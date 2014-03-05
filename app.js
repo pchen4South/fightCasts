@@ -51,17 +51,13 @@ app.post("/create/caster", api.createCaster);
 app.get("/create/video", function (req, res) {
   res.render("createVideo");
 });
-app.post("/create/video", function(req, res){
-  res.send("creating video");
-});
+app.post("/create/video", api.createVideo);
 
 //EVENT
 app.get("/create/event", function (req, res) {
   res.render("createEvent");
 });
-app.post("/create/event", function (req, res) {
-  res.send("creating event");
-});
+app.post("/create/event", api.createEvent);
 
 //CHANNEL
 app.get("/create/channel", function (req, res) {

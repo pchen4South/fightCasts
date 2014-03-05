@@ -2,7 +2,8 @@ var player = require('./models/playerModel');
 var character = require('./models/characterModel');
 var game = require('./models/gameModel');
 var caster = require('./models/casterModel');
-
+var event = require('./models/eventModel');
+var video = require('./models/videoModel');
 
 
 var createPlayer = function(req,res){
@@ -26,6 +27,13 @@ var createGame = function(req,res){
   });
 }
 
+var createVideo = function(req,res){
+  video['model'].create({url: req.body.url}, function(err, result){
+    if (err){console.log(err)}
+    else res.status(200).send('vid created');
+  });
+}
+
 var createCaster = function(req,res){
   caster['model'].create({name: req.body.name}, function(err, result){
     if (err){console.log(err)}
@@ -33,7 +41,23 @@ var createCaster = function(req,res){
   });
 }
 
+var createEvent = function(req,res){
+  event['model'].create(
+    {
+      name: req.body.name,
+      date: req.body.date,
+      country: req.body.country
+    }, function(err, result){
+      if (err) {console.log(err)}
+      else res.status(200).send('event created');
+    }
+  );
+}
+
 module.exports = {'createPlayer': createPlayer, 
                   'createCharacter': createCharacter,
                   'createGame': createGame,
-                  'createCaster': createCaster}
+                  'createCaster': createCaster,
+                  'createEvent': createEvent,
+                  'createVideo': createVideo
+                  }
