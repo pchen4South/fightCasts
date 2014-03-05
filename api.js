@@ -4,6 +4,8 @@ var game = require('./models/gameModel');
 var caster = require('./models/casterModel');
 var event = require('./models/eventModel');
 var video = require('./models/videoModel');
+var channel = require('./models/channelModel');
+var team = require('./models/teamModel');
 
 
 var createPlayer = function(req,res){
@@ -54,10 +56,26 @@ var createEvent = function(req,res){
   );
 }
 
+var createChannel = function(req,res){
+  channel['model'].create({name: req.body.name}, function(err, result){
+    if (err){console.log(err)}
+    else res.status(200).send();
+  });
+}
+
+var createTeam = function(req,res){
+  team['model'].create({name: req.body.name}, function(err, result){
+    if (err){console.log(err)}
+    else res.status(200).send();
+  });
+}
+
 module.exports = {'createPlayer': createPlayer, 
                   'createCharacter': createCharacter,
                   'createGame': createGame,
                   'createCaster': createCaster,
                   'createEvent': createEvent,
-                  'createVideo': createVideo
+                  'createVideo': createVideo,
+                  'createChannel': createChannel,
+                  'createTeam': createTeam
                   }
