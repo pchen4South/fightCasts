@@ -106,7 +106,8 @@ var getAll = function (cb) {
     events: getEvents,
     channels: getChannels,
     teams: getTeams,
-    fighters: getFighters 
+    fighters: getFighters,
+    matches: getMatches
   }, cb);
 };
 

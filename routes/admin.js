@@ -108,9 +108,13 @@ module.exports = function (app) {
   });
 
   app.post("/admin/fighters", function (req, res) {
-    res.send("creating fighter");
+    api.createFighter(req.body, function (err, result) {
+      res.redirect("/admin/fighters");
+    });
   });
   app.post("/admin/matches", function (req, res){
-    res.send("creating match");
+    api.createMatch(req.body, function (err, result) {
+      res.redirect("/admin/matches");
+    });
   });
 };

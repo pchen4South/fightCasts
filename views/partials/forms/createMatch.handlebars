@@ -1,50 +1,50 @@
 <form role="form" method="POST">
   <div class="form-group">
 
-    <label for="fighters">
-    <select class="form-control" id="fighters">
+    <label for="fighters">Fighters</label>
+    <select multiple class="form-control" id="fighters" name="fighters">
       {{#each fighters}}
         <option value={{id}}>{{player.name}}</option>
       {{/each}}
     </select>
 
-    <label for="event">
-    <select class="form-control" id="event">
-      {{#each event}}
+    <label for="event">Event</label>
+    <select class="form-control" id="event" name="event">
+      {{#each events}}
         <option value={{id}}>{{name}}</option>
       {{/each}}
     </select>
 
-    <label for="casters">
-    <select class="form-control" id="casters">
+    <label for="casters">Casters</label>
+    <select multiple class="form-control" id="casters" name="casters">
       {{#each casters}}
         <option value={{id}}>{{name}}</option>
       {{/each}}
     </select>
 
-    <label for="videos">
-    <select class="form-control" id="videos">
+    <label for="videos">Videos</label>
+    <select multiple class="form-control" id="videos" name="videos">
       {{#each videos}}
+        <option value={{id}}>{{url}}</option>
+      {{/each}}
+    </select>
+
+    <label for="channel">Channel</label>
+    <select class="form-control" id="channel" name="channel">
+      {{#each channels}}
         <option value={{id}}>{{name}}</option>
       {{/each}}
     </select>
 
-    <label for="channel">
-    <select class="form-control" id="channel">
-      {{#each channel}}
+    <label for="game">Game</label>
+    <select class="form-control" id="game" name="game">
+      {{#each games}}
         <option value={{id}}>{{name}}</option>
       {{/each}}
     </select>
 
-    <label for="game">
-    <select class="form-control" id="game">
-      {{#each game}}
-        <option value={{id}}>{{name}}</option>
-      {{/each}}
-    </select>
-
-    <label for="teams">
-    <select class="form-control" id="teams">
+    <label for="teams">Teams</label>
+    <select class="form-control" id="teams" name="teams">
       {{#each teams}}
         <option value={{id}}>{{name}}</option>
       {{/each}}
