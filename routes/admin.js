@@ -3,66 +3,110 @@ var api = require('../api');
 module.exports = function (app) {
   //read
   app.get("/admin", function (req, res) {
-    res.render("admin/dashboard");
+    api.getAll(function (err, results) {
+      res.render("admin/dashboard", results);
+    });
   });
   app.get("/admin/players", function (req, res) {
-    res.render("admin/players");
+    api.getAll(function (err, results) {
+      res.render("admin/players", results);
+    });
   });
   app.get("/admin/characters", function (req, res) {
-    res.render("admin/characters");
+    api.getAll(function (err, results) {
+      res.render("admin/characters", results);
+    });
   });
   app.get("/admin/games", function (req, res) {
-    res.render("admin/games");
+    api.getAll(function (err, results) {
+      res.render("admin/games", results);
+    });
   });
   app.get("/admin/casters", function (req, res) {
-    res.render("admin/casters");
+    api.getAll(function (err, results) {
+      res.render("admin/casters", results);
+    });
   });
   app.get("/admin/videos", function (req, res) {
-    res.render("admin/videos");
+    api.getAll(function (err, results) {
+      res.render("admin/videos", results);
+    });
   });
   app.get("/admin/events", function (req, res) {
-    res.render("admin/events");
+    api.getAll(function (err, results) {
+      res.render("admin/events", results);
+    });
   });
   app.get("/admin/channels", function (req, res) {
-    res.render("admin/channels");
+    api.getAll(function (err, results) {
+      res.render("admin/channels", results);
+    });
   });
   app.get("/admin/teams", function (req, res) {
-    res.render("admin/teams");
+    api.getAll(function (err, results) {
+      res.render("admin/teams", results);
+    });
   });
   app.get("/admin/fighters", function (req, res) {
-    res.render("admin/fighters");
+    api.getAll(function (err, results) {
+      res.render("admin/fighters", results);
+    });
   });
   app.get("/admin/matches", function (req, res) {
-    res.render("admin/matches");
+    api.getAll(function (err, results) {
+      res.render("admin/matches", results);
+    });
   });
 
   //create
-  app.post("/admin/players", api.createPlayer);
-  app.post("/admin/characters", api.createCharacter);
-  app.post("/admin/games", api.createGame);
-  app.post("/admin/casters", api.createCaster);
-  app.post("/admin/videos", api.createVideo);
-  app.post("/admin/events", api.createEvent);
-  app.post("/admin/channels", api.createChannel);
-  app.post("/admin/teams", api.createTeam);
-  app.post("/admin/fighters", function (req, res) {
-    res.send("creating fighter");
-  });
-  app.post("/admin/matches", function (req, res){
-    res.send("creating match");
-  });
   app.post("/admin/players", function (req, res) {
     api.createPlayer(req.body, function (err, result) {
       res.redirect("/admin/players");
     });
   });
-  app.post("/admin/characters", api.createCharacter);
-  app.post("/admin/games", api.createGame);
-  app.post("/admin/casters", api.createCaster);
-  app.post("/admin/videos", api.createVideo);
-  app.post("/admin/events", api.createEvent);
-  app.post("/admin/channels", api.createChannel);
-  app.post("/admin/teams", api.createTeam);
+
+  app.post("/admin/characters", function (req, res) {
+    api.createCharacter(req.body, function (err, result) {
+      res.redirect("/admin/characters");
+    });
+  });
+
+  app.post("/admin/games", function (req, res) {
+    api.createGame(req.body, function (err, result) {
+      res.redirect("/admin/games");
+    });
+  });
+
+  app.post("/admin/casters", function (req, res) {
+    api.createCaster(req.body, function (err, result) {
+      res.redirect("/admin/casters");
+    });
+  });
+
+  app.post("/admin/videos", function (req, res) {
+    api.createVideo(req.body, function (err, result) {
+      res.redirect("/admin/videos");
+    });
+  });
+
+  app.post("/admin/events", function (req, res) {
+    api.createEvent(req.body, function (err, result) {
+      res.redirect("/admin/events");
+    });
+  });
+
+  app.post("/admin/channels", function (req, res) {
+    api.createChannel(req.body, function (err, result) {
+      res.redirect("/admin/channels");
+    });
+  });
+
+  app.post("/admin/teams", function (req, res) {
+    api.createTeam(req.body, function (err, result) {
+      res.redirect("/admin/teams");
+    });
+  });
+
   app.post("/admin/fighters", function (req, res) {
     res.send("creating fighter");
   });
