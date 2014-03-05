@@ -62,7 +62,7 @@ var getCaster = partial(get, caster.model);
 var getEvent = partial(get, event.model);
 var getChannel = partial(get, channel.model);
 var getTeam = partial(get, team.model);
-var getFighter = partial(get, fig1hter.model);
+var getFighter = partial(get, fighter.model);
 var getMatch = partial(get, match.model);
 
 module.exports = {
