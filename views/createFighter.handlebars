@@ -1,0 +1,21 @@
+<form role="form" method="POST">
+  <div class="form-group">
+    <label for="player">Player</label>
+    <select class="form-control" id="player">
+      {{#each players}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="characters">
+    <select class="form-control" id="characters">
+      {{#each characters}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+  </div> 
+  <button type="submit" class="btn btn-default">
+    Create! 
+  </button>
+</form> 

@@ -9,11 +9,10 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 
 app.engine(".handlebars", exphbs({defaultLayout: "main"}));
-app.use(express.bodyParser());
-app.use(express.static(__dirname + '/assets'));
-app.use(express.methodOverride());
 app.use(express.urlencoded());
 app.use(express.json());
+app.use(express.static(__dirname + '/assets'));
+app.use(express.methodOverride());
 
 var returnIndex = function (req, res) {
   res.render("index", {matches: matches});
@@ -86,12 +85,12 @@ app.post("/create/team", function (req, res) {
   res.send("creating team");
 });
 
-//PARTICIPANT
-app.get("/create/participant", function (req, res) {
+//FIGHTER
+app.get("/create/fighter", function (req, res) {
   res.render("createEvent");
 });
-app.post("/create/participant", function (req, res) {
-  res.send("creating participant");
+app.post("/create/fighter", function (req, res) {
+  res.send("creating fighter");
 });
 
 //MATCH

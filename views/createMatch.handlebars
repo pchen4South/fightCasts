@@ -1,0 +1,57 @@
+<form role="form" method="POST">
+  <div class="form-group">
+
+    <label for="fighters">
+    <select class="form-control" id="fighters">
+      {{#each fighters}}
+        <option value={{id}}>{{player.name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="event">
+    <select class="form-control" id="event">
+      {{#each event}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="casters">
+    <select class="form-control" id="casters">
+      {{#each casters}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="videos">
+    <select class="form-control" id="videos">
+      {{#each videos}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="channel">
+    <select class="form-control" id="channel">
+      {{#each channel}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="game">
+    <select class="form-control" id="game">
+      {{#each game}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="teams">
+    <select class="form-control" id="teams">
+      {{#each teams}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+  </div> 
+  <button type="submit" class="btn btn-default">
+    Create! 
+  </button>
+</form> 
