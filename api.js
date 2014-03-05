@@ -11,6 +11,7 @@ var video = require('./models/videoModel');
 var channel = require('./models/channelModel');
 var team = require('./models/teamModel');
 var fighter = require('./models/fighterModel');
+var match = require('./models/matchModel');
 
 var formatDbResponse = function (result) {
  var cleaned = result.toObject();
@@ -45,6 +46,20 @@ var createFighter = function (data, cb) {
   return fighter.model.create(formatted, cb);
 };
 
+var createMatch = function(data, cb){
+  var formatted = {
+    _fighters: data.fighters,
+    _casters: data.casters,
+    _videos: data.videos,
+    _teams: data.teams,
+    _game: data.game,
+    _event: data.event,
+    _channel: data.channel
+  };
+  
+  return match.model.create(formatted, cb);
+};
+
 var get = function (modelType, id, cb) {
   return modelType.findById(id, function (err, res) {
     return cb(err, formatDbResponse(res)); 
@@ -68,6 +83,7 @@ var getEvent = partial(get, event.model);
 var getChannel = partial(get, channel.model);
 var getTeam = partial(get, team.model);
 var getFighter = partial(get, fighter.model);
+var getMatch = partial(get, match.model);
 
 var getPlayers = partial(getMultiple, player.model);
 var getCharacters = partial(getMultiple, character.model);
@@ -78,6 +94,7 @@ var getEvents = partial(getMultiple, event.model);
 var getChannels = partial(getMultiple, channel.model);
 var getTeams = partial(getMultiple, team.model);
 var getFighters = partial(getMultiple, fighter.model);
+var getMatches = partial(getMultiple, match.model);
 
 var getAll = function (cb) {
   async.parallel({
@@ -103,6 +120,7 @@ module.exports = {
   createChannel: createChannel,
   createTeam: createTeam,
   createFighter: createFighter,
+  createMatch: createMatch,
 
   getAll: getAll,
   getPlayer: getPlayer, 
@@ -114,6 +132,7 @@ module.exports = {
   getChannel: getChannel,
   getTeam: getTeam,
   getFighter: getFighter,
+  getMatch: getMatch,
 
   getPlayers: getPlayers, 
   getCharacters: getCharacters,
@@ -123,5 +142,6 @@ module.exports = {
   getVideos: getVideos,
   getChannels: getChannels,
   getTeams: getTeams,
-  getFighters: getFighters
+  getFighters: getFighters,
+  getMtches: getMatches
 }
