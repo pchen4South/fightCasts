@@ -6,4 +6,4 @@ var Characters = new mongoose.Schema({
 
 var Character = mongoose.model('Character', Characters);
 
-module.exports = Character;
+module.exports = {'model': Character, "schema": Characters};

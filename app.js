@@ -20,8 +20,27 @@ var returnIndex = function (req, res) {
 };
 
 app.get("/", returnIndex);
-
 app.get("/matches", returnIndex);
+
+app.post("/players", function(req, res){
+  res.send("creating");
+});
+app.post("/characters", function(req, res){
+  res.send("creating");
+});
+app.post("/games", function(req, res){
+  res.send("creating");
+});
+app.post("/casters", function(req, res){
+  res.send("creating");
+});
+app.post("/videos", function(req, res){
+  res.send("creating");
+});
+app.post("/matches", function(req, res){
+  res.send("creating");
+});
+
 
 app.get('/matches/:id', function (req, res) {
   var id = Number(req.params.id)
