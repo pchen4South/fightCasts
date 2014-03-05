@@ -14,15 +14,16 @@ async.parallel({
   player: function(cb){
     player.find({name: 'steve'}, cb);
   },
-  character: function(cb){
+  characters: function(cb){
     character.find({name: 'akuma'}, cb);
   }
 },
   function(err, results){
-  
+    console.log(results['characters'][0]._id);
+    
     fighter.create({
       _player: results['player'][0]._id,
-      _character: results['character'][0]._id
+      _characters: [results['characters'][0]._id]
     })
     
 });
