@@ -1,10 +1,50 @@
-<h1>Matches</h1>
-{{#each matches}}
-<ul>
-  <li>
-    <a href="/matches/{{id}}">
-      {{id}}
-    </a>
-  </li>
-</ul>
-{{/each}}
+<div class="row">
+  <div class="table-responsive">
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <td>title</td>
+          <td>fighters</td>
+          <td>event</td>
+          <td>casters</td>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each matches}}
+        <tr>
+
+          <td>
+            <a href="/matches/{{id}}">
+              {{title}}
+            </a>
+          </td>
+
+          <td>
+            {{#each fighters}}
+              <strong>
+                {{player.name}}
+              </strong>
+              <em>
+                {{#each characters}}
+                  {{name}}
+                {{/each}}
+              </em>
+            {{/each}}
+          </td>
+
+          <td>
+            {{event.name}}
+          </td>
+
+          <td>
+            {{#each casters}}
+              {{name}}  
+            {{/each}}
+          </td>
+
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

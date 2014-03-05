@@ -16,7 +16,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 
 var returnIndex = function (req, res) {
-  res.render("index", matches);
+  res.render("index", {matches: matches});
 };
 
 app.get("/", returnIndex);
@@ -44,7 +44,7 @@ app.post("/matches", function(req, res){
 
 app.get('/matches/:id', function (req, res) {
   var id = Number(req.params.id)
-    , match = find(matches.matches, {id: id});
+    , match = find(matches, {id: id});
 
   res.render("match", match);
 });

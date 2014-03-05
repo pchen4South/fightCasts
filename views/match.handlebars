@@ -1,2 +1,54 @@
-<h1>Here is a great thing</h1>
-<h2>Id: {{id}}</h2>
+<div class="row">
+  <div class="table-responsive">
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <td>title</td>
+          <td>fighters</td>
+          <td>event</td>
+          <td>casters</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <a href="/matches/{{id}}">
+              {{title}}
+            </a>
+          </td>
+
+          <td>
+            {{#each fighters}}
+              <strong>
+                {{player.name}}
+              </strong>
+              <em>
+                {{#each characters}}
+                  {{name}}
+                {{/each}}
+              </em>
+            {{/each}}
+          </td>
+
+          <td>
+            {{event.name}}
+          </td>
+
+          <td>
+            {{#each casters}}
+              {{name}}  
+            {{/each}}
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="row">
+      {{#each videos}}
+      <iframe width="560" height="315" src={{url}} frameborder="0" allowfullscreen>
+      </iframe>
+      {{/each}}
+    </section>
+  </div>
+</div>
