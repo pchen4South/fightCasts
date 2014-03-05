@@ -1,6 +1,7 @@
 module.exports = [
   {
     id: 1,
+    title: "Kbrad and Alioune",
     videos: [
       {
         id: 1,
