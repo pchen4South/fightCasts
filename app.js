@@ -1,5 +1,8 @@
 var express = require('express');
 var engines = require('consolidate');
+var fs = require('fs');
+var testdata = __dirname + '/data.json';
+
 var app = express();
 var data = require('./data')
 
@@ -15,5 +18,21 @@ app.get("/", function (req, res) {
   res.render("index", data); 
 });
 
-app.listen(3000);
-console.log('Listening on port 3000');
+app.get('matches', function(req, res){
+  fs.readFile(testdata, 'utf8', function (err, data) {
+  if (err) {
+    console.log('Error: ' + err);
+    return;
+  }
+ 
+    //data = JSON.parse(data);
+    res.JSON(data);
+  });
+});
+
+app.get('matches/:id');
+
+app.get('/testDB', function(req, res){
+  res.send('biatch');
+});
+
