@@ -5,15 +5,15 @@ module.exports = [
     videos: [
       {
         id: 1,
-        url: "http://www.youtube.com/watch?v=y6vn1xVJWxw&feature=share&list=UU-66OacjdjbkftCZuXwtW6w&index=2"
+        url: "//www.youtube.com/embed/y6vn1xVJWxw"
       },
       {
         id: 2,
-        url: "http://www.youtube.com/watch?v=Opqwf5HJVGw&feature=share&list=UU-66OacjdjbkftCZuXwtW6w&index=1"
+        url: "//www.youtube.com/embed/Opqwf5HJVGw"
       },
       {
         id: 3,
-        url: "http://www.youtube.com/watch?v=vRTAGNMOFes&list=UU-66OacjdjbkftCZuXwtW6w&feature=share"
+        url: "//www.youtube.com/embed/vRTAGNMOFes"
       },
     ], 
     channel: {
