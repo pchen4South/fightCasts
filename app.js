@@ -30,7 +30,7 @@ app.post("/create/player", api.createPlayer);
 
 //CHARACTER
 app.get("/create/character", function (req, res) {
-  res.render("createPlayer");
+  res.render("createCharacter");
 });
 app.post("/create/character", api.createCharacter);
 
@@ -60,15 +60,12 @@ app.post("/create/event", api.createEvent);
 
 //CHANNEL
 app.get("/create/channel", function (req, res) {
-  res.render("createEvent");
-});
-app.post("/create/channel", function (req, res) {
-  res.send("creating channel");
+  res.render("createChannel");
 });
 
 //TEAM
 app.get("/create/team", function (req, res) {
-  res.render("createEvent");
+  res.render("createTeam");
 });
 app.post("/create/team", function (req, res) {
   res.send("creating team");
@@ -76,7 +73,7 @@ app.post("/create/team", function (req, res) {
 
 //FIGHTER
 app.get("/create/fighter", function (req, res) {
-  res.render("createEvent");
+  res.render("createFighter");
 });
 app.post("/create/fighter", function (req, res) {
   res.send("creating fighter");
