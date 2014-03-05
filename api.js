@@ -10,6 +10,7 @@ var video = require('./models/videoModel');
 var channel = require('./models/channelModel');
 var team = require('./models/teamModel');
 var fighter = require('./models/fighterModel');
+var match = require('./models/matchModel');
 
 var create = function (modelType, data, cb) {
   return modelType.create(data, cb);
@@ -34,6 +35,20 @@ var createFighter = function (data, cb) {
   return fighter.model.create(formatted, cb);
 };
 
+var createMatch = function(data, cb){
+  var formatted = {
+    _fighters: data.fighters,
+    _casters: data.casters,
+    _videos: data.videos,
+    _teams: data.teams,
+    _game: data.game,
+    _event: data.event,
+    _channel: data.channel
+  };
+  
+  return match.model.create(formatted, cb);
+};
+
 var get = function (modelType, id, cb) {
   modelType.findById(id, cb);
 };
@@ -47,7 +62,8 @@ var getCaster = partial(get, caster.model);
 var getEvent = partial(get, event.model);
 var getChannel = partial(get, channel.model);
 var getTeam = partial(get, team.model);
-var getFighter = partial(get, fighter.model);
+var getFighter = partial(get, fig1hter.model);
+var getMatch = partial(get, match.model);
 
 module.exports = {
   createPlayer: createPlayer, 
@@ -59,6 +75,7 @@ module.exports = {
   createChannel: createChannel,
   createTeam: createTeam,
   createFighter: createFighter,
+  createMatch: createMatch,
   getPlayer: getPlayer, 
   getCharacter: getCharacter,
   getGame: getGame,
@@ -68,4 +85,5 @@ module.exports = {
   getChannel: getChannel,
   getTeam: getTeam,
   getFighter: getFighter,
+  getMatch: getMatch
 }
