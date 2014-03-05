@@ -13,6 +13,7 @@ var fighter = require('./models/fighterModel');
 var match = require('./models/matchModel');
 
 var create = function (modelType, data, cb) {
+  console.log(data);
   return modelType.create(data, cb);
 };
 
