@@ -8,4 +8,4 @@ var Events = new mongoose.Schema({
 
 var Event = mongoose.model('Event', Events);
 
-module.exports = Event;
+module.exports = {'model': Event, 'schema': Events}

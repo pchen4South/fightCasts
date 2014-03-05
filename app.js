@@ -3,7 +3,8 @@ var exphbs = require('express3-handlebars');
 var _ = require('lodash');
 var find = _.find;
 var app = express();
-var matches = require('./matches')
+var matches = require('./matches');
+var api = require('./api');
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
@@ -25,49 +26,37 @@ app.get("/matches", returnIndex);
 app.get("/create/player", function (req, res) {
   res.render("createPlayer");
 });
-app.post("/create/player", function(req, res){
-  res.send("creating player");
-});
+app.post("/create/player", api.createPlayer);
 
 //CHARACTER
 app.get("/create/character", function (req, res) {
   res.render("createPlayer");
 });
-app.post("/create/character", function(req, res){
-  res.send("creating character");
-});
+app.post("/create/character", api.createCharacter);
 
 //GAME
 app.get("/create/game", function (req, res) {
   res.render("createGame");
 });
-app.post("/create/game", function(req, res){
-  res.send("creating game");
-});
+app.post("/create/game", api.createGame);
 
 //CASTER
 app.get("/create/caster", function (req, res) {
   res.render("createCaster");
 });
-app.post("/create/caster", function(req, res){
-  res.send("creating caster");
-});
+app.post("/create/caster", api.createCaster);
 
 //VIDEO
 app.get("/create/video", function (req, res) {
   res.render("createVideo");
 });
-app.post("/create/video", function(req, res){
-  res.send("creating video");
-});
+app.post("/create/video", api.createVideo);
 
 //EVENT
 app.get("/create/event", function (req, res) {
   res.render("createEvent");
 });
-app.post("/create/event", function (req, res) {
-  res.send("creating event");
-});
+app.post("/create/event", api.createEvent);
 
 //CHANNEL
 app.get("/create/channel", function (req, res) {
