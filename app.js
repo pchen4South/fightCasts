@@ -3,7 +3,8 @@ var exphbs = require('express3-handlebars');
 var _ = require('lodash');
 var find = _.find;
 var app = express();
-var matches = require('./matches')
+var matches = require('./matches');
+var api = require('./api');
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
@@ -22,9 +23,7 @@ var returnIndex = function (req, res) {
 app.get("/", returnIndex);
 app.get("/matches", returnIndex);
 
-app.post("/players", function(req, res){
-  res.send("creating");
-});
+app.post("/players", api.createPlayer);
 app.post("/characters", function(req, res){
   res.send("creating");
 });
@@ -40,7 +39,6 @@ app.post("/videos", function(req, res){
 app.post("/matches", function(req, res){
   res.send("creating");
 });
-
 
 app.get('/matches/:id', function (req, res) {
   var id = Number(req.params.id)
