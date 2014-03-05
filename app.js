@@ -3,7 +3,7 @@ var fs = require('fs');
 var testdata = __dirname + '/data.json';
 
 var app = express();
-var replay = require('./models/replayModel');
+//var replay = require('./models/replayModel');
 
 app.use(express.bodyParser());
 app.use(express.methodOverride());
