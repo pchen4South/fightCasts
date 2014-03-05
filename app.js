@@ -23,21 +23,84 @@ var returnIndex = function (req, res) {
 app.get("/", returnIndex);
 app.get("/matches", returnIndex);
 
-app.post("/players", api.createPlayer);
-app.post("/characters", function(req, res){
-  res.send("creating");
+//PLAYER
+app.get("/create/player", function (req, res) {
+  res.render("createPlayer");
 });
-app.post("/games", function(req, res){
-  res.send("creating");
+app.post("/create/player", function(req, res){
+  res.send("creating player");
 });
-app.post("/casters", function(req, res){
-  res.send("creating");
+
+//CHARACTER
+app.get("/create/character", function (req, res) {
+  res.render("createPlayer");
 });
-app.post("/videos", function(req, res){
-  res.send("creating");
+app.post("/create/character", function(req, res){
+  res.send("creating character");
 });
-app.post("/matches", function(req, res){
-  res.send("creating");
+
+//GAME
+app.get("/create/game", function (req, res) {
+  res.render("createGame");
+});
+app.post("/create/game", function(req, res){
+  res.send("creating game");
+});
+
+//CASTER
+app.get("/create/caster", function (req, res) {
+  res.render("createCaster");
+});
+app.post("/create/caster", function(req, res){
+  res.send("creating caster");
+});
+
+//VIDEO
+app.get("/create/video", function (req, res) {
+  res.render("createVideo");
+});
+app.post("/create/video", function(req, res){
+  res.send("creating video");
+});
+
+//EVENT
+app.get("/create/event", function (req, res) {
+  res.render("createEvent");
+});
+app.post("/create/event", function (req, res) {
+  res.send("creating event");
+});
+
+//CHANNEL
+app.get("/create/channel", function (req, res) {
+  res.render("createEvent");
+});
+app.post("/create/channel", function (req, res) {
+  res.send("creating channel");
+});
+
+//TEAM
+app.get("/create/team", function (req, res) {
+  res.render("createEvent");
+});
+app.post("/create/team", function (req, res) {
+  res.send("creating team");
+});
+
+//PARTICIPANT
+app.get("/create/participant", function (req, res) {
+  res.render("createEvent");
+});
+app.post("/create/participant", function (req, res) {
+  res.send("creating participant");
+});
+
+//MATCH
+app.get("/create/match", function (req, res) {
+  res.render("createMatch");
+});
+app.post("/create/match", function(req, res){
+  res.send("creating match");
 });
 
 app.get('/matches/:id', function (req, res) {
