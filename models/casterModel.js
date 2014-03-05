@@ -6,4 +6,4 @@ var Casters = new mongoose.Schema({
 
 var Caster = mongoose.model('Caster', Casters);
 
-module.exports = Caster;
+module.exports = {'model': Caster, 'schema': Casters};

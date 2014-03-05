@@ -6,4 +6,4 @@ var Games = new mongoose.Schema({
 
 var Game = mongoose.model('Game', Games);
 
-module.exports = Game;
+module.exports = {'model': Game, 'schema': Games};

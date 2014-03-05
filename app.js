@@ -39,17 +39,13 @@ app.post("/create/character", api.createCharacter);
 app.get("/create/game", function (req, res) {
   res.render("createGame");
 });
-app.post("/create/game", function(req, res){
-  res.send("creating game");
-});
+app.post("/create/game", api.createGame);
 
 //CASTER
 app.get("/create/caster", function (req, res) {
   res.render("createCaster");
 });
-app.post("/create/caster", function(req, res){
-  res.send("creating caster");
-});
+app.post("/create/caster", api.createCaster);
 
 //VIDEO
 app.get("/create/video", function (req, res) {
