@@ -27,17 +27,13 @@ app.get("/matches", returnIndex);
 app.get("/create/player", function (req, res) {
   res.render("createPlayer");
 });
-app.post("/create/player", function(req, res){
-  res.send("creating player");
-});
+app.post("/create/player", api.createPlayer);
 
 //CHARACTER
 app.get("/create/character", function (req, res) {
   res.render("createPlayer");
 });
-app.post("/create/character", function(req, res){
-  res.send("creating character");
-});
+app.post("/create/character", api.createCharacter);
 
 //GAME
 app.get("/create/game", function (req, res) {
