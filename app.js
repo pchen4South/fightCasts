@@ -27,52 +27,56 @@ app.get("/create/player", function (req, res) {
   res.render("createPlayer");
 });
 app.post("/create/player", api.createPlayer);
+app.post("/api/v1/players", api.createPlayer);
 
 //CHARACTER
 app.get("/create/character", function (req, res) {
   res.render("createPlayer");
 });
 app.post("/create/character", api.createCharacter);
+app.post("/api/v1/characters", api.createCharacter);
 
 //GAME
 app.get("/create/game", function (req, res) {
   res.render("createGame");
 });
 app.post("/create/game", api.createGame);
+app.post("/api/v1/games", api.createGame);
 
 //CASTER
 app.get("/create/caster", function (req, res) {
   res.render("createCaster");
 });
 app.post("/create/caster", api.createCaster);
+app.post("/api/v1/casters", api.createCaster);
 
 //VIDEO
 app.get("/create/video", function (req, res) {
   res.render("createVideo");
 });
 app.post("/create/video", api.createVideo);
+app.post("/api/v1/videos", api.createVideo);
 
 //EVENT
 app.get("/create/event", function (req, res) {
   res.render("createEvent");
 });
 app.post("/create/event", api.createEvent);
+app.post("/api/v1/events", api.createEvent);
 
 //CHANNEL
 app.get("/create/channel", function (req, res) {
   res.render("createEvent");
 });
-app.post("/create/channel", function (req, res) {
-  res.send("creating channel");
-});
+app.post("/create/channel", api.createChannel);
+app.post("/api/v1/channels", api.createChannel);
 
 //TEAM
 app.get("/create/team", function (req, res) {
   res.render("createEvent");
 });
-app.post("/create/team", function (req, res) {
-  res.send("creating team");
-});
+app.post("/create/team", api.createTeam);
+app.post("/api/v1/teams", api.createTeam);
 
 //FIGHTER
 app.get("/create/fighter", function (req, res) {
@@ -95,10 +99,6 @@ app.get('/matches/:id', function (req, res) {
     , match = find(matches, {id: id});
 
   res.render("match", match);
-});
-
-app.get('/testDB', function(req, res){
-  res.send('biatch');
 });
 
 app.listen(3000);
