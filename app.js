@@ -1,5 +1,5 @@
 var express = require('express');
-var engines = require('consolidate');
+var exphbs = require('express3-handlebars');
 var _ = require('lodash');
 var find = _.find;
 var app = express();
@@ -8,8 +8,7 @@ var matches = require('./matches')
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 
-app.engine(".handlebars", engines.handlebars);
-app.engine(".jade", engines.jade);
+app.engine(".handlebars", exphbs({defaultLayout: "main"}));
 app.use(express.bodyParser());
 app.use(express.static(__dirname + '/assets'));
 app.use(express.methodOverride());
