@@ -1,3 +1,5 @@
+var async = require('async')
+
 var player = require('./models/playerModel');
 var character = require('./models/characterModel');
 var game = require('./models/gameModel');
@@ -68,6 +70,22 @@ var createTeam = function(req,res){
     if (err){console.log(err)}
     else res.status(200).send();
   });
+}
+
+var createFighter = function(req, res){
+  //player ID
+  player = req.body.player;
+  //character ID's in an []
+  characters = req.body.characters;
+  
+  fighter['model'].create(
+  { _player : player,
+    _characters : characters}, 
+    function(err, result){
+        if (err){console.log(err)}
+        else res.status(200).send('fighter created');
+  });
+  
 }
 
 module.exports = {'createPlayer': createPlayer, 
