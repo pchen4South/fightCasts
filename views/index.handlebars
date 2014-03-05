@@ -21,7 +21,14 @@
 
           <td>
             {{#each fighters}}
-              {{player.name}}
+              <strong>
+                {{player.name}}
+              </strong>
+              <em>
+                {{#each characters}}
+                  {{name}}
+                {{/each}}
+              </em>
             {{/each}}
           </td>
 
@@ -30,7 +37,6 @@
           </td>
 
           <td>
-            cast by: 
             {{#each casters}}
               {{name}}  
             {{/each}}
