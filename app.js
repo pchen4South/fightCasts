@@ -1,38 +1,38 @@
 var express = require('express');
 var engines = require('consolidate');
-var fs = require('fs');
-var testdata = __dirname + '/data.json';
-
+var _ = require('lodash');
+var find = _.find;
 var app = express();
-var data = require('./data')
+var matches = require('./matches')
 
 app.set("views", __dirname + "/views");
+app.set("view engine", "handlebars");
+
 app.engine(".handlebars", engines.handlebars);
+app.engine(".jade", engines.jade);
 app.use(express.bodyParser());
 app.use(express.static(__dirname + '/assets'));
 app.use(express.methodOverride());
 app.use(express.urlencoded());
 app.use(express.json());
 
-app.get("/", function (req, res) {
-  res.render("index", data); 
-});
+var returnIndex = function (req, res) {
+  res.render("index", matches);
+};
 
-app.get('matches', function(req, res){
-  fs.readFile(testdata, 'utf8', function (err, data) {
-  if (err) {
-    console.log('Error: ' + err);
-    return;
-  }
- 
-    //data = JSON.parse(data);
-    res.JSON(data);
-  });
-});
+app.get("/", returnIndex);
 
-app.get('matches/:id');
+app.get("/matches", returnIndex);
+
+app.get('/matches/:id', function (req, res) {
+  var id = Number(req.params.id)
+    , match = find(matches.matches, {id: id});
+
+  res.render("match", match);
+});
 
 app.get('/testDB', function(req, res){
   res.send('biatch');
 });
 
+app.listen(3000);
