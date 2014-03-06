@@ -97,13 +97,6 @@ var getTeams = partial(getMultiple, team.model);
 var getFighters = partial(getMultiple, fighter.model);
 var getMatches = partial(getMultiple, match.model);
 
-var getFighterNested = function (id, cb) {
-  fighter.model.findById(id)
-  .populate("_player")
-  .populate("_characters")
-  .exec(cb);
-};
-
 //helpers for getMatchNested
 var playerOptions = {
   model: "Player",
@@ -116,6 +109,7 @@ var charactersOptions = {
 
 var formatNestedFighter = function (monFighter) {
   return {
+    id: monFighter["_id"],
     characters: map(monFighter["_characters"], formatDbResponse),
     player: formatDbResponse(monFighter["_player"])
   };
@@ -132,6 +126,16 @@ var formatNestedMatch = function (monMatch) {
     game: formatDbResponse(monMatch["_game"]),
     channel: formatDbResponse(monMatch["_channel"]),
   };
+};
+
+var getFighterNested = function (id, cb) {
+  fighter.model.findById(id)
+  .populate("_player")
+  .populate("_characters")
+  .exec(function (err, fighter) {
+    if (err) cb(err);
+    else cb(null, formatNestedFighter(fighter));
+  });
 };
 
 var getMatchNested = function (id, cb) {
@@ -157,7 +161,10 @@ var getFightersNested = function (cb) {
   fighter.model.find()
   .populate("_player")
   .populate("_characters")
-  .exec(cb);
+  .exec(function (err, fighters) {
+    if (err) cb(err);
+    else cb(null, map(fighters, formatNestedFighter));
+  });
 };
 
 var getMatchesNested = function (cb) {
@@ -191,8 +198,8 @@ var getAll = function (cb) {
     events: getEvents,
     channels: getChannels,
     teams: getTeams,
-    fighters: getFighters,
-    matches: getMatches
+    fighters: getFightersNested,
+    matches: getMatchesNested
   }, cb);
 };
 

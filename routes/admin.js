@@ -54,6 +54,7 @@ module.exports = function (app) {
   });
   app.get("/admin/matches", function (req, res) {
     api.getAll(function (err, results) {
+      console.log(results);
       res.render("admin/matches", results);
     });
   });
@@ -114,6 +115,8 @@ module.exports = function (app) {
   });
   app.post("/admin/matches", function (req, res){
     api.createMatch(req.body, function (err, result) {
+      console.log(err);
+      console.log(result);
       res.redirect("/admin/matches");
     });
   });
