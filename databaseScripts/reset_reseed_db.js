@@ -7,13 +7,19 @@ var characters = require('./seeds/characters');
 var players = require('./seeds/players');
 var games = require('./seeds/games');
 var casters = require('./seeds/casters');
-var videos= require('./seeds/videos');
+var videos = require('./seeds/videos');
+var events = require('./seeds/events');
+var channels = require('./seeds/channels');
+var teams = require('./seeds/teams');
 
 var gameModel = require('../models/gameModel');
 var characterModel = require('../models/characterModel');
 var playerModel = require('../models/playerModel');
 var casterModel = require('../models/casterModel');
 var videoModel = require('../models/videoModel');
+var eventModel = require('../models/eventModel');
+var channelModel = require('../models/channelModel');
+var teamModel = require('../models/teamModel');
 
 var createCharacter = function (character) {
   characterModel.model.create(character, function (err, res) {
@@ -50,6 +56,27 @@ var createVideo = function (video) {
   });
 };
 
+var createEvent = function (event) {
+  eventModel.model.create(event, function (err, res) {
+    if (err) console.log(err); 
+    else console.log("Event created: ", res.name);
+  });
+};
+
+var createChannel = function (channel) {
+  channelModel.model.create(channel, function (err, res) {
+    if (err) console.log(err);
+    else console.log("Channel created: ", res.name);
+  });
+};
+
+var createTeam = function (team) {
+  teamModel.model.create(team, function (err, res) {
+    if (err) console.log(err);
+    else console.log("Team created: ", res.name);
+  });
+};
+
 
 var resetDb = function (mongoose) {
   mongoose.connect('mongodb://localhost:27017/fightCasts', function (err) {
@@ -61,6 +88,9 @@ var resetDb = function (mongoose) {
       forEach(games, createGame);
       forEach(casters, createCaster);
       forEach(videos, createVideo);
+      forEach(events, createEvent);
+      forEach(channels, createChannel);
+      forEach(teams, createTeam);
     });
   });
 };
