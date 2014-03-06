@@ -2,8 +2,12 @@ var mongoose = require('mongoose');
 var _ = require('lodash');
 var forEach = _.forEach;
 var prompt = require('prompt');
+
 var characters = require('./seeds/characters');
 var players = require('./seeds/players');
+var games = require('./seeds/games');
+
+var gameModel = require('../models/gameModel');
 var characterModel = require('../models/characterModel');
 var playerModel = require('../models/playerModel');
 
@@ -21,6 +25,13 @@ var createPlayer = function (player) {
   });
 };
 
+var createGame = function (game) {
+  gameModel.model.create(game, function (err, res) {
+    if (err) console.log(err);
+    else console.log("Game created: ", res.name); 
+  });
+};
+
 var resetDb = function (mongoose) {
   mongoose.connect('mongodb://localhost:27017/fightCasts', function (err) {
     mongoose.connection.db.dropDatabase(function (err) {
@@ -28,6 +39,7 @@ var resetDb = function (mongoose) {
       
       forEach(characters, createCharacter);
       forEach(players, createPlayer);
+      forEach(games, createGame);
     });
   });
 };
