@@ -6,12 +6,14 @@ var prompt = require('prompt');
 var characters = require('./seeds/characters');
 var players = require('./seeds/players');
 var games = require('./seeds/games');
+var casters = require('./seeds/casters');
+var videos= require('./seeds/videos');
 
 var gameModel = require('../models/gameModel');
 var characterModel = require('../models/characterModel');
 var playerModel = require('../models/playerModel');
-var gameList = require('./games');
-var async = require('async');
+var casterModel = require('../models/casterModel');
+var videoModel = require('../models/videoModel');
 
 var createCharacter = function (character) {
   characterModel.model.create(character, function (err, res) {
@@ -40,6 +42,19 @@ var findCharacters = function(game){
     else console.log(res);
   })
 }
+var createCaster = function (caster) {
+  casterModel.model.create(caster, function (err, res) {
+    if (err) console.log(err);
+    else console.log("Caster created: ", res.name); 
+  });
+};
+
+var createVideo = function (video) {
+  videoModel.model.create(video, function (err, res) {
+    if (err) console.log(err); 
+    else console.log("Video created: ", res.name, res.url);
+  });
+};
 
 
 var resetDb = function (mongoose) {
@@ -50,6 +65,9 @@ var resetDb = function (mongoose) {
       forEach(characters, createCharacter);
       forEach(players, createPlayer);
       forEach(games, findCharacters);
+      // forEach(games, createGame);
+      forEach(casters, createCaster);
+      forEach(videos, createVideo);
     });
   });
 };
