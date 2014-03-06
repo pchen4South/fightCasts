@@ -8,7 +8,11 @@
     <label for="fighters">Fighters</label>
     <select multiple class="form-control" id="fighters" name="fighters">
       {{#each fighters}}
-        <option value={{id}}>{{player.name}}</option>
+        <option value={{id}}>{{player.name}} 
+          {{#each characters}}
+            {{name}}
+          {{/each}}
+        </option>
       {{/each}}
     </select>
 

@@ -54,7 +54,6 @@ module.exports = function (app) {
   });
   app.get("/admin/matches", function (req, res) {
     api.getAll(function (err, results) {
-      console.log(results);
       res.render("admin/matches", results);
     });
   });
