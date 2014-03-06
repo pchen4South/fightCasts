@@ -1,6 +1,10 @@
 <form role="form" method="POST">
   <div class="form-group">
 
+    <label for="title">Title</label>
+    <input class="form-control" type="text" name="title" id="title" placeholder="match title">
+    </input>
+
     <label for="fighters">Fighters</label>
     <select multiple class="form-control" id="fighters" name="fighters">
       {{#each fighters}}
@@ -25,7 +29,7 @@
     <label for="videos">Videos</label>
     <select multiple class="form-control" id="videos" name="videos">
       {{#each videos}}
-        <option value={{id}}>{{url}}</option>
+        <option value={{id}}>{{name}}</option>
       {{/each}}
     </select>
 

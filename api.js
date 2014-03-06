@@ -53,6 +53,8 @@ var createFighter = function (data, cb) {
 
 var createMatch = function(data, cb){
   var formatted = {
+    approved: data.approved,
+    title: data.title,
     _fighters: data.fighters,
     _casters: data.casters,
     _videos: data.videos,
@@ -122,6 +124,8 @@ var formatNestedFighter = function (monFighter) {
 var formatNestedMatch = function (monMatch) {
   return {
     id: monMatch["_id"],
+    approved: monMatch.approved,
+    title: monMatch.title,
     fighters: map(monMatch["_fighters"], formatNestedFighter),
     casters: map(monMatch["_casters"], formatDbResponse),
     videos: map(monMatch["_videos"], formatDbResponse),
