@@ -37,7 +37,7 @@ var createGame = function (game) {
 };
 
 var findCharacters = function(game){
-  characterModel.find({name: game}, function(err,res){
+  characterModel.model.find({name: game}, function(err,res){
     if(err) console.log (err);
     else console.log(res);
   })
@@ -55,7 +55,6 @@ var createVideo = function (video) {
     else console.log("Video created: ", res.name, res.url);
   });
 };
-
 
 var resetDb = function (mongoose) {
   mongoose.connect('mongodb://localhost:27017/fightCasts', function (err) {
