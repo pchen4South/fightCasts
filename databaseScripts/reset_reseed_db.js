@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var _ = require('lodash');
 var forEach = _.forEach;
 var prompt = require('prompt');
+var async = require('async');
 
 var characters = require('./seeds/characters');
 var players = require('./seeds/players');
@@ -21,11 +22,31 @@ var eventModel = require('../models/eventModel');
 var channelModel = require('../models/channelModel');
 var teamModel = require('../models/teamModel');
 
-var createCharacter = function (character) {
-  characterModel.model.create(character, function (err, res) {
-    if (err) console.log(err);
-    else console.log("Character created: ", res.name); 
-  });
+var createCharacter = function (character, done) {  
+  charMod = characterModel.model;
+  var newChar = new charMod(character);
+  console.log("Character Created: ", newChar.name);
+  newChar.save(done);   
+};
+
+var characterFind = function(done){
+  async.map(games, findCharactersAndCreateGames, done);
+};
+
+var characterCreation = function(done){
+  async.map(characters, createCharacter, done);
+};
+
+var findCharactersAndCreateGames = function(game, cb){
+  characterModel.model.find({game: game.name}, function(err,res){
+    if(err) console.log (err);
+    else if (res.length>0){
+      gameModel.model.create({name:game.name, _characters: res}, function(err, res){
+        if(err) console.log(err);
+        console.log("Game created: ", res.name);
+      })
+    }
+  })
 };
 
 var createPlayer = function (player) {
@@ -89,15 +110,15 @@ var resetDb = function (mongoose) {
     mongoose.connection.db.dropDatabase(function (err) {
       console.log("database Dropped");
       
-      forEach(characters, createCharacter);
       forEach(players, createPlayer);
-      forEach(games, findCharacters);
-      // forEach(games, createGame);
       forEach(casters, createCaster);
       forEach(videos, createVideo);
       forEach(events, createEvent);
       forEach(channels, createChannel);
       forEach(teams, createTeam);
+      
+      async.series([characterCreation, characterFind]);
+      
     });
   });
 };
