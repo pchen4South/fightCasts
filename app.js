@@ -6,12 +6,11 @@ var helpers = require('./assets/javascripts/handlebarsHelpers');
 
 mongoose.connect('mongodb://localhost:27017/fightCasts');
 
-console.log(helpers.gameIcon("SF4"));
-
 var hbs = exphbs.create({
   defaultLayout: "main",
   helpers: {gameIcon: helpers.gameIcon}  
 });
+
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 app.engine(".handlebars", hbs.engine);
