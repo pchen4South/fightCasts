@@ -3,16 +3,21 @@
     <table class="table table-condensed">
       <thead>
         <tr>
+          <td>game</td>
           <td>title</td>
           <td>fighters</td>
           <td>event</td>
           <td>casters</td>
         </tr>
       </thead>
-      <tbody>
+      <tbody>      
         {{#each matches}}
         <tr>
-
+          
+          <td>    
+           <img src = {{gameIcon game.name}}> </img>
+          </td>
+          
           <td>
             <a href="/matches/{{id}}">
               {{title}}

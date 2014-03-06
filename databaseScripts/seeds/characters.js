@@ -37,5 +37,10 @@ module.exports = [
   {name: "Evil Ryu", game: "SF4"},
   {name: "Oni", game: "SF4"},
   {name: "Yang", game: "SF4"},
-  {name: "Yun", game: "SF4"}  
+  {name: "Falco", game: "SSBM"},  
+  {name: "Fox", game: "SSBM"},  
+  {name: "Shiek", game: "SSBM"},  
+  {name: "Zelda", game: "SSBM"},  
+  {name: "Marth", game: "SSBM"},  
+  {name: "Jigglypuff", game: "SSBM"},  
 ]
