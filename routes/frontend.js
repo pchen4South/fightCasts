@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var find = _.find;
-var matches = require('../matches');
+var matches = require('../databaseScripts/matches');
 
 module.exports = function (app) {
   var returnIndex = function (req, res) {

@@ -1,6 +1,8 @@
 var express = require('express');
 var exphbs = require('express3-handlebars');
 var app = express();
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/fightCasts');
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");

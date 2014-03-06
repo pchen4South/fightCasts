@@ -15,11 +15,13 @@ var fighter = require('./models/fighterModel');
 var match = require('./models/matchModel');
 
 var formatDbResponse = function (result) {
- var cleaned = result.toObject();
- cleaned.id = result._id;
- delete cleaned._id;
- delete cleaned.__v;
- return cleaned;
+  if(result){
+   var cleaned = result.toObject();
+   cleaned.id = result._id;
+   delete cleaned._id;
+   delete cleaned.__v;
+   return cleaned;
+  }
 };
 
 var create = function (modelType, data, cb) {

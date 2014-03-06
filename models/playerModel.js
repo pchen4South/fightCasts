@@ -1,4 +1,4 @@
-var mongoose = require('mongoose').connect('mongodb://localhost:27017/fightCasts');
+var mongoose = require('mongoose');
 
 var Players = new mongoose.Schema({
   name: String
