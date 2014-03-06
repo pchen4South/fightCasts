@@ -15,6 +15,7 @@
     "lodash": "~2.4.1",
     "express3-handlebars": "~0.5.0",
     "async": "~0.2.10",
-    "express-mongoose-resource": "0.0.4"
+    "express-mongoose-resource": "0.0.4",
+    "prompt": "~0.2.12"
   }
 }
