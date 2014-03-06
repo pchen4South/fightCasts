@@ -34,6 +34,14 @@ var createGame = function (game) {
   });
 };
 
+var findCharacters = function(game){
+  characterModel.find({name: game}, function(err,res){
+    if(err) console.log (err);
+    else console.log(res);
+  })
+}
+
+
 var resetDb = function (mongoose) {
   mongoose.connect('mongodb://localhost:27017/fightCasts', function (err) {
     mongoose.connection.db.dropDatabase(function (err) {
@@ -41,7 +49,7 @@ var resetDb = function (mongoose) {
       
       forEach(characters, createCharacter);
       forEach(players, createPlayer);
-      forEach(games, createGame);
+      forEach(games, findCharacters);
     });
   });
 };
