@@ -1,0 +1,1 @@
+module.exports = ["SF4", "SSBM", "SFxT", "MvC3"]
