@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var Videos = new mongoose.Schema({
+  name: String,
   url: String
 });
 

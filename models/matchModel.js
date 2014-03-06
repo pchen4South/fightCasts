@@ -8,6 +8,7 @@ var casterSchema = require('./casterModel').schema;
 var videoSchema = require('./videoModel').schema;
 
 var Matches = new mongoose.Schema({
+  approved: {type: Boolean, default: false},
   _fighters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Fighter" }],
   _casters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Caster" }],
   _videos: [{type: mongoose.Schema.Types.ObjectId, ref: "Video"}],

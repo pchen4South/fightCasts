@@ -1,7 +1,6 @@
 var async = require('async');
 var _ = require('lodash');
 var partial = _.partial;
-var partialRight = _.partialRight;
 var map = _.map;
 var player = require('./models/playerModel');
 var character = require('./models/characterModel');
@@ -15,13 +14,16 @@ var fighter = require('./models/fighterModel');
 var match = require('./models/matchModel');
 
 var formatDbResponse = function (result) {
-  if(result){
-   var cleaned = result.toObject();
+  var cleaned;
+
+  if (result) {
+   cleaned = result.toObject();
    cleaned.id = result._id;
    delete cleaned._id;
    delete cleaned.__v;
    return cleaned;
-  }
+  } else cleaned = null;
+  return cleaned;
 };
 
 var create = function (modelType, data, cb) {

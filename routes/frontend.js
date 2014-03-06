@@ -1,18 +1,21 @@
 var _ = require('lodash');
 var find = _.find;
-var matches = require('../databaseScripts/matches');
+var api = require('../api');
 
 module.exports = function (app) {
   var returnIndex = function (req, res) {
-    res.render("index", {matches: matches});
+    api.getMatches(function (err, matches) {
+      res.render("index", {matches: matches}); 
+    });
   };
 
   app.get("/", returnIndex);
   app.get("/matches", returnIndex);
   app.get('/matches/:id', function (req, res) {
     var id = Number(req.params.id)
-      , match = find(matches, {id: id});
 
-    res.render("match", match);
+    api.getMatch(id, function (err, match) {
+      res.render("match", match); 
+    });
   });
 };

@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var Games = new mongoose.Schema({
   name: String,
+  nickname: String,
   _characters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game" }]
 });
 
