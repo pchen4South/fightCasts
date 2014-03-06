@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var _ = require('lodash');
 var forEach = _.forEach;
 var prompt = require('prompt');
-var characters = require('./characters');
-var players = require('./players');
+var characters = require('./seeds/characters');
+var players = require('./seeds/players');
 var characterModel = require('../models/characterModel');
 var playerModel = require('../models/playerModel');
 

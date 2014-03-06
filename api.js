@@ -1,7 +1,6 @@
 var async = require('async');
 var _ = require('lodash');
 var partial = _.partial;
-var partialRight = _.partialRight;
 var map = _.map;
 var player = require('./models/playerModel');
 var character = require('./models/characterModel');
