@@ -8,13 +8,13 @@ var casterSchema = require('./casterModel').schema;
 var videoSchema = require('./videoModel').schema;
 
 var Matches = new mongoose.Schema({
-  _fighters: [{ type: mongoose.Schema.Types.ObjectId, ref: fighterSchema }],
-  _casters: [{ type: mongoose.Schema.Types.ObjectId, ref: casterSchema }],
-  _videos: [{type: mongoose.Schema.Types.ObjectId, ref: videoSchema}],
-  _teams: [{type: mongoose.Schema.Types.ObjectId, ref: teamSchema}],
-  _event: {type: mongoose.Schema.Types.ObjectId, ref: eventSchema},
-  _game: {type: mongoose.Schema.Types.ObjectId, ref: gameSchema},
-  _channel: {type: mongoose.Schema.Types.ObjectId, ref: channelSchema},  
+  _fighters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Fighter" }],
+  _casters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Caster" }],
+  _videos: [{type: mongoose.Schema.Types.ObjectId, ref: "Video"}],
+  _teams: [{type: mongoose.Schema.Types.ObjectId, ref: "Team"}],
+  _event: {type: mongoose.Schema.Types.ObjectId, ref: "Event"},
+  _game: {type: mongoose.Schema.Types.ObjectId, ref: "Game"},
+  _channel: {type: mongoose.Schema.Types.ObjectId, ref: "Channel"},  
 });
 
 var Match = mongoose.model('Match', Matches);

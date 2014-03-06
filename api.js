@@ -1,6 +1,7 @@
 var async = require('async');
 var _ = require('lodash');
 var partial = _.partial;
+var partialRight = _.partialRight;
 var map = _.map;
 var player = require('./models/playerModel');
 var character = require('./models/characterModel');
@@ -96,6 +97,90 @@ var getTeams = partial(getMultiple, team.model);
 var getFighters = partial(getMultiple, fighter.model);
 var getMatches = partial(getMultiple, match.model);
 
+var getFighterNested = function (id, cb) {
+  fighter.model.findById(id)
+  .populate("_player")
+  .populate("_characters")
+  .exec(cb);
+};
+
+//helpers for getMatchNested
+var playerOptions = {
+  model: "Player",
+  path: "_fighters._player"
+};
+var charactersOptions = {
+  model: "Character",
+  path: "_fighters._characters"
+};
+
+var formatNestedFighter = function (monFighter) {
+  return {
+    characters: map(monFighter["_characters"], formatDbResponse),
+    player: formatDbResponse(monFighter["_player"])
+  };
+};
+
+var formatNestedMatch = function (monMatch) {
+  return {
+    id: monMatch["_id"],
+    fighters: map(monMatch["_fighters"], formatNestedFighter),
+    casters: map(monMatch["_casters"], formatDbResponse),
+    videos: map(monMatch["_videos"], formatDbResponse),
+    teams: map(monMatch["_teams"], formatDbResponse),
+    event: formatDbResponse(monMatch["_event"]),
+    game: formatDbResponse(monMatch["_game"]),
+    channel: formatDbResponse(monMatch["_channel"]),
+  };
+};
+
+var getMatchNested = function (id, cb) {
+  match.model.findById(id)
+  .populate("_fighters")
+  .populate("_casters")
+  .populate("_videos")
+  .populate("_teams")
+  .populate("_event")
+  .populate("_game")
+  .populate("_channel")
+  .exec(function (err, res) {
+    match.model.populate(res, playerOptions, function (err, res) {
+      match.model.populate(res, charactersOptions, function (err, res) {
+        if (err) cb(err);
+        else cb(null, formatNestedMatch(res)); 
+      });
+    });
+  });
+};
+
+var getFightersNested = function (cb) {
+  fighter.model.find()
+  .populate("_player")
+  .populate("_characters")
+  .exec(cb);
+};
+
+var getMatchesNested = function (cb) {
+  match.model.find()
+  .populate("_fighters")
+  .populate("_player")
+  .populate("_characters")
+  .populate("_casters")
+  .populate("_videos")
+  .populate("_teams")
+  .populate("_event")
+  .populate("_game")
+  .populate("_channel")
+  .exec(function (err, res) {
+    match.model.populate(res, playerOptions, function (err, matches) {
+      match.model.populate(matches, charactersOptions, function (err, results) {
+        if (err) cb(err); 
+        else cb(null, map(results, formatNestedMatch));
+      });
+    });
+  });
+};
+
 var getAll = function (cb) {
   async.parallel({
     players: getPlayers,
@@ -134,6 +219,8 @@ module.exports = {
   getTeam: getTeam,
   getFighter: getFighter,
   getMatch: getMatch,
+  getMatchNested: getMatchNested,
+  getFighterNested: getFighterNested,
 
   getPlayers: getPlayers, 
   getCharacters: getCharacters,
@@ -144,5 +231,7 @@ module.exports = {
   getChannels: getChannels,
   getTeams: getTeams,
   getFighters: getFighters,
-  getMtches: getMatches
+  getMatches: getMatches,
+  getMatchesNested: getMatchesNested,
+  getFightersNested: getFightersNested,
 }
