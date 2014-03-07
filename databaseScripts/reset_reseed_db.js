@@ -21,7 +21,7 @@ var channelModel = require('../models/channelModel');
 var teamModel = require('../models/teamModel');
 
 var createCharacter = function (character, done) {  
-  charMod = characterModel.model;
+  var charMod = characterModel.model;
   var newChar = new charMod(character);
   console.log("Character Created: ", newChar.name);
   newChar.save(done);   

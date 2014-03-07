@@ -2,13 +2,13 @@ var express = require('express');
 var exphbs = require('express3-handlebars');
 var app = express();
 var mongoose = require('mongoose');
-var helpers = require('./assets/javascripts/handlebarsHelpers');
+var gameIcon = require('./views/helpers/gameIcon');
 
 mongoose.connect('mongodb://localhost:27017/fightCasts');
 
 var hbs = exphbs.create({
   defaultLayout: "main",
-  helpers: {gameIcon: helpers.gameIcon}  
+  helpers: {gameIcon: gameIcon}  
 });
 
 app.set("views", __dirname + "/views");
