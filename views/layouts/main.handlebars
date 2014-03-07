@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" type="text/css" href="/vendor/stylesheets/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href"/vendor/stylesheets/select2.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/stylesheets/select2-bootstrap.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
 </head>
 
@@ -31,9 +31,11 @@
   <script src="/vendor/javascripts/jquery.js"></script>
   <script src="/vendor/javascripts/select2.min.js"></script>
   <script src="/vendor/javascripts/bootstrap.min.js"></script>
+  <script src="/vendor/javascripts/handlebars.js"></script>
+  <script src="/vendor/javascripts/ember.min.js"></script>
 
   <section class="col-md-8">
-    <div class="container-fluid">
+    <div class="container-fluid" id="main-content">
       {{{body}}}
     </div>
   </section>

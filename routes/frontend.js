@@ -13,7 +13,7 @@ module.exports = function (app) {
   app.get("/matches", returnIndex);
   app.get("/matches/submit", function (req, res) {
     api.getAll(function (err, results) {
-      res.render("submit", results); 
+      res.render("submitForm", results); 
     });
   });
   app.get('/matches/:id', function (req, res) {
