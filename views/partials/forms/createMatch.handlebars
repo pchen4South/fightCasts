@@ -8,7 +8,7 @@
     <label for="fighters">Fighters</label>
     <select multiple class="form-control" id="fighters" name="fighters">
       {{#each fighters}}
-        <option value={{id}}>{{player.name}} 
+        <option value={{id}}>{{person.name}} 
           {{#each characters}}
             {{name}}
           {{/each}}
@@ -23,12 +23,6 @@
       {{/each}}
     </select>
 
-    <label for="casters">Casters</label>
-    <select multiple class="form-control" id="casters" name="casters">
-      {{#each casters}}
-        <option value={{id}}>{{name}}</option>
-      {{/each}}
-    </select>
 
     <label for="videos">Videos</label>
     <select multiple class="form-control" id="videos" name="videos">

@@ -1,9 +1,7 @@
 var mongoose = require('mongoose');
-var playerSchema = require('./playerModel')['schema'];
-var characterSchema = require('./characterModel')['schema'];
 
 var Fighters = new mongoose.Schema({
-  _player: { type: mongoose.Schema.Types.ObjectId, ref: "Player" },
+  _person: { type: mongoose.Schema.Types.ObjectId, ref: "Person" },
   _characters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Character" }]
 });
 

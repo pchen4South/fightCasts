@@ -5,9 +5,8 @@ var prompt = require('prompt');
 var async = require('async');
 
 var characters = require('./seeds/characters');
-var players = require('./seeds/players');
+var people = require('./seeds/people');
 var games = require('./seeds/games');
-var casters = require('./seeds/casters');
 var videos = require('./seeds/videos');
 var events = require('./seeds/events');
 var channels = require('./seeds/channels');
@@ -15,8 +14,7 @@ var teams = require('./seeds/teams');
 
 var gameModel = require('../models/gameModel');
 var characterModel = require('../models/characterModel');
-var playerModel = require('../models/playerModel');
-var casterModel = require('../models/casterModel');
+var personModel = require('../models/personModel');
 var videoModel = require('../models/videoModel');
 var eventModel = require('../models/eventModel');
 var channelModel = require('../models/channelModel');
@@ -49,10 +47,10 @@ var findCharactersAndCreateGames = function(game, cb){
   })
 };
 
-var createPlayer = function (player) {
-  playerModel.model.create(player, function (err, res) {
+var createPerson = function (person) {
+  personModel.model.create(person, function (err, res) {
     if (err) console.log(err);
-    else console.log("Player created: ", res.name); 
+    else console.log("Person created: ", res.name); 
   });
 };
 
@@ -69,12 +67,7 @@ var findCharacters = function(game){
     else console.log(res);
   })
 }
-var createCaster = function (caster) {
-  casterModel.model.create(caster, function (err, res) {
-    if (err) console.log(err);
-    else console.log("Caster created: ", res.name); 
-  });
-};
+
 
 var createVideo = function (video) {
   videoModel.model.create(video, function (err, res) {
@@ -110,8 +103,7 @@ var resetDb = function (mongoose) {
     mongoose.connection.db.dropDatabase(function (err) {
       console.log("database Dropped");
       
-      forEach(players, createPlayer);
-      forEach(casters, createCaster);
+      forEach(people, createPerson);
       forEach(videos, createVideo);
       forEach(events, createEvent);
       forEach(channels, createChannel);

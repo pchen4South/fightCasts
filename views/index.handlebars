@@ -7,7 +7,6 @@
           <td>title</td>
           <td>fighters</td>
           <td>event</td>
-          <td>casters</td>
         </tr>
       </thead>
       <tbody>      
@@ -27,7 +26,7 @@
           <td>
             {{#each fighters}}
               <strong>
-                {{player.name}}
+                {{person.name}}
               </strong>
               <em>
                 {{#each characters}}
@@ -39,12 +38,6 @@
 
           <td>
             {{event.name}}
-          </td>
-
-          <td>
-            {{#each casters}}
-              {{name}}  
-            {{/each}}
           </td>
 
         </tr>

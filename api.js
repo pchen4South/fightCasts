@@ -2,10 +2,9 @@ var async = require('async');
 var _ = require('lodash');
 var partial = _.partial;
 var map = _.map;
-var player = require('./models/playerModel');
+var person = require('./models/personModel');
 var character = require('./models/characterModel');
 var game = require('./models/gameModel');
-var caster = require('./models/casterModel');
 var event = require('./models/eventModel');
 var video = require('./models/videoModel');
 var channel = require('./models/channelModel');
@@ -33,18 +32,17 @@ var create = function (modelType, data, cb) {
 };
 
 //create
-var createPlayer = partial(create, player.model);
+var createPerson = partial(create, person.model);
 var createCharacter = partial(create, character.model);
 var createGame = partial(create, game.model);
 var createVideo = partial(create, video.model);
-var createCaster = partial(create, caster.model);
 var createEvent = partial(create, event.model);
 var createChannel = partial(create, channel.model);
 var createTeam = partial(create, team.model);
 
 var createFighter = function (data, cb) {
   var formatted = {
-    _player: data.player,
+    _person: data.person,
     _characters: data.characters 
   };
 
@@ -56,7 +54,6 @@ var createMatch = function(data, cb){
     approved: data.approved,
     title: data.title,
     _fighters: data.fighters,
-    _casters: data.casters,
     _videos: data.videos,
     _teams: data.teams,
     _game: data.game,
@@ -81,22 +78,20 @@ var getMultiple = function (modelType, cb) {
 };
 
 //Read
-var getPlayer = partial(get, player.model);
+var getPerson = partial(get, person.model);
 var getCharacter = partial(get, character.model);
 var getGame = partial(get, game.model);
 var getVideo = partial(get, video.model);
-var getCaster = partial(get, caster.model);
 var getEvent = partial(get, event.model);
 var getChannel = partial(get, channel.model);
 var getTeam = partial(get, team.model);
 var getFighter = partial(get, fighter.model);
 var getMatch = partial(get, match.model);
 
-var getPlayers = partial(getMultiple, player.model);
+var getPeople = partial(getMultiple, person.model);
 var getCharacters = partial(getMultiple, character.model);
 var getGames = partial(getMultiple, game.model);
 var getVideos = partial(getMultiple, video.model);
-var getCasters = partial(getMultiple, caster.model);
 var getEvents = partial(getMultiple, event.model);
 var getChannels = partial(getMultiple, channel.model);
 var getTeams = partial(getMultiple, team.model);
@@ -104,9 +99,9 @@ var getFighters = partial(getMultiple, fighter.model);
 var getMatches = partial(getMultiple, match.model);
 
 //helpers for getMatchNested
-var playerOptions = {
-  model: "Player",
-  path: "_fighters._player"
+var personOptions = {
+  model: "Person",
+  path: "_fighters._person"
 };
 var charactersOptions = {
   model: "Character",
@@ -117,7 +112,7 @@ var formatNestedFighter = function (monFighter) {
   return {
     id: monFighter["_id"],
     characters: map(monFighter["_characters"], formatDbResponse),
-    player: formatDbResponse(monFighter["_player"])
+    person: formatDbResponse(monFighter["_person"])
   };
 };
 
@@ -127,7 +122,6 @@ var formatNestedMatch = function (monMatch) {
     approved: monMatch.approved,
     title: monMatch.title,
     fighters: map(monMatch["_fighters"], formatNestedFighter),
-    casters: map(monMatch["_casters"], formatDbResponse),
     videos: map(monMatch["_videos"], formatDbResponse),
     teams: map(monMatch["_teams"], formatDbResponse),
     event: formatDbResponse(monMatch["_event"]),
@@ -138,7 +132,7 @@ var formatNestedMatch = function (monMatch) {
 
 var getFighterNested = function (id, cb) {
   fighter.model.findById(id)
-  .populate("_player")
+  .populate("_person")
   .populate("_characters")
   .exec(function (err, fighter) {
     if (err) cb(err);
@@ -149,14 +143,13 @@ var getFighterNested = function (id, cb) {
 var getMatchNested = function (id, cb) {
   match.model.findById(id)
   .populate("_fighters")
-  .populate("_casters")
   .populate("_videos")
   .populate("_teams")
   .populate("_event")
   .populate("_game")
   .populate("_channel")
   .exec(function (err, res) {
-    match.model.populate(res, playerOptions, function (err, res) {
+    match.model.populate(res, personOptions, function (err, res) {
       match.model.populate(res, charactersOptions, function (err, res) {
         if (err) cb(err);
         else cb(null, formatNestedMatch(res)); 
@@ -167,7 +160,7 @@ var getMatchNested = function (id, cb) {
 
 var getFightersNested = function (cb) {
   fighter.model.find()
-  .populate("_player")
+  .populate("_person")
   .populate("_characters")
   .exec(function (err, fighters) {
     if (err) cb(err);
@@ -178,16 +171,15 @@ var getFightersNested = function (cb) {
 var getMatchesNested = function (cb) {
   match.model.find()
   .populate("_fighters")
-  .populate("_player")
+  .populate("_person")
   .populate("_characters")
-  .populate("_casters")
   .populate("_videos")
   .populate("_teams")
   .populate("_event")
   .populate("_game")
   .populate("_channel")
   .exec(function (err, res) {
-    match.model.populate(res, playerOptions, function (err, matches) {
+    match.model.populate(res, personOptions, function (err, matches) {
       match.model.populate(matches, charactersOptions, function (err, results) {
         if (err) cb(err); 
         else cb(null, map(results, formatNestedMatch));
@@ -198,11 +190,10 @@ var getMatchesNested = function (cb) {
 
 var getAll = function (cb) {
   async.parallel({
-    players: getPlayers,
+    people: getPeople,
     characters: getCharacters,
     games: getGames,
     videos: getVideos,
-    casters: getCasters,
     events: getEvents,
     channels: getChannels,
     teams: getTeams,
@@ -212,10 +203,9 @@ var getAll = function (cb) {
 };
 
 module.exports = {
-  createPlayer: createPlayer, 
+  createPerson: createPerson, 
   createCharacter: createCharacter,
   createGame: createGame,
-  createCaster: createCaster,
   createEvent: createEvent,
   createVideo: createVideo,
   createChannel: createChannel,
@@ -224,10 +214,9 @@ module.exports = {
   createMatch: createMatch,
 
   getAll: getAll,
-  getPlayer: getPlayer, 
+  getPerson: getPerson, 
   getCharacter: getCharacter,
   getGame: getGame,
-  getCaster: getCaster,
   getEvent: getEvent,
   getVideo: getVideo,
   getChannel: getChannel,
@@ -237,10 +226,9 @@ module.exports = {
   getMatchNested: getMatchNested,
   getFighterNested: getFighterNested,
 
-  getPlayers: getPlayers, 
+  getPeople: getPeople, 
   getCharacters: getCharacters,
   getGames: getGames,
-  getCasters: getCasters,
   getEvents: getEvents,
   getVideos: getVideos,
   getChannels: getChannels,

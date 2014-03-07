@@ -3,16 +3,13 @@ var api = require('../api');
 module.exports = function (app) {
 
   //PLAYER
-  app.post("/api/v1/players", api.createPlayer);
+  app.post("/api/v1/people", api.createPerson);
 
   //CHARACTER
   app.post("/api/v1/characters", api.createCharacter);
 
   //GAME
   app.post("/api/v1/games", api.createGame);
-
-  //CASTER
-  app.post("/api/v1/casters", api.createCaster);
 
   //VIDEO
   app.post("/api/v1/videos", api.createVideo);

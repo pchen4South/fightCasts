@@ -7,9 +7,9 @@ module.exports = function (app) {
       res.render("admin/dashboard", results);
     });
   });
-  app.get("/admin/players", function (req, res) {
+  app.get("/admin/people", function (req, res) {
     api.getAll(function (err, results) {
-      res.render("admin/players", results);
+      res.render("admin/people", results);
     });
   });
   app.get("/admin/characters", function (req, res) {
@@ -22,11 +22,7 @@ module.exports = function (app) {
       res.render("admin/games", results);
     });
   });
-  app.get("/admin/casters", function (req, res) {
-    api.getAll(function (err, results) {
-      res.render("admin/casters", results);
-    });
-  });
+
   app.get("/admin/videos", function (req, res) {
     api.getAll(function (err, results) {
       res.render("admin/videos", results);
@@ -59,9 +55,9 @@ module.exports = function (app) {
   });
 
   //create
-  app.post("/admin/players", function (req, res) {
-    api.createPlayer(req.body, function (err, result) {
-      res.redirect("/admin/players");
+  app.post("/admin/people", function (req, res) {
+    api.createPerson(req.body, function (err, result) {
+      res.redirect("/admin/people");
     });
   });
 
@@ -77,11 +73,6 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/admin/casters", function (req, res) {
-    api.createCaster(req.body, function (err, result) {
-      res.redirect("/admin/casters");
-    });
-  });
 
   app.post("/admin/videos", function (req, res) {
     api.createVideo(req.body, function (err, result) {
