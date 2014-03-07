@@ -11,6 +11,11 @@ module.exports = function (app) {
 
   app.get("/", returnIndex);
   app.get("/matches", returnIndex);
+  app.get("/matches/submit", function (req, res) {
+    api.getAll(function (err, results) {
+      res.render("submit", results); 
+    });
+  });
   app.get('/matches/:id', function (req, res) {
     var id = req.params.id
 
