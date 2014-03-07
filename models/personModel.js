@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 
 var People = new mongoose.Schema({
-  name: String
+  name: String,
+  country: String
 });
 
 var Person = mongoose.model('Person', People);

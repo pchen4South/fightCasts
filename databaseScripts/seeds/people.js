@@ -1,8 +1,8 @@
 module.exports = [
-  {name: "Pete"},
-  {name: "Steve"},
-  {name: "Sid"},
-  {name: "Rohan"},
-  {name: "Infiltration"},
-  {name: "Daigo Umehara"},
+  {name: "Pete", country: "US"},
+  {name: "Steve", country: "US"},
+  {name: "Sid", country: "US"},
+  {name: "Rohan", country: "US"},
+  {name: "Infiltration", country: "KR"},
+  {name: "Daigo Umehara", country: "JP"}
 ]

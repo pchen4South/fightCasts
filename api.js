@@ -42,7 +42,7 @@ var createTeam = partial(create, team.model);
 
 var createFighter = function (data, cb) {
   var formatted = {
-    _person: data.person,
+    playerName: data.playerName,
     _characters: data.characters 
   };
 
@@ -112,7 +112,7 @@ var formatNestedFighter = function (monFighter) {
   return {
     id: monFighter["_id"],
     characters: map(monFighter["_characters"], formatDbResponse),
-    person: formatDbResponse(monFighter["_person"])
+    playerName: monFighter.playerName
   };
 };
 
@@ -132,7 +132,6 @@ var formatNestedMatch = function (monMatch) {
 
 var getFighterNested = function (id, cb) {
   fighter.model.findById(id)
-  .populate("_person")
   .populate("_characters")
   .exec(function (err, fighter) {
     if (err) cb(err);

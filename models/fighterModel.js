@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var Fighters = new mongoose.Schema({
-  _person: { type: mongoose.Schema.Types.ObjectId, ref: "Person" },
+  playerName: String,
   _characters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Character" }]
 });
 

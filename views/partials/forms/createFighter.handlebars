@@ -1,11 +1,10 @@
 <form role="form" method="POST">
   <div class="form-group">
     <label for="person">Player</label>
-    <select class="form-control" id="person" name="person">
-      {{#each people}}
-        <option value={{id}}>{{name}}</option>
-      {{/each}}
-    </select>
+     <div class="form-group">
+      <label for="playerName">Name</label>
+      <input type="text" name="playerName" class="form-control" id="playerName" placeholder="player name">
+    </div> 
 
     <label for="characters">Character</label>
     <select multiple class="form-control" id="characters" name="characters">
