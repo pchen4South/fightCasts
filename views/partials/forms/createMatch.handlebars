@@ -5,10 +5,16 @@
     <input class="form-control" type="text" name="title" id="title" placeholder="match title">
     </input>
 
+    <label for="casters">Casters</label>
+    <input class="form-control" type="text" name="casters" id="casters" placeholder="Caster Names">
+    </input>
+    
+    
+    
     <label for="fighters">Fighters</label>
     <select multiple class="form-control" id="fighters" name="fighters">
       {{#each fighters}}
-        <option value={{id}}>{{person.name}} 
+        <option value={{id}}>{{person.name}} as
           {{#each characters}}
             {{name}}
           {{/each}}

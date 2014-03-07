@@ -42,7 +42,7 @@ var createTeam = partial(create, team.model);
 
 var createFighter = function (data, cb) {
   var formatted = {
-    playerName: data.playerName,
+    _person: data.person,
     _characters: data.characters 
   };
 
@@ -53,6 +53,7 @@ var createMatch = function(data, cb){
   var formatted = {
     approved: data.approved,
     title: data.title,
+    casters: data.casters,
     _fighters: data.fighters,
     _videos: data.videos,
     _teams: data.teams,
@@ -112,6 +113,7 @@ var formatNestedFighter = function (monFighter) {
   return {
     id: monFighter["_id"],
     characters: map(monFighter["_characters"], formatDbResponse),
+    person: formatDbResponse(monFighter["_person"]),
     playerName: monFighter.playerName
   };
 };
@@ -121,6 +123,7 @@ var formatNestedMatch = function (monMatch) {
     id: monMatch["_id"],
     approved: monMatch.approved,
     title: monMatch.title,
+    casters: monMatch.casters,
     fighters: map(monMatch["_fighters"], formatNestedFighter),
     videos: map(monMatch["_videos"], formatDbResponse),
     teams: map(monMatch["_teams"], formatDbResponse),
@@ -133,6 +136,7 @@ var formatNestedMatch = function (monMatch) {
 var getFighterNested = function (id, cb) {
   fighter.model.findById(id)
   .populate("_characters")
+  .populate("_person")
   .exec(function (err, fighter) {
     if (err) cb(err);
     else cb(null, formatNestedFighter(fighter));
