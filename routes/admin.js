@@ -110,4 +110,22 @@ module.exports = function (app) {
       res.redirect("/admin/matches");
     });
   });
+  
+  app.post("/admin/matches/:_id/approve", function(req,res){
+    var id = req.body.id;
+    api.getMatch(id, function(err, result){
+      api.updateMatchById(id, { $set: { approved: true }}, function(err, result){
+        res.redirect("admin/matches");
+      })
+    })
+  });  
+  
+  app.post("/admin/matches/:_id/unapprove", function(req,res){
+    var id = req.body.id;
+    api.getMatch(id, function(err, result){
+      api.updateMatchById(id, { $set: { approved: false }}, function(err, result){
+        res.redirect("admin/matches");
+      })
+    })
+  });
 };

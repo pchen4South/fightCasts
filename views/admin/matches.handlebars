@@ -5,7 +5,27 @@
   {{> forms/createMatch}}
   <ul>
   {{#each matches}} 
-    <li>{{title}}</li>
+    
+   <form role = "form" method = "POST"> 
+    {{#if approved}}
+        <li>
+        <b>APPROVED</b>
+        <button formaction = "/admin/matches/{{id}}/unapprove" type = "submit"
+        class = "btn btn-default" name = "id" value = {{id}}>
+          Unapprove</button>
+          {{title}}
+        </li>
+    {{else}}
+      <li>
+        <b>UNAPPROVED</b>
+        <button formaction = "/admin/matches/{{id}}/approve" type = "submit"
+        class = "btn btn-default" name = "id" value = {{id}}>
+          Approve</button>
+          {{title}}
+      </li>
+ 
+    </form>
+    {{/if}}
   {{/each}}
   </ul>
 </div>

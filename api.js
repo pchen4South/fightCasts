@@ -205,7 +205,16 @@ var getAll = function (cb) {
   }, cb);
 };
 
+var updateMatchById = function(id, updateOptions, cb){
+  match.model.findByIdAndUpdate(id, updateOptions, function(err, res){
+    if (err) console.log(err);
+    else
+      cb(null, res);
+  });
+}
+
 module.exports = {
+  updateMatchById: updateMatchById,
   createPerson: createPerson, 
   createCharacter: createCharacter,
   createGame: createGame,
