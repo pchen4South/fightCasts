@@ -205,15 +205,28 @@ var getAll = function (cb) {
   }, cb);
 };
 
+//update
 var updateMatchById = function(id, updateOptions, cb){
   match.model.findByIdAndUpdate(id, updateOptions, function(err, res){
     if (err) console.log(err);
     else
       cb(null, res);
   });
-}
+};
+
+//delete
+var deletePersonById = function(id, cb){
+  person.model.findByIdAndRemove(id, function(err,res){
+    if (err){console.log(err)}
+    else
+      cb(null, res);
+  });
+};
+
+
 
 module.exports = {
+  deletePersonById: deletePersonById,
   updateMatchById: updateMatchById,
   createPerson: createPerson, 
   createCharacter: createCharacter,

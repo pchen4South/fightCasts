@@ -6,10 +6,12 @@
 </div>
 
 <div class = "col-md-6">
- <ul>
+ <ul style="list-style-type:none">
   {{#each characters}} 
   <div class = "col-md-3">
-    <li><b>{{game}}</b> {{name}} </li>
+    <li>
+    <img src = {{gameIcon game}}> </img> 
+    {{name}} </li>
   </div>  
   {{/each}}
   </ul>

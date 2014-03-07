@@ -149,7 +149,8 @@ module.exports = function (app) {
       res.redirect("/admin/matches");
     });
   });
-  
+
+  //update
   app.post("/admin/matches/:_id/approve", function(req,res){
     var id = req.body.id;
     api.getMatch(id, function(err, result){
@@ -167,4 +168,14 @@ module.exports = function (app) {
       })
     })
   });
+  
+  //delete
+  app.post("/admin/people/:_id/delete", function(req, res){
+    var id = req.body.id;
+    api.deletePersonById(id, function(err, result){
+      console.log("DELETED Person: ", result.name);
+      res.redirect("admin/people");
+    });
+  });
+  
 };
