@@ -1,17 +1,21 @@
 <div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-10">
+<div class="col-md-4">
   {{> forms/createFighter}}
+</div>
+<div class = "col-md-6">
   <ul>
   {{#each fighters}} 
-  <li>
-    {{person.name}} 
-    as 
-    {{#each characters}}
-      {{name}} 
-    {{/each}}
-  </li>
+    <div class = "col-md-3">
+      <li>
+        <b>{{person.name}}</b>
+        as 
+        {{#each characters}}
+          {{name}} 
+        {{/each}}
+      </li>
+    </div>
   {{/each}}
   </ul>
 </div>

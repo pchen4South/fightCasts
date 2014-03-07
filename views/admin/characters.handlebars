@@ -1,11 +1,16 @@
 <div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-10">
+<div class="col-md-4">
   {{> forms/createCharacter}}
-  <ul>
+</div>
+
+<div class = "col-md-6">
+ <ul>
   {{#each characters}} 
+  <div class = "col-md-3">
     <li><b>{{game}}</b> {{name}} </li>
+  </div>  
   {{/each}}
   </ul>
 </div>

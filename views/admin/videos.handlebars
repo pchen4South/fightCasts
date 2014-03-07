@@ -1,11 +1,15 @@
 <div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-10">
+<div class="col-md-4">
   {{> forms/createVideo}}
+</div>
+<div class = "col-md-6">
   <ul>
-  {{#each videos}} 
-    <li>{{name}}</li>
-  {{/each}}
+    {{#each videos}} 
+    <div class = "col-md-3">
+      <li>{{name}} </li>
+    </div>
+    {{/each}}
   </ul>
 </div>

@@ -1,8 +1,10 @@
 <div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-10">
+<div class="col-md-4">
   {{> forms/createMatch}}
+</div>
+<div class ="col-md-6">
   <ul>
   {{#each matches}} 
     
@@ -11,17 +13,17 @@
         <li>
         <b>APPROVED</b>
         <button formaction = "/admin/matches/{{id}}/unapprove" type = "submit"
-        class = "btn btn-default" name = "id" value = {{id}}>
+        class = "btn btn-xs btn-default" name = "id" value = {{id}}>
           Unapprove</button>
-          {{title}}
+          Match Title: {{title}}
         </li>
     {{else}}
       <li>
         <b>UNAPPROVED</b>
         <button formaction = "/admin/matches/{{id}}/approve" type = "submit"
-        class = "btn btn-default" name = "id" value = {{id}}>
+        class = "btn btn-xs btn-default" name = "id" value = {{id}}>
           Approve</button>
-          {{title}}
+          Match Title: {{title}}
       </li>
  
     </form>

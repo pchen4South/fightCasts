@@ -1,11 +1,15 @@
 <div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-10">
+<div class="col-md-4">
   {{> forms/createPerson}}
+</div>
+<div class ="col-md-6">
   <ul>
   {{#each people}} 
+    <div class = "col-md-3">
     <li><b>{{country}} </b>{{name}}</li>
+    </div>
   {{/each}}
   </ul>
 </div>
