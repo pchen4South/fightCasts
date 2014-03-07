@@ -5,12 +5,13 @@
   {{> forms/createMatch}}
 </div>
 <div class ="col-md-6">
-  <ul>
+  <ul style="list-style-type:none">
   {{#each matches}} 
     
    <form role = "form" method = "POST"> 
     {{#if approved}}
         <li>
+        <img src = {{gameIcon game.name}}> </img> 
         <b>APPROVED</b>
         <button formaction = "/admin/matches/{{id}}/unapprove" type = "submit"
         class = "btn btn-xs btn-default" name = "id" value = {{id}}>
@@ -19,6 +20,7 @@
         </li>
     {{else}}
       <li>
+        <img src = {{gameIcon game.name}}> </img>
         <b>UNAPPROVED</b>
         <button formaction = "/admin/matches/{{id}}/approve" type = "submit"
         class = "btn btn-xs btn-default" name = "id" value = {{id}}>

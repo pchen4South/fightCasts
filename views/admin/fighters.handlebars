@@ -5,14 +5,16 @@
   {{> forms/createFighter}}
 </div>
 <div class = "col-md-6">
-  <ul>
+  <ul style="list-style-type:none">
   {{#each fighters}} 
-    <div class = "col-md-3">
+    <div class = "col-md-4">
       <li>
+        <img src = {{countryIcon person.country}}></img>
         <b>{{person.name}}</b>
         as 
         {{#each characters}}
-          {{name}} 
+          <img src = {{gameIcon game}}></img>
+          <b>{{name}} </b>
         {{/each}}
       </li>
     </div>
