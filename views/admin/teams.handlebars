@@ -5,9 +5,19 @@
   {{> forms/createTeam}}
 </div>
 <div class="col-md-6">  
-  <ul>
-  {{#each teams}} 
-    <li>{{name}}</li>
-  {{/each}}
-  </ul>
+  <form role = "form" method = "POST"> 
+    <ul>
+      {{#each teams}} 
+      <div class = "col-md-3">
+        <li>
+        <button formaction = "/admin/teams/{{id}}/delete"
+          type = "submit"
+          class = "btn btn-xs btn-default" 
+          name = "id" value = {{id}}> X </button>
+        {{name}}
+        </li>
+      </div>
+      {{/each}}
+    </ul>
+  </form>
 </div>

@@ -172,9 +172,57 @@ module.exports = function (app) {
   //delete
   app.post("/admin/people/:_id/delete", function(req, res){
     var id = req.body.id;
-    api.deletePersonById(id, function(err, result){
+    api.deletePerson(id, function(err, result){
       console.log("DELETED Person: ", result.name);
       res.redirect("admin/people");
+    });
+  }); 
+  
+  app.post("/admin/videos/:_id/delete", function(req, res){
+    var id = req.body.id;
+    api.deleteVideo(id, function(err, result){
+      console.log("DELETED Video: ", result.name);
+      res.redirect("admin/videos");
+    });
+  });  
+  
+  app.post("/admin/events/:_id/delete", function(req, res){
+    var id = req.body.id;
+    api.deleteEvent(id, function(err, result){
+      console.log("DELETED Event: ", result.name);
+      res.redirect("admin/events");
+    });
+  });
+
+  app.post("/admin/channels/:_id/delete", function(req, res){
+    var id = req.body.id;
+    api.deleteChannel(id, function(err, result){
+      console.log("DELETED Channel: ", result.name);
+      res.redirect("admin/channels");
+    });
+  }); 
+  
+  app.post("/admin/teams/:_id/delete", function(req, res){
+    var id = req.body.id;
+    api.deleteTeam(id, function(err, result){
+      console.log("DELETED team: ", result.name);
+      res.redirect("admin/teams");
+    });
+  });  
+  
+  app.post("/admin/fighters/:_id/delete", function(req, res){
+    var id = req.body.id;
+    api.deleteFighter(id, function(err, result){
+      console.log("deleted fighter");
+      res.redirect("admin/fighters");
+    });
+  });
+  
+  app.post("/admin/matches/:_id/delete", function(req, res){
+    var id = req.body.id;
+    api.deleteMatch(id, function(err, result){
+      console.log("deleted match", result.title);
+      res.redirect("admin/matches");
     });
   });
   

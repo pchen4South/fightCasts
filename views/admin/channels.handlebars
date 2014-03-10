@@ -5,9 +5,22 @@
   {{> forms/createChannel}}
 </div>  
 <div class = "col-md-6">
+
+<form role = "form" method = "POST"> 
   <ul>
-  {{#each channels}} 
-    <li>{{name}}</li>
-  {{/each}}
+    {{#each channels}} 
+    <div class = "col-md-4">
+      <li>
+      <button formaction = "/admin/channels/{{id}}/delete"
+        type = "submit"
+        class = "btn btn-xs btn-default" 
+        name = "id" value = {{id}}> X </button>
+      {{name}}
+      </li>
+    </div>
+    {{/each}}
   </ul>
+</form>
+  
 </div>
+

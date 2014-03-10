@@ -4,12 +4,21 @@
 <div class="col-md-4">
   {{> forms/createVideo}}
 </div>
+
 <div class = "col-md-6">
-  <ul>
-    {{#each videos}} 
-    <div class = "col-md-3">
-      <li>{{name}} </li>
-    </div>
-    {{/each}}
-  </ul>
+<form role = "form" method = "POST"> 
+    <ul>
+      {{#each videos}} 
+      <div class = "col-md-3">
+        <li>
+        <button formaction = "/admin/videos/{{id}}/delete"
+          type = "submit"
+          class = "btn btn-xs btn-default" 
+          name = "id" value = {{id}}> X </button>
+        {{name}}
+        </li>
+      </div>
+      {{/each}}
+    </ul>
+  </form>
 </div>
