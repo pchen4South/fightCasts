@@ -1,3 +1,60 @@
 <form role="form">
+  <div class="form-group">
+    <label>Title</label>
+    {{input type="text" value=data.title}}
+  </div>
+
+  <div class="form-group">
+    <label>Event Name</label> 
+    {{input type="text" value=data.eventName}}
+  </div>
+
+  <div class="form-group">
+    <label>Game</label>
+    {{view Ember.Select 
+      prompt="Select a game"
+      content=games
+      selection=data.game
+      optionLabelPath="content.name"}}
+  </div>
+
+  <div class="form-group">
+    {{fc-createFighterForm 
+      characters=data.game.characters
+      fighters=data.fighterData}}
+  </div>
+
+  <ul class="form-group">
+    {{#each fighter in data.fighterData}}
+      {{fc-fighterSummary 
+        fighterData=data.fighterData 
+        fighter=fighter}}
+    {{/each}}
+  </ul>
+
+  <div class="form-group">
+    {{fc-createCasterForm casters=data.casters}}
+  </div>
+
+  <ul class="form-group">
+    {{#each caster in data.casters}}
+    {{fc-casterSummary 
+      casters=data.casters
+      caster=caster}}
+    {{/each}}
+  </ul>
+
+  <div class="form-group">
+    {{fc-createVideoForm videos=data.videos}}
+  </div>
+
+  <ul class="form-group">
+    {{#each video in data.videos}}
+    {{fc-videoSummary
+      videos=data.videos
+      video=video}}
+    {{/each}}
+  </ul>
+
   <button {{action "onSubmit" data}} class="btn btn-default">Submit</button> 
 </form>

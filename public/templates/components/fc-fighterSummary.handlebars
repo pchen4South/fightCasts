@@ -1,0 +1,9 @@
+<li>
+  <span>
+  {{fighter.name}}
+  {{#each character in fighter.characters}}
+    {{character.name}}
+  {{/each}}
+  </span>
+  <button {{action "deleteFighter" fighter}}>Remove</button>
+</li>

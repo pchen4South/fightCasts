@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-sm-4">
+    {{input type="text" value=newFighter.name}}
+  </div>
+  <div class="col-sm-4">
+    {{view Ember.Select 
+      multiple="true"
+      prompt="Select a character"
+      content=characters
+      selection=newFighter.characters
+      optionValuePath="content.id"
+      optionLabelPath="content.name"}} 
+  </div>
+
+  <div class="col-sm-4">
+    <button class="btn btn-default" {{action "createFighter" newFighter}}>
+      Create
+    </button>
+  </div>
+</div>

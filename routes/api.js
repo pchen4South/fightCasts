@@ -7,9 +7,21 @@ module.exports = function (app) {
 
   //CHARACTER
   app.post("/api/v1/characters", api.createCharacter);
+  app.get("/api/v1/characters", function (req, res) {
+    api.getCharacters(function (err, characters) {
+      if (err) res.send(400, {err: err.message});
+      res.json(characters); 
+    }); 
+  });
 
   //GAME
   app.post("/api/v1/games", api.createGame);
+  app.get("/api/v1/games", function (req, res) {
+    api.getGamesNested(function (err, games) {
+      if (err) res.send(400, {err: err.message});
+      res.json(games); 
+    }); 
+  });
 
   //CASTER
   app.post("/api/v1/casters", api.createCaster);

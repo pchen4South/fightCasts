@@ -121,6 +121,15 @@ var formatNestedFighter = function (monFighter) {
   };
 };
 
+var formatNestedGame = function (monGame) {
+  return {
+    id: monGame["_id"],
+    name: monGame.name,
+    nickname: monGame.nickname,
+    characters: map(monGame["_characters"], formatDbResponse)
+  };
+};
+
 var formatNestedMatch = function (monMatch) {
   return {
     id: monMatch["_id"],
@@ -163,6 +172,24 @@ var getMatchNested = function (id, cb) {
       });
     });
   });
+};
+
+var getGameNested = function (id, cb) {
+  game.model.findById(id)
+  .populate("_characters")
+  .exec(function (err, games) {
+    if (err) cb(err);
+    else cb(null, formatNestedGame(game)); 
+  });
+};
+
+var getGamesNested = function (cb) {
+  game.model.find()
+  .populate("_characters")
+  .exec(function (err, games) {
+    if (err) cb(err); 
+    else cb(null, map(games, formatNestedGame));
+  })
 };
 
 var getFightersNested = function (cb) {
@@ -236,6 +263,7 @@ module.exports = {
   getMatch: getMatch,
   getMatchNested: getMatchNested,
   getFighterNested: getFighterNested,
+  getGameNested: getGameNested,
 
   getPlayers: getPlayers, 
   getCharacters: getCharacters,
@@ -249,4 +277,5 @@ module.exports = {
   getMatches: getMatches,
   getMatchesNested: getMatchesNested,
   getFightersNested: getFightersNested,
+  getGamesNested: getGamesNested
 }
