@@ -3,7 +3,7 @@ var api = require('../api');
 module.exports = function (app) {
 
   //PLAYER
-  app.post("/api/v1/players", api.createPlayer);
+  app.post("/api/v1/people", api.createPerson);
 
   //CHARACTER
   app.post("/api/v1/characters", api.createCharacter);
@@ -22,9 +22,6 @@ module.exports = function (app) {
       res.json(games); 
     }); 
   });
-
-  //CASTER
-  app.post("/api/v1/casters", api.createCaster);
 
   //VIDEO
   app.post("/api/v1/videos", api.createVideo);

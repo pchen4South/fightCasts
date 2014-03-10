@@ -1,11 +1,35 @@
-<div class="col-md-4">
+<div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-8">
+<div class="col-md-4">
   {{> forms/createMatch}}
-  <ul>
+</div>
+<div class ="col-md-6">
+  <ul style="list-style-type:none">
   {{#each matches}} 
-    <li>{{title}}</li>
+    
+   <form role = "form" method = "POST"> 
+    {{#if approved}}
+        <li>
+        <img src = {{gameIcon game.name}}> </img> 
+        <b>APPROVED</b>
+        <button formaction = "/admin/matches/{{id}}/unapprove" type = "submit"
+        class = "btn btn-xs btn-default" name = "id" value = {{id}}>
+          Unapprove</button>
+          Match Title: {{title}}
+        </li>
+    {{else}}
+      <li>
+        <img src = {{gameIcon game.name}}> </img>
+        <b>UNAPPROVED</b>
+        <button formaction = "/admin/matches/{{id}}/approve" type = "submit"
+        class = "btn btn-xs btn-default" name = "id" value = {{id}}>
+          Approve</button>
+          Match Title: {{title}}
+      </li>
+ 
+    </form>
+    {{/if}}
   {{/each}}
   </ul>
 </div>

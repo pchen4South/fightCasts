@@ -4,64 +4,99 @@ module.exports = function (app) {
   //read
   app.get("/admin", function (req, res) {
     api.getAll(function (err, results) {
+      if(results){
+        results.layout = "adminLayout";
+      }
       res.render("admin/dashboard", results);
     });
   });
-  app.get("/admin/players", function (req, res) {
+  app.get("/admin/people", function (req, res) {
     api.getAll(function (err, results) {
-      res.render("admin/players", results);
+      if(results){
+        results.layout = "adminLayout";
+      }
+      res.render("admin/people", results);
     });
   });
   app.get("/admin/characters", function (req, res) {
     api.getAll(function (err, results) {
+      if(results){
+        results.layout = "adminLayout";
+      }
       res.render("admin/characters", results);
     });
   });
   app.get("/admin/games", function (req, res) {
     api.getAll(function (err, results) {
+      if(results){
+        results.layout = "adminLayout";
+      }
       res.render("admin/games", results);
     });
   });
+  
+  
   app.get("/admin/casters", function (req, res) {
-    api.getAll(function (err, results) {
-      res.render("admin/casters", results);
-    });
+    res.redirect("/admin");
   });
+  
+  
+  
+  
+  
   app.get("/admin/videos", function (req, res) {
     api.getAll(function (err, results) {
+      if(results){
+        results.layout = "adminLayout";
+      }
       res.render("admin/videos", results);
     });
   });
   app.get("/admin/events", function (req, res) {
     api.getAll(function (err, results) {
+      if(results){
+        results.layout = "adminLayout";
+      }
       res.render("admin/events", results);
     });
   });
   app.get("/admin/channels", function (req, res) {
     api.getAll(function (err, results) {
+      if(results){
+        results.layout = "adminLayout";
+      }
       res.render("admin/channels", results);
     });
   });
   app.get("/admin/teams", function (req, res) {
     api.getAll(function (err, results) {
+      if(results){
+        results.layout = "adminLayout";
+      }
       res.render("admin/teams", results);
     });
   });
   app.get("/admin/fighters", function (req, res) {
     api.getAll(function (err, results) {
+      if(results){
+        results.layout = "adminLayout";
+      }
       res.render("admin/fighters", results);
     });
   });
   app.get("/admin/matches", function (req, res) {
     api.getAll(function (err, results) {
+      if(results){
+        results.layout = "adminLayout";
+      }
       res.render("admin/matches", results);
     });
   });
 
   //create
-  app.post("/admin/players", function (req, res) {
-    api.createPlayer(req.body, function (err, result) {
-      res.redirect("/admin/players");
+  app.post("/admin/people", function (req, res) {
+    api.createPerson(req.body, function (err, result) {
+      res.redirect("/admin/people");
     });
   });
 
@@ -77,11 +112,6 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/admin/casters", function (req, res) {
-    api.createCaster(req.body, function (err, result) {
-      res.redirect("/admin/casters");
-    });
-  });
 
   app.post("/admin/videos", function (req, res) {
     api.createVideo(req.body, function (err, result) {
@@ -119,4 +149,33 @@ module.exports = function (app) {
       res.redirect("/admin/matches");
     });
   });
+
+  //update
+  app.post("/admin/matches/:_id/approve", function(req,res){
+    var id = req.body.id;
+    api.getMatch(id, function(err, result){
+      api.updateMatchById(id, { $set: { approved: true }}, function(err, result){
+        res.redirect("admin/matches");
+      })
+    })
+  });  
+  
+  app.post("/admin/matches/:_id/unapprove", function(req,res){
+    var id = req.body.id;
+    api.getMatch(id, function(err, result){
+      api.updateMatchById(id, { $set: { approved: false }}, function(err, result){
+        res.redirect("admin/matches");
+      })
+    })
+  });
+  
+  //delete
+  app.post("/admin/people/:_id/delete", function(req, res){
+    var id = req.body.id;
+    api.deletePersonById(id, function(err, result){
+      console.log("DELETED Person: ", result.name);
+      res.redirect("admin/people");
+    });
+  });
+  
 };

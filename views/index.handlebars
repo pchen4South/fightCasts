@@ -27,7 +27,7 @@
           <td>
             {{#each fighters}}
               <strong>
-                {{player.name}}
+                {{person.country}} {{person.name}}
               </strong>
               <em>
                 {{#each characters}}
@@ -40,11 +40,9 @@
           <td>
             {{event.name}}
           </td>
-
+          
           <td>
-            {{#each casters}}
-              {{name}}  
-            {{/each}}
+            {{casters}}
           </td>
 
         </tr>

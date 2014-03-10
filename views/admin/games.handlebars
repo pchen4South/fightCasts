@@ -1,11 +1,13 @@
-<div class="col-md-4">
+<div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-8">
+<div class="col-md-4">
   {{> forms/createGame}}
+</div>
+<div class="col-md-6">
   <ul>
   {{#each games}} 
-    <li>{{name}}</li>
+    <li><img src = {{gameIcon name}}> </img> <b>{{name}}</b></li>
   {{/each}}
   </ul>
 </div>

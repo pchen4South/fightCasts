@@ -1,11 +1,18 @@
-<div class="col-md-4">
+<div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-8">
+<div class="col-md-4">
   {{> forms/createCharacter}}
-  <ul>
+</div>
+
+<div class = "col-md-6">
+ <ul style="list-style-type:none">
   {{#each characters}} 
-    <li><b>{{game}}</b> {{name}} </li>
+  <div class = "col-md-3">
+    <li>
+    <img src = {{gameIcon game}}> </img> 
+    {{name}} </li>
+  </div>  
   {{/each}}
   </ul>
 </div>

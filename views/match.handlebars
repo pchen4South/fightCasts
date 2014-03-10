@@ -3,6 +3,7 @@
     <table class="table table-condensed">
       <thead>
         <tr>
+          <td>game</td>
           <td>title</td>
           <td>fighters</td>
           <td>event</td>
@@ -11,16 +12,20 @@
       </thead>
       <tbody>
         <tr>
+        
+          <td>    
+           <img src = {{gameIcon game.name}}> </img>
+          </td>
           <td>
             <a href="/matches/{{id}}">
-              {{title}}
+              {{title}} 
             </a>
           </td>
 
           <td>
             {{#each fighters}}
               <strong>
-                {{player.name}}
+                {{playerName}}
               </strong>
               <em>
                 {{#each characters}}
@@ -35,9 +40,7 @@
           </td>
 
           <td>
-            {{#each casters}}
-              {{name}}  
-            {{/each}}
+             Caster Placeholder
           </td>
 
         </tr>

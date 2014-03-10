@@ -1,0 +1,24 @@
+<div class="col-md-2">
+  {{> adminlist}}
+</div>
+<div class="col-md-4">
+  {{> forms/createPerson}}
+</div>
+<div class ="col-md-6">
+  <form role = "form" method = "POST"> 
+    <ul>
+      {{#each people}} 
+      <div class = "col-md-3">
+        <li>
+        <button formaction = "/admin/people/{{id}}/delete"
+          type = "submit"
+          class = "btn btn-xs btn-default" 
+          name = "id" value = {{id}}> X </button>
+        <img src = {{countryIcon country}}/>
+        {{name}}
+        </li>
+      </div>
+      {{/each}}
+    </ul>
+  </form>
+</div>
