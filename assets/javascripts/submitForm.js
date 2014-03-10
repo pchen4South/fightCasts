@@ -10,6 +10,10 @@ var fetchGames = function () {
   return Ember.$.get("/api/v1/games")
 };
 
+var submitMatch = function (data) {
+  return Ember.$.post("/api/v1/matches/submit", data);
+};
+
 App.FcSubmitMatchFormComponent = Ember.Component.extend({
   didInsertElement: function () {
     var games = this.get("games");
@@ -41,7 +45,10 @@ App.FcSubmitMatchFormComponent = Ember.Component.extend({
       casters: get(data, "casters"),
       videos: get(data, "videos")
     }
-    console.log(data);
+    submitMatch(data)
+    .then(function (res) {
+      console.log("yay!", res); 
+    });
   }
 });
 

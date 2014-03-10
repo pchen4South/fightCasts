@@ -38,5 +38,9 @@ module.exports = function (app) {
   //FIGHTER
 
   //MATCH
+  app.post("/api/v1/matches/submit", function (req, res) {
+    console.log(JSON.stringify(req.body, null, 6));
+    res.send({data: "woooo"});
+  });
 
 };
