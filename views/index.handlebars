@@ -26,9 +26,8 @@
 
           <td>
             {{#each fighters}}
-              <strong>
-                {{person.country}} {{person.name}}
-              </strong>
+                <img src = "{{countryIcon person.country}}"/> 
+              <b>{{person.name}}</b>
               <em>
                 {{#each characters}}
                   {{name}}

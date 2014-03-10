@@ -24,14 +24,15 @@
 
           <td>
             {{#each fighters}}
-              <strong>
-                {{playerName}}
-              </strong>
-              <em>
+              <img src = "{{countryIcon person.country}}"/>
+              <b>
+                {{person.name}}
+              </b>
                 {{#each characters}}
-                  {{name}}
+                  <img src = "{{gameIcon game}}"/>
+                   <em>{{name}}</em>
                 {{/each}}
-              </em>
+              <br>
             {{/each}}
           </td>
 

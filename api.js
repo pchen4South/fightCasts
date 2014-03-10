@@ -242,18 +242,32 @@ var updateMatchById = function(id, updateOptions, cb){
 };
 
 //delete
-var deletePersonById = function(id, cb){
-  person.model.findByIdAndRemove(id, function(err,res){
-    if (err){console.log(err)}
-    else
-      cb(null, res);
+var deleteModelById = function (modelType, id, cb) {
+  return modelType.findByIdAndRemove(id, 
+    function (err, res) {
+      return cb(err, formatDbResponse(res)); 
   });
 };
 
+var deletePerson = partial(deleteModelById, person.model);
+var deleteCharacter = partial(deleteModelById, character.model);
+var deleteGame = partial(deleteModelById, game.model);
+var deleteVideo = partial(deleteModelById, video.model);
+var deleteEvent = partial(deleteModelById, event.model);
+var deleteChannel = partial(deleteModelById, channel.model);
+var deleteTeam = partial(deleteModelById, team.model);
+var deleteFighter = partial(deleteModelById, fighter.model);
+var deleteMatch = partial(deleteModelById, match.model);
 
 
 module.exports = {
-  deletePersonById: deletePersonById,
+  deletePerson: deletePerson,
+  deleteVideo: deleteVideo,
+  deleteEvent: deleteEvent,
+  deleteChannel: deleteChannel,
+  deleteTeam: deleteTeam,
+  deleteFighter: deleteFighter,
+  deleteMatch: deleteMatch,
   updateMatchById: updateMatchById,
   createPerson: createPerson, 
   createCharacter: createCharacter,
