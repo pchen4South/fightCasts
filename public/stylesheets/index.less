@@ -1,0 +1,76 @@
+@import "variables.less";
+@import "mixins.less";
+@import "scaffolding.less";
+@import "code.less";
+@import "grid.less";
+@import "forms.less";
+@import "buttons.less";
+@import "utilities.less";
+@import "responsive-utilities.less";
+
+@default-tile-color: #eeeeee;
+@default-background-color: #16499a;
+@sf4-tile-color: #8cbf26;
+
+@font-large: 64px;
+@font-mediumish: 48px;
+@font-medium: 32px;
+@font-smallish: 16px;
+@font-small: 8px;
+@header-margin: 32px;
+@large-tile-height: 128px;
+@medium-tile-height: 64px;
+@small-tile-height: 32px;
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+}
+
+body {
+  background-color: @default-background-color;
+}
+
+.page-header {
+  min-height: 50px;
+  border: none;
+  margin: @header-margin;
+  .page-brand {
+    font-size: @font-medium;
+    font-weight: normal;
+    text-decoration: none;
+    margin: 0px 0px 0px 15px;
+    color: white;
+  }
+}
+
+.tile-group {
+  .title {
+    font-size: @font-smallish;
+    font-weight: normal;
+    margin: 0px 0px 0px 10px;
+    color: white;
+  }
+}
+
+.tile {
+  position: relative;
+  height: @large-tile-height;
+  background-color: @default-tile-color;
+  .transition(background-color .6s);
+  &:hover {
+    background-color: lighten(@default-tile-color, 15%);
+  }
+}
+
+.tile.sf4 {
+  background-color: @sf4-tile-color;
+  &:hover {
+    background-color: lighten(@sf4-tile-color, 15%);
+  }
+}

@@ -1,52 +1,93 @@
 <div class="row">
-  <div class="table-responsive">
-    <table class="table table-condensed">
-      <thead>
-        <tr>
-          <td>game</td>
-          <td>title</td>
-          <td>fighters</td>
-          <td>event</td>
-          <td>casters</td>
-        </tr>
-      </thead>
-      <tbody>      
-        {{#each matches}}
-        <tr>
-          
-          <td>    
-           <img src = {{gameIcon game.name}}> </img>
-          </td>
-          
-          <td>
-            <a href="/matches/{{id}}">
-              {{title}}
-            </a>
-          </td>
+  <section class="col-sm-8 list">
+    <div class="tile-group">
+      <h3 class="row title">today's matches</h3>
+      <div class="row-fluid">
+        <div class="col-sm-6">
+          <div class="tile sf4">
+            <ul class="fighter-list">
 
-          <td>
-            {{#each fighters}}
-                <img src = "{{countryIcon person.country}}"/> 
-              <b>{{person.name}}</b>
-              <em>
-                {{#each characters}}
-                  {{name}}
-                {{/each}}
-              </em>
-            {{/each}}
-          </td>
+              <li class="fighter">
+                <h1 class="fighter-name">
+                  Pizzahat
+                </h1> 
+                <ul class="character-list">
+                  <li class="character-name">Oni</li> 
+                  <li class="character-name">Sakura</li> 
+                </ul>
+              </li> 
 
-          <td>
-            {{event.name}}
-          </td>
-          
-          <td>
-            {{casters}}
-          </td>
+              <li class="fighter">
+                <h1 class="fighter-name">
+                  Hunde
+                </h1> 
+                <ul class="character-list">
+                  <li class="character-name">Sagat</li> 
+                  <li class="character-name">Cody</li> 
+                </ul>
+              </li> 
 
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="tile">
+            <ul class="fighter-list">
+
+              <li class="fighter">
+                <h1 class="fighter-name">
+                  Daigo 
+                </h1> 
+                <ul class="character-list">
+                  <li class="character-name">Ryu</li> 
+                </ul>
+              </li> 
+
+              <li class="fighter">
+                <h1 class="fighter-name">
+                  Infiltration
+                </h1> 
+                <ul class="character-list">
+                  <li class="character-name">Akuma</li> 
+                </ul>
+              </li> 
+
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="tile">
+            <ul class="fighter-list">
+
+              <li class="fighter">
+                <h1 class="fighter-name">
+                  Womandad 
+                </h1> 
+                <ul class="character-list">
+                  <li class="character-name">Sagat</li> 
+                  <li class="character-name">Adon</li> 
+                  <li class="character-name">El Fuerte</li> 
+                </ul>
+              </li> 
+
+              <li class="fighter">
+                <h1 class="fighter-name">
+                  Sid
+                </h1> 
+                <ul class="character-list">
+                  <li class="character-name">Dudley</li> 
+                </ul>
+              </li> 
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="col-sm-4 featured">
+  </section>
 </div>
+
