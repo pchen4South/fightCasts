@@ -11,7 +11,7 @@ var fetchGames = function () {
 };
 
 var submitMatch = function (data) {
-  return Ember.$.post("/api/v1/matches/submit", data);
+  return Ember.$.post("/api/v1/submittedMatches", data);
 };
 
 var validateTitle = function (title) {
@@ -93,8 +93,7 @@ App.FcSubmitMatchFormComponent = Ember.Component.extend({
     set(self, "inFlight", true);
     submitMatch(data)
     .then(function (res) {
-      set(self, "inFlight", false);
-      console.log("yay!", res); 
+      window.location.reload();
     })
     .fail(function (err) {
       set(self, "inFlight", false);
