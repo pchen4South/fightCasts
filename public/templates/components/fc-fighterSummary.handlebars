@@ -5,5 +5,9 @@
     {{character.name}}
   {{/each}}
   </span>
-  <button {{action "deleteFighter" fighter}}>Remove</button>
+  <button class="btn btn-danger" 
+    {{bind-attr disabled=inFlight}}
+    {{action "deleteFighter" fighter}}>
+    Remove
+  </button>
 </li>

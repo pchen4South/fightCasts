@@ -1,9 +1,11 @@
 <div class="row">
   <div class="col-sm-8">
-    {{input type="text" value=newCaster.name}}
+    {{input type="text" disabled=inFlight value=newCaster.name}}
   </div>
   <div class="col-sm-4">
-    <button class="btn btn-default" {{action "addCaster" newCaster}}>
+    <button class="btn btn-default" 
+      {{bind-attr disabled=inFlight}}
+      {{action "addCaster" newCaster}}>
       Add 
     </button>
   </div>

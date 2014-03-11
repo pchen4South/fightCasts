@@ -10,6 +10,26 @@ var fetchGames = function () {
   return Ember.$.get("/api/v1/games")
 };
 
+var submitMatch = function (data) {
+  return Ember.$.post("/api/v1/matches/submit", data);
+};
+
+var validateTitle = function (title) {
+  return title ? "" : "Must provide a value for title";
+};
+
+var validateGame = function (game) {
+  return game.id ? "" : "Must select a game";
+};
+
+var validateFighterData = function (fighterData) {
+  return fighterData.length > 0 ? "" : "Must include at least one fighter";
+};
+
+var validateVideoData = function (videoData) {
+  return videoData.length > 0 ? "" : "Must include at least one video";
+};
+
 App.FcSubmitMatchFormComponent = Ember.Component.extend({
   didInsertElement: function () {
     var games = this.get("games");
@@ -20,7 +40,18 @@ App.FcSubmitMatchFormComponent = Ember.Component.extend({
     });
   },
 
+  inFlight: false,
+
   games: [],
+
+  errors: {
+    title: "",
+    game: "",
+    eventName: "",
+    fighterData: "",
+    casters: "",
+    videoData: ""
+  },
 
   data: {
     title: "",
@@ -28,20 +59,47 @@ App.FcSubmitMatchFormComponent = Ember.Component.extend({
     eventName: "",
     fighterData: [],
     casters: [],
-    videos: []
+    videoData: []
   },
 
   onSubmit: function (data) {
+    var self = this;
+
     var data = {
       title: get(data, "title"),
-      game: get(data, "game.id"),
+      game: {
+        id: get(data, "game.id"),
+        name: get(data, "game.name"),
+        nickname: get(data, "game.nickname")
+      },
       fighterData: get(data, "fighterData"),
-      character: get(data, "character.id"),
       eventName: get(data, "eventName"),
-      casters: get(data, "casters"),
-      videos: get(data, "videos")
+      casterNames: get(data, "casters").mapBy("name"),
+      videoData: get(data, "videoData")
     }
-    console.log(data);
+
+    var titleError = validateTitle(data.title);
+    var gameError = validateGame(data.game);
+    var fighterDataError = validateFighterData(data.fighterData);
+    var videoDataError = validateVideoData(data.videoData);
+
+    set(this, "errors.title", titleError);
+    set(this, "errors.game", gameError);
+    set(this, "errors.fighterData", fighterDataError);
+    set(this, "errors.videoData", videoDataError);
+
+    if (titleError || gameError || fighterDataError || videoDataError) return;
+
+    set(self, "inFlight", true);
+    submitMatch(data)
+    .then(function (res) {
+      set(self, "inFlight", false);
+      console.log("yay!", res); 
+    })
+    .fail(function (err) {
+      set(self, "inFlight", false);
+      console.log("boo", err);
+    });
   }
 });
 
@@ -101,8 +159,7 @@ App.FcCasterSummaryComponent = Ember.Component.extend({
 
 App.FcCreateVideoFormComponent = Ember.Component.extend({
   newVideo: {
-    url: "",
-    name: "" 
+    url: ""
   },
 
   keyDown: function (e) {
@@ -117,7 +174,6 @@ App.FcCreateVideoFormComponent = Ember.Component.extend({
 
     get(this, "videos").pushObject(copy(newVideo)); 
     set(this, "newVideo.url", "");
-    set(this, "newVideo.name", "");
   }
 });
 

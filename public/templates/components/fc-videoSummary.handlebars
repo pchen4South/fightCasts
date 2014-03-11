@@ -3,5 +3,7 @@
   {{video.name}}
   {{video.url}}
   </span>
-  <button {{action "removeVideo" video}}>Remove</button>
+  <button class="btn btn-danger"
+    {{bind-attr disabled=inFlight}}
+    {{action "removeVideo" video}}>Remove</button>
 </li>

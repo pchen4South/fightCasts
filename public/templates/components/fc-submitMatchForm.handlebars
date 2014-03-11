@@ -1,60 +1,73 @@
 <form role="form">
   <div class="form-group">
     <label>Title</label>
-    {{input type="text" value=data.title}}
+    {{input type="text" disabled=inFlight value=data.title}}
+    <span class="help-block">{{errors.title}}</span>
   </div>
 
   <div class="form-group">
     <label>Event Name</label> 
-    {{input type="text" value=data.eventName}}
+    {{input type="text" disabled=inFlight value=data.eventName}}
   </div>
 
   <div class="form-group">
     <label>Game</label>
     {{view Ember.Select 
+      disabled=inFlight
       prompt="Select a game"
       content=games
       selection=data.game
       optionLabelPath="content.name"}}
+    <span class="help-block">{{errors.game}}</span>
   </div>
 
   <div class="form-group">
     {{fc-createFighterForm 
+      inFlight=inFlight
       characters=data.game.characters
       fighters=data.fighterData}}
+    <span class="help-block">{{errors.fighterData}}</span>
   </div>
 
   <ul class="form-group">
     {{#each fighter in data.fighterData}}
       {{fc-fighterSummary 
+        inFlight=inFlight
         fighterData=data.fighterData 
         fighter=fighter}}
     {{/each}}
   </ul>
 
   <div class="form-group">
-    {{fc-createCasterForm casters=data.casters}}
+    {{fc-createCasterForm inFlight=inFlight casters=data.casters}}
   </div>
 
   <ul class="form-group">
     {{#each caster in data.casters}}
     {{fc-casterSummary 
+      inFlight=inFlight
       casters=data.casters
       caster=caster}}
     {{/each}}
   </ul>
 
   <div class="form-group">
-    {{fc-createVideoForm videos=data.videos}}
+    {{fc-createVideoForm inFlight=inFlight videos=data.videoData}}
+    <span class="help-block">{{errors.videoData}}</span>
   </div>
 
   <ul class="form-group">
-    {{#each video in data.videos}}
+    {{#each video in data.videoData}}
     {{fc-videoSummary
-      videos=data.videos
+      inFlight=inFlight
+      videos=data.videoData
       video=video}}
     {{/each}}
   </ul>
 
-  <button {{action "onSubmit" data}} class="btn btn-default">Submit</button> 
+  <button class="btn btn-default"
+    {{bind-attr disabled=inFlight}}
+    {{action "onSubmit" data}}>
+    Submit
+  </button> 
 </form>
