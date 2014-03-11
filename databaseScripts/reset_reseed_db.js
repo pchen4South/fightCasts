@@ -36,10 +36,12 @@ var characterCreation = function(done){
 };
 
 var findCharactersAndCreateGames = function(game, cb){
-  characterModel.model.find({game: game.name}, function(err,res){
+  characterModel.model.find({game: game.nickname}, function(err,res){
     if(err) console.log (err);
     else if (res.length>0){
-      gameModel.model.create({name:game.name, _characters: res}, function(err, res){
+      gameModel.model.create({name:game.name, 
+                              _characters: res, 
+                              nickname: game.nickname}, function(err, res){
         if(err) console.log(err);
         console.log("Game created: ", res.name);
       })
