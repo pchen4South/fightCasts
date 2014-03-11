@@ -1,6 +1,6 @@
 module.exports = function (game) {
   switch (game) {
-    case "SF4":{
+    case "SF4AE":{
       return "/images/SF4.png";
       break;
     }

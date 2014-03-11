@@ -38,5 +38,6 @@ module.exports = function (app) {
   //FIGHTER
 
   //MATCH
-
+  app.post("/api/v1/submittedMatches", 
+              api.createSubmittedMatch);
 };
