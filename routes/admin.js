@@ -34,16 +34,11 @@ module.exports = function (app) {
       res.render("admin/games", results);
     });
   });
-  
-  
+    
   app.get("/admin/casters", function (req, res) {
     res.redirect("/admin");
   });
-  
-  
-  
-  
-  
+
   app.get("/admin/videos", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
@@ -90,6 +85,48 @@ module.exports = function (app) {
         results.layout = "adminLayout";
       }
       res.render("admin/matches", results);
+    });
+  });  
+  
+  app.get("/admin/submittedmatches/:_id", function (req, res) {
+    var id = req.params._id;
+    
+    api.getSubmittedMatch(id, function (err, results) {
+      if(results){
+        var id = results.id;
+        var resultObject = results.matchJson;
+        results = resultObject;
+        results.id = id;
+        results.layout = "adminLayout";
+        
+        api.getAll(function(allErr, allRes){
+          if (allErr){res.redirect("admin/submittedmatches")}
+          else
+            results.all = allRes;
+            res.render("admin/submittedmatch", results);
+        });
+        
+      }
+      else (res.redirect("admin/submittedmatches"));
+
+    });
+  });
+  
+  app.get("/admin/submittedmatches", function (req, res) {
+    api.getAll(function (err, results) {      
+      if(results){
+        results.layout = "adminLayout";
+        
+        var submittedMatches = results.submittedMatches;
+        var matches = [];
+        
+        for (var i = 0; i < submittedMatches.length; i++){
+            matches[i] = submittedMatches[i].matchJson;
+            matches[i].id = submittedMatches[i].id;
+        }
+        results.submittedMatches = matches;       
+      }
+      res.render("admin/submittedmatches", results);
     });
   });
 
@@ -142,11 +179,27 @@ module.exports = function (app) {
       res.redirect("/admin/fighters");
     });
   });
+  
   app.post("/admin/matches", function (req, res){
     api.createMatch(req.body, function (err, result) {
       console.log(err);
       console.log(result);
       res.redirect("/admin/matches");
+    });
+  });  
+  
+  app.post("/admin/convertmatches", function (req, res){
+    api.createMatch(req.body, function (err, result) {      
+      var convertedMatchId = req.body.convertedMatch
+      if(result){
+        api.deleteSubmittedMatch(convertedMatchId, function(err, result)
+        {
+          if(result){
+            console.log("deleted the submitted match and created match");
+          }
+          res.redirect("/admin/matches");
+        });
+      }
     });
   });
 

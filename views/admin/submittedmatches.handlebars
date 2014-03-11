@@ -1,0 +1,19 @@
+<div class="col-md-2">
+  {{> adminlist}}
+</div>
+
+<div class ="col-md-10">
+  <ul style="list-style-type:none">
+  {{#each submittedMatches}} 
+   <li>
+    
+    <div class = "col-md-4">  
+      <a href="/admin/submittedmatches/{{id}}">
+      Submitted Match: {{title}}
+      </a>
+    </div>
+    
+    </li>
+  {{/each}}
+  </ul>
+</div>

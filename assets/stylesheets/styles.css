@@ -5,3 +5,9 @@ body {
 .right-column {
   background-color: gray;
 }
+
+.userSubmitted{
+  background-color: #eee;
+  padding: 10px;
+  border-radius: 10px;
+}
