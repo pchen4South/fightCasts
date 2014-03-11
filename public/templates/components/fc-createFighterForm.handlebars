@@ -1,9 +1,10 @@
 <div class="row">
   <div class="col-sm-4">
-    {{input type="text" value=newFighter.name}}
+    {{input type="text" disabled=inFlight value=newFighter.name}}
   </div>
   <div class="col-sm-4">
     {{view Ember.Select 
+      disabled=inFlight
       multiple="true"
       prompt="Select a character"
       content=characters
@@ -13,8 +14,10 @@
   </div>
 
   <div class="col-sm-4">
-    <button class="btn btn-default" {{action "createFighter" newFighter}}>
-      Create
+    <button class="btn btn-default" 
+      {{bind-attr disabled=inFlight}}
+      {{action "createFighter" newFighter}}>
+      Add 
     </button>
   </div>
 </div>

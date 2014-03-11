@@ -3,6 +3,7 @@
   "description": "aggregation of fighting game casts",
   "version": "0.0.1",
   "private": true,
+"LKJAFHLKAJHLAKJH"
   "dependencies": {
     "express": "~3.4.8",
     "orm": "~2.1.3",

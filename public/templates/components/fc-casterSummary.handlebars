@@ -2,5 +2,9 @@
   <span>
     {{caster.name}}
   </span>
-  <button {{action "removeCaster" caster}}>Remove</button>
+  <button class="btn btn-danger"
+    {{bind-attr disabled=inFlight}}
+    {{action "removeCaster" caster}}>
+    Remove
+  </button>
 </li>
