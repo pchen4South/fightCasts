@@ -93,6 +93,7 @@ App.FcSubmitMatchFormComponent = Ember.Component.extend({
     set(self, "inFlight", true);
     submitMatch(data)
     .then(function (res) {
+      console.log("yoyoyoyo", res);
       window.location.reload();
     })
     .fail(function (err) {

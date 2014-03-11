@@ -29,6 +29,7 @@ var formatDbResponse = function (result) {
 
 var create = function (modelType, data, cb) {
   return modelType.create(data, function (err, res) {
+    console.log(err, res);
     return cb(err, formatDbResponse(res)); 
   });
 };
@@ -41,7 +42,7 @@ var createVideo = partial(create, video.model);
 var createEvent = partial(create, event.model);
 var createChannel = partial(create, channel.model);
 var createTeam = partial(create, team.model);
-var createSubmittedMatch = (create, submittedMatch.model);
+var createSubmittedMatch = partial(create, submittedMatch.model);
 
 var createFighter = function (data, cb) {
   var formatted = {

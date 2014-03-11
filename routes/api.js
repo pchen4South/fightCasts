@@ -10,7 +10,7 @@ module.exports = function (app) {
   app.get("/api/v1/characters", function (req, res) {
     api.getCharacters(function (err, characters) {
       if (err) res.send(400, {err: err.message});
-      res.json(characters); 
+      else res.json(characters); 
     }); 
   });
 
@@ -19,7 +19,7 @@ module.exports = function (app) {
   app.get("/api/v1/games", function (req, res) {
     api.getGamesNested(function (err, games) {
       if (err) res.send(400, {err: err.message});
-      res.json(games); 
+      else res.json(games); 
     }); 
   });
 
@@ -38,6 +38,10 @@ module.exports = function (app) {
   //FIGHTER
 
   //MATCH
-  app.post("/api/v1/submittedMatches", 
-              api.createSubmittedMatch);
+  app.post("/api/v1/submittedMatches", function (req, res) {
+    api.createSubmittedMatch({matchJson: req.body}, function (err, result) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json(result);
+    });
+  });
 };
