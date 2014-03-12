@@ -1,7 +1,8 @@
 module.exports = [{
   title: "Ryan Hart vs. Daigo",
   videoNames: ["Daigo vs Ryan Hart"],
-  fighterNames: ["Daigo Umehara", "Ryan Hart"],
+  fighterOne: "Daigo Umehara",
+  fighterTwo: "Ryan Hart",
   game: "Super Street Fighter 4 Arcade Edition",
   casterNames: ["Steve", "Pete"],
   eventName: "ESGN Fight Night Season 1",
@@ -9,7 +10,8 @@ module.exports = [{
 },{
   title: "Infiltration vs. Daigo",
   videoNames: "Infiltration vs Daigo",
-  fighterNames: ["Daigo Umehara", "Infiltration"],
+  fighterOne: "Daigo Umehara",
+  fighterTwo: "Infiltration",
   game: "Super Street Fighter 4 Arcade Edition",
   casterNames: ["Steve", "Rohan"],
   eventName: "ESGN Fight Night Season 3",
@@ -17,7 +19,8 @@ module.exports = [{
 },{
   title: "Pete vs Steve Casuals",
   videoNames: "Pete vs Steve Casuals",
-  fighterNames: ["Pete", "Steve"],
+  fighterOne: "Pete",
+  fighterTwo: "Steve",
   game: "Super Street Fighter 4 Arcade Edition",
   casterNames: ["Sid", "Rohan"],
   eventName: "",
@@ -25,7 +28,8 @@ module.exports = [{
 },{
   title: "OnlineWarrior vs Kappa",
   videoNames: "Online ranked",
-  fighterNames: ["Rohan", "Gootecks"],
+  fighterOne: "Rohan", 
+  fighterTwo: "Gootecks",
   game: "Super Street Fighter 4 Arcade Edition",
   casterNames: "",
   eventName: "",
@@ -34,7 +38,8 @@ module.exports = [{
 ,{
   title: "Steve vs Peter SSBM",
   videoNames: "Fox versus Falco",
-  fighterNames: ["Pete", "Steve"],
+  fighterOne: "Pete", 
+  fighterTwo: "Steve",
   game: "Super Smash Brothers Melee",
   casterNames: ["Rohan"],
   eventName: "",
@@ -43,7 +48,8 @@ module.exports = [{
 ,{
   title: "Infiltration vs. Ryan Hart",
   videoNames: "esgn fighting",
-  fighterNames: ["Ryan Hart", "Infiltration"],
+  fighterOne: "Ryan Hart", 
+  fighterTwo: "Infiltration",
   game: "Super Street Fighter 4 Arcade Edition",
   casterNames: ["Gootecks", "Mike Ross"],
   eventName: "ESGN Fight Night Season 2",

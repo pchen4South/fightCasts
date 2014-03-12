@@ -154,10 +154,11 @@ var findCasters = function(casters, cb){
 };
 
 var findModelsAndCreateMatches  = function(match, done){
-
+  //console.log(match.fighterOne);
   async.parallel([
     //match.title -> title
-    async.apply(findFighters, match.fighterNames),
+    async.apply(findPersonForFighter, match.fighterOne),
+    async.apply(findPersonForFighter, match.fighterTwo),
     async.apply(findCasters, match.casterNames),
     async.apply(find, videoModel, match.videoNames), 
     async.apply(find, gameModel, match.game),
@@ -165,22 +166,24 @@ var findModelsAndCreateMatches  = function(match, done){
     
     ],
     function(err, results){
-      var fighterArray = results[0];
-      var casterArray = results[1];
+      var fighterOne = results[0][0];
+      var fighterTwo = results[1][0];
+      var casterArray = results[2];
       
-      var videos = results[2];
-      var game = results[3][0];
-      var event = results[4][0];
+      var videos = results[3];
+      var game = results[4][0];
+      var event = results[5][0];
       var casters = cleanNestedArray(casterArray);
-      var fighters = cleanNestedArray(fighterArray);
-      //console.log(fighterArray);
+
+      console.log(fighterOne);
       
       //results is an array of all the models
       //results[0] is an array of [{playerJSON}]
       matchModel.model.create({
         title: match.title,
         _casters: casters,
-        _fighters: fighters,
+        _fighterOne: fighterOne,
+        _fighterTwo: fighterTwo,
         _videos: videos,
         _game: game,
         _event: event,

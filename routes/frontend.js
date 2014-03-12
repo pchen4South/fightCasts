@@ -8,7 +8,6 @@ var createPayload = function (matches) {
 
   var matchesByCategory = sortByCategory(matches);
   
-  //console.log(matchesByCategory);
   
   matchesByCategory.pro.sort(sortByDateMostRecent);
   matchesByCategory.scrub.sort(sortByDateMostRecent);
@@ -57,9 +56,9 @@ module.exports = function (app) {
   var returnIndex = function (req, res) {
     api.getMatchesNested(function (err, matches) {
       var payload = createPayload(matches);
-      console.log(payload);
+      //console.log(payload);
       res.render("index", payload); 
-    });
+     });
   };
 
   app.get("/", returnIndex);
