@@ -145,7 +145,6 @@ var formatNestedGame = function (monGame) {
 };
 
 var formatNestedMatch = function (monMatch) {
-  console.log("MONMATCH", monMatch);
   return {
     id: monMatch["_id"],
     approved: monMatch.approved,
@@ -157,7 +156,9 @@ var formatNestedMatch = function (monMatch) {
     event: formatDbResponse(monMatch["_event"]),
     game: formatDbResponse(monMatch["_game"]),
     channel: formatDbResponse(monMatch["_channel"]),
-    category: monMatch.category
+    category: monMatch.category,
+    createdAt: monMatch.createdAt,
+    updatedAt: monMatch.updatedAt
   };
 };
 
@@ -181,7 +182,6 @@ var getMatchNested = function (id, cb) {
   .populate("_channel")
   .populate("_casters")
   .exec(function (err, res) {
-    console.log(res._casters);
     match.model.populate(res, personOptions, function (err, res) {
       match.model.populate(res, charactersOptions, function (err, res) {
         if (err) cb(err);
@@ -229,7 +229,6 @@ var getMatchesNested = function (cb) {
   .populate("_channel")
   .populate("_casters")
   .exec(function (err, res) {
-    console.log("res", res);
     match.model.populate(res, personOptions, function (err, matches) {
       match.model.populate(matches, charactersOptions, function (err, results) {
         if (err) cb(err); 

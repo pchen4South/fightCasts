@@ -38,7 +38,7 @@ module.exports = [{
   game: "Super Smash Brothers Melee",
   casterNames: ["Rohan"],
   eventName: "",
-  category: "scrub"
+  category: "community"
 }
 ,{
   title: "Infiltration vs. Ryan Hart",

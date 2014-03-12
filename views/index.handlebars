@@ -1,11 +1,11 @@
 <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
   <div class="tile-group">
     <h3 class="title">
-      today's matches
+      latest pro matches
     </h3>
     <ul class="tiles">
-      {{#each matches}}
-        {{> match-tile}}
+      {{#each matches.pro}}
+        {{> tiles/match-tile-long}}
       {{/each}}
     </ul>
   </div>
@@ -14,11 +14,27 @@
 <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
   <div class="tile-group">
     <h3 class="title">
-      today's matches
+      featured matches
     </h3>
     <ul class="tiles">
-      {{#each matches}}
-        {{> match-tile-long}}
+      {{#with featuredMatches.pro}}
+        {{> tiles/match-tile-featured}}
+      {{/with}}
+      {{#with featuredMatches.community}}
+        {{> tiles/match-tile-featured}}
+      {{/with}}
+      {{#with featuredMatches.scrub}}
+        {{> tiles/match-tile-featured}}
+      {{/with}}
+    </ul>
+  </div>
+  <div class="tile-group">
+    <h3 class="title">
+      community matches
+    </h3>
+    <ul class="tiles">
+      {{#each communityMatches}}
+        {{> tiles/match-tile-long}}
       {{/each}}
     </ul>
   </div>

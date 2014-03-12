@@ -1,0 +1,107 @@
+.tile {
+  position: relative;
+  height: @large-tile-height;
+  padding: 24px 8px;
+  .make-sm-column(6, 16px);
+  .transition(background-color .6s);
+}
+
+.tile.long {
+  .make-sm-column(12, 16px);
+  height: @long-tile-height;
+}
+
+.tiles .tile {
+  &:nth-child(3n+1) {
+    .tile-tag {
+      background-color: lighten(@tile-color-1, 15%)
+    }
+    background-color: @tile-color-1;
+    &:hover {
+      background-color: lighten(@tile-color-1, 15%);
+    }
+  }
+  &:nth-child(3n+2) {
+    .tile-tag {
+      background-color: lighten(@tile-color-2, 15%)
+    }
+    background-color: @tile-color-2;
+    &:hover {
+      background-color: lighten(@tile-color-2, 15%);
+    }
+  }
+  &:nth-child(3n+3) {
+    .tile-tag {
+      background-color: lighten(@tile-color-3, 15%)
+    }
+    background-color: @tile-color-3;
+    &:hover {
+      background-color: lighten(@tile-color-3, 15%);
+    }
+  }
+}
+
+.tile .tile-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 24px;
+  padding: 4px;
+}
+
+.tile .fighter-list {
+  margin: 0px;
+  padding: 0px;
+  .fighter {
+    .text-overflow();
+    .fighter-name {
+      font-weight: bold;
+      font-size: @font-smallish;
+      font-style: italic;
+    }
+  }
+}
+
+.tile .character-list {
+  display: inline;
+  font-weight: lighter;
+  font-size: @font-smallish;
+  font-style: normal;
+  .character-name:not(:first-child) {
+    &:before {
+      content: "/ ";
+    }
+  }
+}
+
+.tile .caster-list {
+  margin-left: 10%;
+  font-weight: normal;
+  font-size: @font-small;
+  .text-overflow();
+  .caster-name {
+    font-weight: lighter;
+    &:not(:first-child) {
+      &:before {
+        content: "/ ";
+      }
+    }
+  }
+}
+
+.tile .event {
+  margin-left: 10%;
+  font-weight: normal;
+  font-size: @font-small;
+  font-style: italic;
+  .text-overflow();
+  .event-name {
+  }
+}
+
+.tile .title-name {
+  font-weight: lighter;
+  font-size: @font-smallish;
+  .text-overflow();
+}
+

@@ -1,14 +1,64 @@
 var _ = require('lodash');
 var find = _.find;
+var first = _.first;
 var api = require('../api');
+
+//remove when ready
+var createPayload = function (matches) {
+
+  var matchesByCategory = sortByCategory(matches);
+  
+  //console.log(matchesByCategory);
+  
+  matchesByCategory.pro.sort(sortByDateMostRecent);
+  matchesByCategory.scrub.sort(sortByDateMostRecent);
+  matchesByCategory.community.sort(sortByDateMostRecent);
+  
+  return {
+    matches: matchesByCategory,
+    featuredMatches: {
+      pro: matchesByCategory.pro[0], 
+      community: matchesByCategory.community[1], 
+      scrub: matchesByCategory.scrub[0], 
+    },
+    communityMatches: first(matchesByCategory.community, 3)
+  };
+};
+
+var sortByCategory = function (matchArray){
+  var community = [];
+  var pro = [];
+  var scrub = [];
+  
+  for(var i = 0; i < matchArray.length; ++i){
+    switch(matchArray[i].category){
+      case "pro":
+        pro.push(matchArray[i]);
+        break;
+      case "scrub":
+        scrub.push(matchArray[i]);
+        break;
+      case "community":
+        community.push(matchArray[i]);
+        break;
+    }
+  }
+  
+  return {pro: pro, community: community, scrub:scrub};  
+  
+};
+
+var sortByDateMostRecent = function(date1,date2){
+     return date1 - date2;
+};
 
 
 module.exports = function (app) {
   var returnIndex = function (req, res) {
     api.getMatchesNested(function (err, matches) {
-      //res.render("index", {matches: [1,2,3,4,5,6]});
-      console.log(matches);
-      res.render("index", {matches: matches}); 
+      var payload = createPayload(matches);
+      console.log(payload);
+      res.render("index", payload); 
     });
   };
 

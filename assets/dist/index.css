@@ -1687,42 +1687,6 @@ input[type="button"].btn-block {
     display: none !important;
   }
 }
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  color: white;
-}
-ul {
-  list-style-type: none;
-}
-body {
-  background-color: #1d1d1d;
-}
-.page-header {
-  min-height: 50px;
-  border: none;
-  margin: 16px 32px;
-}
-.page-header .page-brand {
-  font-size: 32px;
-  font-weight: normal;
-  text-decoration: none;
-  margin: 0px 0px 0px 15px;
-  color: white;
-}
-.tile-group .title {
-  font-size: 16px;
-  font-weight: normal;
-  margin: 0px 0px 0px 10px;
-  padding: 0px 0px 8px 6px;
-}
-.tiles {
-  margin: 0px;
-  padding: 0px;
-}
 .tile {
   height: 128px;
   padding: 24px 8px;
@@ -1918,4 +1882,120 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.tile.long .tile-tag {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: 56px;
+  width: 20%;
+  padding: 12px;
+  font-size: 24px;
+}
+.tile.long .fighter-list {
+  position: absolute;
+  top: 4px;
+  left: 24%;
+  width: 30%;
+  padding: 0px;
+}
+.tile.long .fighter-list .fighter {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.long .fighter-list .fighter .fighter-name {
+  font-weight: normal;
+  font-size: 16px;
+  font-style: italic;
+}
+.tile.long .character-list {
+  display: inline;
+  font-weight: lighter;
+  font-size: 16px;
+  font-style: normal;
+}
+.tile.long .character-list .character-name:not(:first-child):before {
+  content: "/ ";
+}
+.tile.long .caster-list {
+  position: absolute;
+  top: 4px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  font-weight: normal;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.long .caster-list .caster-name {
+  font-weight: lighter;
+}
+.tile.long .caster-list .caster-name:not(:first-child):before {
+  content: "/ ";
+}
+.tile.long .event {
+  position: absolute;
+  font-weight: normal;
+  font-size: 12px;
+  font-style: italic;
+  top: 24px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.long .title-name {
+  font-weight: bold;
+  font-size: 12px;
+  position: absolute;
+  font-weight: lighter;
+  font-size: 16px;
+  top: 40px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  color: white;
+}
+ul {
+  list-style-type: none;
+}
+body {
+  background-color: #1d1d1d;
+}
+.page-header {
+  min-height: 50px;
+  border: none;
+  margin: 16px 32px;
+}
+.page-header .page-brand {
+  font-size: 32px;
+  font-weight: normal;
+  text-decoration: none;
+  margin: 0px 0px 0px 15px;
+  color: white;
+}
+.tile-group .title {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0px 0px 0px 10px;
+  padding: 0px 0px 8px 6px;
+}
+.tiles {
+  margin: 0px;
+  padding: 0px;
 }
