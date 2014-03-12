@@ -1,0 +1,34 @@
+  <div class="userSubmitted">
+    <h3>User Submitted Match Details</h3>
+    <label for="title">Title</label>
+    <input class="form-control" type="text" name="title" id="title" placeholder="match title" value={{title}}>
+    </input>
+
+    <label for="casters">Casters</label>
+    <input class="form-control" type="text" name="casters" id="casters" placeholder="Caster Names">
+    </input>   
+    <label for="fighters">Fighters</label>
+    <select multiple class="form-control" id="fighters" name="fighters">
+      {{#each fighterData}}
+        <option value={{id}}>{{name}} as
+          {{#each characters}}
+            {{name}}
+          {{/each}}
+        </option>
+      {{/each}}
+    </select>
+    <label for="event">Event</label>
+    <select class="form-control" id="event" name="event">
+        <option value={{id}}>{{eventName}}</option>
+    </select>
+    <label for="videos">Videos</label>
+    <select multiple class="form-control" id="videos" name="videos">
+      {{#each videoData}}
+        <option value={{id}}>{{url}}</option>
+      {{/each}}
+    </select>
+    <label for="game">Game</label>
+    <select class="form-control" id="game" name="game">
+        <option value={{id}}>{{game.name}} {{game.nickname}}</option>
+    </select>
+  </div> 

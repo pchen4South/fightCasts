@@ -1,1 +1,0 @@
-module.exports = ["SF4AE", "SSBM", "SFxT", "MvC3"]

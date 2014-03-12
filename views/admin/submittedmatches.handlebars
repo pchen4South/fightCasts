@@ -1,0 +1,23 @@
+<div class="col-md-2">
+  {{> adminlist}}
+</div>
+
+<div class ="col-md-10">
+  <h3> User Submitted Matches </h3>
+  <ul style="list-style-type:none">
+  {{#each submittedMatches}} 
+   <li>
+    
+    <div class = "col-md-4">  
+      <a href="/admin/submittedmatches/{{id}}">
+      Title: {{title}}
+      {{#each fighterData}}
+         Player: {{name}}
+      {{/each}}
+      </a>
+    </div>
+    
+    </li>
+  {{/each}}
+  </ul>
+</div>

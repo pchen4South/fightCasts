@@ -84,6 +84,16 @@ var getMultiple = function (modelType, cb) {
 
 };
 
+var searchMatches = function(query, cb){
+  console.log(query);
+  return match.model.find(query, function(err,res){
+    if (err){res.send("problem with search")}
+    else
+     var formatted = map(res, formatDbResponse);    
+      return cb(err, formatted);
+  });
+}
+
 //Read
 var getPerson = partial(get, person.model);
 var getCharacter = partial(get, character.model);
@@ -267,6 +277,8 @@ var deleteChannel = partial(deleteModelById, channel.model);
 var deleteTeam = partial(deleteModelById, team.model);
 var deleteFighter = partial(deleteModelById, fighter.model);
 var deleteMatch = partial(deleteModelById, match.model);
+var deleteSubmittedMatch = partial(deleteModelById, 
+                            submittedMatch.model);
 
 
 module.exports = {
@@ -277,6 +289,7 @@ module.exports = {
   deleteTeam: deleteTeam,
   deleteFighter: deleteFighter,
   deleteMatch: deleteMatch,
+  deleteSubmittedMatch: deleteSubmittedMatch,
   updateMatchById: updateMatchById,
   createPerson: createPerson, 
   createCharacter: createCharacter,
@@ -302,7 +315,8 @@ module.exports = {
   getMatchNested: getMatchNested,
   getFighterNested: getFighterNested,
   getGameNested: getGameNested,
-
+  getSubmittedMatch: getSubmittedMatch,
+  
   getPeople: getPeople, 
   getCharacters: getCharacters,
   getGames: getGames,
@@ -314,5 +328,7 @@ module.exports = {
   getMatches: getMatches,
   getMatchesNested: getMatchesNested,
   getFightersNested: getFightersNested,
-  getGamesNested: getGamesNested
+  getGamesNested: getGamesNested,
+  
+  searchMatches: searchMatches
 }

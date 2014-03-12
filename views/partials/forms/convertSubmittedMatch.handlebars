@@ -1,0 +1,69 @@
+<form role="form" method="POST" action = "/admin/convertmatches">
+  <div class="form-group">
+    <h3> Create a Match </h3>
+    <input type="hidden" name="convertedMatch" value="{{id}}" />
+    <label for="title">Title</label>
+    <input class="form-control" type="text" name="title" id="title" placeholder="match title" value
+    = {{title}}>
+    </input>
+
+    <label for="casters">Casters</label>
+    <select multiple class="form-control" id="casters" name="casters">
+      {{#each all.people}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+        
+    <label for="fighters">Fighters</label>
+    <select multiple class="form-control" id="fighters" name="fighters">
+      {{#each all.fighters}}
+        <option value={{id}}>
+        {{person.name}} as
+          {{#each characters}}
+            {{name}}
+          {{/each}}
+        </option>
+      {{/each}}
+    </select>
+
+    <label for="event">Event</label>
+    <select class="form-control" id="event" name="event">
+      {{#each all.events}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+
+    <label for="videos">Videos</label>
+    <select multiple class="form-control" id="videos" name="videos">
+      {{#each all.videos}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="channel">Channel</label>
+    <select class="form-control" id="channel" name="channel">
+      {{#each all.channels}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="game">Game</label>
+    <select class="form-control" id="game" name="game">
+      {{#each all.games}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="teams">Teams</label>
+    <select class="form-control" id="teams" name="teams">
+      {{#each teams}}
+        <option value={{id}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+  </div> 
+  <button type="submit" class="btn btn-default">
+    Create! 
+  </button>
+</form> 
