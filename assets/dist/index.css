@@ -1817,6 +1817,12 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.tile .caster-list .caster-name {
+  font-weight: lighter;
+}
+.tile .caster-list .caster-name:not(:first-child):before {
+  content: "/ ";
+}
 .tile .event {
   margin-left: 10%;
   font-weight: normal;
@@ -1826,8 +1832,8 @@ body {
   white-space: nowrap;
 }
 .tile .title-name {
-  font-weight: bold;
-  font-size: 12px;
+  font-weight: normal;
+  font-size: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1899,10 +1905,11 @@ body {
 }
 .tile.long .title-name {
   font-weight: bold;
-  position: absolute;
-  font-weight: bolder;
   font-size: 12px;
-  top: 44px;
+  position: absolute;
+  font-weight: normal;
+  font-size: 16px;
+  top: 40px;
   left: 60%;
   width: 40%;
   margin-left: 0;

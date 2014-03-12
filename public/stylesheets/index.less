@@ -153,6 +153,12 @@ body {
   font-size: @font-small;
   .text-overflow();
   .caster-name {
+    font-weight: lighter;
+    &:not(:first-child) {
+      &:before {
+        content: "/ ";
+      }
+    }
   }
 }
 
@@ -166,8 +172,8 @@ body {
 }
 
 .tile .title-name {
-  font-weight: bold;
-  font-size: @font-small;
+  font-weight: normal;
+  font-size: @font-smallish;
   .text-overflow();
 }
 
@@ -245,9 +251,9 @@ body {
   font-weight: bold;
   font-size: @font-small;
   position: absolute;
-  font-weight: bolder;
-  font-size: @font-small;
-  top: 44px;
+  font-weight: normal;
+  font-size: @font-smallish;
+  top: 40px;
   left: 60%;
   width: 40%;
   margin-left: 0;
