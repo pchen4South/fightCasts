@@ -5,7 +5,7 @@
     </h3>
     <ul class="tiles">
       {{#each matches}}
-        {{> match-tile-long}}
+        {{> tiles/match-tile-long}}
       {{/each}}
     </ul>
   </div>
@@ -18,14 +18,24 @@
     </h3>
     <ul class="tiles">
       {{#with featuredMatches.pro}}
-        {{> match-tile-featured}}
+        {{> tiles/match-tile-featured}}
       {{/with}}
       {{#with featuredMatches.community}}
-        {{> match-tile-featured}}
+        {{> tiles/match-tile-featured}}
       {{/with}}
       {{#with featuredMatches.scrub}}
-        {{> match-tile-featured}}
+        {{> tiles/match-tile-featured}}
       {{/with}}
+    </ul>
+  </div>
+  <div class="tile-group">
+    <h3 class="title">
+      community matches
+    </h3>
+    <ul class="tiles">
+      {{#each communityMatches}}
+        {{> tiles/match-tile-long}}
+      {{/each}}
     </ul>
   </div>
 </div>

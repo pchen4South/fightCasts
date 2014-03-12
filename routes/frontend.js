@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var find = _.find;
+var first = _.first;
 var api = require('../api');
 
 var createPayload = function (matches) {
@@ -9,7 +10,8 @@ var createPayload = function (matches) {
       pro: matches[0], 
       community: matches[1], 
       scrub: matches[1], 
-    } 
+    },
+    communityMatches: first(matches, 3)
   };
 };
 
