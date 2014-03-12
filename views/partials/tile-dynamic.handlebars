@@ -1,0 +1,35 @@
+<li class="tile">
+  <small class="tile-tag">
+    {{game.nickname}}
+  </small>
+
+  <ul class="fighter-list">
+  {{#each fighters}}
+    <li class="fighter">
+      <span class="fighter-name">
+        {{person.name}}
+      </span> 
+      <div class="character-list">
+      {{#each characters}}
+        <span class="character-name">{{name}}</span> 
+      {{/each}}
+      </div>
+    </li> 
+  {{/each}}
+  </ul>
+
+  <div class="caster-list">
+    Cast by:
+  {{#each casters}}
+    <span class="caster-name">{{name}}</span>
+  {{/each}}
+  </div>
+
+  <div class="event">
+    <span class="event-name">{{event.name}}</span>
+  </div>
+
+  <div class="title-name">
+    {{title}}
+  </div>
+</li>

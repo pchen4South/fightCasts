@@ -14,8 +14,6 @@
 @tile-color-1: #9a1616;
 @tile-color-2: #16499a;
 @tile-color-3: #4390df;
-@sf4-tile-color: #128023;
-
 
 @font-large: 64px;
 @font-mediumish: 48px;
@@ -27,6 +25,7 @@
 
 @header-margin: 16px 32px;
 @large-tile-height: 128px;
+@long-tile-height: 64px;
 @medium-tile-height: 64px;
 @small-tile-height: 32px;
 
@@ -80,12 +79,9 @@ body {
   .transition(background-color .6s);
 }
 
-.tile-tag {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 24px;
-  padding: 4px;
+.tile.long {
+  .make-sm-column(12, 16px);
+  height: @long-tile-height;
 }
 
 .tiles .tile {
@@ -118,13 +114,19 @@ body {
   }
 }
 
-.fighter-list {
+.tile .tile-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 24px;
+  padding: 4px;
+}
+
+.tile .fighter-list {
   margin: 0px;
   padding: 0px;
   .fighter {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    .text-overflow();
     .fighter-name {
       font-weight: bold;
       font-size: @font-smallish;
@@ -133,9 +135,9 @@ body {
   }
 }
 
-.character-list {
+.tile .character-list {
   display: inline;
-  font-weight: normal;
+  font-weight: lighter;
   font-size: @font-smallish;
   font-style: normal;
   .character-name:not(:first-child) {
@@ -145,39 +147,109 @@ body {
   }
 }
 
-.caster-list {
+.tile .caster-list {
   margin-left: 10%;
   font-weight: normal;
   font-size: @font-small;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  .text-overflow();
   .caster-name {
   }
 }
 
-.event {
+.tile .event {
   margin-left: 10%;
   font-weight: normal;
   font-size: @font-small;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  .text-overflow();
   .event-name {
   }
 }
 
-.title-name {
+.tile .title-name {
   font-weight: bold;
   font-size: @font-small;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  .text-overflow();
 }
 
-.tile.sf4 {
-  background-color: @sf4-tile-color;
-  &:hover {
-    background-color: lighten(@sf4-tile-color, 15%);
+.tile.long .tile-tag {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: @long-tile-height - 8;
+  width: 20%;
+  padding: 12px;
+  font-size: @font-mediumish;
+}
+
+.tile.long .fighter-list {
+  position: absolute;
+  top: 4px;
+  left: 24%;
+  width: 30%;
+  padding: 0px;
+  .fighter {
+    .text-overflow();
+    .fighter-name {
+      font-weight: normal;
+      font-size: @font-smallish;
+      font-style: italic;
+    }
   }
+}
+
+.tile.long .character-list {
+  display: inline;
+  font-weight: lighter;
+  font-size: @font-smallish;
+  font-style: normal;
+  .character-name:not(:first-child) {
+    &:before {
+      content: "/ ";
+    }
+  }
+}
+
+.tile.long .caster-list {
+  position: absolute;
+  top: 4px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  font-weight: normal;
+  font-size: @font-small;
+  .text-overflow();
+  .caster-name {
+    font-weight: lighter;
+    &:not(:first-child) {
+      &:before {
+        content: "/ ";
+      }
+    }
+  }
+}
+
+.tile.long .event {
+  position: absolute;
+  font-weight: normal;
+  font-size: @font-small;
+  top: 24px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  .text-overflow();
+  .event-name {
+  }
+}
+
+.tile.long .title-name {
+  font-weight: bold;
+  font-size: @font-small;
+  position: absolute;
+  font-weight: bolder;
+  font-size: @font-small;
+  top: 44px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  .text-overflow();
 }

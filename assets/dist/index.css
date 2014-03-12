@@ -1739,12 +1739,18 @@ body {
     width: 50%;
   }
 }
-.tile-tag {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 24px;
-  padding: 4px;
+.tile.long {
+  position: relative;
+  min-height: 1px;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 64px;
+}
+@media (min-width: 768px) {
+  .tile.long {
+    float: left;
+    width: 100%;
+  }
 }
 .tiles .tile:nth-child(3n+1) {
   background-color: #9a1616;
@@ -1773,30 +1779,37 @@ body {
 .tiles .tile:nth-child(3n+3):hover {
   background-color: #84b7ea;
 }
-.fighter-list {
+.tile .tile-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 24px;
+  padding: 4px;
+}
+.tile .fighter-list {
   margin: 0px;
   padding: 0px;
 }
-.fighter-list .fighter {
+.tile .fighter-list .fighter {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.fighter-list .fighter .fighter-name {
+.tile .fighter-list .fighter .fighter-name {
   font-weight: bold;
   font-size: 16px;
   font-style: italic;
 }
-.character-list {
+.tile .character-list {
   display: inline;
-  font-weight: normal;
+  font-weight: lighter;
   font-size: 16px;
   font-style: normal;
 }
-.character-list .character-name:not(:first-child):before {
+.tile .character-list .character-name:not(:first-child):before {
   content: "/ ";
 }
-.caster-list {
+.tile .caster-list {
   margin-left: 10%;
   font-weight: normal;
   font-size: 12px;
@@ -1804,7 +1817,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.event {
+.tile .event {
   margin-left: 10%;
   font-weight: normal;
   font-size: 12px;
@@ -1812,16 +1825,88 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.title-name {
+.tile .title-name {
   font-weight: bold;
   font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.tile.sf4 {
-  background-color: #128023;
+.tile.long .tile-tag {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: 56px;
+  width: 20%;
+  padding: 12px;
+  font-size: 24px;
 }
-.tile.sf4:hover {
-  background-color: #1bc335;
+.tile.long .fighter-list {
+  position: absolute;
+  top: 4px;
+  left: 24%;
+  width: 30%;
+  padding: 0px;
+}
+.tile.long .fighter-list .fighter {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.long .fighter-list .fighter .fighter-name {
+  font-weight: normal;
+  font-size: 16px;
+  font-style: italic;
+}
+.tile.long .character-list {
+  display: inline;
+  font-weight: lighter;
+  font-size: 16px;
+  font-style: normal;
+}
+.tile.long .character-list .character-name:not(:first-child):before {
+  content: "/ ";
+}
+.tile.long .caster-list {
+  position: absolute;
+  top: 4px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  font-weight: normal;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.long .caster-list .caster-name {
+  font-weight: lighter;
+}
+.tile.long .caster-list .caster-name:not(:first-child):before {
+  content: "/ ";
+}
+.tile.long .event {
+  position: absolute;
+  font-weight: normal;
+  font-size: 12px;
+  top: 24px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.long .title-name {
+  font-weight: bold;
+  position: absolute;
+  font-weight: bolder;
+  font-size: 12px;
+  top: 44px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
