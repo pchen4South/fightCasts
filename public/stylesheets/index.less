@@ -15,6 +15,7 @@
 @font-large: 64px;
 @font-mediumish: 48px;
 @font-medium: 32px;
+@font-mediumish: 24px;
 @font-smallish: 16px;
 @font-small: 8px;
 @header-margin: 32px;
@@ -65,6 +66,31 @@ body {
   .transition(background-color .6s);
   &:hover {
     background-color: lighten(@default-tile-color, 15%);
+  }
+}
+
+.fighter-list {
+  padding: 5px;
+  .fighter {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    .fighter-name {
+      font-weight: bold;
+      font-size: @font-smallish;
+      font-style: italic;
+    }
+    .character-list {
+      display: inline;
+      font-weight: normal;
+      font-size: @font-smallish;
+      font-style: normal;
+      .character-name {
+        &:before {
+          content: "/ ";
+        }
+      }
+    }
   }
 }
 

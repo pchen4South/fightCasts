@@ -1728,6 +1728,28 @@ body {
 .tile:hover {
   background-color: #ffffff;
 }
+.fighter-list {
+  padding: 5px;
+}
+.fighter-list .fighter {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fighter-list .fighter .fighter-name {
+  font-weight: bold;
+  font-size: 16px;
+  font-style: italic;
+}
+.fighter-list .fighter .character-list {
+  display: inline;
+  font-weight: normal;
+  font-size: 16px;
+  font-style: normal;
+}
+.fighter-list .fighter .character-list .character-name:before {
+  content: "/ ";
+}
 .tile.sf4 {
   background-color: #8cbf26;
 }
