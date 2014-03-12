@@ -77,7 +77,8 @@ App.FcSubmitMatchFormComponent = Ember.Component.extend({
       casterNames: get(data, "casters").mapBy("name"),
       videoData: get(data, "videoData")
     }
-
+    window.data = data;
+    
     var titleError = validateTitle(data.title);
     var gameError = validateGame(data.game);
     var fighterDataError = validateFighterData(data.fighterData);
@@ -94,7 +95,7 @@ App.FcSubmitMatchFormComponent = Ember.Component.extend({
     submitMatch(data)
     .then(function (res) {
       console.log("yoyoyoyo", res);
-      window.location.reload();
+      //window.location.reload();
     })
     .fail(function (err) {
       set(self, "inFlight", false);
