@@ -5,5 +5,8 @@ module.exports = [
   {name: "Rohan", country: "US"},
   {name: "Infiltration", country: "KR"},
   {name: "Daigo Umehara", country: "JP"},
-  {name: "Ryan Hart", country: "GB"}
+  {name: "Gootecks", country: "US"},
+  {name: "Mike Ross", country: "US"},
+  {name: "Ryan Hart", country: "GB"},
+  {name: "multiple", country: ""}
 ]

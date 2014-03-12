@@ -21,6 +21,7 @@
     "grunt": "~0.4.2",
     "grunt-ember-templates": "~0.4.19",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-less": "~0.10.0"
+    "grunt-contrib-less": "~0.10.0",
+    "mongoose-timestamp": "~0.2.0"
   }
 }

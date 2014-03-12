@@ -28,7 +28,7 @@ var matchModel = require('../models/matchModel');
 var createCharacter = function (character, done) {  
   var charMod = characterModel.model;
   var newChar = new charMod(character);
-  console.log("Character Created: ", newChar.name);
+  //console.log("Character Created: ", newChar.name);
   newChar.save(done);   
 };
 
@@ -75,7 +75,7 @@ var findCharactersAndCreateGames = function(game, cb){
           cb();
         }
         else{
-          console.log("Game created: ", res.name);
+          //console.log("Game created: ", res.name);
           cb(err, res);
         }
       })
@@ -107,8 +107,10 @@ var find = function(modelType, query, done){
 };
 
 var findPersonForFighter = function(fighterName, cb){
+  
   personModel.model.find({name: fighterName}, function(err,res){
     if (err){
+      console.log("PERSON NOT FOUND");
       cb(err);
     }
     else
@@ -119,7 +121,8 @@ var findPersonForFighter = function(fighterName, cb){
         cb(err);
         }
         else{
-          console.log("found fighter");
+          if(res.length == 0)
+            console.log("not found fighter: ", res.length);
           cb(err,res);
         }
      });
@@ -151,10 +154,11 @@ var findCasters = function(casters, cb){
 };
 
 var findModelsAndCreateMatches  = function(match, done){
-
+  //console.log(match.fighterOne);
   async.parallel([
     //match.title -> title
-    async.apply(findFighters, match.fighterNames),
+    async.apply(findPersonForFighter, match.fighterOne),
+    async.apply(findPersonForFighter, match.fighterTwo),
     async.apply(findCasters, match.casterNames),
     async.apply(find, videoModel, match.videoNames), 
     async.apply(find, gameModel, match.game),
@@ -162,25 +166,28 @@ var findModelsAndCreateMatches  = function(match, done){
     
     ],
     function(err, results){
-      var fighterArray = results[0];
-      var casterArray = results[1];
+      var fighterOne = results[0][0];
+      var fighterTwo = results[1][0];
+      var casterArray = results[2];
       
-      var videos = results[2];
-      var game = results[3][0];
-      var event = results[4][0];
+      var videos = results[3];
+      var game = results[4][0];
+      var event = results[5][0];
       var casters = cleanNestedArray(casterArray);
-      var fighters = cleanNestedArray(fighterArray);
-      //console.log(fighters);
+
+      console.log(fighterOne);
       
       //results is an array of all the models
       //results[0] is an array of [{playerJSON}]
       matchModel.model.create({
         title: match.title,
         _casters: casters,
-        _fighters: fighters,
+        _fighterOne: fighterOne,
+        _fighterTwo: fighterTwo,
         _videos: videos,
         _game: game,
-        _event: event
+        _event: event,
+        category: match.category
       }, function(err,res){
         if(err){done(err)}
         else{
@@ -198,7 +205,7 @@ var cleanNestedArray = function(arr){
   for(var i = 0; i < arr.length; i++){
     cleaned[i] = arr[i][0];
   }
-  console.log(cleaned);
+  //console.log(cleaned);
   return cleaned;
 }
 
@@ -208,15 +215,23 @@ var findModelsAndCreateFighters = function(fighter, cb){
     if (err){cb(err)}
     else
       characterModel.model.find({name: fighter.character}, function(err, res){
-        if (err){cb(err)}
-        else
+        if (err){
+          console.log("char error");
+          cb(err)
+        }
+        else{
+          
           fighterModel.model.create({_characters: res, _person: result[0]}, function(err, res){
-            if (err){cb(err)}
+            if (err){
+            console.log("fightermodel problem");
+            cb(err);
+            }
             else {
-              console.log("fighter created");
+              //console.log("fighter created");
               cb(null, res);
             }
           })
+        }
       })
   });  
 }
@@ -230,7 +245,7 @@ var create = function(modelType, data, cb){
       cb(err);
     }
     else{
-      console.log(modelType.modelName + "created: ", res.name);
+      //console.log(modelType.modelName + "created: ", res.name);
       cb(null,res);
     }
   });  

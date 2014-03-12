@@ -4,7 +4,7 @@
   </small>
 
   <ul class="fighter-list">
-  {{#each fighters}}
+<!--   {{#each fighters}}
     <li class="fighter">
       <span class="fighter-name">
         {{person.name}}
@@ -15,7 +15,34 @@
       {{/each}}
       </div>
     </li> 
-  {{/each}}
+  {{/each}} -->
+  
+  {{#with fighterOne}}
+    <li class="fighter">
+      <span class="fighter-name">
+        {{person.name}}
+      </span> 
+      <div class="character-list">
+      {{#each characters}}
+        <span class="character-name">{{name}}</span> 
+      {{/each}}
+      </div>
+    </li> 
+  {{/with}}
+  
+  {{#with fighterTwo}}
+    <li class="fighter">
+      <span class="fighter-name">
+        {{person.name}}
+      </span> 
+      <div class="character-list">
+      {{#each characters}}
+        <span class="character-name">{{name}}</span> 
+      {{/each}}
+      </div>
+    </li> 
+  {{/with}}
+  
   </ul>
 
   <div class="caster-list">
