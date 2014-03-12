@@ -3,13 +3,17 @@
 </div>
 
 <div class ="col-md-10">
+  <h3> User Submitted Matches </h3>
   <ul style="list-style-type:none">
   {{#each submittedMatches}} 
    <li>
     
     <div class = "col-md-4">  
       <a href="/admin/submittedmatches/{{id}}">
-      Submitted Match: {{title}}
+      Title: {{title}}
+      {{#each fighterData}}
+         Player: {{name}}
+      {{/each}}
       </a>
     </div>
     

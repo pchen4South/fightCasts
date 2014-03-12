@@ -84,6 +84,16 @@ var getMultiple = function (modelType, cb) {
 
 };
 
+var searchMatches = function(query, cb){
+  console.log(query);
+  return match.model.find(query, function(err,res){
+    if (err){res.send("problem with search")}
+    else
+     var formatted = map(res, formatDbResponse);    
+      return cb(err, formatted);
+  });
+}
+
 //Read
 var getPerson = partial(get, person.model);
 var getCharacter = partial(get, character.model);
@@ -318,5 +328,7 @@ module.exports = {
   getMatches: getMatches,
   getMatchesNested: getMatchesNested,
   getFightersNested: getFightersNested,
-  getGamesNested: getGamesNested
+  getGamesNested: getGamesNested,
+  
+  searchMatches: searchMatches
 }

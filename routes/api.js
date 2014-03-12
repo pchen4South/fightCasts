@@ -38,6 +38,17 @@ module.exports = function (app) {
   //FIGHTER
 
   //MATCH
+  app.get("/api/v1/matches", function (req, res) {
+    var query = req.query.title;
+    query = {"title": {"$regex":query}};
+    
+    api.searchMatches(query,function (err, characters) {
+      if (err) res.send(400, {err: err.message});
+      else res.json(characters); 
+    }); 
+  });
+  
+  
   app.post("/api/v1/submittedMatches", function (req, res) {
     api.createSubmittedMatch({matchJson: req.body}, function (err, result) {
       if (err) res.send(400, {err: err.message}); 
