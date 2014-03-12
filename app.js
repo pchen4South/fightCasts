@@ -1,6 +1,5 @@
 var express = require('express');
 var exphbs = require('express3-handlebars');
-var ejs = require('ejs');
 var app = express();
 var mongoose = require('mongoose');
 var gameIcon = require('./views/helpers/gameIcon');

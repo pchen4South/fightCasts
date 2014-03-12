@@ -9,15 +9,17 @@
   <script src="/vendor/javascripts/handlebars.js"></script>
   <script src="/vendor/javascripts/ember.min.js"></script>
 
-  <nav class="page-header">
-    <a href="/" class="page-brand">fight casts</a> 
-  </nav>
+  <div class="row">
+    <nav class="page-header">
+      <a href="/" class="page-brand">fight casts</a> 
+    </nav>
+  </div>
 
-  <section class="col-md-8">
-    <div class="container-fluid" id="main-content">
-      {{{body}}}
+  <div class="container">
+    <div class="row-fluid">
+      <section class="col-lg-12 col-md-12 col-sm-12 col-sx-12">
+        {{{body}}}
+      </section>
     </div>
-  </section>
-  <section class="col-md-4 right-column">
-  </section>
+  </div>
 </body>

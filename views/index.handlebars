@@ -1,41 +1,25 @@
-<div class="row">
-  <section class="col-sm-8 list">
-    <div class="tile-group">
-      <h3 class="row title">today's matches</h3>
-      <div class="row-fluid">
-        <div class="col-sm-6">
-          <div class="tile sf4">
-            <ul class="fighter-list">
-
-              <li class="fighter">
-                <span class="fighter-name">
-                  Pizzahat
-                </span> 
-                <div class="character-list">
-                  <span class="character-name">Oni</span> 
-                  <span class="character-name">Sakura</span> 
-                  <span class="character-name">Ibuki</span> 
-                </div>
-              </li> 
-
-              <li class="fighter">
-                <span class="fighter-name">
-                  Hunde
-                </span> 
-                <div class="character-list">
-                  <span class="character-name">Sagat</span> 
-                  <span class="character-name">Cody</span> 
-                </div>
-              </li> 
-
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-  <section class="col-sm-4 featured">
-  </section>
+<div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
+  <div class="tile-group">
+    <h3 class="title">
+      today's matches
+    </h3>
+    <ul class="tiles">
+      {{#each matches}}
+        {{> match-tile}}
+      {{/each}}
+    </ul>
+  </div>
 </div>
 
+<div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
+  <div class="tile-group">
+    <h3 class="title">
+      today's matches
+    </h3>
+    <ul class="tiles">
+      {{#each matches}}
+        {{> match-tile}}
+      {{/each}}
+    </ul>
+  </div>
+</div>

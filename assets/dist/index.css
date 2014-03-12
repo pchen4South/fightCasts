@@ -1693,17 +1693,18 @@ input[type="button"].btn-block {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  color: white;
 }
 ul {
   list-style-type: none;
 }
 body {
-  background-color: #16499a;
+  background-color: #1d1d1d;
 }
 .page-header {
   min-height: 50px;
   border: none;
-  margin: 32px;
+  margin: 16px 32px;
 }
 .page-header .page-brand {
   font-size: 32px;
@@ -1716,20 +1717,65 @@ body {
   font-size: 16px;
   font-weight: normal;
   margin: 0px 0px 0px 10px;
-  color: white;
+  padding: 0px 0px 8px 6px;
+}
+.tiles {
+  margin: 0px;
+  padding: 0px;
 }
 .tile {
-  position: relative;
   height: 128px;
-  background-color: #eeeeee;
+  padding: 24px 8px;
+  position: relative;
+  min-height: 1px;
+  padding-left: 8px;
+  padding-right: 8px;
   -webkit-transition: background-color 0.6s;
   transition: background-color 0.6s;
 }
-.tile:hover {
-  background-color: #ffffff;
+@media (min-width: 768px) {
+  .tile {
+    float: left;
+    width: 50%;
+  }
+}
+.tile-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 24px;
+  padding: 4px;
+}
+.tiles .tile:nth-child(3n+1) {
+  background-color: #9a1616;
+}
+.tiles .tile:nth-child(3n+1) .tile-tag {
+  background-color: #dd2020;
+}
+.tiles .tile:nth-child(3n+1):hover {
+  background-color: #dd2020;
+}
+.tiles .tile:nth-child(3n+2) {
+  background-color: #16499a;
+}
+.tiles .tile:nth-child(3n+2) .tile-tag {
+  background-color: #2069dd;
+}
+.tiles .tile:nth-child(3n+2):hover {
+  background-color: #2069dd;
+}
+.tiles .tile:nth-child(3n+3) {
+  background-color: #4390df;
+}
+.tiles .tile:nth-child(3n+3) .tile-tag {
+  background-color: #84b7ea;
+}
+.tiles .tile:nth-child(3n+3):hover {
+  background-color: #84b7ea;
 }
 .fighter-list {
-  padding: 5px;
+  margin: 0px;
+  padding: 0px;
 }
 .fighter-list .fighter {
   overflow: hidden;
@@ -1741,18 +1787,41 @@ body {
   font-size: 16px;
   font-style: italic;
 }
-.fighter-list .fighter .character-list {
+.character-list {
   display: inline;
   font-weight: normal;
   font-size: 16px;
   font-style: normal;
 }
-.fighter-list .fighter .character-list .character-name:before {
+.character-list .character-name:not(:first-child):before {
   content: "/ ";
 }
+.caster-list {
+  margin-left: 10%;
+  font-weight: normal;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.event {
+  margin-left: 10%;
+  font-weight: normal;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.title-name {
+  font-weight: bold;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .tile.sf4 {
-  background-color: #8cbf26;
+  background-color: #128023;
 }
 .tile.sf4:hover {
-  background-color: #b0dd54;
+  background-color: #1bc335;
 }
