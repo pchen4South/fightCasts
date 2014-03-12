@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var timestamps = require('mongoose-timestamp');
+
 var fighterSchema = require('./fighterModel').schema;
 var eventSchema = require('./eventModel').schema;
 var gameSchema = require('./gameModel').schema;
@@ -15,9 +17,12 @@ var Matches = new mongoose.Schema({
   _teams: [{type: mongoose.Schema.Types.ObjectId, ref: "Team"}],
   _event: {type: mongoose.Schema.Types.ObjectId, ref: "Event"},
   _game: {type: mongoose.Schema.Types.ObjectId, ref: "Game"},
-  _channel: {type: mongoose.Schema.Types.ObjectId, ref: "Channel"},  
+  _channel: {type: mongoose.Schema.Types.ObjectId, ref: "Channel"},
+  //pro / scrub / community
+  category: String
 });
 
+Matches.plugin(timestamps);
 var Match = mongoose.model('Match', Matches);
 
 module.exports = {'model': Match, 'schema': Matches}

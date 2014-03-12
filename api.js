@@ -157,6 +157,7 @@ var formatNestedMatch = function (monMatch) {
     event: formatDbResponse(monMatch["_event"]),
     game: formatDbResponse(monMatch["_game"]),
     channel: formatDbResponse(monMatch["_channel"]),
+    category: monMatch.category
   };
 };
 
