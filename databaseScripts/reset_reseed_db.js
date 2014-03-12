@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var _ = require('lodash');
+var partial = _.partial;
 var forEach = _.forEach;
 var prompt = require('prompt');
 var async = require('async');
@@ -11,6 +12,8 @@ var videos = require('./seeds/videos');
 var events = require('./seeds/events');
 var channels = require('./seeds/channels');
 var teams = require('./seeds/teams');
+var fighters = require('./seeds/fighters');
+var matches = require('./seeds/matches');
 
 var gameModel = require('../models/gameModel');
 var characterModel = require('../models/characterModel');
@@ -19,6 +22,8 @@ var videoModel = require('../models/videoModel');
 var eventModel = require('../models/eventModel');
 var channelModel = require('../models/channelModel');
 var teamModel = require('../models/teamModel');
+var fighterModel = require('../models/fighterModel');
+var matchModel = require('../models/matchModel');
 
 var createCharacter = function (character, done) {  
   var charMod = characterModel.model;
@@ -35,83 +40,216 @@ var characterCreation = function(done){
   async.map(characters, createCharacter, done);
 };
 
+var peopleCreation = function(done){
+  async.map(people, partial(create, personModel.model), done);
+};
+
+var videosCreation = function(done){
+  async.map(videos, partial(create, videoModel.model), done);
+};
+
+var eventsCreation = function(done){
+  async.map(events, partial(create, eventModel.model), done);
+};
+
+var channelsCreation = function(done){
+  async.map(channels, partial(create, channelModel.model), done);
+};
+
+var teamsCreation = function(done){
+  async.map(teams, partial(create, teamModel.model), done);
+};
+
 var findCharactersAndCreateGames = function(game, cb){
   characterModel.model.find({game: game.nickname}, function(err,res){
-    if(err) console.log (err);
+    if(err){
+      console.log (err);
+      cb(err);
+    }
     else if (res.length>0){
       gameModel.model.create({name:game.name, 
                               _characters: res, 
                               nickname: game.nickname}, function(err, res){
-        if(err) console.log(err);
-        console.log("Game created: ", res.name);
+        if(err){
+          console.log (err);
+          cb();
+        }
+        else{
+          console.log("Game created: ", res.name);
+          cb(err, res);
+        }
       })
     }
+    else
+      cb(null);
   })
 };
 
-var createPerson = function (person) {
-  personModel.model.create(person, function (err, res) {
-    if (err) console.log(err);
-    else console.log("Person created: ", res.name); 
+var fighterCreation = function(done){
+  async.map(fighters, findModelsAndCreateFighters, done);
+}
+
+var matchCreation = function(done){
+  async.map(matches, findModelsAndCreateMatches, done);
+}
+
+var find = function(modelType, query, done){
+
+  modelType.model.find({name: query}, function(err, res){
+    if (err) { 
+      console.log(err);
+      done(err);
+    }
+    else{
+      done(null,res);
+    }
   });
 };
 
-var createGame = function (game) {
-  gameModel.model.create(game, function (err, res) {
-    if (err) console.log(err);
-    else console.log("Game created: ", res.name); 
+var findPersonForFighter = function(fighterName, cb){
+  personModel.model.find({name: fighterName}, function(err,res){
+    if (err){
+      cb(err);
+    }
+    else
+    {
+     cb(err, res);
+    }
   });
-};
+}
 
-var findCharacters = function(game){
-  characterModel.model.find({name: game}, function(err,res){
-    if(err) console.log (err);
-    else console.log(res);
-  })
+var findPersonForCaster = function(casterName, cb){
+  personModel.model.find({name: casterName}, function(err,res){
+    if (err){
+      cb(err);
+    }
+    else
+    {
+     cb(err, res);
+    }
+  });
 }
 
 
-var createVideo = function (video) {
-  videoModel.model.create(video, function (err, res) {
-    if (err) console.log(err); 
-    else console.log("Video created: ", res.name, res.url);
-  });
+
+
+var findFighters = function(fighters, cb){
+  async.map(fighters, findPersonForFighter, cb);  
 };
 
-var createEvent = function (event) {
-  eventModel.model.create(event, function (err, res) {
-    if (err) console.log(err); 
-    else console.log("Event created: ", res.name);
-  });
+var findCasters = function(casters, cb){
+  async.map(casters, findPersonForCaster, cb);  
 };
 
-var createChannel = function (channel) {
-  channelModel.model.create(channel, function (err, res) {
-    if (err) console.log(err);
-    else console.log("Channel created: ", res.name);
-  });
+var findModelsAndCreateMatches  = function(match, done){
+
+  async.parallel([
+    //match.title -> title
+    async.apply(findFighters, match.fighterNames),
+    async.apply(findCasters, match.casterNames),
+    async.apply(find, videoModel, match.videoNames), 
+    async.apply(find, gameModel, match.game),
+    async.apply(find, eventModel, match.eventName),
+    
+    ],
+    function(err, results){
+      var fighterArray = results[0];
+      var casterArray = results[1];
+      
+      var videos = results[2];
+      var game = results[3][0];
+      var event = results[4][0];
+      var casters = cleanNestedArray(casterArray);
+      var fighters = cleanNestedArray(fighterArray);
+      
+      //results is an array of all the models
+      //results[0] is an array of [{playerJSON}]
+      matchModel.model.create({
+        title: match.title,
+        _casters: casters,
+        _fighters: fighters,
+        _videos: videos,
+        _game: game,
+        _event: event
+      }, function(err,res){
+        if(err){done(err)}
+        else{
+          console.log("match created: ", res.title);
+          done(null, res);      
+        }
+      });
+    }
+  );
 };
 
-var createTeam = function (team) {
-  teamModel.model.create(team, function (err, res) {
-    if (err) console.log(err);
-    else console.log("Team created: ", res.name);
-  });
-};
+var cleanNestedArray = function(arr){
+  var cleaned = [];
+    
+  for(var i = 0; i < arr.length; i++){
+    cleaned[i] = arr[i][0]._id;
+  }
+
+  return cleaned;
+}
+
+
+var findModelsAndCreateFighters = function(fighter, cb){
+  personModel.model.find({name: fighter.name}, function(err, result){
+    if (err){cb(err)}
+    else
+      characterModel.model.find({name: fighter.character}, function(err, res){
+        if (err){cb(err)}
+        else
+          fighterModel.model.create({_characters: res, _person: result[0]}, function(err, res){
+            if (err){cb(err)}
+            else {
+              console.log("fighter created");
+              cb(null, res);
+            }
+          })
+      })
+  });  
+}
+
+
+
+var create = function(modelType, data, cb){
+  modelType.create(data, function(err, res){
+    if (err) { 
+      console.log(err);
+      cb(err);
+    }
+    else{
+      console.log(modelType.modelName + "created: ", res.name);
+      cb(null,res);
+    }
+  });  
+}
+
 
 
 var resetDb = function (mongoose) {
   mongoose.connect('mongodb://localhost:27017/fightCasts', function (err) {
     mongoose.connection.db.dropDatabase(function (err) {
       console.log("database Dropped");
-      
-      forEach(people, createPerson);
-      forEach(videos, createVideo);
-      forEach(events, createEvent);
-      forEach(channels, createChannel);
-      forEach(teams, createTeam);
-      
-      async.series([characterCreation, characterFind]);
+
+      async.series([peopleCreation,
+                    videosCreation,
+                    eventsCreation,
+                    channelsCreation,
+                    teamsCreation,
+                    characterCreation, 
+                    // //characterFind calls game creation
+                    characterFind,
+                    fighterCreation,
+                    matchCreation], 
+                    
+                    function(err, res){
+                      if (err)
+                        console.log (err);
+                      else
+                        console.log ("done with seeding");
+                    });
       
     });
   });
