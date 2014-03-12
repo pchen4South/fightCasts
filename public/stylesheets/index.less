@@ -1,0 +1,183 @@
+@import "variables.less";
+@import "mixins.less";
+@import "scaffolding.less";
+@import "code.less";
+@import "grid.less";
+@import "forms.less";
+@import "buttons.less";
+@import "utilities.less";
+@import "responsive-utilities.less";
+
+@default-background-color: #1d1d1d;
+
+@default-tile-color: #9a1616;
+@tile-color-1: #9a1616;
+@tile-color-2: #16499a;
+@tile-color-3: #4390df;
+@sf4-tile-color: #128023;
+
+
+@font-large: 64px;
+@font-mediumish: 48px;
+@font-medium: 32px;
+@font-mediumish: 24px;
+@font-smallish: 16px;
+@font-small: 12px;
+@font-tiny: 8px;
+
+@header-margin: 16px 32px;
+@large-tile-height: 128px;
+@medium-tile-height: 64px;
+@small-tile-height: 32px;
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  color: white;
+}
+
+ul {
+  list-style-type: none;
+}
+
+body {
+  background-color: @default-background-color;
+}
+
+.page-header {
+  min-height: 50px;
+  border: none;
+  margin: @header-margin;
+  .page-brand {
+    font-size: @font-medium;
+    font-weight: normal;
+    text-decoration: none;
+    margin: 0px 0px 0px 15px;
+    color: white;
+  }
+}
+
+.tile-group {
+  .title {
+    font-size: @font-smallish;
+    font-weight: normal;
+    margin: 0px 0px 0px 10px;
+    padding: 0px 0px 8px 6px;
+  }
+}
+
+.tiles {
+  margin: 0px;
+  padding: 0px;
+}
+
+.tile {
+  position: relative;
+  height: @large-tile-height;
+  padding: 24px 8px;
+  .make-sm-column(6, 16px);
+  .transition(background-color .6s);
+}
+
+.tile-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 24px;
+  padding: 4px;
+}
+
+.tiles .tile {
+  &:nth-child(3n+1) {
+    .tile-tag {
+      background-color: lighten(@tile-color-1, 15%)
+    }
+    background-color: @tile-color-1;
+    &:hover {
+      background-color: lighten(@tile-color-1, 15%);
+    }
+  }
+  &:nth-child(3n+2) {
+    .tile-tag {
+      background-color: lighten(@tile-color-2, 15%)
+    }
+    background-color: @tile-color-2;
+    &:hover {
+      background-color: lighten(@tile-color-2, 15%);
+    }
+  }
+  &:nth-child(3n+3) {
+    .tile-tag {
+      background-color: lighten(@tile-color-3, 15%)
+    }
+    background-color: @tile-color-3;
+    &:hover {
+      background-color: lighten(@tile-color-3, 15%);
+    }
+  }
+}
+
+.fighter-list {
+  margin: 0px;
+  padding: 0px;
+  .fighter {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    .fighter-name {
+      font-weight: bold;
+      font-size: @font-smallish;
+      font-style: italic;
+    }
+  }
+}
+
+.character-list {
+  display: inline;
+  font-weight: normal;
+  font-size: @font-smallish;
+  font-style: normal;
+  .character-name:not(:first-child) {
+    &:before {
+      content: "/ ";
+    }
+  }
+}
+
+.caster-list {
+  margin-left: 10%;
+  font-weight: normal;
+  font-size: @font-small;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  .caster-name {
+  }
+}
+
+.event {
+  margin-left: 10%;
+  font-weight: normal;
+  font-size: @font-small;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  .event-name {
+  }
+}
+
+.title-name {
+  font-weight: bold;
+  font-size: @font-small;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tile.sf4 {
+  background-color: @sf4-tile-color;
+  &:hover {
+    background-color: lighten(@sf4-tile-color, 15%);
+  }
+}
