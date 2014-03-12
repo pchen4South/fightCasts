@@ -1,35 +1,43 @@
-<li class="tile long">
-  <small class="tile-tag">
-    {{game.nickname}}
-  </small>
-
-  <ul class="fighter-list">
-  {{#each fighters}}
-    <li class="fighter">
-      <span class="fighter-name">
-        {{person.name}}
-      </span> 
-      <div class="character-list">
-      {{#each characters}}
-        <span class="character-name">{{name}}</span> 
-      {{/each}}
-      </div>
-    </li> 
-  {{/each}}
-  </ul>
-
-  <div class="caster-list">
-    Cast by:
-  {{#each casters}}
-    <span class="caster-name">{{name}}</span>
-  {{/each}}
+<li class="tile featured">
+  <div class="tile-tag">
+    <span class="game">{{game.nickname}}</span>
+    <span class="type">Pro</span>
   </div>
 
-  <div class="event">
-    <span class="event-name">{{event.name}}</span>
+  <div class="fighter-list">
+    <div class="fighter-name">
+      Infiltration
+    </div>
+    <div class="character-list">
+      <span class="character-name">Oni</span>
+      <span class="character-name">Akuma</span>
+      <span class="character-name">Hakan</span>
+    </div>
+    <div class="vs">VS</div>
+    <div class="fighter-name">
+      Daigo Umehara
+    </div>
+    <div class="character-list">
+      <span class="character-name">Ryu</span>
+    </div>
+  </div>
+
+  <div class="video-thumbnails">
+  {{#each videos}}
+    <div class="video-thumbnail"></div> 
+    <div class="video-thumbnail"></div> 
+    <div class="video-thumbnail"></div> 
+  {{/each}}
   </div>
 
   <div class="title-name">
     {{title}}
   </div>
+
+  {{#if event}}
+  <div class="event">
+    <span class="event-name">{{event.name}}</span>
+  </div>
+  {{/if}}
+
 </li>

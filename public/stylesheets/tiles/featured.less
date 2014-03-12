@@ -1,33 +1,47 @@
-.tile.long .tile-tag {
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  height: @long-tile-height - 8;
-  width: 20%;
-  padding: 12px;
-  font-size: @font-mediumish;
+.tile.featured {
+  position: relative;
+  .make-xs-column(4, 4px);
+  .make-sm-column(4, 4px);
+  .make-md-column(4, 4px);
+  .make-lg-column(4, 4px);
+  height: @featured-tile-height;
 }
 
-.tile.long .fighter-list {
-  position: absolute;
-  top: 4px;
-  left: 24%;
-  width: 30%;
-  padding: 0px;
-  .fighter {
-    .text-overflow();
-    .fighter-name {
-      font-weight: normal;
-      font-size: @font-smallish;
-      font-style: italic;
-    }
+.tile.featured .tile-tag {
+  position: relative;
+  font-weight: 100;
+  font-size: @font-smallish;
+  text-align: left;
+  .type {
+    float: right;
+    font-size: @font-small;
+    font-style: italic;
+    font-color: gray;
   }
 }
 
-.tile.long .character-list {
+.tile.featured {
+  padding-top: 0px;
+  padding-bottom: 8px;
+  text-align: center;
+}
+
+.tile.featured .fighter-list {
+  .fighter-name {
+    font-size: @font-mediumish;
+    font-weight: 100;
+    .text-overflow();
+  }
+  .vs {
+    font-size: @font-smallish;
+    font-weight: 600;
+  }
+}
+
+.tile.featured .character-list {
   display: inline;
   font-weight: lighter;
-  font-size: @font-smallish;
+  font-size: @font-small;
   font-style: normal;
   .character-name:not(:first-child) {
     &:before {
@@ -36,12 +50,18 @@
   }
 }
 
-.tile.long .caster-list {
-  position: absolute;
-  top: 4px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
+.tile.featured .video-thumbnails {
+  display: block;
+  margin: 8px auto;
+  .video-thumbnail {
+    background-color: black;
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+  }
+}
+
+.tile.featured .caster-list {
   font-weight: normal;
   font-size: @font-small;
   .text-overflow();
@@ -55,29 +75,16 @@
   }
 }
 
-.tile.long .event {
-  position: absolute;
+.tile.featured .event {
   font-weight: normal;
   font-size: @font-small;
   font-style: italic;
-  top: 24px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
-  .text-overflow();
   .event-name {
+    text-overflow: wrap;
   }
 }
 
-.tile.long .title-name {
-  font-weight: bold;
-  font-size: @font-small;
-  position: absolute;
+.tile.featured .title-name {
   font-weight: lighter;
   font-size: @font-smallish;
-  top: 40px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
-  .text-overflow();
 }
