@@ -1,0 +1,83 @@
+.tile.long .tile-tag {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: @long-tile-height - 8;
+  width: 20%;
+  padding: 12px;
+  font-size: @font-mediumish;
+}
+
+.tile.long .fighter-list {
+  position: absolute;
+  top: 4px;
+  left: 24%;
+  width: 30%;
+  padding: 0px;
+  .fighter {
+    .text-overflow();
+    .fighter-name {
+      font-weight: normal;
+      font-size: @font-smallish;
+      font-style: italic;
+    }
+  }
+}
+
+.tile.long .character-list {
+  display: inline;
+  font-weight: lighter;
+  font-size: @font-smallish;
+  font-style: normal;
+  .character-name:not(:first-child) {
+    &:before {
+      content: "/ ";
+    }
+  }
+}
+
+.tile.long .caster-list {
+  position: absolute;
+  top: 4px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  font-weight: normal;
+  font-size: @font-small;
+  .text-overflow();
+  .caster-name {
+    font-weight: lighter;
+    &:not(:first-child) {
+      &:before {
+        content: "/ ";
+      }
+    }
+  }
+}
+
+.tile.long .event {
+  position: absolute;
+  font-weight: normal;
+  font-size: @font-small;
+  font-style: italic;
+  top: 24px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  .text-overflow();
+  .event-name {
+  }
+}
+
+.tile.long .title-name {
+  font-weight: bold;
+  font-size: @font-small;
+  position: absolute;
+  font-weight: lighter;
+  font-size: @font-smallish;
+  top: 40px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  .text-overflow();
+}

@@ -2,12 +2,23 @@ var _ = require('lodash');
 var find = _.find;
 var api = require('../api');
 
+var createPayload = function (matches) {
+  return {
+    matches: matches,
+    featuredMatches: {
+      pro: matches[0], 
+      community: matches[1], 
+      scrub: matches[1], 
+    } 
+  };
+};
+
 module.exports = function (app) {
   var returnIndex = function (req, res) {
     api.getMatchesNested(function (err, matches) {
-      //res.render("index", {matches: [1,2,3,4,5,6]});
-      console.log(matches);
-      res.render("index", {matches: matches}); 
+      var payload = createPayload(matches);
+      console.log(payload);
+      res.render("index", payload); 
     });
   };
 
