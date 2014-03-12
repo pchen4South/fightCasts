@@ -15,7 +15,7 @@
         <tr>
           
           <td>    
-           <img src = {{gameIcon game.name}}> </img>
+           <img src = {{gameIcon game.nickname}}> </img>
           </td>
           
           <td>
@@ -41,7 +41,9 @@
           </td>
           
           <td>
-            {{casters}}
+            {{#each casters}}
+              {{name}}
+            {{/each}}
           </td>
 
         </tr>

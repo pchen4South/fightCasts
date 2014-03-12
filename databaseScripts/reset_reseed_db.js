@@ -113,7 +113,16 @@ var findPersonForFighter = function(fighterName, cb){
     }
     else
     {
-     cb(err, res);
+     fighterModel.model.find({_person: res[0]}, function(err,res){
+        if (err){
+        console.log("fighter not found");
+        cb(err);
+        }
+        else{
+          console.log("found fighter");
+          cb(err,res);
+        }
+     });
     }
   });
 }
@@ -161,6 +170,7 @@ var findModelsAndCreateMatches  = function(match, done){
       var event = results[4][0];
       var casters = cleanNestedArray(casterArray);
       var fighters = cleanNestedArray(fighterArray);
+      //console.log(fighters);
       
       //results is an array of all the models
       //results[0] is an array of [{playerJSON}]
@@ -174,7 +184,7 @@ var findModelsAndCreateMatches  = function(match, done){
       }, function(err,res){
         if(err){done(err)}
         else{
-          console.log("match created: ", res.title);
+          //console.log("match created: ", res);
           done(null, res);      
         }
       });
@@ -184,11 +194,11 @@ var findModelsAndCreateMatches  = function(match, done){
 
 var cleanNestedArray = function(arr){
   var cleaned = [];
-    
+   
   for(var i = 0; i < arr.length; i++){
-    cleaned[i] = arr[i][0]._id;
+    cleaned[i] = arr[i][0];
   }
-
+  console.log(cleaned);
   return cleaned;
 }
 
