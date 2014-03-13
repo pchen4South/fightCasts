@@ -5,21 +5,29 @@
   </div>
 
   <div class="fighter-list">
+    {{#with fighterOne}}
     <div class="fighter-name">
-      Infiltration
+      {{person.name}} 
     </div>
     <div class="character-list">
-      <span class="character-name">Oni</span>
-      <span class="character-name">Akuma</span>
-      <span class="character-name">Hakan</span>
+      {{#each characters}}
+        <span class="character-name">{{name}}</span>
+      {{/each}}
     </div>
+    {{/with}}
+
     <div class="vs">VS</div>
+
+    {{#with fighterTwo}}
     <div class="fighter-name">
-      Daigo Umehara
+      {{person.name}}
     </div>
     <div class="character-list">
-      <span class="character-name">Ryu</span>
+      {{#each characters}}
+        <span class="character-name">{{name}}</span>
+      {{/each}}
     </div>
+    {{/with}}
   </div>
 
   <div class="video-thumbnails">
