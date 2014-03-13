@@ -6,4 +6,5 @@ module.exports = [
   {name: "Mike Ross vs Xian", url: "//www.youtube.com/embed/2I3X2cO9InQ"},
   {name: "Infiltration vs Daigo", url: "//www.youtube.com/embed/jlAqfaCCtXE"},
   {name: "Daigo vs Ryan Hart", url: "//www.youtube.com/embed/4ZhPMU4RSgw"},
+  {name: "Pete vs Viperboy", url: "//www.youtube.com/embed/CGBOH9w4lcc"},
 ];
