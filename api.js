@@ -131,8 +131,7 @@ var formatNestedFighter = function (monFighter) {
   return {
     id: monFighter["_id"],
     characters: map(monFighter["_characters"], formatDbResponse),
-    person: formatDbResponse(monFighter["_person"]),
-    playerName: monFighter.playerName
+    person: formatDbResponse(monFighter["_person"])
   };
 };
 
@@ -146,11 +145,12 @@ var formatNestedGame = function (monGame) {
 };
 
 var formatNestedMatch = function (monMatch) {
+  console.log("MONMATCH", monMatch);
   return {
     id: monMatch["_id"],
     approved: monMatch.approved,
     title: monMatch.title,
-    casters: monMatch.casters,
+    casters: map(monMatch["_casters"], formatDbResponse),
     fighters: map(monMatch["_fighters"], formatNestedFighter),
     videos: map(monMatch["_videos"], formatDbResponse),
     teams: map(monMatch["_teams"], formatDbResponse),
@@ -178,7 +178,9 @@ var getMatchNested = function (id, cb) {
   .populate("_event")
   .populate("_game")
   .populate("_channel")
+  .populate("_casters")
   .exec(function (err, res) {
+    console.log(res._casters);
     match.model.populate(res, personOptions, function (err, res) {
       match.model.populate(res, charactersOptions, function (err, res) {
         if (err) cb(err);
@@ -219,18 +221,19 @@ var getFightersNested = function (cb) {
 var getMatchesNested = function (cb) {
   match.model.find()
   .populate("_fighters")
-  .populate("_person")
-  .populate("_characters")
   .populate("_videos")
   .populate("_teams")
   .populate("_event")
   .populate("_game")
   .populate("_channel")
+  .populate("_casters")
   .exec(function (err, res) {
+    console.log("res", res);
     match.model.populate(res, personOptions, function (err, matches) {
       match.model.populate(matches, charactersOptions, function (err, results) {
         if (err) cb(err); 
         else cb(null, map(results, formatNestedMatch));
+          // // console.log(results);
       });
     });
   });

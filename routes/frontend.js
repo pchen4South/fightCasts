@@ -5,9 +5,9 @@ var api = require('../api');
 module.exports = function (app) {
   var returnIndex = function (req, res) {
     api.getMatchesNested(function (err, matches) {
-      //FIXME: this is here temporarily for testing
-      res.render("index", {matches: [1,2,3,4,5,6]});
-      //res.render("index", {matches: matches}); 
+      //res.render("index", {matches: [1,2,3,4,5,6]});
+      console.log(matches);
+      res.render("index", {matches: matches}); 
     });
   };
 
