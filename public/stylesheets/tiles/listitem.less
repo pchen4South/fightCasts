@@ -1,0 +1,71 @@
+.tile.listitem {
+  padding: 0px;
+  position: relative;
+  height: @listitem-tile-height;
+}
+
+.tile.listitem .fighter-list {
+  .fighter {
+    width: 30%;
+    .text-overflow();
+    .fighter-name {
+      display: inline;
+      padding-left: 8px;
+      font-weight: 300;
+      font-size: @font-small;
+      font-style: italic;
+    }
+    .character-list {
+      display: inline;
+      font-weight: 100;
+      font-size: @font-small;
+      font-style: normal;
+      .character-name:not(:first-child) {
+        &:before {
+          content: "/ ";
+        }
+      }
+    }
+  }
+  .fighter.top {
+    position: absolute;
+    top: 0px;
+    left: 0px; 
+  }
+  .fighter.bottom {
+    position: absolute;
+    top: 12px;
+    left: 0px; 
+  }
+}
+
+.tile.listitem .match-details {
+  .title-name {
+    position: absolute;
+    top: 0px;
+    left: 30%;
+    width: 56%;
+    .text-overflow();
+    font-size: @font-smallish;
+    font-weight: 200;
+  }
+  .event {
+    position: absolute;
+    top: 16px;
+    left: 30%;
+    width: 30%;
+    .text-overflow();
+    font-size: @font-small;
+    font-weight: 100;
+  }
+  .caster-list {
+    position: absolute;
+    top: 16px;
+    left: 70%;
+    width: 30%;
+    .text-overflow();
+    font-size: @font-small;
+    font-weight: 100;
+    font-style: italic;
+  }
+}

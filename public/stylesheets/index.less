@@ -26,11 +26,12 @@
 @header-margin: 16px 32px;
 @large-tile-height: 128px;
 @long-tile-height: 64px;
+@listitem-tile-height: 32px;
 @featured-tile-height: 256px;
 @medium-tile-height: 64px;
 @small-tile-height: 32px;
 
-@import "tiles/long.less";
+@import "tiles/listitem.less";
 @import "tiles/featured.less";
 
 *, *:before, *:after {
@@ -79,7 +80,6 @@ body {
   position: relative;
   height: @large-tile-height;
   padding: 24px 8px;
-  .make-sm-column(6, 16px);
   .transition(background-color .6s);
 }
 

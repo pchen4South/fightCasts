@@ -1,0 +1,52 @@
+<li class="tile listitem">
+  <div class="fighter-list">
+
+    {{#with fighterOne}}
+      <div class="fighter top">
+        <div class="fighter-name">
+          {{person.name}}
+        </div> 
+        <div class="character-list">
+        {{#each characters}}
+          <span class="character-name">{{name}}</span> 
+        {{/each}}
+        </div>
+      </div> 
+    {{/with}}
+    
+    {{#with fighterTwo}}
+      <div class="fighter bottom">
+        <div class="fighter-name">
+          {{person.name}}
+        </div> 
+        <div class="character-list">
+        {{#each characters}}
+          <span class="character-name">{{name}}</span> 
+        {{/each}}
+        </div>
+      </div> 
+    {{/with}}
+    
+  </div>
+
+  <div class="match-details">
+    <div class="title-name">
+      {{title}}
+    </div>
+
+    {{#if casters}}
+    <div class="caster-list">
+      Cast by:
+    {{#each casters}}
+      <span class="caster-name">{{name}}</span>
+    {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if event}}
+    <div class="event">
+      <span class="event-name">{{event.name}}</span>
+    </div>
+    {{/if}}
+  </div>
+</li>

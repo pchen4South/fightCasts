@@ -1687,96 +1687,76 @@ input[type="button"].btn-block {
     display: none !important;
   }
 }
-.tile.long {
-  position: relative;
-  min-height: 1px;
-  padding-left: 8px;
-  padding-right: 8px;
-  height: 64px;
-}
-@media (min-width: 768px) {
-  .tile.long {
-    float: left;
-    width: 100%;
-  }
-}
-.tile.long .tile-tag {
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  height: 56px;
-  width: 20%;
-  padding: 12px;
-  font-size: 24px;
-}
-.tile.long .fighter-list {
-  position: absolute;
-  top: 4px;
-  left: 24%;
-  width: 30%;
+.tile.listitem {
   padding: 0px;
+  position: relative;
+  height: 32px;
 }
-.tile.long .fighter-list .fighter {
+.tile.listitem .fighter-list .fighter {
+  width: 30%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.tile.long .fighter-list .fighter .fighter-name {
-  font-weight: normal;
-  font-size: 16px;
+.tile.listitem .fighter-list .fighter .fighter-name {
+  display: inline;
+  padding-left: 8px;
+  font-weight: 300;
+  font-size: 12px;
   font-style: italic;
 }
-.tile.long .character-list {
+.tile.listitem .fighter-list .fighter .character-list {
   display: inline;
-  font-weight: lighter;
-  font-size: 16px;
+  font-weight: 100;
+  font-size: 12px;
   font-style: normal;
 }
-.tile.long .character-list .character-name:not(:first-child):before {
+.tile.listitem .fighter-list .fighter .character-list .character-name:not(:first-child):before {
   content: "/ ";
 }
-.tile.long .caster-list {
+.tile.listitem .fighter-list .fighter.top {
   position: absolute;
-  top: 4px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
-  font-weight: normal;
-  font-size: 12px;
+  top: 0px;
+  left: 0px;
+}
+.tile.listitem .fighter-list .fighter.bottom {
+  position: absolute;
+  top: 12px;
+  left: 0px;
+}
+.tile.listitem .match-details .title-name {
+  position: absolute;
+  top: 0px;
+  left: 30%;
+  width: 56%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-.tile.long .caster-list .caster-name {
-  font-weight: lighter;
-}
-.tile.long .caster-list .caster-name:not(:first-child):before {
-  content: "/ ";
-}
-.tile.long .event {
-  position: absolute;
-  font-weight: normal;
-  font-size: 12px;
-  font-style: italic;
-  top: 24px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile.long .title-name {
-  position: absolute;
-  font-weight: lighter;
   font-size: 16px;
-  top: 40px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
+  font-weight: 200;
+}
+.tile.listitem .match-details .event {
+  position: absolute;
+  top: 16px;
+  left: 30%;
+  width: 30%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 12px;
+  font-weight: 100;
+}
+.tile.listitem .match-details .caster-list {
+  position: absolute;
+  top: 16px;
+  left: 70%;
+  width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 100;
+  font-style: italic;
 }
 .tile.featured {
   float: left;
@@ -1914,20 +1894,11 @@ body {
   padding: 0px;
 }
 .tile {
+  position: relative;
   height: 128px;
   padding: 24px 8px;
-  position: relative;
-  min-height: 1px;
-  padding-left: 8px;
-  padding-right: 8px;
   -webkit-transition: background-color 0.6s;
   transition: background-color 0.6s;
-}
-@media (min-width: 768px) {
-  .tile {
-    float: left;
-    width: 50%;
-  }
 }
 .tiles .tile:nth-child(3n+1) {
   background-color: #9a1616;
