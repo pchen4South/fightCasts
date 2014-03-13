@@ -1,10 +1,8 @@
-.tile.listitem {
-  padding: 0px;
-  position: relative;
-  height: @listitem-tile-height;
+.tile-match-listitem {
+  .tile-mixin(); 
 }
 
-.tile.listitem .fighter-list {
+.tile-match-listitem .fighter-list {
   .fighter {
     width: 30%;
     .text-overflow();
@@ -39,7 +37,7 @@
   }
 }
 
-.tile.listitem .match-details {
+.tile-match-listitem .match-details {
   .title-name {
     position: absolute;
     top: 0px;

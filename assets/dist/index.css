@@ -2625,6 +2625,171 @@ input[type="button"].btn-block {
   height: 100%;
   background-color: blue;
 }
+.tile-mixin {
+  position: relative;
+  padding: 4px;
+  height: 100%;
+  width: 100%;
+  background-color: #4390df;
+  -webkit-transition: background-color 0.4s;
+  transition: background-color 0.4s;
+}
+.tile-match-featured {
+  position: relative;
+  padding: 4px;
+  height: 100%;
+  width: 100%;
+  background-color: #4390df;
+  -webkit-transition: background-color 0.4s;
+  transition: background-color 0.4s;
+}
+.tile-match-featured .tile-tag {
+  position: relative;
+  font-weight: 100;
+  font-size: 16px;
+  text-align: left;
+}
+.tile-match-featured .tile-tag .type {
+  float: right;
+  font-size: 12px;
+  font-style: italic;
+  font-color: gray;
+}
+.tile-match-featured {
+  padding-top: 0px;
+  padding-bottom: 8px;
+  text-align: center;
+}
+.tile-match-featured .fighter-list .fighter-name {
+  font-size: 24px;
+  font-weight: 100;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile-match-featured .fighter-list .vs {
+  font-size: 16px;
+  font-weight: 600;
+}
+.tile-match-featured .character-list {
+  display: inline;
+  font-weight: lighter;
+  font-size: 12px;
+  font-style: normal;
+}
+.tile-match-featured .character-list .character-name:not(:first-child):before {
+  content: "/ ";
+}
+.tile-match-featured .video-thumbnails {
+  display: block;
+  margin: 8px auto;
+}
+.tile-match-featured .video-thumbnails .video-thumbnail {
+  background-color: black;
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+}
+.tile-match-featured .caster-list {
+  font-weight: normal;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile-match-featured .caster-list .caster-name {
+  font-weight: lighter;
+}
+.tile-match-featured .caster-list .caster-name:not(:first-child):before {
+  content: "/ ";
+}
+.tile-match-featured .event {
+  font-weight: normal;
+  font-size: 12px;
+  font-style: italic;
+}
+.tile-match-featured .event .event-name {
+  text-overflow: wrap;
+}
+.tile-match-featured .title-name {
+  font-weight: lighter;
+  font-size: 16px;
+}
+.tile-match-listitem {
+  position: relative;
+  padding: 4px;
+  height: 100%;
+  width: 100%;
+  background-color: #4390df;
+  -webkit-transition: background-color 0.4s;
+  transition: background-color 0.4s;
+}
+.tile-match-listitem .fighter-list .fighter {
+  width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile-match-listitem .fighter-list .fighter .fighter-name {
+  display: inline;
+  padding-left: 8px;
+  font-weight: 300;
+  font-size: 12px;
+  font-style: italic;
+}
+.tile-match-listitem .fighter-list .fighter .character-list {
+  display: inline;
+  font-weight: 100;
+  font-size: 12px;
+  font-style: normal;
+}
+.tile-match-listitem .fighter-list .fighter .character-list .character-name:not(:first-child):before {
+  content: "/ ";
+}
+.tile-match-listitem .fighter-list .fighter.top {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.tile-match-listitem .fighter-list .fighter.bottom {
+  position: absolute;
+  top: 12px;
+  left: 0px;
+}
+.tile-match-listitem .match-details .title-name {
+  position: absolute;
+  top: 0px;
+  left: 30%;
+  width: 56%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 200;
+}
+.tile-match-listitem .match-details .event {
+  position: absolute;
+  top: 16px;
+  left: 30%;
+  width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 100;
+}
+.tile-match-listitem .match-details .caster-list {
+  position: absolute;
+  top: 16px;
+  left: 70%;
+  width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 100;
+  font-style: italic;
+}
 *,
 *:before,
 *:after {
@@ -2650,31 +2815,4 @@ body {
   text-decoration: none;
   margin: 0px 0px 0px 16px;
   color: white;
-}
-.tile-mixin {
-  position: relative;
-  padding: 4px;
-  height: 100%;
-  width: 100%;
-  background-color: #9a1616;
-  -webkit-transition: background-color 0.4s;
-  transition: background-color 0.4s;
-}
-.tile-match-listitem {
-  position: relative;
-  padding: 4px;
-  height: 100%;
-  width: 100%;
-  background-color: #9a1616;
-  -webkit-transition: background-color 0.4s;
-  transition: background-color 0.4s;
-}
-.tile-match-featured {
-  position: relative;
-  padding: 4px;
-  height: 100%;
-  width: 100%;
-  background-color: #9a1616;
-  -webkit-transition: background-color 0.4s;
-  transition: background-color 0.4s;
 }

@@ -11,10 +11,10 @@
 
 @default-background-color: #1d1d1d;
 
-@default-tile-color: #9a1616;
 @tile-color-1: #9a1616;
 @tile-color-2: #16499a;
 @tile-color-3: #4390df;
+@default-tile-color: @tile-color-3;
 
 @font-large: 64px;
 @font-mediumish: 48px;
@@ -27,6 +27,17 @@
 @header-margin: 16px 0px;
 
 @import "tile-grid.less";
+.tile-mixin {
+  position: relative;
+  padding: 4px;
+  height: 100%;
+  width: 100%;
+  background-color: @default-tile-color;
+  .transition(background-color .4s);
+}
+@import "tiles/featured.less";
+@import "tiles/listitem.less";
+
 
 *, *:before, *:after {
   box-sizing: border-box;
@@ -54,21 +65,4 @@ body {
     margin: 0px 0px 0px 16px;
     color: white;
   }
-}
-
-.tile-mixin {
-  position: relative;
-  padding: 4px;
-  height: 100%;
-  width: 100%;
-  background-color: @default-tile-color;
-  .transition(background-color .4s);
-}
-
-.tile-match-listitem {
-  .tile-mixin(); 
-}
-
-.tile-match-featured {
-  .tile-mixin();
 }
