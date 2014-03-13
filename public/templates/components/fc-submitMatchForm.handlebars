@@ -21,24 +21,44 @@
     <span class="help-block">{{errors.game}}</span>
   </div>
 
-  <div class="form-group">
+  <div class="form-group">    Player 1
     {{fc-createFighterForm 
       inFlight=inFlight
       characters=data.game.characters
-      fighters=data.fighterData}}
-    <span class="help-block">{{errors.fighterData}}</span>
-  </div>
-
+      fighter=data.fighterOne}}
+    <span class="help-block">{{errors.fighterOne}}</span>
+  </div>  
+  
   <ul class="form-group">
-    {{#each fighter in data.fighterData}}
+    {{#each fighter in data.fighterOne}}
       {{fc-fighterSummary 
         inFlight=inFlight
-        fighterData=data.fighterData 
+        fighterOne=data.fighterOne 
+        fighter=fighter}}
+    {{/each}}
+  </ul>  
+  
+  <div class="form-group">
+    Player 2
+    {{fc-createFighterForm 
+      inFlight=inFlight
+      characters=data.game.characters
+      fighter=data.fighterTwo}}
+    <span class="help-block">{{errors.fighterTwo}}</span>
+  </div>
+
+  
+  <ul class="form-group">
+    {{#each fighter in data.fighterTwo}}
+      {{fc-fighterSummary 
+        inFlight=inFlight
+        fighterTwo=data.fighterTwo 
         fighter=fighter}}
     {{/each}}
   </ul>
 
   <div class="form-group">
+    Casters
     {{fc-createCasterForm inFlight=inFlight casters=data.casters}}
   </div>
 
@@ -52,6 +72,7 @@
   </ul>
 
   <div class="form-group">
+    Videos
     {{fc-createVideoForm inFlight=inFlight videos=data.videoData}}
     <span class="help-block">{{errors.videoData}}</span>
   </div>

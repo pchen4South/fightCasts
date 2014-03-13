@@ -30,9 +30,24 @@
   </div>
 
   <div class="form-group">
-    <label for="fighters" class="col-sm-2 control-label">Fighters</label>
+    <label for="fighters" class="col-sm-2 control-label">Player 1</label>
     <div class="col-sm-10">
-      <select multiple class="form-control" id="fighters" name="fighters">
+      <select multiple class="form-control" id="fighterOne" name="fighterOne">
+        {{#each fighters}}
+          <option value={{id}}>{{player.name}} 
+            {{#each characters}}
+              {{name}}
+            {{/each}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
+  </div>  
+  
+  <div class="form-group">
+    <label for="fighters" class="col-sm-2 control-label">Player 2</label>
+    <div class="col-sm-10">
+      <select multiple class="form-control" id="fighterTwo" name="fighterTwo">
         {{#each fighters}}
           <option value={{id}}>{{player.name}} 
             {{#each characters}}
@@ -47,11 +62,11 @@
   <div class="form-group">
     <label for="casters" class="col-sm-2 control-label">Casters</label>
     <div class="col-sm-10">
-      <input type="text" id="newCasterInput" class="form-control" placeholder="type name and hit enter">
-      </input>
-      <ul id="casterNames" class="row">
-      </ul>
-    </div>
+      <select multiple class="form-control" id="casters" name="casters">
+        {{#each people}}
+          <option value={{id}}>{{name}}</option>
+        {{/each}}
+      </select>
   </div>
 
   <div class="form-group">

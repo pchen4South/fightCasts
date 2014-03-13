@@ -153,14 +153,27 @@ function program1(depth0,data) {
   data.buffer.push("\n      ");
   data.buffer.push(escapeExpression((helper = helpers['fc-fighterSummary'] || (depth0 && depth0['fc-fighterSummary']),options={hash:{
     'inFlight': ("inFlight"),
-    'fighterData': ("data.fighterData"),
+    'fighterOne': ("data.fighterOne"),
     'fighter': ("fighter")
-  },hashTypes:{'inFlight': "ID",'fighterData': "ID",'fighter': "ID"},hashContexts:{'inFlight': depth0,'fighterData': depth0,'fighter': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-fighterSummary", options))));
+  },hashTypes:{'inFlight': "ID",'fighterOne': "ID",'fighter': "ID"},hashContexts:{'inFlight': depth0,'fighterOne': depth0,'fighter': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-fighterSummary", options))));
   data.buffer.push("\n    ");
   return buffer;
   }
 
 function program3(depth0,data) {
+  
+  var buffer = '', helper, options;
+  data.buffer.push("\n      ");
+  data.buffer.push(escapeExpression((helper = helpers['fc-fighterSummary'] || (depth0 && depth0['fc-fighterSummary']),options={hash:{
+    'inFlight': ("inFlight"),
+    'fighterTwo': ("data.fighterTwo"),
+    'fighter': ("fighter")
+  },hashTypes:{'inFlight': "ID",'fighterTwo': "ID",'fighter': "ID"},hashContexts:{'inFlight': depth0,'fighterTwo': depth0,'fighter': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-fighterSummary", options))));
+  data.buffer.push("\n    ");
+  return buffer;
+  }
+
+function program5(depth0,data) {
   
   var buffer = '', helper, options;
   data.buffer.push("\n    ");
@@ -173,7 +186,7 @@ function program3(depth0,data) {
   return buffer;
   }
 
-function program5(depth0,data) {
+function program7(depth0,data) {
   
   var buffer = '', helper, options;
   data.buffer.push("\n    ");
@@ -212,27 +225,39 @@ function program5(depth0,data) {
   data.buffer.push("\n    <span class=\"help-block\">");
   stack1 = helpers._triageMustache.call(depth0, "errors.game", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</span>\n  </div>\n\n  <div class=\"form-group\">\n    ");
+  data.buffer.push("</span>\n  </div>\n\n  <div class=\"form-group\">    Player 1\n    ");
   data.buffer.push(escapeExpression((helper = helpers['fc-createFighterForm'] || (depth0 && depth0['fc-createFighterForm']),options={hash:{
     'inFlight': ("inFlight"),
     'characters': ("data.game.characters"),
-    'fighters': ("data.fighterData")
-  },hashTypes:{'inFlight': "ID",'characters': "ID",'fighters': "ID"},hashContexts:{'inFlight': depth0,'characters': depth0,'fighters': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-createFighterForm", options))));
+    'fighter': ("data.fighterOne")
+  },hashTypes:{'inFlight': "ID",'characters': "ID",'fighter': "ID"},hashContexts:{'inFlight': depth0,'characters': depth0,'fighter': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-createFighterForm", options))));
   data.buffer.push("\n    <span class=\"help-block\">");
-  stack1 = helpers._triageMustache.call(depth0, "errors.fighterData", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers._triageMustache.call(depth0, "errors.fighterOne", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</span>\n  </div>\n\n  <ul class=\"form-group\">\n    ");
-  stack1 = helpers.each.call(depth0, "fighter", "in", "data.fighterData", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  data.buffer.push("</span>\n  </div>  \n  \n  <ul class=\"form-group\">\n    ");
+  stack1 = helpers.each.call(depth0, "fighter", "in", "data.fighterOne", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n  </ul>\n\n  <div class=\"form-group\">\n    ");
+  data.buffer.push("\n  </ul>  \n  \n  <div class=\"form-group\">\n    Player 2\n    ");
+  data.buffer.push(escapeExpression((helper = helpers['fc-createFighterForm'] || (depth0 && depth0['fc-createFighterForm']),options={hash:{
+    'inFlight': ("inFlight"),
+    'characters': ("data.game.characters"),
+    'fighter': ("data.fighterTwo")
+  },hashTypes:{'inFlight': "ID",'characters': "ID",'fighter': "ID"},hashContexts:{'inFlight': depth0,'characters': depth0,'fighter': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-createFighterForm", options))));
+  data.buffer.push("\n    <span class=\"help-block\">");
+  stack1 = helpers._triageMustache.call(depth0, "errors.fighterTwo", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span>\n  </div>\n\n  \n  <ul class=\"form-group\">\n    ");
+  stack1 = helpers.each.call(depth0, "fighter", "in", "data.fighterTwo", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n  </ul>\n\n  <div class=\"form-group\">\n    Casters\n    ");
   data.buffer.push(escapeExpression((helper = helpers['fc-createCasterForm'] || (depth0 && depth0['fc-createCasterForm']),options={hash:{
     'inFlight': ("inFlight"),
     'casters': ("data.casters")
   },hashTypes:{'inFlight': "ID",'casters': "ID"},hashContexts:{'inFlight': depth0,'casters': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-createCasterForm", options))));
   data.buffer.push("\n  </div>\n\n  <ul class=\"form-group\">\n    ");
-  stack1 = helpers.each.call(depth0, "caster", "in", "data.casters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  stack1 = helpers.each.call(depth0, "caster", "in", "data.casters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n  </ul>\n\n  <div class=\"form-group\">\n    ");
+  data.buffer.push("\n  </ul>\n\n  <div class=\"form-group\">\n    Videos\n    ");
   data.buffer.push(escapeExpression((helper = helpers['fc-createVideoForm'] || (depth0 && depth0['fc-createVideoForm']),options={hash:{
     'inFlight': ("inFlight"),
     'videos': ("data.videoData")
@@ -241,7 +266,7 @@ function program5(depth0,data) {
   stack1 = helpers._triageMustache.call(depth0, "errors.videoData", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</span>\n  </div>\n\n  <ul class=\"form-group\">\n    ");
-  stack1 = helpers.each.call(depth0, "video", "in", "data.videoData", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  stack1 = helpers.each.call(depth0, "video", "in", "data.videoData", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n  </ul>\n\n  <button class=\"btn btn-default\"\n    ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
@@ -298,12 +323,11 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["index"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1;
+  var stack1;
 
 
   stack1 = helpers._triageMustache.call(depth0, "fc-submitMatchForm", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n");
-  return buffer;
+  else { data.buffer.push(''); }
   
 });

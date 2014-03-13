@@ -137,11 +137,15 @@ var charactersTwoOptions = {
 };
 
 var formatNestedFighter = function (monFighter) {
-  return {
-    id: monFighter["_id"],
-    characters: map(monFighter["_characters"], formatDbResponse),
-    person: formatDbResponse(monFighter["_person"])
-  };
+  if(monFighter){
+    return {
+      id: monFighter["_id"],
+      characters: map(monFighter["_characters"], formatDbResponse),
+      person: formatDbResponse(monFighter["_person"])
+    };
+  } else {
+    return;
+  }
 };
 
 var formatNestedGame = function (monGame) {
@@ -307,6 +311,7 @@ var deleteSubmittedMatch = partial(deleteModelById,
 
 
 module.exports = {
+  deleteGame: deleteGame,
   deletePerson: deletePerson,
   deleteVideo: deleteVideo,
   deleteEvent: deleteEvent,
@@ -314,6 +319,7 @@ module.exports = {
   deleteTeam: deleteTeam,
   deleteFighter: deleteFighter,
   deleteMatch: deleteMatch,
+  deleteCharacter: deleteCharacter,  
   deleteSubmittedMatch: deleteSubmittedMatch,
   updateMatchById: updateMatchById,
   createPerson: createPerson, 

@@ -2441,7 +2441,7 @@ input[type="button"].btn-block {
   margin-right: 0px;
 }
 .tile-1 {
-  padding: 8px !important;
+  padding: 4px !important;
   float: left;
   width: 4.16666667%;
   position: relative;
@@ -2476,7 +2476,7 @@ input[type="button"].btn-block {
   }
 }
 .tile-8x1 {
-  padding: 8px !important;
+  padding: 4px !important;
   float: left;
   width: 33.33333333%;
   position: relative;
@@ -2511,7 +2511,7 @@ input[type="button"].btn-block {
   }
 }
 .tile-8x8 {
-  padding: 8px !important;
+  padding: 4px !important;
   float: left;
   width: 33.33333333%;
   position: relative;

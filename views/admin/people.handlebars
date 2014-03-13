@@ -1,14 +1,14 @@
 <div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-4">
+<div class="col-md-3">
   {{> forms/createPerson}}
 </div>
-<div class ="col-md-6">
+<div class ="col-md-7">
   <form role = "form" method = "POST"> 
     <ul>
       {{#each people}} 
-      <div class = "col-md-3">
+      <div class = "col-md-4">
         <li>
         <button formaction = "/admin/people/{{id}}/delete"
           type = "submit"

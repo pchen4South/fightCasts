@@ -5,9 +5,14 @@
   {{> forms/createGame}}
 </div>
 <div class="col-md-6">
-  <ul>
+  <ul style = "list-style:none">
   {{#each games}} 
-    <li><img src = {{gameIcon nickname}}> </img> <b>{{name}} - {{nickname}}</b></li>
+  <li>
+    <button formaction = "/admin/games/{{id}}/delete"
+          type = "submit"
+          class = "btn btn-xs btn-default" 
+          name = "id" value = {{id}}> X </button>
+    <img src = {{gameIcon nickname}}> </img> <b>{{name}} - {{nickname}}</b></li>
   {{/each}}
   </ul>
 </div>
