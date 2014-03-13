@@ -2270,7 +2270,7 @@ input[type="button"].btn-block {
   margin-left: 0px;
   margin-right: 0px;
 }
-.tile-1 {
+.tile-1x1 {
   padding: 4px !important;
   float: left;
   width: 4.16666667%;
@@ -2282,27 +2282,237 @@ input[type="button"].btn-block {
   width: 32px;
 }
 @media (min-width: 768px) {
-  .tile-1 {
+  .tile-1x1 {
     float: left;
     width: 4.16666667%;
   }
 }
 @media (min-width: 992px) {
-  .tile-1 {
+  .tile-1x1 {
     float: left;
     width: 4.16666667%;
   }
 }
 @media (min-width: 1200px) {
-  .tile-1 {
+  .tile-1x1 {
     float: left;
     width: 4.16666667%;
   }
 }
 @media (min-width: 1200px) {
-  .tile-1 {
+  .tile-1x1 {
     height: 48px;
     width: 48px;
+  }
+}
+.tile-1x4 {
+  padding: 4px !important;
+  float: left;
+  width: 4.16666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 128px;
+  width: 32px;
+}
+@media (min-width: 768px) {
+  .tile-1x4 {
+    float: left;
+    width: 4.16666667%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-1x4 {
+    float: left;
+    width: 4.16666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-1x4 {
+    float: left;
+    width: 4.16666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-1x4 {
+    height: 192px;
+    width: 48px;
+  }
+}
+.tile-1x8 {
+  padding: 4px !important;
+  float: left;
+  width: 4.16666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 256px;
+  width: 32px;
+}
+@media (min-width: 768px) {
+  .tile-1x8 {
+    float: left;
+    width: 4.16666667%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-1x8 {
+    float: left;
+    width: 4.16666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-1x8 {
+    float: left;
+    width: 4.16666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-1x8 {
+    height: 384px;
+    width: 48px;
+  }
+}
+.tile-4x1 {
+  padding: 4px !important;
+  float: left;
+  width: 16.66666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 32px;
+  width: 128px;
+}
+@media (min-width: 768px) {
+  .tile-4x1 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-4x1 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-4x1 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-4x1 {
+    height: 48px;
+    width: 192px;
+  }
+}
+.tile-4x2 {
+  padding: 4px !important;
+  float: left;
+  width: 16.66666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 64px;
+  width: 128px;
+}
+@media (min-width: 768px) {
+  .tile-4x2 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-4x2 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-4x2 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-4x2 {
+    height: 96px;
+    width: 192px;
+  }
+}
+.tile-4x4 {
+  padding: 4px !important;
+  float: left;
+  width: 16.66666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 128px;
+  width: 128px;
+}
+@media (min-width: 768px) {
+  .tile-4x4 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-4x4 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-4x4 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-4x4 {
+    height: 192px;
+    width: 192px;
+  }
+}
+.tile-4x8 {
+  padding: 4px !important;
+  float: left;
+  width: 16.66666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 256px;
+  width: 128px;
+}
+@media (min-width: 768px) {
+  .tile-4x8 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-4x8 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-4x8 {
+    float: left;
+    width: 16.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-4x8 {
+    height: 384px;
+    width: 192px;
   }
 }
 .tile-8x1 {
