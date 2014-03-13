@@ -1,0 +1,3 @@
+bugs / notes
+
+1. deleting a person model breaks associated fighter model
