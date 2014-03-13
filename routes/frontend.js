@@ -19,6 +19,7 @@ var createPayload = function (matches) {
       pro: matchesByCategory.pro[0], 
       community: matchesByCategory.community[1], 
       scrub: matchesByCategory.scrub[0], 
+      topRated: matchesByCategory.pro[1], 
     },
     communityMatches: first(matchesByCategory.community, 3)
   };
