@@ -1760,29 +1760,29 @@ input[type="button"].btn-block {
 }
 .tile.featured {
   float: left;
-  width: 33.33333333%;
+  width: 50%;
   position: relative;
   min-height: 1px;
-  padding-left: 2px;
-  padding-right: 2px;
+  padding-left: 0px;
+  padding-right: 0px;
   height: 256px;
 }
 @media (min-width: 768px) {
   .tile.featured {
     float: left;
-    width: 33.33333333%;
+    width: 50%;
   }
 }
 @media (min-width: 992px) {
   .tile.featured {
     float: left;
-    width: 33.33333333%;
+    width: 50%;
   }
 }
 @media (min-width: 1200px) {
   .tile.featured {
     float: left;
-    width: 33.33333333%;
+    width: 50%;
   }
 }
 .tile.featured .tile-tag {
