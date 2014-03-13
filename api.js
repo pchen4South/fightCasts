@@ -155,22 +155,24 @@ var formatNestedGame = function (monGame) {
 };
 
 var formatNestedMatch = function (monMatch) {
-  return {
-    id: monMatch["_id"],
-    approved: monMatch.approved,
-    title: monMatch.title,
-    casters: map(monMatch["_casters"], formatDbResponse),
-    fighterOne: formatNestedFighter(monMatch["_fighterOne"]),
-    fighterTwo: formatNestedFighter(monMatch["_fighterTwo"]),
-    videos: map(monMatch["_videos"], formatDbResponse),
-    teams: map(monMatch["_teams"], formatDbResponse),
-    event: formatDbResponse(monMatch["_event"]),
-    game: formatDbResponse(monMatch["_game"]),
-    channel: formatDbResponse(monMatch["_channel"]),
-    category: monMatch.category,
-    createdAt: monMatch.createdAt,
-    updatedAt: monMatch.updatedAt
-  };
+  if(monMatch){
+    return {
+      id: monMatch["_id"],
+      approved: monMatch.approved,
+      title: monMatch.title,
+      casters: map(monMatch["_casters"], formatDbResponse),
+      fighterOne: formatNestedFighter(monMatch["_fighterOne"]),
+      fighterTwo: formatNestedFighter(monMatch["_fighterTwo"]),
+      videos: map(monMatch["_videos"], formatDbResponse),
+      teams: map(monMatch["_teams"], formatDbResponse),
+      event: formatDbResponse(monMatch["_event"]),
+      game: formatDbResponse(monMatch["_game"]),
+      channel: formatDbResponse(monMatch["_channel"]),
+      category: monMatch.category,
+      createdAt: monMatch.createdAt,
+      updatedAt: monMatch.updatedAt
+    };
+  } else return {};
 };
 
 var getFighterNested = function (id, cb) {

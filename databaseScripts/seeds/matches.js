@@ -18,7 +18,7 @@ module.exports = [{
   category: "pro"
 },{
   title: "Pete vs Steve Casuals",
-  videoNames: "Pete vs Steve Casuals",
+  videoNames: "Alioune vs Xian 1/3",
   fighterOne: "Pete",
   fighterTwo: "Steve",
   game: "Super Street Fighter 4 Arcade Edition",
@@ -27,7 +27,7 @@ module.exports = [{
   category: "scrub"
 },{
   title: "OnlineWarrior vs Kappa",
-  videoNames: "Online ranked",
+  videoNames: "Alioune vs Xian 2/3",
   fighterOne: "Rohan", 
   fighterTwo: "Gootecks",
   game: "Super Street Fighter 4 Arcade Edition",
@@ -37,7 +37,7 @@ module.exports = [{
 }
 ,{
   title: "Steve vs Peter SSBM",
-  videoNames: "Fox versus Falco",
+  videoNames: "Pete vs Viperboy",
   fighterOne: "Pete", 
   fighterTwo: "Steve",
   game: "Super Smash Brothers Melee",
@@ -47,7 +47,7 @@ module.exports = [{
 }
 ,{
   title: "Infiltration vs. Ryan Hart",
-  videoNames: "esgn fighting",
+  videoNames: "Infiltration vs Tokido",
   fighterOne: "Ryan Hart", 
   fighterTwo: "Infiltration",
   game: "Super Street Fighter 4 Arcade Edition",
