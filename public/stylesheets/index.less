@@ -24,17 +24,9 @@
 @font-small: 12px;
 @font-tiny: 8px;
 
-@header-margin: 16px 32px;
-@large-tile-height: 128px;
-@long-tile-height: 64px;
-@listitem-tile-height: 32px;
-@featured-tile-height: 256px;
-@medium-tile-height: 64px;
-@small-tile-height: 32px;
+@header-margin: 16px 0px;
 
 @import "tile-grid.less";
-@import "tiles/listitem.less";
-@import "tiles/featured.less";
 
 *, *:before, *:after {
   box-sizing: border-box;
@@ -52,65 +44,31 @@ body {
 }
 
 .page-header {
-  min-height: 50px;
+  min-height: 48px;
   border: none;
   margin: @header-margin;
   .page-brand {
     font-size: @font-medium;
-    font-weight: 200;
+    font-weight: 100;
     text-decoration: none;
-    margin: 0px 0px 0px 15px;
+    margin: 0px 0px 0px 16px;
     color: white;
   }
 }
 
-.tile-group {
-  .title {
-    font-size: @font-smallish;
-    font-weight: 100;
-    margin: 8px 0px 0px 0px;
-    padding-left: 8px;
-  }
-}
-
-.tiles {
-  margin: 0px;
-  padding: 0px;
-}
-
-.tile {
+.tile-mixin {
   position: relative;
-  height: @large-tile-height;
-  padding: 24px 8px;
-  .transition(background-color .6s);
+  padding: 4px;
+  height: 100%;
+  width: 100%;
+  background-color: @default-tile-color;
+  .transition(background-color .4s);
 }
 
-.tiles .tile {
-  &:nth-child(3n+1) {
-    .tile-tag {
-      background-color: lighten(@tile-color-1, 15%)
-    }
-    background-color: @tile-color-1;
-    &:hover {
-      background-color: lighten(@tile-color-1, 15%);
-    }
-  }
-  &:nth-child(3n+2) {
-    .tile-tag {
-      background-color: lighten(@tile-color-2, 15%)
-    }
-    background-color: @tile-color-2;
-    &:hover {
-      background-color: lighten(@tile-color-2, 15%);
-    }
-  }
-  &:nth-child(3n+3) {
-    .tile-tag {
-      background-color: lighten(@tile-color-3, 15%)
-    }
-    background-color: @tile-color-3;
-    &:hover {
-      background-color: lighten(@tile-color-3, 15%);
-    }
-  }
+.tile-match-listitem {
+  .tile-mixin(); 
+}
+
+.tile-match-featured {
+  .tile-mixin();
 }

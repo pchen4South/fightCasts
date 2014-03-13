@@ -1,44 +1,35 @@
-<div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
-  <div class="tile-group">
-    <h3 class="title">
-      latest pro matches
-    </h3>
-    <ul class="tiles">
-      {{#each matches.pro}}
-        {{> tiles/match-tile-listitem}}
-      {{/each}}
-    </ul>
+<div class="col-xs-12">
+  {{#each matches.pro}}
+    <div class="tile-12x1">
+    {{> tiles/match-tile-listitem}}
+    </div>
+  {{/each}}
+</div>
+
+<div class="col-xs-8">
+  <div class="tile-4x8">
+  {{#with featuredMatches.pro}}
+    {{> tiles/match-tile-featured}}
+  {{/with}}
   </div>
-  <div class="tile-group">
-    <h3 class="title">
-      community matches
-    </h3>
-    <ul class="tiles">
-      {{#each communityMatches}}
-        {{> tiles/match-tile-listitem}}
-      {{/each}}
-    </ul>
+
+  <div class="tile-4x8">
+  {{#with featuredMatches.topRated}}
+    {{> tiles/match-tile-featured}}
+  {{/with}}
+  </div>
+
+  <div class="tile-4x8">
+  {{#with featuredMatches.community}}
+    {{> tiles/match-tile-featured}}
+  {{/with}}
+  </div>
+
+  <div class="tile-4x8">
+  {{#with featuredMatches.scrub}}
+    {{> tiles/match-tile-featured}}
+  {{/with}}
   </div>
 </div>
 
-<div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
-  <div class="tile-group">
-    <h3 class="title">
-      featured matches
-    </h3>
-    <ul class="tiles">
-      {{#with featuredMatches.pro}}
-        {{> tiles/match-tile-featured}}
-      {{/with}}
-      {{#with featuredMatches.topRated}}
-        {{> tiles/match-tile-featured}}
-      {{/with}}
-      {{#with featuredMatches.community}}
-        {{> tiles/match-tile-featured}}
-      {{/with}}
-      {{#with featuredMatches.scrub}}
-        {{> tiles/match-tile-featured}}
-      {{/with}}
-    </ul>
-  </div>
-</div>
+<div class="col-xs-4"></div>
