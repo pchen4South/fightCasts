@@ -26,10 +26,10 @@
 @header-margin: 16px 32px;
 @large-tile-height: 128px;
 @long-tile-height: 64px;
+@featured-tile-height: 256px;
 @medium-tile-height: 64px;
 @small-tile-height: 32px;
 
-@import "tiles/tile.less";
 @import "tiles/long.less";
 @import "tiles/featured.less";
 
@@ -54,7 +54,7 @@ body {
   margin: @header-margin;
   .page-brand {
     font-size: @font-medium;
-    font-weight: normal;
+    font-weight: 200;
     text-decoration: none;
     margin: 0px 0px 0px 15px;
     color: white;
@@ -64,13 +64,51 @@ body {
 .tile-group {
   .title {
     font-size: @font-smallish;
-    font-weight: normal;
-    margin: 0px 0px 0px 10px;
-    padding: 0px 0px 8px 6px;
+    font-weight: 100;
+    margin: 8px 0px 0px 0px;
+    padding-left: 8px;
   }
 }
 
 .tiles {
   margin: 0px;
   padding: 0px;
+}
+
+.tile {
+  position: relative;
+  height: @large-tile-height;
+  padding: 24px 8px;
+  .make-sm-column(6, 16px);
+  .transition(background-color .6s);
+}
+
+.tiles .tile {
+  &:nth-child(3n+1) {
+    .tile-tag {
+      background-color: lighten(@tile-color-1, 15%)
+    }
+    background-color: @tile-color-1;
+    &:hover {
+      background-color: lighten(@tile-color-1, 15%);
+    }
+  }
+  &:nth-child(3n+2) {
+    .tile-tag {
+      background-color: lighten(@tile-color-2, 15%)
+    }
+    background-color: @tile-color-2;
+    &:hover {
+      background-color: lighten(@tile-color-2, 15%);
+    }
+  }
+  &:nth-child(3n+3) {
+    .tile-tag {
+      background-color: lighten(@tile-color-3, 15%)
+    }
+    background-color: @tile-color-3;
+    &:hover {
+      background-color: lighten(@tile-color-3, 15%);
+    }
+  }
 }

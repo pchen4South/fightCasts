@@ -1,4 +1,4 @@
-<div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
+<div class="col-lg-4 col-md-4 col-sm-4 col-sx-4">
   <div class="tile-group">
     <h3 class="title">
       latest pro matches
@@ -9,9 +9,19 @@
       {{/each}}
     </ul>
   </div>
+  <div class="tile-group">
+    <h3 class="title">
+      community matches
+    </h3>
+    <ul class="tiles">
+      {{#each communityMatches}}
+        {{> tiles/match-tile-long}}
+      {{/each}}
+    </ul>
+  </div>
 </div>
 
-<div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
+<div class="col-lg-8 col-md-8 col-sm-8 col-sx-8">
   <div class="tile-group">
     <h3 class="title">
       featured matches
@@ -26,16 +36,6 @@
       {{#with featuredMatches.scrub}}
         {{> tiles/match-tile-featured}}
       {{/with}}
-    </ul>
-  </div>
-  <div class="tile-group">
-    <h3 class="title">
-      community matches
-    </h3>
-    <ul class="tiles">
-      {{#each communityMatches}}
-        {{> tiles/match-tile-long}}
-      {{/each}}
     </ul>
   </div>
 </div>

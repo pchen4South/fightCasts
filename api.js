@@ -29,7 +29,6 @@ var formatDbResponse = function (result) {
 
 var create = function (modelType, data, cb) {
   return modelType.create(data, function (err, res) {
-    console.log(err, res);
     return cb(err, formatDbResponse(res)); 
   });
 };

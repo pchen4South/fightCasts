@@ -1687,6 +1687,232 @@ input[type="button"].btn-block {
     display: none !important;
   }
 }
+.tile.long {
+  position: relative;
+  min-height: 1px;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 64px;
+}
+@media (min-width: 768px) {
+  .tile.long {
+    float: left;
+    width: 100%;
+  }
+}
+.tile.long .tile-tag {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: 56px;
+  width: 20%;
+  padding: 12px;
+  font-size: 24px;
+}
+.tile.long .fighter-list {
+  position: absolute;
+  top: 4px;
+  left: 24%;
+  width: 30%;
+  padding: 0px;
+}
+.tile.long .fighter-list .fighter {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.long .fighter-list .fighter .fighter-name {
+  font-weight: normal;
+  font-size: 16px;
+  font-style: italic;
+}
+.tile.long .character-list {
+  display: inline;
+  font-weight: lighter;
+  font-size: 16px;
+  font-style: normal;
+}
+.tile.long .character-list .character-name:not(:first-child):before {
+  content: "/ ";
+}
+.tile.long .caster-list {
+  position: absolute;
+  top: 4px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  font-weight: normal;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.long .caster-list .caster-name {
+  font-weight: lighter;
+}
+.tile.long .caster-list .caster-name:not(:first-child):before {
+  content: "/ ";
+}
+.tile.long .event {
+  position: absolute;
+  font-weight: normal;
+  font-size: 12px;
+  font-style: italic;
+  top: 24px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.long .title-name {
+  position: absolute;
+  font-weight: lighter;
+  font-size: 16px;
+  top: 40px;
+  left: 60%;
+  width: 40%;
+  margin-left: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.featured {
+  float: left;
+  width: 33.33333333%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+  height: 256px;
+}
+@media (min-width: 768px) {
+  .tile.featured {
+    float: left;
+    width: 33.33333333%;
+  }
+}
+@media (min-width: 992px) {
+  .tile.featured {
+    float: left;
+    width: 33.33333333%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile.featured {
+    float: left;
+    width: 33.33333333%;
+  }
+}
+.tile.featured .tile-tag {
+  position: relative;
+  font-weight: 100;
+  font-size: 16px;
+  text-align: left;
+}
+.tile.featured .tile-tag .type {
+  float: right;
+  font-size: 12px;
+  font-style: italic;
+  font-color: gray;
+}
+.tile.featured {
+  padding-top: 0px;
+  padding-bottom: 8px;
+  text-align: center;
+}
+.tile.featured .fighter-list .fighter-name {
+  font-size: 24px;
+  font-weight: 100;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.featured .fighter-list .vs {
+  font-size: 16px;
+  font-weight: 600;
+}
+.tile.featured .character-list {
+  display: inline;
+  font-weight: lighter;
+  font-size: 12px;
+  font-style: normal;
+}
+.tile.featured .character-list .character-name:not(:first-child):before {
+  content: "/ ";
+}
+.tile.featured .video-thumbnails {
+  display: block;
+  margin: 8px auto;
+}
+.tile.featured .video-thumbnails .video-thumbnail {
+  background-color: black;
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+}
+.tile.featured .caster-list {
+  font-weight: normal;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tile.featured .caster-list .caster-name {
+  font-weight: lighter;
+}
+.tile.featured .caster-list .caster-name:not(:first-child):before {
+  content: "/ ";
+}
+.tile.featured .event {
+  font-weight: normal;
+  font-size: 12px;
+  font-style: italic;
+}
+.tile.featured .event .event-name {
+  text-overflow: wrap;
+}
+.tile.featured .title-name {
+  font-weight: lighter;
+  font-size: 16px;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  color: white;
+}
+ul {
+  list-style-type: none;
+}
+body {
+  background-color: #1d1d1d;
+}
+.page-header {
+  min-height: 50px;
+  border: none;
+  margin: 16px 32px;
+}
+.page-header .page-brand {
+  font-size: 32px;
+  font-weight: 200;
+  text-decoration: none;
+  margin: 0px 0px 0px 15px;
+  color: white;
+}
+.tile-group .title {
+  font-size: 16px;
+  font-weight: 100;
+  margin: 8px 0px 0px 0px;
+  padding-left: 8px;
+}
+.tiles {
+  margin: 0px;
+  padding: 0px;
+}
 .tile {
   height: 128px;
   padding: 24px 8px;
@@ -1701,19 +1927,6 @@ input[type="button"].btn-block {
   .tile {
     float: left;
     width: 50%;
-  }
-}
-.tile.long {
-  position: relative;
-  min-height: 1px;
-  padding-left: 8px;
-  padding-right: 8px;
-  height: 64px;
-}
-@media (min-width: 768px) {
-  .tile.long {
-    float: left;
-    width: 100%;
   }
 }
 .tiles .tile:nth-child(3n+1) {
@@ -1742,260 +1955,4 @@ input[type="button"].btn-block {
 }
 .tiles .tile:nth-child(3n+3):hover {
   background-color: #84b7ea;
-}
-.tile .tile-tag {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 24px;
-  padding: 4px;
-}
-.tile .fighter-list {
-  margin: 0px;
-  padding: 0px;
-}
-.tile .fighter-list .fighter {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile .fighter-list .fighter .fighter-name {
-  font-weight: bold;
-  font-size: 16px;
-  font-style: italic;
-}
-.tile .character-list {
-  display: inline;
-  font-weight: lighter;
-  font-size: 16px;
-  font-style: normal;
-}
-.tile .character-list .character-name:not(:first-child):before {
-  content: "/ ";
-}
-.tile .caster-list {
-  margin-left: 10%;
-  font-weight: normal;
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile .caster-list .caster-name {
-  font-weight: lighter;
-}
-.tile .caster-list .caster-name:not(:first-child):before {
-  content: "/ ";
-}
-.tile .event {
-  margin-left: 10%;
-  font-weight: normal;
-  font-size: 12px;
-  font-style: italic;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile .title-name {
-  font-weight: lighter;
-  font-size: 16px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile.long .tile-tag {
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  height: 56px;
-  width: 20%;
-  padding: 12px;
-  font-size: 24px;
-}
-.tile.long .fighter-list {
-  position: absolute;
-  top: 4px;
-  left: 24%;
-  width: 30%;
-  padding: 0px;
-}
-.tile.long .fighter-list .fighter {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile.long .fighter-list .fighter .fighter-name {
-  font-weight: normal;
-  font-size: 16px;
-  font-style: italic;
-}
-.tile.long .character-list {
-  display: inline;
-  font-weight: lighter;
-  font-size: 16px;
-  font-style: normal;
-}
-.tile.long .character-list .character-name:not(:first-child):before {
-  content: "/ ";
-}
-.tile.long .caster-list {
-  position: absolute;
-  top: 4px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
-  font-weight: normal;
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile.long .caster-list .caster-name {
-  font-weight: lighter;
-}
-.tile.long .caster-list .caster-name:not(:first-child):before {
-  content: "/ ";
-}
-.tile.long .event {
-  position: absolute;
-  font-weight: normal;
-  font-size: 12px;
-  font-style: italic;
-  top: 24px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile.long .title-name {
-  font-weight: bold;
-  font-size: 12px;
-  position: absolute;
-  font-weight: lighter;
-  font-size: 16px;
-  top: 40px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile.long .tile-tag {
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  height: 56px;
-  width: 20%;
-  padding: 12px;
-  font-size: 24px;
-}
-.tile.long .fighter-list {
-  position: absolute;
-  top: 4px;
-  left: 24%;
-  width: 30%;
-  padding: 0px;
-}
-.tile.long .fighter-list .fighter {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile.long .fighter-list .fighter .fighter-name {
-  font-weight: normal;
-  font-size: 16px;
-  font-style: italic;
-}
-.tile.long .character-list {
-  display: inline;
-  font-weight: lighter;
-  font-size: 16px;
-  font-style: normal;
-}
-.tile.long .character-list .character-name:not(:first-child):before {
-  content: "/ ";
-}
-.tile.long .caster-list {
-  position: absolute;
-  top: 4px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
-  font-weight: normal;
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile.long .caster-list .caster-name {
-  font-weight: lighter;
-}
-.tile.long .caster-list .caster-name:not(:first-child):before {
-  content: "/ ";
-}
-.tile.long .event {
-  position: absolute;
-  font-weight: normal;
-  font-size: 12px;
-  font-style: italic;
-  top: 24px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile.long .title-name {
-  font-weight: bold;
-  font-size: 12px;
-  position: absolute;
-  font-weight: lighter;
-  font-size: 16px;
-  top: 40px;
-  left: 60%;
-  width: 40%;
-  margin-left: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  color: white;
-}
-ul {
-  list-style-type: none;
-}
-body {
-  background-color: #1d1d1d;
-}
-.page-header {
-  min-height: 50px;
-  border: none;
-  margin: 16px 32px;
-}
-.page-header .page-brand {
-  font-size: 32px;
-  font-weight: normal;
-  text-decoration: none;
-  margin: 0px 0px 0px 15px;
-  color: white;
-}
-.tile-group .title {
-  font-size: 16px;
-  font-weight: normal;
-  margin: 0px 0px 0px 10px;
-  padding: 0px 0px 8px 6px;
-}
-.tiles {
-  margin: 0px;
-  padding: 0px;
 }

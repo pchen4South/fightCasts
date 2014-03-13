@@ -48,7 +48,7 @@ var sortByCategory = function (matchArray){
 };
 
 var sortByDateMostRecent = function(date1,date2){
-     return date1 - date2;
+  return date1 - date2;
 };
 
 
@@ -56,7 +56,7 @@ module.exports = function (app) {
   var returnIndex = function (req, res) {
     api.getMatchesNested(function (err, matches) {
       var payload = createPayload(matches);
-      //console.log(payload);
+      console.log(JSON.stringify(payload, null, 6));
       res.render("index", payload); 
      });
   };
