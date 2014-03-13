@@ -277,6 +277,22 @@ module.exports = function (app) {
       console.log("deleted match", result.title);
       res.redirect("admin/matches");
     });
+  });  
+  
+  app.post("/admin/games/:_id/delete", function(req, res){
+    var id = req.body.id;
+    api.deleteGame(id, function(err, result){
+      console.log("deleted game", result.name);
+      res.redirect("admin/games");
+    });
+  }); 
+
+  app.post("/admin/characters/:_id/delete", function(req, res){
+    var id = req.body.id;
+    api.deleteCharacter(id, function(err, result){
+      console.log("deleted character", result.name);
+      res.redirect("admin/characters");
+    });
   });
   
 };

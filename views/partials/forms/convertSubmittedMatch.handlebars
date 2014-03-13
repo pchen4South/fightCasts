@@ -14,8 +14,19 @@
       {{/each}}
     </select>
         
-    <label for="fighters">Fighters</label>
-    <select multiple class="form-control" id="fighters" name="fighters">
+    <label for="fighterOne">Player 1</label>
+    <select multiple class="form-control" id="fighterOne" name="fighterOne">
+      {{#each all.fighters}}
+        <option value={{id}}>
+        {{person.name}} as
+          {{#each characters}}
+            {{name}}
+          {{/each}}
+        </option>
+      {{/each}}
+    </select>
+    <label for="fighterTwo">Player 2</label>
+    <select multiple class="form-control" id="fighterTwo" name="fighterTwo">
       {{#each all.fighters}}
         <option value={{id}}>
         {{person.name}} as

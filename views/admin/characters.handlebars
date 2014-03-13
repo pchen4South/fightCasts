@@ -10,6 +10,11 @@
   {{#each characters}} 
   <div class = "col-md-3">
     <li>
+    <button formaction = "/admin/characters/{{id}}/delete"
+          type = "submit"
+          class = "btn btn-xs btn-default" 
+          name = "id" value = {{id}}> X </button>
+    
     <img src = {{gameIcon game}}> </img> 
     {{name}} </li>
   </div>  

@@ -7,9 +7,20 @@
     <label for="casters">Casters</label>
     <input class="form-control" type="text" name="casters" id="casters" placeholder="Caster Names">
     </input>   
-    <label for="fighters">Fighters</label>
-    <select multiple class="form-control" id="fighters" name="fighters">
-      {{#each fighterData}}
+    <label for="fighterOne">Player 1</label>
+    <select class="form-control" id="fighterOne" name="fighterOne">
+      {{#each fighterOne}}
+        <option value={{id}}>{{name}} as
+          {{#each characters}}
+            {{name}}
+          {{/each}}
+        </option>
+      {{/each}}
+    </select>    
+    
+    <label for="fighterTwo">Player 2</label>
+    <select class="form-control" id="fighterTwo" name="fighterTwo">
+      {{#each fighterTwo}}
         <option value={{id}}>{{name}} as
           {{#each characters}}
             {{name}}
@@ -17,6 +28,7 @@
         </option>
       {{/each}}
     </select>
+    
     <label for="event">Event</label>
     <select class="form-control" id="event" name="event">
         <option value={{id}}>{{eventName}}</option>
