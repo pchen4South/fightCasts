@@ -62,6 +62,9 @@ module.exports = function (app) {
      });
   };
 
+  app.get("/test", function (req, res) {
+    res.render("test");
+  });
   app.get("/", returnIndex);
   app.get("/matches", returnIndex);
   app.get("/matches/submit", function (req, res) {
