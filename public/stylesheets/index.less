@@ -33,7 +33,10 @@
   height: 100%;
   width: 100%;
   background-color: @default-tile-color;
-  .transition(background-color .4s);
+  .transition(background-color .2s);
+  &:hover {
+    background-color: lighten(@default-tile-color, 15%);
+  }
 }
 @import "tiles/featured.less";
 @import "tiles/listitem.less";
