@@ -4,9 +4,15 @@ var app = express();
 var mongoose = require('mongoose');
 var gameIcon = require('./views/helpers/gameIcon');
 var countryIcon = require('./views/helpers/countryIcon');
-mongoose.connect('mongodb://localhost:27017/fightCasts'||
-  'mongodb://admin:jibob682@mongo.onmodulus.net:27017/enyrO4ma'
-);
+// DEV ADDR:
+//mongoose.connect('mongodb://localhost:27017/fightCasts');
+
+//modulus ADDR:
+mongoose.connect('mongodb://admin:jibob682@novus.modulusmongo.net:27017/up5asOma');
+
+//call to reset db on the modulus server (comment out the connect above);
+// var reset = require('./databaseScripts/reset_reseed_db');
+// reset(mongoose);
 
 var hbs = exphbs.create({
   defaultLayout: "main",

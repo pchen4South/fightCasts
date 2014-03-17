@@ -274,12 +274,15 @@ var resetDb = function (mongoose) {
                         console.log (err);
                       else
                         console.log ("done with seeding");
+                        mongoose.disconnect();
                     });
       
     });
   });
 };
 
+//uncomment for resetting on modulus server
+// module.exports = resetDb;
 
 prompt.start();
 
