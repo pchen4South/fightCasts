@@ -73,9 +73,10 @@ module.exports = function (app) {
     });
   });
   app.get('/matches/:id', function (req, res) {
-    var id = req.params.id
-
+    var id = req.params.id;
+    
     api.getMatchNested(id, function (err, match) {
+      console.log("MATCH: ", match);
       res.render("match", match); 
     });
   });
