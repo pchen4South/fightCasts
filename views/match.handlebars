@@ -1,53 +1,64 @@
 <div class="row">
   <div class="table-responsive">
-    <table class="table table-condensed">
+    <table class="table">
       <thead>
         <tr>
-          <td>game</td>
-          <td>title</td>
-          <td>fighters</td>
-          <td>event</td>
-          <td>casters</td>
+          <td>
+            <h3>
+            <img src = {{gameIcon game.nickname}}> </img>
+            {{title}}
+            </h3>
+          </td>
+          <td></td>
+
         </tr>
       </thead>
       <tbody>
         <tr>
+          <td>Players</td>
+          <td>Event</td>
+          <td>Casters</td>
         
-          <td>    
-           <img src = {{gameIcon game.name}}> </img>
-          </td>
+        </tr>      
+        <tr>
           <td>
-            <a href="/matches/{{id}}">
-              {{title}} 
-            </a>
-          </td>
-
-          <td>
-            {{#each fighters}}
+            {{#with fighterOne}}
               <img src = "{{countryIcon person.country}}"/>
               <b>
                 {{person.name}}
               </b>
                 {{#each characters}}
-                  <img src = "{{gameIcon game}}"/>
                    <em>{{name}}</em>
                 {{/each}}
               <br>
+            {{/with}}
+            {{#with fighterTwo}}
+              <img src = "{{countryIcon person.country}}"/>
+              <b>
+                {{person.name}}
+              </b>
+                {{#each characters}}
+                   <em>{{name}}</em>
+                {{/each}}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <br>
+            {{/with}}
+          </td>
+
+          <td>
+            {{event.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+
+          <td>
+            {{#each casters}}
+              <img src = "{{countryIcon country}}"/>{{name}}
             {{/each}}
           </td>
-
-          <td>
-            {{event.name}}
-          </td>
-
-          <td>
-             Caster Placeholder
-          </td>
-
         </tr>
       </tbody>
     </table>
-
+<hr>
     <section class="row">
       {{#each videos}}
       <iframe width="560" height="315" src={{url}} frameborder="0" allowfullscreen>
