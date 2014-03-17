@@ -2635,7 +2635,7 @@ input[type="button"].btn-block {
   transition: background-color 0.2s;
 }
 .tile-mixin:hover {
-  background-color: #84b7ea;
+  background-color: #6faae6;
 }
 .tile-match-featured {
   position: relative;
@@ -2647,7 +2647,7 @@ input[type="button"].btn-block {
   transition: background-color 0.2s;
 }
 .tile-match-featured:hover {
-  background-color: #84b7ea;
+  background-color: #6faae6;
 }
 .tile-match-featured .tile-tag {
   position: relative;
@@ -2731,7 +2731,7 @@ input[type="button"].btn-block {
   transition: background-color 0.2s;
 }
 .tile-match-listitem:hover {
-  background-color: #84b7ea;
+  background-color: #6faae6;
 }
 .tile-match-listitem .fighter-list .fighter {
   width: 30%;
