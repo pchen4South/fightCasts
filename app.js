@@ -4,7 +4,9 @@ var app = express();
 var mongoose = require('mongoose');
 var gameIcon = require('./views/helpers/gameIcon');
 var countryIcon = require('./views/helpers/countryIcon');
-mongoose.connect('mongodb://localhost:27017/fightCasts');
+mongoose.connect('mongodb://localhost:27017/fightCasts'||
+  'mongodb://admin:jibob682@mongo.onmodulus.net:27017/enyrO4ma'
+);
 
 var hbs = exphbs.create({
   defaultLayout: "main",
@@ -24,4 +26,4 @@ require('./routes/api')(app);
 require('./routes/admin')(app);
 require('./routes/frontend')(app);
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
