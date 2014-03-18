@@ -1,69 +1,62 @@
-<div class="row">
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-        <tr>
-          <td>
-            <h3>
-            <img src = {{gameIcon game.nickname}}> </img>
-            {{title}}
-            </h3>
-          </td>
-          <td></td>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Players</td>
-          <td>Event</td>
-          <td>Casters</td>
-        
-        </tr>      
-        <tr>
-          <td>
-            {{#with fighterOne}}
-              <img src = "{{countryIcon person.country}}"/>
-              <b>
-                {{person.name}}
-              </b>
-                {{#each characters}}
-                   <em>{{name}}</em>
-                {{/each}}
-              <br>
-            {{/with}}
-            {{#with fighterTwo}}
-              <img src = "{{countryIcon person.country}}"/>
-              <b>
-                {{person.name}}
-              </b>
-                {{#each characters}}
-                   <em>{{name}}</em>
-                {{/each}}
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <br>
-            {{/with}}
-          </td>
-
-          <td>
-            {{event.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </td>
-
-          <td>
-            {{#each casters}}
-              <img src = "{{countryIcon country}}"/>{{name}}
-            {{/each}}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-<hr>
-    <section class="row">
-      {{#each videos}}
-      <iframe width="560" height="315" src={{url}} frameborder="0" allowfullscreen>
-      </iframe>
-      {{/each}}
-    </section>
+<div class="col-xs-24">
+  <div class="tile-12x1">
+    <img src = {{gameIcon game.nickname}}> </img>
+    <span style = "font-size:22px"> {{title}}</span>
   </div>
 </div>
+
+<div class="col-xs-24">
+  <div class="tile-8x1"> 
+    {{#with fighterOne}}
+          <img src = "{{countryIcon person.country}}"/>
+          {{person.name}}
+        {{#each characters}}
+          <span class="character-name"><i>{{name}}</i></span> 
+        {{/each}}
+    {{/with}}
+    <br>
+    {{#with fighterTwo}}
+          <img src = "{{countryIcon person.country}}"/>
+          {{person.name}} 
+        {{#each characters}}
+          <span class="character-name"><i>{{name}}</i></span> 
+        {{/each}}
+    {{/with}}
+  </div>
+
+  {{#if event}}
+  <div class="tile-6x1">
+      <div class="event">
+        <span class="event-name"><b>{{event.name}}</b></span>
+      </div>
+  </div>
+  {{/if}}
+  
+  <div class="tile-8x1">
+  {{#if casters}}
+    <div class="caster-list">
+      Cast by:
+    {{#each casters}}
+      <span class="caster-name">
+        <img src = "{{countryIcon country}}"/>
+       {{name}}
+      </span>
+    {{/each}}
+    </div>
+  {{/if}}
+  </div>
+  <section class="col-xs-24">
+  <hr>
+  <div class = "col-xs-6"></div>
+  <div class = "col-xs-6"> 
+    {{#each videos}}
+      <iframe width="530" height="330" src={{url}} 
+      frameborder="0" allowfullscreen>
+      </iframe>
+    {{/each}}
+  </div>
+  <div class = "col-xs-6"></div>
+  </section>
+</div>
+
+
