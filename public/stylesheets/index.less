@@ -12,9 +12,20 @@
 
 @default-background-color: #1d1d1d;
 
-@tile-color-1: #9a1616;
-@tile-color-2: #16499a;
-@tile-color-3: #4390df;
+
+//greyblue scheme
+@tile-color-1: #3f7dd5;
+@tile-color-2: #d7154c;
+@tile-color-3: #4a474b;
+@tile-color-4: #f2f6f7;
+@tile-color-5: #060606;
+
+//color scheme that is perhaps too light?
+//@tile-color-1: #ECE5CE;
+//@tile-color-2: #FF2714;
+//@tile-color-3: #E0DFDF;
+//@tile-color-4: #DBDCD7;
+//@tile-color-5: #3A130B;
 @default-tile-color: @tile-color-3;
 
 @font-large: 64px;
@@ -33,7 +44,7 @@
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: @default-tile-color;
+  background-color: none;
   .transition(background-color .2s);
   &:hover {
     background-color: lighten(@default-tile-color, 10%);
@@ -41,6 +52,7 @@
 }
 @import "tiles/featured.less";
 @import "tiles/listitem.less";
+@import "tiles/main.less";
 
 
 *, *:before, *:after {

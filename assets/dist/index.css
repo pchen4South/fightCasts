@@ -2892,6 +2892,10 @@ input[type="button"].btn-block {
   margin-left: 0px;
   margin-right: 0px;
 }
+.tile-subheader {
+  font-weight: 100;
+  font-size: 16px;
+}
 .tile-1x1 {
   padding: 4px !important;
   float: left;
@@ -3522,6 +3526,76 @@ input[type="button"].btn-block {
     width: 576px;
   }
 }
+.tile-12x2 {
+  padding: 4px !important;
+  float: left;
+  width: 50%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 64px;
+  width: 384px;
+}
+@media (min-width: 768px) {
+  .tile-12x2 {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-12x2 {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-12x2 {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-12x2 {
+    height: 96px;
+    width: 576px;
+  }
+}
+.tile-12x4 {
+  padding: 4px !important;
+  float: left;
+  width: 50%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 128px;
+  width: 384px;
+}
+@media (min-width: 768px) {
+  .tile-12x4 {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-12x4 {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-12x4 {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-12x4 {
+    height: 192px;
+    width: 576px;
+  }
+}
 .tile-12x6 {
   padding: 4px !important;
   float: left;
@@ -3557,118 +3631,110 @@ input[type="button"].btn-block {
     width: 576px;
   }
 }
+.tile-12x8 {
+  padding: 4px !important;
+  float: left;
+  width: 50%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 256px;
+  width: 384px;
+}
+@media (min-width: 768px) {
+  .tile-12x8 {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-12x8 {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-12x8 {
+    float: left;
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-12x8 {
+    height: 384px;
+    width: 576px;
+  }
+}
 .tile-test {
   width: 100%;
   height: 100%;
-  background-color: #4390df;
+  background-color: #4a474b;
 }
 .tile-mixin {
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: #4390df;
+  background-color: none;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }
 .tile-mixin:hover {
-  background-color: #6faae6;
+  background-color: #646065;
 }
 .tile-match-featured {
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: #4390df;
+  background-color: none;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
+  background-color: #d7154c;
 }
 .tile-match-featured:hover {
-  background-color: #6faae6;
+  background-color: #646065;
 }
-.tile-match-featured .tile-tag {
+.tile-match-featured .graphics {
+  height: 100%;
+  border: 2px solid white;
+  float: left;
+  width: 33.33333333%;
   position: relative;
-  font-weight: 100;
-  font-size: 16px;
-  text-align: left;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
-.tile-match-featured .tile-tag .type {
-  float: right;
-  font-size: 12px;
-  font-style: italic;
-  font-color: gray;
+@media (min-width: 768px) {
+  .tile-match-featured .graphics {
+    float: left;
+    width: 33.33333333%;
+  }
 }
-.tile-match-featured {
-  padding-top: 0px;
-  padding-bottom: 8px;
-  text-align: center;
+@media (min-width: 992px) {
+  .tile-match-featured .graphics {
+    float: left;
+    width: 33.33333333%;
+  }
 }
-.tile-match-featured .fighter-list .fighter-name {
-  font-size: 24px;
-  font-weight: 100;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile-match-featured .fighter-list .vs {
-  font-size: 16px;
-  font-weight: 600;
-}
-.tile-match-featured .character-list {
-  display: inline;
-  font-weight: lighter;
-  font-size: 12px;
-  font-style: normal;
-}
-.tile-match-featured .character-list .character-name:not(:first-child):before {
-  content: "/ ";
-}
-.tile-match-featured .video-thumbnails {
-  display: block;
-  margin: 8px auto;
-}
-.tile-match-featured .video-thumbnails .video-thumbnail {
-  background-color: black;
-  display: inline-block;
-  height: 32px;
-  width: 32px;
-}
-.tile-match-featured .caster-list {
-  font-weight: normal;
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.tile-match-featured .caster-list .caster-name {
-  font-weight: lighter;
-}
-.tile-match-featured .caster-list .caster-name:not(:first-child):before {
-  content: "/ ";
-}
-.tile-match-featured .event {
-  font-weight: normal;
-  font-size: 12px;
-  font-style: italic;
-}
-.tile-match-featured .event .event-name {
-  text-overflow: wrap;
-}
-.tile-match-featured .title-name {
-  font-weight: lighter;
-  font-size: 16px;
+@media (min-width: 1200px) {
+  .tile-match-featured .graphics {
+    float: left;
+    width: 33.33333333%;
+  }
 }
 .tile-match-listitem {
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: #4390df;
+  background-color: none;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }
 .tile-match-listitem:hover {
-  background-color: #6faae6;
+  background-color: #646065;
 }
 .tile-match-listitem .fighter-list {
   margin-left: 0px;
@@ -3787,6 +3853,22 @@ input[type="button"].btn-block {
   font-style: italic;
   font-weight: 100;
   font-size: 12px;
+}
+.tile-match-main {
+  position: relative;
+  padding: 4px;
+  height: 100%;
+  width: 100%;
+  background-color: none;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+.tile-match-main:hover {
+  background-color: #646065;
+}
+.tile-match-main .embedded-video {
+  height: 100%;
+  width: 100%;
 }
 *,
 *:before,
