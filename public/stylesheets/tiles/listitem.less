@@ -1,69 +1,60 @@
 .tile-match-listitem {
   .tile-mixin(); 
-}
 
-.tile-match-listitem .fighter-list {
-  .fighter {
-    width: 30%;
-    .text-overflow();
-    .fighter-name {
-      display: inline;
-      padding-left: 8px;
-      font-weight: 300;
+  .fighter-list {
+    .make-row(0px);
+    .vs {
+      .make-xs-column(2, 0px);
+      .make-sm-column(2, 0px);
+      .make-md-column(2, 0px);
+      .make-lg-column(2, 0px);
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      font-weight: 600;
       font-size: @font-small;
-      font-style: italic;
     }
-    .character-list {
-      display: inline;
-      font-weight: 100;
-      font-size: @font-small;
-      font-style: normal;
-      .character-name:not(:first-child) {
-        &:before {
-          content: "/ ";
-        }
+    .fighter {
+      .fighter-name {
+        .make-xs-column(8, 0px);
+        .make-sm-column(8, 0px);
+        .make-md-column(8, 0px);
+        .make-lg-column(8, 0px);
+        .text-overflow();
+        display: inline;
+        vertical-align: middle;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-weight: 200;
+        font-size: @font-smallish;  
+      }
+      .character-list {
+        .make-xs-column(3, 0px);
+        .make-sm-column(3, 0px);
+        .make-md-column(3, 0px);
+        .make-lg-column(3, 0px);
+        display: inline;
+        vertical-align: middle;
+        font-weight: 100;
+        font-size: @font-tiny;
+        font-style: italic;
       }
     }
+    .fighter.first {
+      text-align: right;
+    }
+    .fighter.second {
+      text-align: left;
+    }
   }
-  .fighter.top {
-    position: absolute;
-    top: 0px;
-    left: 0px; 
-  }
-  .fighter.bottom {
-    position: absolute;
-    top: 12px;
-    left: 0px; 
-  }
-}
-
-.tile-match-listitem .match-details {
-  .title-name {
-    position: absolute;
-    top: 0px;
-    left: 30%;
-    width: 56%;
-    .text-overflow();
-    font-size: @font-smallish;
-    font-weight: 200;
-  }
-  .event {
-    position: absolute;
-    top: 16px;
-    left: 30%;
-    width: 30%;
-    .text-overflow();
-    font-size: @font-small;
-    font-weight: 100;
-  }
-  .caster-list {
-    position: absolute;
-    top: 16px;
-    left: 70%;
-    width: 30%;
-    .text-overflow();
-    font-size: @font-small;
-    font-weight: 100;
-    font-style: italic;
+  .match-details {
+    .make-row();
+    .event-name {
+      margin-top: -4px;
+      text-align: center;
+      font-style: italic;
+      font-weight: 100;
+      font-size: @font-small; 
+    }
   }
 }

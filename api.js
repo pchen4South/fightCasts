@@ -85,7 +85,6 @@ var getMultiple = function (modelType, cb) {
 };
 
 var searchMatches = function(query, cb){
-  console.log(query);
   return match.model.find(query, function(err,res){
     if (err){res.send("problem with search")}
     else
