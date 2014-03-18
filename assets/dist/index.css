@@ -2956,6 +2956,41 @@ input[type="button"].btn-block {
     width: 48px;
   }
 }
+.tile-1x6 {
+  padding: 4px !important;
+  float: left;
+  width: 4.16666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 192px;
+  width: 32px;
+}
+@media (min-width: 768px) {
+  .tile-1x6 {
+    float: left;
+    width: 4.16666667%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-1x6 {
+    float: left;
+    width: 4.16666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-1x6 {
+    float: left;
+    width: 4.16666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-1x6 {
+    height: 288px;
+    width: 48px;
+  }
+}
 .tile-1x8 {
   padding: 4px !important;
   float: left;
@@ -3129,6 +3164,41 @@ input[type="button"].btn-block {
   .tile-4x8 {
     height: 384px;
     width: 192px;
+  }
+}
+.tile-6x1 {
+  padding: 4px !important;
+  float: left;
+  width: 25%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 32px;
+  width: 192px;
+}
+@media (min-width: 768px) {
+  .tile-6x1 {
+    float: left;
+    width: 25%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-6x1 {
+    float: left;
+    width: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-6x1 {
+    float: left;
+    width: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-6x1 {
+    height: 48px;
+    width: 288px;
   }
 }
 .tile-8x1 {
