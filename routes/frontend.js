@@ -57,7 +57,6 @@ module.exports = function (app) {
   var returnIndex = function (req, res) {
     api.getMatchesNested(function (err, matches) {
       var payload = createPayload(matches);
-      console.log(JSON.stringify(payload, null, 6));
       res.render("index", payload); 
      });
   };
@@ -76,7 +75,6 @@ module.exports = function (app) {
     var id = req.params.id;
     
     api.getMatchNested(id, function (err, match) {
-      console.log("MATCH: ", match);
       res.render("match", match); 
     });
   });
