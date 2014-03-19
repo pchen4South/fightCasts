@@ -1,6 +1,9 @@
 .tile-match-featured {
   .tile-mixin();
   background-color: @tile-color-2;
+  &:hover {
+    background-color: lighten(@tile-color-2, 10%);
+  }
 
   .graphics {
     height: 100%;
