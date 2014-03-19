@@ -2892,13 +2892,6 @@ input[type="button"].btn-block {
   margin-left: 0px;
   margin-right: 0px;
 }
-.tile-subheader {
-  font-weight: 100;
-  font-size: 24px;
-  margin: 8px 0px 0px 0px;
-  padding: 0px;
-  vertical-align: bottom;
-}
 .tile-1x1 {
   padding: 4px !important;
   float: left;
@@ -3742,7 +3735,7 @@ input[type="button"].btn-block {
 .tile-test {
   width: 100%;
   height: 100%;
-  background-color: #4a474b;
+  background-color: #6a656c;
 }
 .tile-mixin {
   position: relative;
@@ -3750,11 +3743,6 @@ input[type="button"].btn-block {
   height: 100%;
   width: 100%;
   background-color: none;
-  -webkit-transition: background-color 0.5s;
-  transition: background-color 0.5s;
-}
-.tile-mixin:hover {
-  background-color: #646065;
 }
 .tile-match-featured {
   position: relative;
@@ -3762,12 +3750,10 @@ input[type="button"].btn-block {
   height: 100%;
   width: 100%;
   background-color: none;
-  -webkit-transition: background-color 0.5s;
-  transition: background-color 0.5s;
   background-color: #d7154c;
 }
 .tile-match-featured:hover {
-  background-color: #646065;
+  background-color: #eb3468;
 }
 .tile-match-featured .graphics {
   height: 100%;
@@ -3803,11 +3789,6 @@ input[type="button"].btn-block {
   height: 100%;
   width: 100%;
   background-color: none;
-  -webkit-transition: background-color 0.5s;
-  transition: background-color 0.5s;
-}
-.tile-match-listitem:hover {
-  background-color: #646065;
 }
 .tile-match-listitem .fighter-list {
   margin-left: 0px;
@@ -3934,15 +3915,33 @@ input[type="button"].btn-block {
   height: 100%;
   width: 100%;
   background-color: none;
-  -webkit-transition: background-color 0.5s;
-  transition: background-color 0.5s;
-}
-.tile-match-main:hover {
-  background-color: #646065;
 }
 .tile-match-main .embedded-video {
   height: 100%;
   width: 100%;
+}
+.tile-match-main-details {
+  position: relative;
+  padding: 4px;
+  height: 100%;
+  width: 100%;
+  background-color: none;
+}
+.tile-match-main-details .event-name {
+  font-weight: 100;
+  font-size: 24px;
+}
+.tile-match-main-details .subevent-name {
+  font-weight: 100;
+  font-size: 24px;
+  color: #6a656c;
+}
+.tile-match-main-details .caster-info {
+  font-weight: 100;
+  font-size: 16px;
+}
+.tile-match-main-details .caster-list {
+  color: #6a656c;
 }
 *,
 *:before,
@@ -3968,4 +3967,18 @@ body {
   font-weight: 100;
   text-decoration: none;
   color: #f2f6f7;
+}
+.subheader {
+  font-weight: 100;
+  font-size: 16px;
+  margin: 8px 0px 0px 0px;
+  padding: 0px;
+}
+.subheader .subheader-secondary {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
 }

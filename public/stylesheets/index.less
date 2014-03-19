@@ -15,7 +15,7 @@
 //greyblue scheme
 @tile-color-1: #3f7dd5;
 @tile-color-2: #d7154c;
-@tile-color-3: #4a474b;
+@tile-color-3: #6a656c;
 @tile-color-4: #f2f6f7;
 @tile-color-5: #060606;
 
@@ -46,14 +46,12 @@
   height: 100%;
   width: 100%;
   background-color: none;
-  .transition(background-color .5s);
-  &:hover {
-    background-color: lighten(@default-tile-color, 10%);
-  }
 }
+
 @import "tiles/featured.less";
 @import "tiles/listitem.less";
 @import "tiles/main.less";
+@import "tiles/main-details.less";
 
 
 *, *:before, *:after {
@@ -82,3 +80,17 @@ body {
     color: @text-color;
   }
 }
+
+.subheader {
+  font-weight: 100;
+  font-size: @font-smallish;
+  margin: 8px 0px 0px 0px;
+  padding: 0px;
+  .subheader-secondary {
+    .text-overflow();
+    font-size: @font-smallish; 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+  }
+}
+
