@@ -4059,3 +4059,6 @@ button.searchBtn {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
+.tile-subheader {
+  font-size: 16px;
+}
