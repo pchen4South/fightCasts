@@ -1,6 +1,10 @@
 .tile-match-listitem {
   .tile-mixin(); 
 
+  transition: background-color .4s;
+  &:hover {
+    background-color: lighten(@tile-color-3, 10%);
+  }
   .fighter-list {
     .make-row(0px);
     .vs {

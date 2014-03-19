@@ -2109,6 +2109,8 @@ input[type="button"].btn-block {
 .form-horizontal .form-group:after,
 .test-tile-row:before,
 .test-tile-row:after,
+.tile-match-featured .fighter-list:before,
+.tile-match-featured .fighter-list:after,
 .tile-match-listitem .fighter-list:before,
 .tile-match-listitem .fighter-list:after,
 .tile-match-listitem .match-details:before,
@@ -2122,6 +2124,7 @@ input[type="button"].btn-block {
 .row:after,
 .form-horizontal .form-group:after,
 .test-tile-row:after,
+.tile-match-featured .fighter-list:after,
 .tile-match-listitem .fighter-list:after,
 .tile-match-listitem .match-details:after {
   clear: both;
@@ -3242,6 +3245,41 @@ input[type="button"].btn-block {
     width: 288px;
   }
 }
+.tile-6x3 {
+  padding: 4px !important;
+  float: left;
+  width: 25%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 96px;
+  width: 192px;
+}
+@media (min-width: 768px) {
+  .tile-6x3 {
+    float: left;
+    width: 25%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-6x3 {
+    float: left;
+    width: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-6x3 {
+    float: left;
+    width: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-6x3 {
+    height: 144px;
+    width: 288px;
+  }
+}
 .tile-6x4 {
   padding: 4px !important;
   float: left;
@@ -3745,43 +3783,61 @@ input[type="button"].btn-block {
   background-color: none;
 }
 .tile-match-featured {
-  position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
   background-color: none;
-  background-color: #d7154c;
-}
-.tile-match-featured:hover {
-  background-color: #eb3468;
+  position: relative;
 }
 .tile-match-featured .graphics {
+  position: absolute;
+  left: 0px;
+  top: 0px;
   height: 100%;
-  border: 2px solid white;
+  width: 33%;
+  border: 2px solid #f2f6f7;
+}
+.tile-match-featured .fighter-list {
+  margin-left: 0px;
+  margin-right: 0px;
+  position: relative;
+  font-size: 16px;
+  font-weight: 100;
+}
+.tile-match-featured .fighter-list .fighter {
+  position: relative;
   float: left;
   width: 33.33333333%;
-  position: relative;
   min-height: 1px;
   padding-left: 0px;
   padding-right: 0px;
 }
-@media (min-width: 768px) {
-  .tile-match-featured .graphics {
-    float: left;
-    width: 33.33333333%;
-  }
+.tile-match-featured .fighter-list .fighter .fighter-name {
+  font-size: 24px;
+  text-align: center;
 }
-@media (min-width: 992px) {
-  .tile-match-featured .graphics {
-    float: left;
-    width: 33.33333333%;
-  }
+.tile-match-featured .fighter-list .fighter .character-list {
+  font-size: 12px;
+  text-align: center;
 }
-@media (min-width: 1200px) {
-  .tile-match-featured .graphics {
-    float: left;
-    width: 33.33333333%;
-  }
+.tile-match-featured .fighter-list .vs {
+  position: relative;
+  float: left;
+  width: 33.33333333%;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: center;
+  padding-top: 16px;
+  color: #d7154c;
+  font-size: 36px;
+  font-weight: 600;
+}
+.tile-match-featured .description {
+  padding-top: 16px;
+  font-weight: 200;
+  font-size: 16px;
+  color: #3f7dd5;
 }
 .tile-match-listitem {
   position: relative;
@@ -3789,6 +3845,10 @@ input[type="button"].btn-block {
   height: 100%;
   width: 100%;
   background-color: none;
+  transition: background-color 0.4s;
+}
+.tile-match-listitem:hover {
+  background-color: #847e86;
 }
 .tile-match-listitem .fighter-list {
   margin-left: 0px;
@@ -3961,17 +4021,17 @@ body {
 .page-header {
   min-height: 48px;
   border: none;
-  margin: 16px 0px;
 }
 .page-header .page-brand {
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 100;
   text-decoration: none;
   color: #f2f6f7;
 }
 .subheader {
   font-weight: 100;
-  font-size: 16px;
+  font-size: 24px;
+  color: #6a656c;
   margin: 8px 0px 0px 0px;
   padding: 0px;
 }
@@ -3981,5 +4041,5 @@ body {
   white-space: nowrap;
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 600;
+  font-weight: 300;
 }

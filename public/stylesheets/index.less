@@ -29,10 +29,10 @@
 //@tile-color-5: #3A130B;
 @default-tile-color: @tile-color-3;
 
-@font-large: 64px;
-@font-mediumish: 48px;
-@font-medium: 32px;
-@font-mediumish: 24px;
+@font-largish: 64px;
+@font-large: 48px;
+@font-mediumish: 36px;
+@font-medium: 24px;
 @font-smallish: 16px;
 @font-small: 12px;
 @font-tiny: 8px;
@@ -72,9 +72,8 @@ body {
 .page-header {
   min-height: 48px;
   border: none;
-  margin: @header-margin;
   .page-brand {
-    font-size: @font-medium;
+    font-size: @font-large;
     font-weight: 100;
     text-decoration: none;
     color: @text-color;
@@ -83,14 +82,15 @@ body {
 
 .subheader {
   font-weight: 100;
-  font-size: @font-smallish;
+  font-size: @font-medium;
+  color: @tile-color-3;
   margin: 8px 0px 0px 0px;
   padding: 0px;
   .subheader-secondary {
     .text-overflow();
     font-size: @font-smallish; 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 600;
+    font-weight: 300;
   }
 }
 

@@ -1,16 +1,44 @@
 .tile-match-featured {
   .tile-mixin();
-  background-color: @tile-color-2;
-  &:hover {
-    background-color: lighten(@tile-color-2, 10%);
-  }
+  position: relative;
 
   .graphics {
+    position: absolute;
+    left: 0px;
+    top: 0px;
     height: 100%;
-    border: 2px solid white;
-    .make-xs-column(8, 0px);
-    .make-sm-column(8, 0px);
-    .make-md-column(8, 0px);
-    .make-lg-column(8, 0px);
+    width: 33%;
+    border: 2px solid @tile-color-4;
+  }
+  .fighter-list {
+    .make-row();
+    .fighter {
+      .make-xs-column(8, 0px);
+      .fighter-name {
+        font-size: @font-medium;
+        text-align: center;
+      }
+      .character-list {
+        font-size: @font-small;
+        text-align: center;
+      }
+    }
+    position: relative;
+    font-size: @font-smallish;
+    font-weight: 100;
+    .vs {
+      .make-xs-column(8, 0px);
+      text-align: center;
+      padding-top: 16px;
+      color: @tile-color-2;
+      font-size: @font-mediumish;
+      font-weight: 600;
+    }
+  }
+  .description {
+    padding-top: 16px;
+    font-weight: 200;
+    font-size: @font-smallish;
+    color: @tile-color-1;
   }
 }

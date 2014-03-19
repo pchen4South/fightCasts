@@ -3,7 +3,7 @@
   <div class="tile-6x1">
     <h3 class="subheader">top pro matches</h3> 
   </div>
-  <div class="tile-6x2">
+  <div class="tile-6x4">
     {{> tiles/match-tile-featured}}
   </div>
   {{/with}}
@@ -14,12 +14,6 @@
     <div class="tile-6x1">
     {{> tiles/match-tile-listitem}}
     </div>
-    <div class="tile-6x1">
-    {{> tiles/match-tile-listitem}}
-    </div>
-    <div class="tile-6x1">
-    {{> tiles/match-tile-listitem}}
-    </div>
   {{/each}}
 </div>
 
@@ -27,7 +21,7 @@
   {{#with featuredMatches.pro}}
   <div class="tile-12x1">
     <h3 class="subheader">
-      <span>match details / </span>
+      match details /
       <span class="subheader-secondary">{{title}}</span>
     </h3> 
   </div>
@@ -40,7 +34,7 @@
     <h3 class="subheader">top community matches</h3> 
   </div>
   {{#with featuredMatches.community}}
-  <div class="tile-6x2">
+  <div class="tile-6x4">
     {{> tiles/match-tile-featured}}
   </div>
   {{/with}}
@@ -48,12 +42,6 @@
     <h3 class="subheader">newest community matches</h3> 
   </div>
   {{#each matches.community}}
-    <div class="tile-6x1">
-    {{> tiles/match-tile-listitem}}
-    </div>
-    <div class="tile-6x1">
-    {{> tiles/match-tile-listitem}}
-    </div>
     <div class="tile-6x1">
     {{> tiles/match-tile-listitem}}
     </div>
