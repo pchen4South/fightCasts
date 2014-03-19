@@ -85,11 +85,31 @@ var getMultiple = function (modelType, cb) {
 };
 
 var searchMatches = function(query, cb){
-  return match.model.find(query, function(err,res){
-    if (err){res.send("problem with search")}
-    else
-     var formatted = map(res, formatDbResponse);    
-      return cb(err, formatted);
+  match.model.find(query)
+  .populate("_fighterOne")
+  .populate("_fighterTwo")
+  .populate("_videos")
+  .populate("_teams")
+  .populate("_event")
+  .populate("_game")
+  .populate("_channel")
+  .populate("_casters")
+  .exec(function (err, res) {
+    match.model.populate(res, personOneOptions, function (err, matches) {
+      match.model.populate(matches, charactersOneOptions, function (err, results) {
+        match.model.populate(matches, personTwoOptions, function (err, results) {
+          match.model.populate(matches, charactersTwoOptions, function (err, results) {
+            if (err) cb(err); 
+            else {
+              if (err){res.send("problem with search")}
+              else{
+                cb(null, map(results, formatNestedMatch));   
+             }
+            }
+          });
+        });
+      });
+    });
   });
 }
 
@@ -203,7 +223,7 @@ var getMatchNested = function (id, cb) {
         match.model.populate(res, personTwoOptions, function (err, res) {
           match.model.populate(res, charactersTwoOptions, function (err, res) {
             if (err) cb(err);
-            else cb(null, formatNestedMatch(res));
+             else cb(null, map(results, formatNestedMatch));
           });
         });
       });
