@@ -41,28 +41,23 @@ module.exports = function (app) {
   app.post("/api/v1/teams", api.createTeam);
 
   //FIGHTER
-
-  app.get("/api/v1/matches/search", function (req, res) {
-    var query = req.query.title;
-    query = {"title": {"$regex":query}};
-    
-    api.searchMatches(query,function (err, characters) {
-      if (err) res.send(400, {err: err.message});
-      else res.json(characters); 
-    }); 
-  });
-
   
   //MATCH
-  app.get("/api/v1/matches/search", function (req, res) {
+  app.get("/api/v1/matches/search", function (req, res, next) {
     var query = req.query.title;
-    query = {"title": {"$regex":query}};
-    
-    api.searchMatches(query,function (err, characters) {
+    var querystring = query;
+    query = {"title": {"$regex": new RegExp(query, "i")}};
+ 
+    api.searchMatches(query,function (err, results) {
       if (err) res.send(400, {err: err.message});
-      else res.json(characters); 
+      else {
+        res.render("results",{matches: results, query: querystring}); 
+      }
     }); 
   });
+  
+
+  
   
   app.get("/api/v1/matches/all", allMatches);
   app.get("/api/v1/matches/pro", partial(getMatchByCategory, "pro"));

@@ -4028,6 +4028,22 @@ body {
   text-decoration: none;
   color: #f2f6f7;
 }
+.searchBar {
+  display: inline;
+  width: 200px;
+}
+form.searchForm {
+  margin-left: 50px;
+  display: inline;
+  width: 200px;
+}
+input.searchBox {
+  display: inline;
+  width: 150px;
+}
+button.searchBtn {
+  display: inline;
+}
 .subheader {
   font-weight: 100;
   font-size: 24px;
