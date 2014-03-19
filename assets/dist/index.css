@@ -3934,14 +3934,15 @@ input[type="button"].btn-block {
 .tile-match-main-details .subevent-name {
   font-weight: 100;
   font-size: 24px;
-  color: #6a656c;
+  color: #3f7dd5;
 }
 .tile-match-main-details .caster-info {
   font-weight: 100;
   font-size: 16px;
 }
 .tile-match-main-details .caster-list {
-  color: #6a656c;
+  color: #3f7dd5;
+  font-weight: 100;
 }
 *,
 *:before,
