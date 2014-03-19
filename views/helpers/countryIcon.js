@@ -7,4 +7,3 @@ module.exports = function(country){
   else
     return (imageDir + "zz" + imageType);
 }
-

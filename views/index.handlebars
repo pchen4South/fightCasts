@@ -27,9 +27,11 @@
   <div class="tile-6x1">
     <h3 class="tile-subheader">match details</h3> 
   </div>
-  <div class="tile-12x6">
+  {{#with featuredMatches.pro}}
+  <div class="tile-12x8">
     {{> tiles/match-tile-main}}
   </div>
+  {{/with}}
 </div>
 
 <div class="col-xs-6">

@@ -4,6 +4,7 @@ var app = express();
 var mongoose = require('mongoose');
 var gameIcon = require('./views/helpers/gameIcon');
 var countryIcon = require('./views/helpers/countryIcon');
+var ytUrl = require('./views/helpers/ytUrl');
 // DEV ADDR:
 mongoose.connect('mongodb://localhost:27017/fightCasts');
 
@@ -16,8 +17,11 @@ mongoose.connect('mongodb://localhost:27017/fightCasts');
 
 var hbs = exphbs.create({
   defaultLayout: "main",
-  helpers: {gameIcon: gameIcon, 
-            countryIcon: countryIcon}  
+  helpers: {
+    gameIcon: gameIcon, 
+    countryIcon: countryIcon,
+    ytUrl: ytUrl
+  }  
 });
 
 app.set("views", __dirname + "/views");
