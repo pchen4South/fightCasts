@@ -4020,34 +4020,42 @@ body {
 }
 .page-header {
   min-height: 48px;
-  border: none;
-  position: relative;
 }
 .page-header .page-brand {
+  position: relative;
+  float: left;
+  width: 25%;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
   font-size: 48px;
   font-weight: 100;
   text-decoration: none;
   color: #f2f6f7;
 }
-.searchBar {
+.page-header .searchBar {
+  float: left;
+  width: 25%;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
   position: relative;
   display: inline-block;
   vertical-align: top;
   top: 22px;
-  margin-left: 10px;
 }
-form.searchForm {
+.page-header .searchBar .searchForm {
   display: inline-block;
   width: 300px;
 }
-input.searchBox {
+.page-header .searchBar .searchForm .searchBox {
   display: inline-block;
   width: 200px;
   height: 100%;
   background: #0d0d0d;
   color: #f2f6f7;
 }
-button.searchBtn {
+.page-header .searchBar .searchForm .searchBtn {
   display: inline-block;
 }
 .subheader {
@@ -4061,7 +4069,7 @@ button.searchBtn {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 16px;
+  font-size: 24px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
 }

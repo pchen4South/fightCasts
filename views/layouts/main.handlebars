@@ -9,16 +9,12 @@
   <script src="/vendor/javascripts/handlebars.js"></script>
   <script src="/vendor/javascripts/ember.min.js"></script>
 
-  <div class="container">
+  <nav class="container page-header">
     <div class="row">
-      <nav class="page-header">
-        <a href="/" class="page-brand">
-          fight casts
-        </a> 
-        {{> searchBar}}      
-      </nav>
+      <a href="/" class="page-brand">fight casts</a> 
+      {{> searchBar}}      
     </div>
-  </div>
+  </nav>
 
   <div class="container" id="main-content">
     {{{body}}}

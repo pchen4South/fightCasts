@@ -75,40 +75,36 @@ body {
 
 .page-header {
   min-height: 48px;
-  border: none;
-  position: relative;
   .page-brand {
+    .make-xs-column(6, 0px);
     font-size: @font-large;
     font-weight: 100;
     text-decoration: none;
     color: @text-color;
   }
+  .searchBar{
+    .make-xs-column(6, 0px);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    top: 22px;
+    .searchForm {
+      display: inline-block;
+      width: 300px;
+      .searchBox {
+        display: inline-block;
+        width: 200px;
+        height: 100%;
+        background: #0d0d0d;
+        color: @text-color;
+      }
+      .searchBtn {
+        display: inline-block;
+      }
+    }
+  }
 }
 
-.searchBar{
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  top: 22px;
-  margin-left: 10px;
-}
-
-form.searchForm
-{
-  display: inline-block;
-  width: 300px;
-}
-
-input.searchBox{
-  display: inline-block;
-  width: 200px;
-  height: 100%;
-  background: #0d0d0d;
-  color: @text-color;
-}
-button.searchBtn{
-  display: inline-block;
-}
 
 .subheader {
   font-weight: 100;
@@ -118,7 +114,7 @@ button.searchBtn{
   padding: 0px;
   .subheader-secondary {
     .text-overflow();
-    font-size: @font-smallish; 
+    font-size: @font-medium; 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 300;
   }
