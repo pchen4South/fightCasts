@@ -14,13 +14,15 @@
       </div> 
     {{/with}}
     
-    <div class="vs">VS</div>
+    <div class="vs">
+      <span>VS</span>
+    </div>
 
     {{#with fighterTwo}}
       <div class="fighter second">
-        <div class="fighter-name">
+        <span class="fighter-name">
           {{person.name}}
-        </div> 
+        </span> 
         <div class="character-list">
         {{#each characters}}
           <span class="character-name">{{name}}</span> 
@@ -32,6 +34,7 @@
   </div>
 
   <div class="match-details">
-    <div class="event-name">{{event.name}}</div>
+    <span class="event-name">{{event.name}}</span> 
   </div>
+
 </div>
