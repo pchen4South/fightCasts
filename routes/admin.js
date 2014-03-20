@@ -147,7 +147,18 @@ module.exports = function (app) {
   });
 
   app.post("/admin/characters", function (req, res) {
-    api.createCharacter(req.body, function (err, result) {
+    var character = req.body;
+    var game = character.game;
+    switch(game){
+      case "Super Smash Brothers Melee":
+        character.game = "SSBM";
+        break;
+      case "Super Street Fighter 4 AE":
+        character.game = "SS4AE";
+        break;
+    }   
+    api.createCharacter(character, function (err, result) {
+      console.log("callback");
       res.redirect("/admin/characters");
     });
   });
