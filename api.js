@@ -13,7 +13,6 @@ var fighter = require('./models/fighterModel');
 var match = require('./models/matchModel');
 var submittedMatch = require('./models/submittedMatchModel');
 
-
 var formatDbResponse = function (result) {
   var cleaned;
 
@@ -48,7 +47,6 @@ var createFighter = function (data, cb) {
     _person: data.person,
     _characters: data.characters 
   };
-
   return fighter.model.create(formatted, cb);
 };
 
@@ -65,7 +63,6 @@ var createMatch = function(data, cb){
     _event: data.event,
     _channel: data.channel
   };
-  
   return match.model.create(formatted, cb);
 };
 
@@ -76,12 +73,10 @@ var get = function (modelType, id, cb) {
 };
 
 var getMultiple = function (modelType, cb) {
-
-    return modelType.find({}, function (err, res) {
-      var formatted = map(res, formatDbResponse);    
-      return cb(err, formatted);
-    });
-
+  return modelType.find({}, function (err, res) {
+    if (err) cb(err);
+    else cb(err, map(res, formatDbResponse));
+  });
 };
 
 var searchMatches = function(query, cb){
@@ -100,12 +95,7 @@ var searchMatches = function(query, cb){
         match.model.populate(matches, personTwoOptions, function (err, results) {
           match.model.populate(matches, charactersTwoOptions, function (err, results) {
             if (err) cb(err); 
-            else {
-              if (err){res.send("problem with search")}
-              else{
-                cb(null, map(results, formatNestedMatch));   
-             }
-            }
+            else cb(null, map(results, formatNestedMatch));   
           });
         });
       });
@@ -163,7 +153,7 @@ var formatNestedFighter = function (monFighter) {
       person: formatDbResponse(monFighter["_person"])
     };
   } else {
-    return;
+    return null;
   }
 };
 
@@ -303,16 +293,15 @@ var getAll = function (cb) {
 var updateMatchById = function(id, updateOptions, cb){
   match.model.findByIdAndUpdate(id, updateOptions, function(err, res){
     if (err) console.log(err);
-    else
-      cb(null, res);
+    else cb(null, res);
   });
 };
 
 //delete
 var deleteModelById = function (modelType, id, cb) {
-  return modelType.findByIdAndRemove(id, 
-    function (err, res) {
-      return cb(err, formatDbResponse(res)); 
+  return modelType.findByIdAndRemove(id, function (err, res) {
+    if (err) console.log(err);
+    else cb(err, formatDbResponse(res)); 
   });
 };
 
@@ -325,8 +314,7 @@ var deleteChannel = partial(deleteModelById, channel.model);
 var deleteTeam = partial(deleteModelById, team.model);
 var deleteFighter = partial(deleteModelById, fighter.model);
 var deleteMatch = partial(deleteModelById, match.model);
-var deleteSubmittedMatch = partial(deleteModelById, 
-                            submittedMatch.model);
+var deleteSubmittedMatch = partial(deleteModelById, submittedMatch.model);
 
 
 module.exports = {
