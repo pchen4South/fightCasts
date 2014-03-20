@@ -14,12 +14,18 @@
     <div class="tile-6x1">
     {{> tiles/match-tile-listitem}}
     </div>
+    <div class="tile-6x1">
+    {{> tiles/match-tile-listitem}}
+    </div>
+    <div class="tile-6x1">
+    {{> tiles/match-tile-listitem}}
+    </div>
   {{/each}}
 </div>
 
 <div class="col-xs-12">
   {{#with featuredMatches.pro}}
-  <div class="tile-12x1">
+  <div class="tile-10x1 tile-offset-1">
     <h3 class="subheader">
       match details /
       <span class="subheader-secondary">{{title}}</span>
@@ -42,6 +48,12 @@
     <h3 class="subheader">newest community matches</h3> 
   </div>
   {{#each matches.community}}
+    <div class="tile-6x1">
+    {{> tiles/match-tile-listitem}}
+    </div>
+    <div class="tile-6x1">
+    {{> tiles/match-tile-listitem}}
+    </div>
     <div class="tile-6x1">
     {{> tiles/match-tile-listitem}}
     </div>

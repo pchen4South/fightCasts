@@ -3560,6 +3560,111 @@ input[type="button"].btn-block {
     width: 432px;
   }
 }
+.tile-10x1 {
+  padding: 4px !important;
+  float: left;
+  width: 41.66666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 32px;
+  width: 320px;
+}
+@media (min-width: 768px) {
+  .tile-10x1 {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-10x1 {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-10x1 {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-10x1 {
+    height: 48px;
+    width: 480px;
+  }
+}
+.tile-10x2 {
+  padding: 4px !important;
+  float: left;
+  width: 41.66666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 64px;
+  width: 320px;
+}
+@media (min-width: 768px) {
+  .tile-10x2 {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-10x2 {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-10x2 {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-10x2 {
+    height: 96px;
+    width: 480px;
+  }
+}
+.tile-10x8 {
+  padding: 4px !important;
+  float: left;
+  width: 41.66666667%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 256px;
+  width: 320px;
+}
+@media (min-width: 768px) {
+  .tile-10x8 {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+@media (min-width: 992px) {
+  .tile-10x8 {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-10x8 {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-10x8 {
+    height: 384px;
+    width: 480px;
+  }
+}
 .tile-12x1 {
   padding: 4px !important;
   float: left;
@@ -3768,6 +3873,16 @@ input[type="button"].btn-block {
   .tile-12x9 {
     height: 432px;
     width: 576px;
+  }
+}
+@media (min-width: 992px) {
+  .tile-offset-1 {
+    margin-left: 32px;
+  }
+}
+@media (min-width: 1200px) {
+  .tile-offset-1 {
+    margin-left: 48px;
   }
 }
 .tile-test {
@@ -4019,7 +4134,7 @@ body {
   background-color: #1d1d1d;
 }
 .page-header {
-  min-height: 48px;
+  min-height: 96px;
 }
 .page-header .page-brand {
   position: relative;
@@ -4043,6 +4158,16 @@ body {
   display: inline-block;
   vertical-align: top;
   top: 22px;
+}
+@media (min-width: 992px) {
+  .page-header .searchBar {
+    margin-left: 32px;
+  }
+}
+@media (min-width: 1200px) {
+  .page-header .searchBar {
+    margin-left: 48px;
+  }
 }
 .page-header .searchBar .searchForm {
   display: inline-block;
