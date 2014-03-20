@@ -1,5 +1,14 @@
 var api = require('../api');
 
+// function requireLogin(req, res, next) {
+  // if (req.session.loggedIn) {
+    // next(); // allow the next route to run
+  // } else {
+    // // require the user to log in
+    // res.render("admin/login"); // or render a form, etc.
+  // }
+// }
+
 module.exports = function (app) {
   //read
   app.get("/admin", function (req, res) {
@@ -208,6 +217,20 @@ module.exports = function (app) {
     var id = req.body.id;
     api.getMatch(id, function(err, result){
       api.updateMatchById(id, { $set: { approved: true }}, function(err, result){
+        res.redirect("admin/matches");
+      })
+    })
+  });  app.post("/admin/matches/:_id/feature", function(req,res){
+    var id = req.body.id;
+    api.getMatch(id, function(err, result){
+      api.updateMatchById(id, { $set: { featured: true }}, function(err, result){
+        res.redirect("admin/matches");
+      })
+    })
+  });  app.post("/admin/matches/:_id/unfeature", function(req,res){
+    var id = req.body.id;
+    api.getMatch(id, function(err, result){
+      api.updateMatchById(id, { $set: { featured: false }}, function(err, result){
         res.redirect("admin/matches");
       })
     })
