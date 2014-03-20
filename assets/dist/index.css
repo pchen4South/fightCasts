@@ -2277,8 +2277,8 @@ input[type="button"].btn-block {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('/vendor/fonts/glyphicons-halflings-regular.eot');
+  src: url('/vendor/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/vendor/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/vendor/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('/vendor/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -4021,6 +4021,7 @@ body {
 .page-header {
   min-height: 48px;
   border: none;
+  position: relative;
 }
 .page-header .page-brand {
   font-size: 48px;
@@ -4029,20 +4030,25 @@ body {
   color: #f2f6f7;
 }
 .searchBar {
-  display: inline;
-  width: 200px;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  top: 22px;
+  margin-left: 10px;
 }
 form.searchForm {
-  margin-left: 50px;
-  display: inline;
-  width: 200px;
+  display: inline-block;
+  width: 300px;
 }
 input.searchBox {
-  display: inline;
-  width: 150px;
+  display: inline-block;
+  width: 200px;
+  height: 100%;
+  background: #0a0a0a;
+  color: #f2f6f7;
 }
 button.searchBtn {
-  display: inline;
+  display: inline-block;
 }
 .subheader {
   font-weight: 100;

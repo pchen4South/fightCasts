@@ -8,6 +8,10 @@
 @import "buttons.less";
 @import "utilities.less";
 @import "responsive-utilities.less";
+
+@icon-font-path: "/vendor/fonts/";
+@icon-font-name: "glyphicons-halflings-regular";
+
 @import "glyphicons.less";
 
 @default-background-color: #1d1d1d;
@@ -72,6 +76,7 @@ body {
 .page-header {
   min-height: 48px;
   border: none;
+  position: relative;
   .page-brand {
     font-size: @font-large;
     font-weight: 100;
@@ -81,23 +86,28 @@ body {
 }
 
 .searchBar{
-  display: inline;
-  width: 200px;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  top: 22px;
+  margin-left: 10px;
 }
 
 form.searchForm
 {
-  margin-left: 50px;
-  display: inline;
-  width: 200px;
+  display: inline-block;
+  width: 300px;
 }
 
 input.searchBox{
-  display: inline;
-  width: 150px;
+  display: inline-block;
+  width: 200px;
+  height: 100%;
+  background: #0a0a0a;
+  color: @text-color;
 }
 button.searchBtn{
-  display: inline;
+  display: inline-block;
 }
 
 .subheader {
