@@ -7,6 +7,8 @@ module.exports = [{
   casterNames: ["Steve", "Pete"],
   eventName: "ESGN Fight Night Season 1",
   category: "pro",
+  featured: true,
+  approved: true
 },{
   title: "Infiltration vs. Daigo",
   videoNames: "Infiltration vs Daigo",
@@ -33,7 +35,9 @@ module.exports = [{
   game: "Super Street Fighter 4 Arcade Edition",
   casterNames: "",
   eventName: "",
-  category: "community"
+  category: "community",
+  featured: true,
+  approved: true
 }
 ,{
   title: "Steve vs Peter SSBM",

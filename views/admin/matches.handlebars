@@ -15,13 +15,13 @@
           type = "submit"
           class = "btn btn-xs btn-default" 
           name = "id" value = {{id}}> 
-          <span class = "glyphicon glyphicon-remove-circle"></span> 
+          <span class = "glyphicon glyphicon-trash"></span> 
     </button>
           
     {{#if approved}}
         <button formaction = "/admin/matches/{{id}}/unapprove" type = "submit"
         class = "btn btn-xs btn-default" name = "id" value = {{id}}>
-          <span class="glyphicon glyphicon-ok"></span></button>
+          <span class="glyphicon glyphicon-thumbs-up"></span></button>
         {{#if featured}}
           <button formaction = "/admin/matches/{{id}}/unfeature" type = "submit"
           class = "btn btn-xs btn-default" name = "id" value = {{id}}>
@@ -33,12 +33,12 @@
             <span class="glyphicon glyphicon-star-empty"></span>
           </button>
         {{/if}}
-          {{title}}
+          {{title}} <i> {{category}} </i>
     {{else}}
         <button formaction = "/admin/matches/{{id}}/approve" type = "submit"
         class = "btn btn-xs btn-default" name = "id" value = {{id}}>
-        <span class="glyphicon glyphicon-remove"></span></button>
-          {{title}} 
+        <span class="glyphicon glyphicon-thumbs-down"></span></button>
+          {{title}} <i> {{category}} </i>
     </form>
     {{/if}}
     </li>
