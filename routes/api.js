@@ -56,14 +56,11 @@ module.exports = function (app) {
     }); 
   });
   
-
-  
-  
   app.get("/api/v1/matches/all", allMatches);
   app.get("/api/v1/matches/pro", partial(getMatchByCategory, "pro"));
   app.get("/api/v1/matches/community", partial(getMatchByCategory, "community"));
   app.get("/api/v1/matches/scrub", partial(getMatchByCategory, "scrub"));
-
+  
   app.post("/api/v1/submittedMatches", function (req, res) {
     api.createSubmittedMatch({matchJson: req.body}, function (err, result) {
       if (err) res.send(400, {err: err.message}); 
@@ -82,14 +79,14 @@ var createPayload = function (matches) {
   matchesByCategory.pro.sort(sortByDateMostRecent);
   matchesByCategory.scrub.sort(sortByDateMostRecent);
   matchesByCategory.community.sort(sortByDateMostRecent);
-  
+
   return {
     matches: matchesByCategory,
     featuredMatches: {
-      pro: matchesByCategory.pro[0], 
-      community: matchesByCategory.community[1], 
-      scrub: matchesByCategory.scrub[0], 
-      topRated: matchesByCategory.pro[1], 
+      pro: getFeaturedMatches(matchesByCategory.pro)[0] || {}, 
+      community: getFeaturedMatches(matchesByCategory.community)[0] || {}, 
+      scrub: getFeaturedMatches(matchesByCategory.scrub)[0] || {}, 
+      //default: matchesByCategory.pro[0], 
     },
     communityMatches: first(matchesByCategory.community, 3)
   };
@@ -125,7 +122,7 @@ var sortByDateMostRecent = function(date1,date2){
 var allMatches = function (req, res) {
   api.getMatchesNested(function (err, matches) {
     var payload = createPayload(matches);
-    console.log(JSON.stringify(payload, null, 6));
+    //console.log(JSON.stringify(payload, null, 6));
     res.send(payload);
    });
 };
@@ -139,7 +136,12 @@ var getMatchByCategory = function (type, req, res) {
    });
 };
 
-
+var getFeaturedMatches = function(matchArray){
+  var featured = filter(matchArray, function(element){
+    return element.featured == true;
+  });
+  return featured;
+};
 
 
 

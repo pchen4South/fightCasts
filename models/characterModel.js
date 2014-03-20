@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 
 var Characters = new mongoose.Schema({
-  name: String,
+  name: {type: String, unique: true},
   game: String
 });
 Characters.plugin(timestamps);

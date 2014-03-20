@@ -34,13 +34,30 @@ var create = function (modelType, data, cb) {
 
 //create
 var createPerson = partial(create, person.model);
-var createCharacter = partial(create, character.model);
 var createGame = partial(create, game.model);
 var createVideo = partial(create, video.model);
 var createEvent = partial(create, event.model);
 var createChannel = partial(create, channel.model);
 var createTeam = partial(create, team.model);
 var createSubmittedMatch = partial(create, submittedMatch.model);
+
+var createCharacter = function(chardata, cb){
+  character.model.create(chardata, function(err, newchar){
+    if (err){cb(err)}
+    else{
+      game.model.find({nickname: newchar.game})
+      .populate('_characters')
+      .exec(function(err, game){
+        if(err){console.log(err)}
+        else{
+          game = game[0];
+          game._characters.push(newchar);
+          game.save(cb);
+        }
+      });
+    }
+  });
+};
 
 var createFighter = function (data, cb) {
   var formatted = {
@@ -171,6 +188,7 @@ var formatNestedMatch = function (monMatch) {
     return {
       id: monMatch["_id"],
       approved: monMatch.approved,
+      featured: monMatch.featured,
       title: monMatch.title,
       casters: map(monMatch["_casters"], formatDbResponse),
       fighterOne: formatNestedFighter(monMatch["_fighterOne"]),

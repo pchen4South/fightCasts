@@ -181,6 +181,8 @@ var findModelsAndCreateMatches  = function(match, done){
       //results[0] is an array of [{playerJSON}]
       matchModel.model.create({
         title: match.title,
+        featured: match.featured,
+        approved: match.approved,
         _casters: casters,
         _fighterOne: fighterOne,
         _fighterTwo: fighterTwo,

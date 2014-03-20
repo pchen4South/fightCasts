@@ -2,12 +2,11 @@ var _ = require('lodash');
 var find = _.find;
 var first = _.first;
 var api = require('../api');
+var filter = _.filter;
 
-//remove when ready
 var createPayload = function (matches) {
 
   var matchesByCategory = sortByCategory(matches);
-  
   
   matchesByCategory.pro.sort(sortByDateMostRecent);
   matchesByCategory.scrub.sort(sortByDateMostRecent);
@@ -16,10 +15,10 @@ var createPayload = function (matches) {
   return {
     matches: matchesByCategory,
     featuredMatches: {
-      pro: matchesByCategory.pro[0], 
-      community: matchesByCategory.community[1], 
-      scrub: matchesByCategory.scrub[0], 
-      topRated: matchesByCategory.pro[1], 
+      pro: getFeaturedMatches(matchesByCategory.pro)[0] || {},
+      community: getFeaturedMatches(matchesByCategory.community)[0] || {}, 
+      scrub: getFeaturedMatches(matchesByCategory.scrub)[0] || {}, 
+      default: matchesByCategory.pro[0], 
     },
     communityMatches: first(matchesByCategory.community, 3)
   };
@@ -52,6 +51,13 @@ var sortByDateMostRecent = function(date1,date2){
   return date1 - date2;
 };
 
+var getFeaturedMatches = function(matchArray){
+  var featured = filter(matchArray, function(element){
+    return element.featured == true;
+  });
+  if (featured) return featured;
+  else return [{}];
+};
 
 module.exports = function (app) {
   var returnIndex = function (req, res) {
@@ -79,3 +85,4 @@ module.exports = function (app) {
     });
   });
 };
+

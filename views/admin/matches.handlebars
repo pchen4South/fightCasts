@@ -10,24 +10,35 @@
   {{#each matches}} 
    <li>
    <form role = "form" method = "POST"> 
+    <img src = {{gameIcon game.nickname}}> </img> 
     <button formaction = "/admin/matches/{{id}}/delete"
           type = "submit"
           class = "btn btn-xs btn-default" 
-          name = "id" value = {{id}}> X </button>   
+          name = "id" value = {{id}}> 
+          <span class = "glyphicon glyphicon-trash"></span> 
+    </button>
+          
     {{#if approved}}
-        <img src = {{gameIcon game.name}}> </img> 
-        <b>APPROVED</b>
         <button formaction = "/admin/matches/{{id}}/unapprove" type = "submit"
         class = "btn btn-xs btn-default" name = "id" value = {{id}}>
-          Unapprove</button>
-          Match Title: {{title}} 
+          <span class="glyphicon glyphicon-thumbs-up"></span></button>
+        {{#if featured}}
+          <button formaction = "/admin/matches/{{id}}/unfeature" type = "submit"
+          class = "btn btn-xs btn-default" name = "id" value = {{id}}>
+            <span class="glyphicon glyphicon-star"></span>
+          </button>
+        {{else}}
+          <button formaction = "/admin/matches/{{id}}/feature" type = "submit"
+          class = "btn btn-xs btn-default" name = "id" value = {{id}}>
+            <span class="glyphicon glyphicon-star-empty"></span>
+          </button>
+        {{/if}}
+          {{title}} <i> {{category}} </i>
     {{else}}
-        <img src = {{gameIcon game.name}}> </img>
-        <b>UNAPPROVED</b>
         <button formaction = "/admin/matches/{{id}}/approve" type = "submit"
         class = "btn btn-xs btn-default" name = "id" value = {{id}}>
-          Approve</button>
-          Match Title: {{title}} 
+        <span class="glyphicon glyphicon-thumbs-down"></span></button>
+          {{title}} <i> {{category}} </i>
     </form>
     {{/if}}
     </li>

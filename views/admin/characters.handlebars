@@ -8,6 +8,8 @@
 <div class = "col-md-6">
  <ul style="list-style-type:none">
   {{#each characters}} 
+  
+  <form role = "form" method = "POST"> 
   <div class = "col-md-3">
     <li>
     <button formaction = "/admin/characters/{{id}}/delete"
@@ -20,4 +22,5 @@
   </div>  
   {{/each}}
   </ul>
+  </form>
 </div>

@@ -4,13 +4,13 @@
     <label for="name">Name</label>
     <input type="text" name="name" class="form-control" id="name" placeholder="character name">
     <label for="game">Game</label>
-    <select multiple class="form-control" id="games" name="game">
+    
+    <select multiple class="form-control" id="game" name="game">
       {{#each games}}
-        <option value={{name}}>{{name}}</option>
+        <option value="{{name}}">{{name}}</option>
       {{/each}}
     </select>
-    
-    
+
   </div> 
   <button type="submit" class="btn btn-default">
     Create! 
