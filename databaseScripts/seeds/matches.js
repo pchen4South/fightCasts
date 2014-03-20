@@ -8,7 +8,8 @@ module.exports = [{
   eventName: "ESGN Fight Night Season 1",
   category: "pro",
   featured: true,
-  approved: true
+  approved: true,
+  description: "description placeholder"
 },{
   title: "Infiltration vs. Daigo",
   videoNames: "Infiltration vs Daigo",
@@ -17,7 +18,8 @@ module.exports = [{
   game: "Super Street Fighter 4 Arcade Edition",
   casterNames: ["Steve", "Rohan"],
   eventName: "ESGN Fight Night Season 3",
-  category: "pro"
+  category: "pro",
+  description: "description placeholder"
 },{
   title: "Pete vs Steve Casuals",
   videoNames: "Alioune vs Xian 1/3",
@@ -26,7 +28,8 @@ module.exports = [{
   game: "Super Street Fighter 4 Arcade Edition",
   casterNames: ["Sid", "Rohan"],
   eventName: "",
-  category: "scrub"
+  category: "scrub",
+  description: "description placeholder"
 },{
   title: "OnlineWarrior vs Kappa",
   videoNames: "Alioune vs Xian 2/3",
@@ -37,7 +40,8 @@ module.exports = [{
   eventName: "",
   category: "community",
   featured: true,
-  approved: true
+  approved: true,
+  description: "description placeholder"
 }
 ,{
   title: "Steve vs Peter SSBM",
@@ -47,7 +51,8 @@ module.exports = [{
   game: "Super Smash Brothers Melee",
   casterNames: ["Rohan"],
   eventName: "",
-  category: "community"
+  category: "community",
+  description: "description placeholder"
 }
 ,{
   title: "Infiltration vs. Ryan Hart",
@@ -57,6 +62,7 @@ module.exports = [{
   game: "Super Street Fighter 4 Arcade Edition",
   casterNames: ["Gootecks", "Mike Ross"],
   eventName: "ESGN Fight Night Season 2",
-  category: "pro"
+  category: "pro",
+  description: "description placeholder"
 }
 ]

@@ -183,6 +183,7 @@ var findModelsAndCreateMatches  = function(match, done){
         title: match.title,
         featured: match.featured,
         approved: match.approved,
+        description: match.description,
         _casters: casters,
         _fighterOne: fighterOne,
         _fighterTwo: fighterTwo,

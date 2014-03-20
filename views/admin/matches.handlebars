@@ -33,12 +33,12 @@
             <span class="glyphicon glyphicon-star-empty"></span>
           </button>
         {{/if}}
-          {{title}} <i> {{category}} </i>
+          {{title}} <i> {{category}} </i> {{description}}
     {{else}}
         <button formaction = "/admin/matches/{{id}}/approve" type = "submit"
         class = "btn btn-xs btn-default" name = "id" value = {{id}}>
         <span class="glyphicon glyphicon-thumbs-down"></span></button>
-          {{title}} <i> {{category}} </i>
+          {{title}} <i> {{category}} </i> {{description}}
     </form>
     {{/if}}
     </li>

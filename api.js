@@ -189,6 +189,7 @@ var formatNestedMatch = function (monMatch) {
       id: monMatch["_id"],
       approved: monMatch.approved,
       featured: monMatch.featured,
+      description: monMatch.description,
       title: monMatch.title,
       casters: map(monMatch["_casters"], formatDbResponse),
       fighterOne: formatNestedFighter(monMatch["_fighterOne"]),
