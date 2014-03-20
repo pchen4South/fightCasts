@@ -16,6 +16,15 @@
   }
 }
 
+.tile-offset-mixin (@count: 1) {
+  @media (min-width: @screen-md-min) {
+    margin-left: @count * 32px;
+  }
+  @media (min-width: @screen-lg-min) {
+    margin-left: @count * 48px;
+  }
+}
+
 .tile-1x1 {
   .tile-grid-mixin(1, 1);
 }
@@ -92,6 +101,18 @@
   .tile-grid-mixin(9, 1);
 }
 
+.tile-10x1 {
+  .tile-grid-mixin(10, 1);
+}
+
+.tile-10x2 {
+  .tile-grid-mixin(10, 2);
+}
+
+.tile-10x8 {
+  .tile-grid-mixin(10, 8);
+}
+
 .tile-12x1 {
   .tile-grid-mixin(12, 1);
 }
@@ -114,6 +135,10 @@
 
 .tile-12x9 {
   .tile-grid-mixin(12, 9);
+}
+
+.tile-offset-1 {
+  .tile-offset-mixin(1);
 }
 
 .tile-test {
