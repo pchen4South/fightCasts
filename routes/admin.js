@@ -142,7 +142,7 @@ module.exports = function (app) {
   //create
   app.post("/admin/people", function (req, res) {
     api.createPerson(req.body, function (err, result) {
-      res.redirect("/admin/people");
+      res.send(200, "Person created");
     });
   });
 
@@ -158,7 +158,6 @@ module.exports = function (app) {
         break;
     }   
     api.createCharacter(character, function (err, result) {
-      console.log("callback");
       res.redirect("/admin/characters");
     });
   });

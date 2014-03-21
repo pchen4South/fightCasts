@@ -11,3 +11,7 @@ body {
   padding: 10px;
   border-radius: 10px;
 }
+
+ul.datalist {
+  list-style-type: none !important;
+}
