@@ -1,35 +1,33 @@
 .tile-match-listitem {
   .tile-mixin(); 
-  position: relative;
   display: block;
   .fighter-list {
+    height: 100%;
     .make-row(0px);
-    height: 70%;
     .vs {
-      .make-xs-column(2, 0px);
+      .make-xs-column(4, 0px);
+      .skew(-10deg, 0deg);
       height: 100%;
+      background-color: @tile-color-2;
       text-align: center;
-      span {
-        vertical-align: middle;
-        color: @tile-color-2;
-        font-weight: 600;
-      }
+      color: @tile-color-5;
+      font-weight: 600;
+      font-size: @font-medium;
+      font-style: italic;
     }
     .fighter {
+      .make-xs-column(10, 0px);
+      margin-top: -2px;
       .fighter-name {
-        .make-xs-column(8, 0px);
+        .make-row(0px);
         .text-overflow();
-        height: 100%;
-        vertical-align: middle;
-        padding-left: 10px;
-        padding-right: 10px;
+        vertical-align: bottom;
       }
       .character-list {
-        .make-xs-column(3, 0px);
-        height: 100%;
+        margin-top: -6px;
         .character-name {
-          text-align: center;
-          vertical-align: middle;
+          vertical-align: top;
+          color: @tile-color-1;
           font-size: @font-small;
           font-style: italic;
         }
@@ -37,9 +35,11 @@
     }
     .fighter.first {
       text-align: right;
+      padding-right: 8px;
     }
     .fighter.second {
       text-align: left;
+      padding-left: 8px;
     }
   }
 }

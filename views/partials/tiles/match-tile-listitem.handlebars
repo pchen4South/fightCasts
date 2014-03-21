@@ -3,30 +3,26 @@
 
     {{#with fighterOne}}
       <div class="fighter first">
-        <div class="character-list">
-        {{#each characters}}
-          <span class="character-name">{{name}}</span> 
-        {{/each}}
-        </div>
         <div class="fighter-name">
           {{person.name}}
         </div> 
+        <div class="character-list">
+          <span class="character-name">Frybot</span>
+        </div>
       </div> 
     {{/with}}
     
     <div class="vs">
-      <span>VS</span>
+      VS
     </div>
 
     {{#with fighterTwo}}
       <div class="fighter second">
-        <span class="fighter-name">
+        <div class="fighter-name">
           {{person.name}}
-        </span> 
+        </div> 
         <div class="character-list">
-        {{#each characters}}
-          <span class="character-name">{{name}}</span> 
-        {{/each}}
+          <span class="character-name">Tonto</span>
         </div>
       </div> 
     {{/with}}
