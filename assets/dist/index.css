@@ -3157,7 +3157,7 @@ select[multiple].input-lg {
   height: 100%;
   background-color: #d7154c;
   text-align: center;
-  color: #060606;
+  color: #2c2c2c;
   font-weight: 600;
   font-size: 24px;
   font-style: italic;
@@ -3184,7 +3184,7 @@ select[multiple].input-lg {
 }
 .tile-match-listitem .fighter-list .fighter .character-list .character-name {
   vertical-align: top;
-  color: #3f7dd5;
+  color: #d7154c;
   font-size: 12px;
   font-style: italic;
 }

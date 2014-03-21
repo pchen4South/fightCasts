@@ -7,7 +7,9 @@
           {{person.name}}
         </div> 
         <div class="character-list">
-          <span class="character-name">Frybot</span>
+          {{#each characters}}
+          <span class="character-name">{{name}}</span>
+          {{/each}}
         </div>
       </div> 
     {{/with}}
@@ -22,7 +24,9 @@
           {{person.name}}
         </div> 
         <div class="character-list">
-          <span class="character-name">Tonto</span>
+          {{#each characters}}
+          <span class="character-name">{{name}}</span>
+          {{/each}}
         </div>
       </div> 
     {{/with}}
