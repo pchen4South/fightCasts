@@ -2112,9 +2112,7 @@ input[type="button"].btn-block {
 .tile-match-featured .fighter-list:before,
 .tile-match-featured .fighter-list:after,
 .tile-match-listitem .fighter-list:before,
-.tile-match-listitem .fighter-list:after,
-.tile-match-listitem .match-details:before,
-.tile-match-listitem .match-details:after {
+.tile-match-listitem .fighter-list:after {
   content: " ";
   display: table;
 }
@@ -2125,8 +2123,7 @@ input[type="button"].btn-block {
 .form-horizontal .form-group:after,
 .test-tile-row:after,
 .tile-match-featured .fighter-list:after,
-.tile-match-listitem .fighter-list:after,
-.tile-match-listitem .match-details:after {
+.tile-match-listitem .fighter-list:after {
   clear: both;
 }
 .center-block {
@@ -3968,6 +3965,7 @@ input[type="button"].btn-block {
 .tile-match-listitem .fighter-list {
   margin-left: 0px;
   margin-right: 0px;
+  height: 70%;
 }
 .tile-match-listitem .fighter-list .vs {
   float: left;
@@ -3976,12 +3974,8 @@ input[type="button"].btn-block {
   min-height: 1px;
   padding-left: 0px;
   padding-right: 0px;
-  display: inline-block;
-  color: #d7154c;
-  vertical-align: middle;
+  height: 100%;
   text-align: center;
-  font-weight: 600;
-  font-size: 12px;
 }
 @media (min-width: 768px) {
   .tile-match-listitem .fighter-list .vs {
@@ -4001,6 +3995,12 @@ input[type="button"].btn-block {
     width: 8.33333333%;
   }
 }
+.tile-match-listitem .fighter-list .vs span {
+  vertical-align: middle;
+  color: #d7154c;
+  font-weight: 600;
+  font-size: 12px;
+}
 .tile-match-listitem .fighter-list .fighter .fighter-name {
   float: left;
   width: 33.33333333%;
@@ -4011,7 +4011,7 @@ input[type="button"].btn-block {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  display: inline;
+  height: 100%;
   vertical-align: middle;
   padding-left: 10px;
   padding-right: 10px;
@@ -4043,11 +4043,7 @@ input[type="button"].btn-block {
   min-height: 1px;
   padding-left: 0px;
   padding-right: 0px;
-  display: inline;
-  vertical-align: middle;
-  font-weight: 100;
-  font-size: 8px;
-  font-style: italic;
+  height: 100%;
 }
 @media (min-width: 768px) {
   .tile-match-listitem .fighter-list .fighter .character-list {
@@ -4067,6 +4063,13 @@ input[type="button"].btn-block {
     width: 12.5%;
   }
 }
+.tile-match-listitem .fighter-list .fighter .character-list .character-name {
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 100;
+  font-size: 12px;
+  font-style: italic;
+}
 .tile-match-listitem .fighter-list .fighter.first {
   text-align: right;
 }
@@ -4074,12 +4077,18 @@ input[type="button"].btn-block {
   text-align: left;
 }
 .tile-match-listitem .match-details {
-  margin-left: 0px;
-  margin-right: 0px;
+  position: relative;
+  float: left;
+  width: 100%;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 30%;
+  text-align: center;
 }
 .tile-match-listitem .match-details .event-name {
-  margin-top: -4px;
-  text-align: center;
+  vertical-align: top;
+  color: #3f7dd5;
   font-style: italic;
   font-weight: 100;
   font-size: 12px;
