@@ -4250,10 +4250,15 @@ body {
 }
 .page-header .searchBar .searchForm .searchBox {
   display: inline-block;
+  border-radius: 32px;
+  border: 2px solid #6a656c;
   width: 200px;
   height: 100%;
   background: #0d0d0d;
   color: #f2f6f7;
+}
+.page-header .searchBar .searchForm .searchBox:focus {
+  border: 2px solid #f2f6f7;
 }
 .page-header .searchBar .searchForm .searchBtn {
   display: inline-block;

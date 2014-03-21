@@ -94,10 +94,15 @@ body {
       width: 300px;
       .searchBox {
         display: inline-block;
+        border-radius: 32px;
+        border: 2px solid @tile-color-3;
         width: 200px;
         height: 100%;
         background: #0d0d0d;
         color: @text-color;
+        &:focus {
+          border: 2px solid @tile-color-4; 
+        }
       }
       .searchBtn {
         display: inline-block;
