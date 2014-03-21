@@ -232,7 +232,7 @@ var getMatchNested = function (id, cb) {
         match.model.populate(res, personTwoOptions, function (err, res) {
           match.model.populate(res, charactersTwoOptions, function (err, res) {
             if (err) cb(err);
-             else cb(null, map(results, formatNestedMatch));
+            else cb(null, formatNestedMatch(res));
           });
         });
       });
