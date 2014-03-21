@@ -3904,10 +3904,13 @@ input[type="button"].btn-block {
   background-color: none;
   position: relative;
   display: block;
-  transition: background-color 0.4s;
+  border: none;
+  transition: border .4s;
+  background-color: #2c2c2c;
+  border: 2px solid #060606;
 }
 .tile-match-featured:hover {
-  background-color: #2c2c2c;
+  border: 2px solid #f2f6f7;
 }
 .tile-match-featured .fighter-list {
   margin-left: 0px;
@@ -4024,10 +4027,12 @@ input[type="button"].btn-block {
   background-color: none;
   position: relative;
   display: block;
-  transition: background-color 0.4s;
+  transition: border .4s;
+  background-color: #2c2c2c;
+  border: 2px solid #060606;
 }
 .tile-match-listitem:hover {
-  background-color: #2c2c2c;
+  border: 2px solid #f2f6f7;
 }
 .tile-match-listitem .fighter-list {
   margin-left: 0px;

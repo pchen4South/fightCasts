@@ -2,9 +2,12 @@
   .tile-mixin(); 
   position: relative;
   display: block;
-  transition: background-color .4s;
+  border: none;
+  transition: border .4s;
+  background-color: lighten(@tile-color-5, 15%);
+  border: 2px solid @tile-color-5;
   &:hover {
-    background-color: lighten(@tile-color-5, 15%);
+    border: 2px solid @tile-color-4;
   }
   .fighter-list {
     .make-row(0px);
