@@ -1,17 +1,23 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  color: @text-color;
+  font-weight: 100;
+  font-size: @font-smallish;
+}
+
 @import "variables.less";
 @import "custom/grid.less";
 @import "mixins.less";
 @import "scaffolding.less";
-@import "code.less";
 @import "grid.less";
 @import "forms.less";
-@import "buttons.less";
 @import "utilities.less";
 @import "responsive-utilities.less";
 
 @icon-font-path: "/vendor/fonts/";
 @icon-font-name: "glyphicons-halflings-regular";
-
 @import "glyphicons.less";
 
 @default-background-color: #1d1d1d;
@@ -38,29 +44,15 @@
 @header-margin: 16px 0px;
 
 @import "tile-grid.less";
-.tile-mixin {
-  position: relative;
-  padding: 4px;
-  height: 100%;
-  width: 100%;
-  background-color: none;
-}
-
 @import "tiles/featured.less";
 @import "tiles/listitem.less";
+@import "tiles/info.less";
 @import "tiles/main.less";
 @import "tiles/main-details.less";
 
-
-*, *:before, *:after {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  color: @text-color;
-}
-
 ul {
   list-style-type: none;
+  padding-left: 0px;
 }
 
 body {
@@ -115,7 +107,6 @@ body {
   .subheader-secondary {
     .text-overflow();
     font-size: @font-medium; 
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 300;
   }
 }

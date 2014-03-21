@@ -2,53 +2,34 @@
   .tile-mixin(); 
   position: relative;
   display: block;
-  transition: border .4s;
-  background-color: lighten(@tile-color-5, 15%);
-  border: 2px solid @tile-color-5;
-  &:hover {
-    border: 2px solid @tile-color-4;
-  }
   .fighter-list {
     .make-row(0px);
     height: 70%;
     .vs {
       .make-xs-column(2, 0px);
-      .make-sm-column(2, 0px);
-      .make-md-column(2, 0px);
-      .make-lg-column(2, 0px);
       height: 100%;
       text-align: center;
       span {
         vertical-align: middle;
         color: @tile-color-2;
         font-weight: 600;
-        font-size: @font-smallish;
       }
     }
     .fighter {
       .fighter-name {
         .make-xs-column(8, 0px);
-        .make-sm-column(8, 0px);
-        .make-md-column(8, 0px);
-        .make-lg-column(8, 0px);
         .text-overflow();
         height: 100%;
         vertical-align: middle;
         padding-left: 10px;
         padding-right: 10px;
-        font-weight: 100;
-        font-size: @font-smallish;  
       }
       .character-list {
         .make-xs-column(3, 0px);
-        .make-sm-column(3, 0px);
-        .make-md-column(3, 0px);
-        .make-lg-column(3, 0px);
         height: 100%;
         .character-name {
           text-align: center;
           vertical-align: middle;
-          font-weight: 100;
           font-size: @font-small;
           font-style: italic;
         }
@@ -59,17 +40,6 @@
     }
     .fighter.second {
       text-align: left;
-    }
-  }
-  .match-details {
-    .make-xs-column(24, 0px);
-    height: 30%;
-    text-align: center;
-    .event-name {
-      vertical-align: top;
-      color: @tile-color-1;
-      font-weight: 100;
-      font-size: @font-small; 
     }
   }
 }

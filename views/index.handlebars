@@ -1,31 +1,33 @@
-<div class="col-xs-6">
+<div class="tile-region-7">
   {{#with featuredMatches.pro}}
   <div class="tile-6x1">
     <h3 class="subheader">top pro matches</h3> 
   </div>
+  <div class="tile-1x1"></div>
   <div class="tile-6x4">
     {{> tiles/match-tile-featured}}
   </div>
   {{/with}}
+  <div class="tile-1x1"></div>
   <div class="tile-6x1">
     <h3 class="subheader">new pro matches</h3> 
   </div>
+  <div class="tile-1x1"></div>
   {{#each matches.pro}}
     <div class="tile-6x1">
-    {{> tiles/match-tile-listitem}}
+      {{> tiles/match-tile-listitem}}
     </div>
-    <div class="tile-6x1">
-    {{> tiles/match-tile-listitem}}
-    </div>
-    <div class="tile-6x1">
-    {{> tiles/match-tile-listitem}}
+    <div class="tile-1x1">
+      <div class="info-tile left">
+        <span class="glyphicon glyphicon-info-sign"></span>
+      </div>
     </div>
   {{/each}}
 </div>
 
-<div class="col-xs-12">
+<div class="col-xs-10">
   {{#with featuredMatches.pro}}
-  <div class="tile-10x1 tile-offset-1">
+  <div class="tile-10x1">
     <h3 class="subheader">
       match details /
       <span class="subheader-secondary">{{title}}</span>
@@ -35,27 +37,29 @@
   {{/with}}
 </div>
 
-<div class="col-xs-6">
+<div class="tile-region-7">
+  <div class="tile-1x1"></div>
   <div class="tile-6x1">
     <h3 class="subheader">top community matches</h3> 
   </div>
+  <div class="tile-1x1"></div>
   {{#with featuredMatches.community}}
   <div class="tile-6x4">
     {{> tiles/match-tile-featured}}
   </div>
   {{/with}}
+  <div class="tile-1x1"></div>
   <div class="tile-6x1">
     <h3 class="subheader">new community matches</h3> 
   </div>
   {{#each matches.community}}
-    <div class="tile-6x1">
-    {{> tiles/match-tile-listitem}}
+    <div class="tile-1x1">
+      <div class="info-tile right">
+        <span class="glyphicon glyphicon-info-sign"></span>
+      </div>
     </div>
     <div class="tile-6x1">
-    {{> tiles/match-tile-listitem}}
-    </div>
-    <div class="tile-6x1">
-    {{> tiles/match-tile-listitem}}
+      {{> tiles/match-tile-listitem}}
     </div>
   {{/each}}
 </div>

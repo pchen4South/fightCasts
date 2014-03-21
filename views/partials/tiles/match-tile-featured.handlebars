@@ -1,4 +1,25 @@
 <a class="tile-match-featured" href="/matches/{{id}}">
+  <div class="match-details">
+    {{#if event}}
+    <div class="event-name detail">{{event.name}}</div> 
+    {{/if}}
+
+    {{#if casters}}
+    <div class="caster-list detail">
+      cast by: 
+    {{#each casters}} 
+    <span class="caster-name">{{name}}</span>
+    {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if description}}
+    <div class="description">
+      {{description}} 
+    </div> 
+    {{/if}}
+  </div>
+
   <div class="fighter-list">
 
     {{#with fighterOne}}
@@ -37,28 +58,6 @@
       </div> 
     {{/with}}
     
-  </div>
-
-  <div class="match-details">
-    {{#if event}}
-    <div class="event-name detail">{{event.name}}</div> 
-    {{/if}}
-
-    {{#if casters}}
-    <div class="caster-list detail">
-      cast by: 
-    {{#each casters}} 
-    <span class="caster-name">{{name}}</span>
-    {{/each}}
-    </div>
-    {{/if}}
-
-    {{#if description}}
-    <div class="description">
-      {{description}} 
-    </div> 
-    {{/if}}
-
   </div>
 
 </a>

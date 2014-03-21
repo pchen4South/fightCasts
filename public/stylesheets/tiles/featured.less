@@ -2,21 +2,11 @@
   .tile-mixin(); 
   position: relative;
   display: block;
-  border: none;
-  transition: border .4s;
-  background-color: lighten(@tile-color-5, 15%);
-  border: 2px solid @tile-color-5;
-  &:hover {
-    border: 2px solid @tile-color-4;
-  }
   .fighter-list {
     .make-row(0px);
     height: 60%;
     .vs {
       .make-xs-column(4, 0px);
-      .make-sm-column(4, 0px);
-      .make-md-column(4, 0px);
-      .make-lg-column(4, 0px);
       height: 100%;
       text-align: center;
       span {
@@ -29,9 +19,6 @@
     }
     .fighter {
       .make-xs-column(10, 0px);
-      .make-sm-column(10, 0px);
-      .make-md-column(10, 0px);
-      .make-lg-column(10, 0px);
       height: 100%;
       text-align: center;
       .fighter-name {
@@ -45,13 +32,10 @@
       }
       .as {
         color: @tile-color-3;
-        font-weight: 100;
         font-style: italic;
         font-size: @font-small;
       }
       .character-list {
-        font-weight: 100;
-        font-size: @font-smallish;  
       }
     }
   }
@@ -61,18 +45,10 @@
     text-align: center;
     .detail {
       color: @tile-color-1;
-      font-weight: 100;
-    }
-    .caster-list {
-      span {
-        font-weight: 100;
-      }
     }
     .description {
       color: @tile-color-4;
       .text-overflow();
-      font-weight: 100;
-      font-size: @font-smallish;
     }
   }
 }
