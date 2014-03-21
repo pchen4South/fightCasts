@@ -1,9 +1,10 @@
 .tile-match-listitem {
   .tile-mixin(); 
-
+  position: relative;
+  display: block;
   transition: background-color .4s;
   &:hover {
-    background-color: lighten(@tile-color-3, 10%);
+    background-color: lighten(@tile-color-5, 15%);
   }
   .fighter-list {
     .make-row(0px);
@@ -19,7 +20,7 @@
         vertical-align: middle;
         color: @tile-color-2;
         font-weight: 600;
-        font-size: @font-small;
+        font-size: @font-smallish;
       }
     }
     .fighter {
@@ -33,7 +34,7 @@
         vertical-align: middle;
         padding-left: 10px;
         padding-right: 10px;
-        font-weight: 200;
+        font-weight: 100;
         font-size: @font-smallish;  
       }
       .character-list {
@@ -65,7 +66,6 @@
     .event-name {
       vertical-align: top;
       color: @tile-color-1;
-      font-style: italic;
       font-weight: 100;
       font-size: @font-small; 
     }

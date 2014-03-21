@@ -1,44 +1,75 @@
 .tile-match-featured {
-  .tile-mixin();
+  .tile-mixin(); 
   position: relative;
-
-  .graphics {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    height: 100%;
-    width: 33%;
-    border: 2px solid @tile-color-4;
+  display: block;
+  transition: background-color .4s;
+  &:hover {
+    background-color: lighten(@tile-color-5, 15%);
   }
   .fighter-list {
-    .make-row();
-    .fighter {
-      .make-xs-column(8, 0px);
-      .fighter-name {
+    .make-row(0px);
+    height: 60%;
+    .vs {
+      .make-xs-column(4, 0px);
+      .make-sm-column(4, 0px);
+      .make-md-column(4, 0px);
+      .make-lg-column(4, 0px);
+      height: 100%;
+      text-align: center;
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        color: @tile-color-2;
+        font-weight: 600;
         font-size: @font-medium;
-        text-align: center;
+      }
+    }
+    .fighter {
+      .make-xs-column(10, 0px);
+      .make-sm-column(10, 0px);
+      .make-md-column(10, 0px);
+      .make-lg-column(10, 0px);
+      height: 100%;
+      text-align: center;
+      .fighter-name {
+        display: inline-block;
+        min-height: @font-medium * 2;
+        vertical-align: middle;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-weight: 300;
+        font-size: @font-medium;  
+      }
+      .as {
+        color: @tile-color-3;
+        font-weight: 100;
+        font-style: italic;
+        font-size: @font-small;
       }
       .character-list {
-        font-size: @font-small;
-        text-align: center;
+        font-weight: 100;
+        font-size: @font-smallish;  
       }
     }
-    position: relative;
-    font-size: @font-smallish;
-    font-weight: 100;
-    .vs {
-      .make-xs-column(8, 0px);
-      text-align: center;
-      padding-top: 16px;
-      color: @tile-color-2;
-      font-size: @font-mediumish;
-      font-weight: 600;
-    }
   }
-  .description {
-    padding-top: 16px;
-    font-weight: 200;
-    font-size: @font-smallish;
-    color: @tile-color-1;
+  .match-details {
+    .make-row(0px);
+    height: 40%;
+    text-align: center;
+    .detail {
+      color: @tile-color-1;
+      font-weight: 100;
+    }
+    .caster-list {
+      span {
+        font-weight: 100;
+      }
+    }
+    .description {
+      color: @tile-color-4;
+      .text-overflow();
+      font-weight: 100;
+      font-size: @font-smallish;
+    }
   }
 }

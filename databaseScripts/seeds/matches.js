@@ -9,7 +9,7 @@ module.exports = [{
   category: "pro",
   featured: true,
   approved: true,
-  description: "description placeholder"
+  description: "Nail-biter!  Fantastic grand finals."
 },{
   title: "Infiltration vs. Daigo",
   videoNames: "Infiltration vs Daigo",

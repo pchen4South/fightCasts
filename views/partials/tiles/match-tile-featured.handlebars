@@ -1,34 +1,64 @@
-<div class="tile-match-featured">
+<a class="tile-match-featured" href="/matches/{{id}}">
   <div class="fighter-list">
+
     {{#with fighterOne}}
-      <div class="fighter first">
-        <div class="fighter-name">
+      <div class="fighter">
+        <span class="fighter-name">
           {{person.name}}
-        </div> 
+        </span> 
+        <div class="as">as</div>
         <div class="character-list">
-        {{#each characters}}
-          <span class="character-name">{{name}}</span> 
-        {{/each}}
+          {{#each characters}}
+          <span class="character-name">
+            {{name}}
+          </span> 
+          {{/each}}
         </div>
       </div> 
     {{/with}}
     
-    <div class="vs">VS</div>
+    <div class="vs">
+      <span>VS</span>
+    </div>
 
     {{#with fighterTwo}}
-      <div class="fighter second">
-        <div class="fighter-name">
+      <div class="fighter">
+        <span class="fighter-name">
           {{person.name}}
-        </div> 
+        </span> 
+        <div class="as">as</div>
         <div class="character-list">
-        {{#each characters}}
-          <span class="character-name">{{name}}</span> 
-        {{/each}}
+          {{#each characters}}
+          <span class="character-name">
+            {{name}}
+          </span> 
+          {{/each}}
         </div>
       </div> 
     {{/with}}
+    
   </div>
-  <div class="description">
-    {{description}}
+
+  <div class="match-details">
+    {{#if event}}
+    <div class="event-name detail">{{event.name}}</div> 
+    {{/if}}
+
+    {{#if casters}}
+    <div class="caster-list detail">
+      cast by: 
+    {{#each casters}} 
+    <span class="caster-name">{{name}}</span>
+    {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if description}}
+    <div class="description">
+      {{description}} 
+    </div> 
+    {{/if}}
+
   </div>
-</div>
+
+</a>
