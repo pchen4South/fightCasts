@@ -4067,7 +4067,7 @@ input[type="button"].btn-block {
   text-align: center;
   vertical-align: middle;
   font-weight: 100;
-  font-size: 8px;
+  font-size: 12px;
   font-style: italic;
 }
 .tile-match-listitem .fighter-list .fighter.first {
@@ -4088,6 +4088,7 @@ input[type="button"].btn-block {
 }
 .tile-match-listitem .match-details .event-name {
   vertical-align: top;
+  color: #3f7dd5;
   font-style: italic;
   font-weight: 100;
   font-size: 12px;
