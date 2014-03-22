@@ -1,63 +1,6 @@
 <a class="tile-match-featured" href="/matches/{{id}}">
-  <div class="match-details">
-    {{#if event}}
-    <div class="event-name detail">{{event.name}}</div> 
-    {{/if}}
-
-    {{#if casters}}
-    <div class="caster-list detail">
-      cast by: 
-    {{#each casters}} 
-    <span class="caster-name">{{name}}</span>
-    {{/each}}
-    </div>
-    {{/if}}
-
-    {{#if description}}
-    <div class="description">
-      {{description}} 
-    </div> 
-    {{/if}}
+  <div class="fight-card-header">
+  
   </div>
-
-  <div class="fighter-list">
-
-    {{#with fighterOne}}
-      <div class="fighter">
-        <span class="fighter-name">
-          {{person.name}}
-        </span> 
-        <div class="as">as</div>
-        <div class="character-list">
-          {{#each characters}}
-          <span class="character-name">
-            {{name}}
-          </span> 
-          {{/each}}
-        </div>
-      </div> 
-    {{/with}}
-    
-    <div class="vs">
-      <span>VS</span>
-    </div>
-
-    {{#with fighterTwo}}
-      <div class="fighter">
-        <span class="fighter-name">
-          {{person.name}}
-        </span> 
-        <div class="as">as</div>
-        <div class="character-list">
-          {{#each characters}}
-          <span class="character-name">
-            {{name}}
-          </span> 
-          {{/each}}
-        </div>
-      </div> 
-    {{/with}}
-    
-  </div>
-
+  {{> fightcard}}
 </a>

@@ -97,7 +97,6 @@ body {
   }
 }
 
-
 .subheader {
   font-weight: 100;
   font-size: @font-medium;
@@ -116,3 +115,48 @@ body {
   font-size: @font-smallish;
 }
 
+.fight-card {
+  display: block;
+  .fighter-list {
+    height: 100%;
+    .make-row(0px);
+    .vs-box {
+      .make-xs-column(4, 0px);
+      height: 100%;
+      .vs {
+        .skew(-10deg, 0deg);
+        text-align: center;
+        background-color: @tile-color-2;
+        color: lighten(@tile-color-5, 15%);
+        font-weight: 600;
+        font-style: italic;
+      }
+    }
+    .fighter {
+      .make-xs-column(10, 0px);
+      margin-top: -2px;
+      .fighter-name {
+        .make-row(0px);
+        .text-overflow();
+        vertical-align: bottom;
+      }
+      .character-list {
+        margin-top: -6px;
+        .character-name {
+          vertical-align: top;
+          color: @tile-color-2;
+          font-size: @font-small;
+          font-style: italic;
+        }
+      }
+    }
+    .fighter.first {
+      text-align: right;
+      padding-right: 8px;
+    }
+    .fighter.second {
+      text-align: left;
+      padding-left: 8px;
+    }
+  }
+}

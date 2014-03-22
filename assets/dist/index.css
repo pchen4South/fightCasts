@@ -1711,14 +1711,10 @@ select[multiple].input-lg {
 .row:after,
 .form-horizontal .form-group:before,
 .form-horizontal .form-group:after,
-.tile-match-featured .fighter-list:before,
-.tile-match-featured .fighter-list:after,
-.tile-match-featured .match-details:before,
-.tile-match-featured .match-details:after,
-.tile-match-listitem .fighter-list:before,
-.tile-match-listitem .fighter-list:after,
-.tile-match-listitem .fighter-list .fighter .fighter-name:before,
-.tile-match-listitem .fighter-list .fighter .fighter-name:after {
+.fight-card .fighter-list:before,
+.fight-card .fighter-list:after,
+.fight-card .fighter-list .fighter .fighter-name:before,
+.fight-card .fighter-list .fighter .fighter-name:after {
   content: " ";
   display: table;
 }
@@ -1727,10 +1723,8 @@ select[multiple].input-lg {
 .container-fluid:after,
 .row:after,
 .form-horizontal .form-group:after,
-.tile-match-featured .fighter-list:after,
-.tile-match-featured .match-details:after,
-.tile-match-listitem .fighter-list:after,
-.tile-match-listitem .fighter-list .fighter .fighter-name:after {
+.fight-card .fighter-list:after,
+.fight-card .fighter-list .fighter .fighter-name:after {
   clear: both;
 }
 .center-block {
@@ -2500,7 +2494,6 @@ select[multiple].input-lg {
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: none;
   transition: border .4s;
   background-color: #2c2c2c;
   border: 2px solid #060606;
@@ -2534,6 +2527,20 @@ select[multiple].input-lg {
 @media (min-width: 1200px) {
   .tile-region-4 {
     width: 192px;
+  }
+}
+.tile-region-6 {
+  position: relative;
+  float: left;
+  width: 25%;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 192px;
+}
+@media (min-width: 1200px) {
+  .tile-region-6 {
+    width: 288px;
   }
 }
 .tile-region-7 {
@@ -2921,6 +2928,23 @@ select[multiple].input-lg {
     width: 480px;
   }
 }
+.tile-10x6 {
+  position: relative;
+  float: left;
+  width: 41.66666667%;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding: 4px !important;
+  height: 192px;
+  width: 320px;
+}
+@media (min-width: 1200px) {
+  .tile-10x6 {
+    height: 288px;
+    width: 480px;
+  }
+}
 .tile-10x8 {
   position: relative;
   float: left;
@@ -3051,150 +3075,38 @@ select[multiple].input-lg {
   }
 }
 .tile-match-featured {
+  display: inline-block;
+  position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: none;
   transition: border .4s;
   background-color: #2c2c2c;
   border: 2px solid #060606;
-  position: relative;
-  display: block;
 }
 .tile-match-featured:hover {
   border: 2px solid #f2f6f7;
 }
-.tile-match-featured .fighter-list {
-  margin-left: 0px;
-  margin-right: 0px;
-  height: 60%;
+.tile-match-featured .fight-card-header {
+  height: 75%;
+  padding: 4px 4px 6px 4px;
 }
-.tile-match-featured .fighter-list .vs {
-  position: relative;
-  float: left;
-  width: 16.66666667%;
-  min-height: 1px;
-  padding-left: 0px;
-  padding-right: 0px;
-  height: 100%;
-  text-align: center;
-}
-.tile-match-featured .fighter-list .vs span {
-  display: inline-block;
-  vertical-align: middle;
-  color: #d7154c;
-  font-weight: 600;
-  font-size: 24px;
-}
-.tile-match-featured .fighter-list .fighter {
-  position: relative;
-  float: left;
-  width: 41.66666667%;
-  min-height: 1px;
-  padding-left: 0px;
-  padding-right: 0px;
-  height: 100%;
-  text-align: center;
-}
-.tile-match-featured .fighter-list .fighter .fighter-name {
-  display: inline-block;
-  min-height: 48px;
-  vertical-align: middle;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-weight: 300;
-  font-size: 24px;
-}
-.tile-match-featured .fighter-list .fighter .as {
-  color: #6a656c;
-  font-style: italic;
-  font-size: 12px;
-}
-.tile-match-featured .match-details {
-  margin-left: 0px;
-  margin-right: 0px;
-  height: 40%;
-  text-align: center;
-}
-.tile-match-featured .match-details .detail {
-  color: #3f7dd5;
-}
-.tile-match-featured .match-details .description {
-  color: #f2f6f7;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.tile-match-featured .fight-card {
+  height: 25%;
+  padding: 6px 4px 4px 4px;
 }
 .tile-match-listitem {
+  display: inline-block;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: none;
   transition: border .4s;
   background-color: #2c2c2c;
   border: 2px solid #060606;
-  display: block;
 }
 .tile-match-listitem:hover {
   border: 2px solid #f2f6f7;
-}
-.tile-match-listitem .fighter-list {
-  height: 100%;
-  margin-left: 0px;
-  margin-right: 0px;
-}
-.tile-match-listitem .fighter-list .vs {
-  position: relative;
-  float: left;
-  width: 16.66666667%;
-  min-height: 1px;
-  padding-left: 0px;
-  padding-right: 0px;
-  -webkit-transform: skew(-10deg, 0deg);
-  -ms-transform: skewX(-10deg) skewY(0deg);
-  transform: skew(-10deg, 0deg);
-  height: 100%;
-  background-color: #d7154c;
-  text-align: center;
-  color: #2c2c2c;
-  font-weight: 600;
-  font-size: 24px;
-  font-style: italic;
-}
-.tile-match-listitem .fighter-list .fighter {
-  position: relative;
-  float: left;
-  width: 41.66666667%;
-  min-height: 1px;
-  padding-left: 0px;
-  padding-right: 0px;
-  margin-top: -2px;
-}
-.tile-match-listitem .fighter-list .fighter .fighter-name {
-  margin-left: 0px;
-  margin-right: 0px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  vertical-align: bottom;
-}
-.tile-match-listitem .fighter-list .fighter .character-list {
-  margin-top: -6px;
-}
-.tile-match-listitem .fighter-list .fighter .character-list .character-name {
-  vertical-align: top;
-  color: #d7154c;
-  font-size: 12px;
-  font-style: italic;
-}
-.tile-match-listitem .fighter-list .fighter.first {
-  text-align: right;
-  padding-right: 8px;
-}
-.tile-match-listitem .fighter-list .fighter.second {
-  text-align: left;
-  padding-left: 8px;
 }
 .info-tile span {
   margin-top: 30%;
@@ -3210,7 +3122,6 @@ select[multiple].input-lg {
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: none;
   transition: border .4s;
   background-color: #2c2c2c;
   border: 2px solid #060606;
@@ -3227,7 +3138,6 @@ select[multiple].input-lg {
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: none;
   transition: border .4s;
   background-color: #2c2c2c;
   border: 2px solid #060606;
@@ -3326,4 +3236,65 @@ body {
 }
 .tile-subheader {
   font-size: 16px;
+}
+.fight-card {
+  display: block;
+}
+.fight-card .fighter-list {
+  height: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.fight-card .fighter-list .vs-box {
+  position: relative;
+  float: left;
+  width: 16.66666667%;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 100%;
+}
+.fight-card .fighter-list .vs-box .vs {
+  -webkit-transform: skew(-10deg, 0deg);
+  -ms-transform: skewX(-10deg) skewY(0deg);
+  transform: skew(-10deg, 0deg);
+  text-align: center;
+  background-color: #d7154c;
+  color: #2c2c2c;
+  font-weight: 600;
+  font-style: italic;
+}
+.fight-card .fighter-list .fighter {
+  position: relative;
+  float: left;
+  width: 41.66666667%;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-top: -2px;
+}
+.fight-card .fighter-list .fighter .fighter-name {
+  margin-left: 0px;
+  margin-right: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+.fight-card .fighter-list .fighter .character-list {
+  margin-top: -6px;
+}
+.fight-card .fighter-list .fighter .character-list .character-name {
+  vertical-align: top;
+  color: #d7154c;
+  font-size: 12px;
+  font-style: italic;
+}
+.fight-card .fighter-list .fighter.first {
+  text-align: right;
+  padding-right: 8px;
+}
+.fight-card .fighter-list .fighter.second {
+  text-align: left;
+  padding-left: 8px;
 }

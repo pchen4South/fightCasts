@@ -1,54 +1,14 @@
 .tile-match-featured {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
   .tile-mixin(); 
-  position: relative;
-  display: block;
-  .fighter-list {
-    .make-row(0px);
-    height: 60%;
-    .vs {
-      .make-xs-column(4, 0px);
-      height: 100%;
-      text-align: center;
-      span {
-        display: inline-block;
-        vertical-align: middle;
-        color: @tile-color-2;
-        font-weight: 600;
-        font-size: @font-medium;
-      }
-    }
-    .fighter {
-      .make-xs-column(10, 0px);
-      height: 100%;
-      text-align: center;
-      .fighter-name {
-        display: inline-block;
-        min-height: @font-medium * 2;
-        vertical-align: middle;
-        padding-left: 10px;
-        padding-right: 10px;
-        font-weight: 300;
-        font-size: @font-medium;  
-      }
-      .as {
-        color: @tile-color-3;
-        font-style: italic;
-        font-size: @font-small;
-      }
-      .character-list {
-      }
-    }
+  .fight-card-header {
+    height: 75%;
+    padding: 4px 4px 6px 4px;
   }
-  .match-details {
-    .make-row(0px);
-    height: 40%;
-    text-align: center;
-    .detail {
-      color: @tile-color-1;
-    }
-    .description {
-      color: @tile-color-4;
-      .text-overflow();
-    }
+  .fight-card {
+    height: 25%;
+    padding: 6px 4px 4px 4px;
   }
 }

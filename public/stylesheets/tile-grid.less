@@ -3,7 +3,6 @@
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: none;
   transition: border .4s;
   background-color: lighten(@tile-color-5, 15%);
   border: 2px solid @tile-color-5;
@@ -46,6 +45,10 @@
 
 .tile-region-4 {
   .tile-region-mixin(4);
+}
+
+.tile-region-6 {
+  .tile-region-mixin(6);
 }
 
 .tile-region-7 {
@@ -138,6 +141,10 @@
 
 .tile-10x2 {
   .tile-grid-mixin(10, 2);
+}
+
+.tile-10x6 {
+  .tile-grid-mixin(10, 6);
 }
 
 .tile-10x8 {

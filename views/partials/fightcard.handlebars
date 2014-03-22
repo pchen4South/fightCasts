@@ -1,0 +1,35 @@
+<div class="fight-card">
+ <div class="fighter-list">
+
+   {{#with fighterOne}}
+     <div class="fighter first">
+       <div class="fighter-name">
+         {{person.name}}
+       </div> 
+       <div class="character-list">
+         {{#each characters}}
+         <span class="character-name">{{name}}</span>
+         {{/each}}
+       </div>
+     </div> 
+   {{/with}}
+   
+   <div class="vs-box">
+     <div class="vs">VS</div>
+   </div>
+
+   {{#with fighterTwo}}
+     <div class="fighter second">
+       <div class="fighter-name">
+         {{person.name}}
+       </div> 
+       <div class="character-list">
+         {{#each characters}}
+         <span class="character-name">{{name}}</span>
+         {{/each}}
+       </div>
+     </div> 
+   {{/with}}
+   
+ </div>
+</div>
