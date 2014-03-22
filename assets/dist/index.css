@@ -1711,6 +1711,12 @@ select[multiple].input-lg {
 .row:after,
 .form-horizontal .form-group:before,
 .form-horizontal .form-group:after,
+.tile-match-featured .fight-card-header .flags:before,
+.tile-match-featured .fight-card-header .flags:after,
+.tile-match-featured .fight-card-header .match-details .event-name:before,
+.tile-match-featured .fight-card-header .match-details .event-name:after,
+.tile-match-featured .fight-card-header .match-details .caster-list:before,
+.tile-match-featured .fight-card-header .match-details .caster-list:after,
 .fight-card .fighter-list:before,
 .fight-card .fighter-list:after,
 .fight-card .fighter-list .fighter .fighter-name:before,
@@ -1723,6 +1729,9 @@ select[multiple].input-lg {
 .container-fluid:after,
 .row:after,
 .form-horizontal .form-group:after,
+.tile-match-featured .fight-card-header .flags:after,
+.tile-match-featured .fight-card-header .match-details .event-name:after,
+.tile-match-featured .fight-card-header .match-details .caster-list:after,
 .fight-card .fighter-list:after,
 .fight-card .fighter-list .fighter .fighter-name:after {
   clear: both;
@@ -3085,11 +3094,42 @@ select[multiple].input-lg {
   border: 2px solid #060606;
 }
 .tile-match-featured:hover {
+  text-decoration: none;
+}
+.tile-match-featured:hover {
   border: 2px solid #f2f6f7;
 }
 .tile-match-featured .fight-card-header {
   height: 75%;
   padding: 4px 4px 6px 4px;
+  background-image: url("http://www.veryicon.com/icon/png/Game/Mega%20Games%20Pack%2032/Streetfighter%20IV%20new%202.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.tile-match-featured .fight-card-header .flags {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.tile-match-featured .fight-card-header .flags .flag.one {
+  float: left;
+}
+.tile-match-featured .fight-card-header .flags .flag.two {
+  float: right;
+}
+.tile-match-featured .fight-card-header .match-details {
+  text-align: center;
+}
+.tile-match-featured .fight-card-header .match-details .event-name {
+  margin-left: 0px;
+  margin-right: 0px;
+  font-size: 24px;
+  font-weight: 900;
+}
+.tile-match-featured .fight-card-header .match-details .caster-list {
+  margin-left: 0px;
+  margin-right: 0px;
+  font-size: 16px;
 }
 .tile-match-featured .fight-card {
   height: 25%;

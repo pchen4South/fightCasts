@@ -2,10 +2,40 @@
   display: inline-block;
   height: 100%;
   width: 100%;
+  &:hover {
+    text-decoration: none;
+  }
   .tile-mixin(); 
   .fight-card-header {
     height: 75%;
     padding: 4px 4px 6px 4px;
+    background-image: url("http://www.veryicon.com/icon/png/Game/Mega%20Games%20Pack%2032/Streetfighter%20IV%20new%202.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    .flags {
+      .make-row();  
+      .flag.one {
+        float: left;
+      }
+      .flag.two {
+        float: right;
+      }
+    }
+
+    .match-details {
+      text-align: center;
+      .event-name {
+        .make-row(); 
+        font-size: @font-medium; 
+        font-weight: 900;
+      }
+      .caster-list {
+        .make-row();
+        font-size: @font-smallish;
+      }
+    }
   }
   .fight-card {
     height: 25%;
