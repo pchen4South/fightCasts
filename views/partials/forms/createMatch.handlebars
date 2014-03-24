@@ -6,8 +6,12 @@
     </input>
 
     <label for="casters">Casters</label>
-    <input class="form-control" type="text" name="casters" id="casters" placeholder="Caster Names">
-    </input>
+    <select multiple class="form-control" id="casters" name="casters">
+      {{#each people}}
+        <option value={{id}}>{{name}}
+        </option>
+      {{/each}}
+    </select>
         
     <label for="fighterOne">Player One</label>
     <select multiple class="form-control" id="fighterOne" name="fighterOne">
@@ -65,6 +69,13 @@
       {{#each teams}}
         <option value={{id}}>{{name}}</option>
       {{/each}}
+    </select>
+    
+    <label for="category">Category</label>
+    <select class="form-control" id="category" name="category">
+        <option value="pro">Pro</option>
+        <option value="scrub">Scrub</option>
+        <option value="community">Community</option>
     </select>
 
   </div> 

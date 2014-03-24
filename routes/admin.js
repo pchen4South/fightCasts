@@ -142,7 +142,7 @@ module.exports = function (app) {
   //create
   app.post("/admin/people", function (req, res) {
     api.createPerson(req.body, function (err, result) {
-      res.send(200, "Person created");
+      res.redirect("/admin/people");
     });
   });
 

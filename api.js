@@ -71,6 +71,7 @@ var createMatch = function(data, cb){
   var formatted = {
     approved: data.approved,
     title: data.title,
+    category: data.category,
     _casters: data.casters,
     _fighterOne: data.fighterOne,
     _fighterTwo: data.fighterTwo,
