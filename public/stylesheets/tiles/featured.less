@@ -9,11 +9,7 @@
   .fight-card-header {
     height: 75%;
     padding: 4px 4px 6px 4px;
-    background-image: url("/images/SF4-trans.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-
+    .center-bg("/images/SF4-trans.png");
     .flags {
       .make-row();  
       .flag.one {
@@ -34,6 +30,9 @@
       .caster-list {
         .make-row();
         font-size: @font-smallish;
+        .caster-name {
+          color: @tile-color-1;
+        }
       }
     }
   }

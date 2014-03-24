@@ -2505,13 +2505,16 @@ select[multiple].input-lg {
   content: "\e200";
 }
 .tile-mixin {
+  transition: border .4s;
+  border: 2px solid #060606;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  transition: border .4s;
   background-color: #2c2c2c;
-  border: 2px solid #060606;
+}
+.tile-mixin:focus {
+  border: 2px solid #f2f6f7;
 }
 .tile-mixin:hover {
   border: 2px solid #f2f6f7;
@@ -3108,16 +3111,19 @@ select[multiple].input-lg {
 }
 .tile-match-featured {
   display: inline-block;
+  transition: border .4s;
+  border: 2px solid #060606;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  transition: border .4s;
   background-color: #2c2c2c;
-  border: 2px solid #060606;
 }
 .tile-match-featured:hover {
   text-decoration: none;
+}
+.tile-match-featured:focus {
+  border: 2px solid #f2f6f7;
 }
 .tile-match-featured:hover {
   border: 2px solid #f2f6f7;
@@ -3154,35 +3160,44 @@ select[multiple].input-lg {
   margin-right: 0px;
   font-size: 16px;
 }
+.tile-match-featured .fight-card-header .match-details .caster-list .caster-name {
+  color: #ff7300;
+}
 .tile-match-featured .fight-card {
   height: 25%;
   padding: 6px 4px 4px 4px;
 }
 .tile-match-listitem {
   display: inline-block;
+  transition: border .4s;
+  border: 2px solid #060606;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  transition: border .4s;
   background-color: #2c2c2c;
-  border: 2px solid #060606;
+}
+.tile-match-listitem:focus {
+  border: 2px solid #f2f6f7;
 }
 .tile-match-listitem:hover {
   border: 2px solid #f2f6f7;
 }
 .tile-match-listitemtall {
   display: inline-block;
+  transition: border .4s;
+  border: 2px solid #060606;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  transition: border .4s;
   background-color: #2c2c2c;
-  border: 2px solid #060606;
 }
 .tile-match-listitemtall:hover {
   text-decoration: none;
+}
+.tile-match-listitemtall:focus {
+  border: 2px solid #f2f6f7;
 }
 .tile-match-listitemtall:hover {
   border: 2px solid #f2f6f7;
@@ -3209,6 +3224,7 @@ select[multiple].input-lg {
 .tile-match-listitemtall .fight-card-header .match-details .event-name {
   margin-left: 0px;
   margin-right: 0px;
+  color: #ff7300;
   font-size: 12px;
 }
 .tile-match-listitemtall .fight-card-header .match-details .caster-list {
@@ -3235,13 +3251,16 @@ select[multiple].input-lg {
   text-align: right;
 }
 .tile-match-main {
+  transition: border .4s;
+  border: 2px solid #060606;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  transition: border .4s;
   background-color: #2c2c2c;
-  border: 2px solid #060606;
+}
+.tile-match-main:focus {
+  border: 2px solid #f2f6f7;
 }
 .tile-match-main:hover {
   border: 2px solid #f2f6f7;
@@ -3251,13 +3270,16 @@ select[multiple].input-lg {
   width: 100%;
 }
 .tile-match-main-details {
+  transition: border .4s;
+  border: 2px solid #060606;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  transition: border .4s;
   background-color: #2c2c2c;
-  border: 2px solid #060606;
+}
+.tile-match-main-details:focus {
+  border: 2px solid #f2f6f7;
 }
 .tile-match-main-details:hover {
   border: 2px solid #f2f6f7;
@@ -3267,7 +3289,7 @@ select[multiple].input-lg {
 }
 .tile-match-main-details .subevent-name {
   font-size: 24px;
-  color: #ff7300;
+  color: #6a656c;
 }
 .tile-match-main-details .caster-info {
   font-size: 16px;
@@ -3323,6 +3345,8 @@ body {
   width: 300px;
 }
 .page-header .searchBar .searchForm .searchBox {
+  transition: border .4s;
+  border: 2px solid #060606;
   display: inline-block;
   border-radius: 32px;
   border: 2px solid #6a656c;
@@ -3334,8 +3358,79 @@ body {
 .page-header .searchBar .searchForm .searchBox:focus {
   border: 2px solid #f2f6f7;
 }
+.page-header .searchBar .searchForm .searchBox:hover {
+  border: 2px solid #f2f6f7;
+}
 .page-header .searchBar .searchForm .searchBtn {
   display: inline-block;
+}
+.page-subheader {
+  height: 48px;
+}
+.page-subheader .game-list {
+  margin: 0px;
+  height: 48px;
+}
+.page-subheader .game-list .subheader-text {
+  display: inline-block;
+  float: left;
+  height: 48px;
+  line-height: 48px;
+  padding-right: 24px;
+  color: #6a656c;
+}
+.page-subheader .game-list .game {
+  transition: border .4s;
+  border: 2px solid transparent;
+  border-radius: 32px;
+  display: inline-block;
+  height: 48px;
+  line-height: 48px;
+  width: 192px;
+  float: left;
+}
+.page-subheader .game-list .game:focus {
+  border: 2px solid #f2f6f7;
+}
+.page-subheader .game-list .game:hover {
+  border: 2px solid #f2f6f7;
+}
+.page-subheader .game-list .game .icon {
+  display: inline-block;
+  height: 48px;
+  line-height: 48px;
+  float: left;
+  width: 48px;
+  background-image: url("/images/SF4-gray.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.page-subheader .game-list .game .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline;
+  float: left;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  font-size: 16px;
+  color: #6a656c;
+}
+.page-subheader .game-list .game.active {
+  background: #0d0d0d;
+  border: 2px solid #ff7300;
+  color: #ff7300;
+}
+.page-subheader .game-list .game.active .icon {
+  background-image: url("/images/SF4-trans.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.page-subheader .game-list .game.active .name {
+  color: #ff7300;
 }
 .subheader {
   font-weight: 100;
@@ -3349,7 +3444,6 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 24px;
-  font-weight: 300;
 }
 .tile-subheader {
   font-size: 16px;

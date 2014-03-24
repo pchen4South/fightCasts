@@ -1,14 +1,10 @@
 .tile-mixin {
+  .hover-border(@tile-color-5);
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  transition: border .4s;
   background-color: lighten(@tile-color-5, 15%);
-  border: 2px solid @tile-color-5;
-  &:hover {
-    border: 2px solid @tile-color-4;
-  }
 }
 
 .tile-region-mixin (@x: 1) {

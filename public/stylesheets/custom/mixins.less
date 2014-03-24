@@ -1,0 +1,17 @@
+.center-bg (@url) {
+  background-image: url(@url);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.hover-border (@initial-color: @tile-color-5, @hover-color: @tile-color-4) {
+  transition: border .4s;
+  border: 2px solid @initial-color;
+  &:focus {
+    border: 2px solid @hover-color;
+  }
+  &:hover {
+    border: 2px solid @hover-color;
+  }
+}

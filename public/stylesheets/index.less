@@ -8,7 +8,6 @@
 }
 
 @import "variables.less";
-@import "custom/grid.less";
 @import "mixins.less";
 @import "scaffolding.less";
 @import "grid.less";
@@ -22,8 +21,6 @@
 
 @default-background-color: #1d1d1d;
 
-//red/blue scheme
-//@tile-color-1: #3f7dd5;
 @tile-color-1: #ff7300;
 @tile-color-2: #c60c30;
 @tile-color-3: #6a656c;
@@ -44,6 +41,10 @@
 
 @header-margin: 16px 0px;
 
+@subheader-height: 48px;
+
+@import "custom/grid.less";
+@import "custom/mixins.less";
 @import "tile-grid.less";
 @import "tiles/featured.less";
 @import "tiles/listitem.less";
@@ -81,6 +82,7 @@ body {
       display: inline-block;
       width: 300px;
       .searchBox {
+        .hover-border();
         display: inline-block;
         border-radius: 32px;
         border: 2px solid @tile-color-3;
@@ -88,12 +90,65 @@ body {
         height: 100%;
         background: #0d0d0d;
         color: @text-color;
-        &:focus {
-          border: 2px solid @tile-color-4; 
-        }
       }
       .searchBtn {
         display: inline-block;
+      }
+    }
+  }
+}
+
+.page-subheader {
+  height: @subheader-height;
+  .game-list {
+    margin: 0px;
+    height: @subheader-height;
+    .subheader-text {
+      display: inline-block;
+      float: left;
+      height: @subheader-height;
+      line-height: @subheader-height;
+      padding-right: 24px;
+      color: @tile-color-3;
+    }
+    .game {
+      .hover-border(transparent);
+      border-radius: 32px;
+      display: inline-block;
+      height: @subheader-height;
+      line-height: @subheader-height;
+      //this width is (lcd of 32 and 48) x 2
+      width: 192px;
+      float: left;
+      .icon {
+        display: inline-block;
+        height: @subheader-height;
+        line-height: @subheader-height;
+        float: left;
+        width: 48px;
+        .center-bg("/images/SF4-gray.png");
+      }
+      .name {
+        .text-overflow();
+        display: inline;
+        float: left;
+        height: @subheader-height;
+        line-height: @subheader-height;
+        text-align: center;
+        font-size: @font-smallish;
+        color: @tile-color-3;
+      }
+    }
+
+    .game.active {
+      background: #0d0d0d;
+      border: 2px solid @tile-color-1;
+      color: @tile-color-1;
+      .icon {
+        .center-bg("/images/SF4-trans.png");
+      }
+      .name {
+        color: @tile-color-1;
       }
     }
   }
@@ -108,7 +163,6 @@ body {
   .subheader-secondary {
     .text-overflow();
     font-size: @font-medium; 
-    font-weight: 300;
   }
 }
 
