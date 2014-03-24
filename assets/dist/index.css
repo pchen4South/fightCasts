@@ -3152,17 +3152,21 @@ select[multiple].input-lg {
 .tile-match-featured .fight-card-header .match-details .event-name {
   margin-left: 0px;
   margin-right: 0px;
+  padding-left: 12px;
+  padding-right: 12px;
   color: #ff7300;
-  font-size: 24px;
   font-weight: 300;
+  font-size: 24px;
+  font-weight: 100;
 }
 .tile-match-featured .fight-card-header .match-details .caster-list {
   margin-left: 0px;
   margin-right: 0px;
-  font-size: 16px;
+  font-size: 12px;
 }
 .tile-match-featured .fight-card-header .match-details .caster-list .caster-name {
   color: #ff7300;
+  font-size: 12px;
 }
 .tile-match-featured .fight-card {
   height: 25%;
