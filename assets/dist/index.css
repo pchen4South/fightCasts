@@ -3159,6 +3159,7 @@ select[multiple].input-lg {
   font-weight: 300;
   font-size: 24px;
   font-weight: 100;
+  text-shadow: 2px 2px black;
 }
 .tile-match-featured .fight-card-header .match-details .caster-list {
   margin-left: 0px;
@@ -3517,4 +3518,8 @@ body {
 .fight-card .fighter-list .fighter.second {
   text-align: left;
   padding-left: 8px;
+}
+img.gameLogoSmall {
+  width: 32px;
+  height: 32px;
 }
