@@ -10,7 +10,7 @@
   {{#each matches}} 
    <li>
    <form role = "form" method = "POST"> 
-    <img src = {{gameIcon game.nickname}}> </img> 
+    <img class = "gameImageSmall" src = {{gameIcon game.nickname}}> </img> 
     <button formaction = "/admin/matches/{{id}}/delete"
           type = "submit"
           class = "btn btn-xs btn-default" 

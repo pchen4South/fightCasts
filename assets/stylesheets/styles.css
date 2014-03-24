@@ -15,3 +15,9 @@ body {
 ul.datalist {
   list-style-type: none !important;
 }
+
+
+img.gameImageSmall{
+  width: 32px;
+  height: 32px;
+}
