@@ -9,8 +9,19 @@
     <input class="form-control" type="text" name="casters" id="casters" placeholder="Caster Names">
     </input>
         
-    <label for="fighters">Fighters</label>
-    <select multiple class="form-control" id="fighters" name="fighters">
+    <label for="fighterOne">Player One</label>
+    <select multiple class="form-control" id="fighterOne" name="fighterOne">
+      {{#each fighters}}
+        <option value={{id}}>{{person.name}} as
+          {{#each characters}}
+            {{name}}
+          {{/each}}
+        </option>
+      {{/each}}
+    </select>
+    
+    <label for="fighterTwo">Player Two</label>
+    <select multiple class="form-control" id="fighterTwo" name="fighterTwo">
       {{#each fighters}}
         <option value={{id}}>{{person.name}} as
           {{#each characters}}
