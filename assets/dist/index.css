@@ -3366,17 +3366,17 @@ body {
   display: inline-block;
 }
 .page-subheader {
-  height: 48px;
+  height: 32px;
 }
 .page-subheader .game-list {
   margin: 0px;
-  height: 48px;
+  height: 32px;
 }
 .page-subheader .game-list .subheader-text {
   display: inline-block;
   float: left;
-  height: 48px;
-  line-height: 48px;
+  height: 32px;
+  line-height: 32px;
   padding-right: 24px;
   color: #6a656c;
 }
@@ -3385,8 +3385,7 @@ body {
   border: 2px solid transparent;
   border-radius: 32px;
   display: inline-block;
-  height: 48px;
-  line-height: 48px;
+  height: 32px;
   width: 192px;
   float: left;
 }
@@ -3398,10 +3397,9 @@ body {
 }
 .page-subheader .game-list .game .icon {
   display: inline-block;
-  height: 48px;
-  line-height: 48px;
+  height: 32px;
   float: left;
-  width: 48px;
+  width: 20%;
   background-image: url("/images/SF4-gray.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -3413,9 +3411,10 @@ body {
   white-space: nowrap;
   display: inline;
   float: left;
-  height: 48px;
-  line-height: 48px;
-  text-align: center;
+  height: 32px;
+  width: 80%;
+  padding-top: 4px;
+  text-align: left;
   font-size: 16px;
   color: #6a656c;
 }

@@ -41,7 +41,7 @@
 
 @header-margin: 16px 0px;
 
-@subheader-height: 48px;
+@subheader-height: 32px;
 
 @import "custom/grid.less";
 @import "custom/mixins.less";
@@ -116,16 +116,14 @@ body {
       border-radius: 32px;
       display: inline-block;
       height: @subheader-height;
-      line-height: @subheader-height;
       //this width is (lcd of 32 and 48) x 2
       width: 192px;
       float: left;
       .icon {
         display: inline-block;
         height: @subheader-height;
-        line-height: @subheader-height;
         float: left;
-        width: 48px;
+        width: 20%;
         .center-bg("/images/SF4-gray.png");
       }
       .name {
@@ -133,8 +131,9 @@ body {
         display: inline;
         float: left;
         height: @subheader-height;
-        line-height: @subheader-height;
-        text-align: center;
+        width: 80%;
+        padding-top: 4px;
+        text-align: left;
         font-size: @font-smallish;
         color: @tile-color-3;
       }
