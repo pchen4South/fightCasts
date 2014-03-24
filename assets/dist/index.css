@@ -1717,6 +1717,10 @@ select[multiple].input-lg {
 .tile-match-featured .fight-card-header .match-details .event-name:after,
 .tile-match-featured .fight-card-header .match-details .caster-list:before,
 .tile-match-featured .fight-card-header .match-details .caster-list:after,
+.tile-match-listitemtall .fight-card-header .match-details .event-name:before,
+.tile-match-listitemtall .fight-card-header .match-details .event-name:after,
+.tile-match-listitemtall .fight-card-header .match-details .caster-list:before,
+.tile-match-listitemtall .fight-card-header .match-details .caster-list:after,
 .fight-card .fighter-list:before,
 .fight-card .fighter-list:after,
 .fight-card .fighter-list .fighter .fighter-name:before,
@@ -1732,6 +1736,8 @@ select[multiple].input-lg {
 .tile-match-featured .fight-card-header .flags:after,
 .tile-match-featured .fight-card-header .match-details .event-name:after,
 .tile-match-featured .fight-card-header .match-details .caster-list:after,
+.tile-match-listitemtall .fight-card-header .match-details .event-name:after,
+.tile-match-listitemtall .fight-card-header .match-details .caster-list:after,
 .fight-card .fighter-list:after,
 .fight-card .fighter-list .fighter .fighter-name:after {
   clear: both;
@@ -2597,6 +2603,23 @@ select[multiple].input-lg {
     width: 48px;
   }
 }
+.tile-1x2 {
+  position: relative;
+  float: left;
+  width: 4.16666667%;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding: 4px !important;
+  height: 64px;
+  width: 32px;
+}
+@media (min-width: 1200px) {
+  .tile-1x2 {
+    height: 96px;
+    width: 48px;
+  }
+}
 .tile-1x4 {
   position: relative;
   float: left;
@@ -3148,6 +3171,60 @@ select[multiple].input-lg {
 .tile-match-listitem:hover {
   border: 2px solid #f2f6f7;
 }
+.tile-match-listitemtall {
+  display: inline-block;
+  position: relative;
+  padding: 4px;
+  height: 100%;
+  width: 100%;
+  transition: border .4s;
+  background-color: #2c2c2c;
+  border: 2px solid #060606;
+}
+.tile-match-listitemtall:hover {
+  text-decoration: none;
+}
+.tile-match-listitemtall:hover {
+  border: 2px solid #f2f6f7;
+}
+.tile-match-listitemtall .fight-card-header {
+  position: relative;
+  height: 50%;
+  min-height: 50%;
+  padding: 4px 4px 6px 4px;
+}
+.tile-match-listitemtall .fight-card-header .flags .flag.one {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.tile-match-listitemtall .fight-card-header .flags .flag.two {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.tile-match-listitemtall .fight-card-header .match-details {
+  text-align: center;
+}
+.tile-match-listitemtall .fight-card-header .match-details .event-name {
+  margin-left: 0px;
+  margin-right: 0px;
+  font-size: 12px;
+}
+.tile-match-listitemtall .fight-card-header .match-details .caster-list {
+  margin-left: 0px;
+  margin-right: 0px;
+  font-size: 12px;
+}
+.tile-match-listitemtall .fight-card-header .match-details .caster-list .caster-name {
+  color: #ff7300;
+  font-size: 12px;
+}
+.tile-match-listitemtall .fight-card {
+  min-height: 50%;
+  height: 50%;
+  padding: 6px 4px 4px 4px;
+}
 .info-tile span {
   margin-top: 30%;
 }
@@ -3190,13 +3267,13 @@ select[multiple].input-lg {
 }
 .tile-match-main-details .subevent-name {
   font-size: 24px;
-  color: #3f7dd5;
+  color: #ff7300;
 }
 .tile-match-main-details .caster-info {
   font-size: 16px;
 }
 .tile-match-main-details .caster-list {
-  color: #3f7dd5;
+  color: #ff7300;
 }
 ul {
   list-style-type: none;
@@ -3299,7 +3376,7 @@ body {
   -ms-transform: skewX(-10deg) skewY(0deg);
   transform: skew(-10deg, 0deg);
   text-align: center;
-  background-color: #d7154c;
+  background-color: #ff7300;
   color: #2c2c2c;
   font-weight: 600;
   font-style: italic;
@@ -3326,7 +3403,7 @@ body {
 }
 .fight-card .fighter-list .fighter .character-list .character-name {
   vertical-align: top;
-  color: #d7154c;
+  color: #c60c30;
   font-size: 12px;
   font-style: italic;
 }

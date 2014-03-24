@@ -22,9 +22,10 @@
 
 @default-background-color: #1d1d1d;
 
-//greyblue scheme
-@tile-color-1: #3f7dd5;
-@tile-color-2: #d7154c;
+//red/blue scheme
+//@tile-color-1: #3f7dd5;
+@tile-color-1: #ff7300;
+@tile-color-2: #c60c30;
 @tile-color-3: #6a656c;
 @tile-color-4: #f2f6f7;
 @tile-color-5: #060606;
@@ -46,6 +47,7 @@
 @import "tile-grid.less";
 @import "tiles/featured.less";
 @import "tiles/listitem.less";
+@import "tiles/listitemtall.less";
 @import "tiles/info.less";
 @import "tiles/main.less";
 @import "tiles/main-details.less";
@@ -126,7 +128,7 @@ body {
       .vs {
         .skew(-10deg, 0deg);
         text-align: center;
-        background-color: @tile-color-2;
+        background-color: @tile-color-1;
         color: lighten(@tile-color-5, 15%);
         font-weight: 600;
         font-style: italic;

@@ -14,13 +14,10 @@
   </div>
   <div class="tile-1x1"></div>
   {{#each matches.pro}}
-    <div class="tile-6x1">
-      {{> tiles/match-tile-listitem}}
+    <div class="tile-6x2">
+      {{> tiles/match-tile-listitemtall}}
     </div>
-    <div class="tile-1x1">
-      <div class="info-tile left">
-        <span class="glyphicon glyphicon-info-sign"></span>
-      </div>
+    <div class="tile-1x2">
     </div>
   {{/each}}
 </div>
@@ -53,13 +50,10 @@
     <h3 class="subheader">new community matches</h3> 
   </div>
   {{#each matches.community}}
-    <div class="tile-1x1">
-      <div class="info-tile right">
-        <span class="glyphicon glyphicon-info-sign"></span>
-      </div>
+    <div class="tile-1x2">
     </div>
-    <div class="tile-6x1">
-      {{> tiles/match-tile-listitem}}
+    <div class="tile-6x2">
+      {{> tiles/match-tile-listitemtall}}
     </div>
   {{/each}}
 </div>
