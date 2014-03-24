@@ -3125,7 +3125,7 @@ select[multiple].input-lg {
 .tile-match-featured .fight-card-header {
   height: 75%;
   padding: 4px 4px 6px 4px;
-  background-image: url("http://www.veryicon.com/icon/png/Game/Mega%20Games%20Pack%2032/Streetfighter%20IV%20new%202.png");
+  background-image: url("/images/SF4-trans.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -3370,11 +3370,15 @@ body {
   padding-left: 0px;
   padding-right: 0px;
   height: 100%;
+  margin-top: 6px;
 }
 .fight-card .fighter-list .vs-box .vs {
   -webkit-transform: skew(-10deg, 0deg);
   -ms-transform: skewX(-10deg) skewY(0deg);
   transform: skew(-10deg, 0deg);
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
   background-color: #ff7300;
   color: #2c2c2c;
