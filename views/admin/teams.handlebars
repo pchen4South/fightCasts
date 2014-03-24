@@ -1,12 +1,11 @@
 <div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-4">
-  {{> forms/createTeam}}
-</div>
-<div class="col-md-6">  
+
+<div class="col-md-10">  
+  <h1>Teams</h1>
   <form role = "form" method = "POST"> 
-    <ul>
+    <ul class = "datalist">
       {{#each teams}} 
       <div class = "col-md-3">
         <li>

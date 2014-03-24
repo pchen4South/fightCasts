@@ -6,11 +6,11 @@
 </div>
 
 <div class ="col-md-6">
-  <ul style="list-style-type:none">
+  <ul style="datalist">
   {{#each matches}} 
    <li>
    <form role = "form" method = "POST"> 
-    <img class = "gameImageSmall" src = {{gameIcon game.nickname}}> </img> 
+    <img class = "gameLogoSmall" src = {{gameIcon game.nickname}}> </img> 
     <button formaction = "/admin/matches/{{id}}/delete"
           type = "submit"
           class = "btn btn-xs btn-default" 

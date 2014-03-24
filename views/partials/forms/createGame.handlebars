@@ -1,13 +1,23 @@
-<form role="form" method="POST" action = "/admin/games">
-  <h3>Create Game</h3>
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" name="name" class="form-control" id="name" placeholder="game name">
+<div class = "adminFormWrapper">
+  <form role="form" method="POST" action = "/admin/games">
+    <h3>Create Game</h3>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" 
+             name="name" 
+             class="form-control"
+             id="name" 
+             placeholder="game name">
 
-    <label for="nickname">Nickname</label>
-    <input type="text" name="nickname" class="form-control" id="nickname" placeholder="game nickname">
-  </div> 
-  <button type="submit" class="btn btn-default">
-    Create! 
-  </button>
-</form> 
+      <label for="nickname">Nickname</label>
+      <input type="text" 
+              name="nickname" 
+              class="form-control" 
+              id="nickname" 
+              placeholder="game nickname">
+    </div> 
+    <button type="submit" class="btn btn-default">
+      Create! 
+    </button>
+  </form> 
+</div>

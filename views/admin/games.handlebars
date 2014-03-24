@@ -1,18 +1,17 @@
 <div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-4">
-  {{> forms/createGame}}
-</div>
-<div class="col-md-6">
-  <ul style = "list-style:none">
+<div class="col-md-10">
+  <h1>Games</h1>
+  <ul class = "datalist">
   {{#each games}} 
   <li>
     <button formaction = "/admin/games/{{id}}/delete"
           type = "submit"
           class = "btn btn-xs btn-default" 
           name = "id" value = {{id}}> X </button>
-    <img src = {{gameIcon nickname}}> </img> <b>{{name}} - {{nickname}}</b></li>
+    <img class = "gameLogoSmall"src = {{gameIcon nickname}}> </img> 
+    <b>{{name}} - {{nickname}}</b></li>
   {{/each}}
   </ul>
 </div>

@@ -1,12 +1,11 @@
 <div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-4">
-  {{> forms/createFighter}}
-</div>
-<div class = "col-md-6">
+
+<div class = "col-md-10">
   <form role = "form" method = "POST"> 
-    <ul style="list-style-type:none">
+    <h1> Fighters </h1>
+    <ul class = "datalist">
       {{#each fighters}} 
       <div class = "col-md-6">
         <li>
@@ -18,7 +17,7 @@
         <b>{{person.name}}</b>
         as 
         {{#each characters}}
-          <img src = "{{gameIcon game}}"/>
+          <img class = "gameLogoSmall" src = "{{gameIcon game}}"/>
           <b>{{name}} </b>
         {{/each}}
         </li>

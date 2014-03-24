@@ -1,26 +1,22 @@
 <div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-4">
-  {{> forms/createEvent}}
-</div>
-<div class ="col-md-6">
 
-<form role = "form" method = "POST"> 
-  <ul>
-    {{#each events}} 
-    <div class = "col-md-4">
-      <li>
-      <button formaction = "/admin/events/{{id}}/delete"
-        type = "submit"
-        class = "btn btn-xs btn-default" 
-        name = "id" value = {{id}}> X </button>
-      {{name}}
-      </li>
-    </div>
-    {{/each}}
-  </ul>
-</form>
-  
-  
+<div class ="col-md-10">
+  <form role = "form" method = "POST"> 
+    <h1>Events</h1>
+    <ul class = "datalist">
+      {{#each events}} 
+      <div class = "col-md-4">
+        <li>
+        <button formaction = "/admin/events/{{id}}/delete"
+          type = "submit"
+          class = "btn btn-xs btn-default" 
+          name = "id" value = {{id}}> X </button>
+        {{name}}
+        </li>
+      </div>
+      {{/each}}
+    </ul>
+  </form>
 </div>

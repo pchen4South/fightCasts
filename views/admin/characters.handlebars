@@ -1,14 +1,11 @@
 <div class="col-md-2">
   {{> adminlist}}
 </div>
-<div class="col-md-4">
-  {{> forms/createCharacter}}
-</div>
 
-<div class = "col-md-6">
- <ul style="list-style-type:none">
+<div class = "col-md-10">
+  <h1> Characters </h1>
+ <ul class = "datalist">
   {{#each characters}} 
-  
   <form role = "form" method = "POST"> 
   <div class = "col-md-3">
     <li>
@@ -17,7 +14,7 @@
           class = "btn btn-xs btn-default" 
           name = "id" value = {{id}}> X </button>
     
-    <img src = {{gameIcon game}}> </img> 
+    <img class = "gameLogoSmall" src = {{gameIcon game}}> </img> 
     {{name}} </li>
   </div>  
   {{/each}}

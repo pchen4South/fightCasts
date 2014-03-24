@@ -1,21 +1,28 @@
-<form role="form" method="POST" action = "/admin/fighters">
-  <div class="form-group">
-    <label for="person">Player</label>
-    <select class="form-control" id="person" name="person">
-     {{#each people}}
-       <option value={{id}}>{{name}}</option>
-     {{/each}}
-    </select>
+<div class = "adminFormWrapper">
+  <form role="form" method="POST" 
+      action = "/admin/fighters">
+    <div class="form-group">
+      <label for="person">Player</label>
+      <select class="form-control" 
+              id="person" 
+              name="person">
+       {{#each people}}
+         <option value={{id}}>{{name}}</option>
+       {{/each}}
+      </select>
 
-    <label for="characters">Character</label>
-    <select multiple class="form-control" id="characters" name="characters">
-      {{#each characters}}
-        <option value={{id}}>{{name}}</option>
-      {{/each}}
-    </select>
+      <label for="characters">Character</label>
+      <select multiple class="form-control" 
+              id="characters" 
+              name="characters">
+        {{#each characters}}
+          <option value={{id}}>{{name}}</option>
+        {{/each}}
+      </select>
 
-  </div> 
-  <button type="submit" class="btn btn-default">
-    Create! 
-  </button>
-</form> 
+    </div> 
+    <button type="submit" class="btn btn-default">
+      Create! 
+    </button>
+  </form> 
+</div>
