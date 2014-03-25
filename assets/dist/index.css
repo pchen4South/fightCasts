@@ -5,7 +5,6 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   color: #f2f6f7;
-  font-family: 'Raleway', 'sans-serif';
   font-weight: 100;
   font-size: 16px;
 }
@@ -3310,6 +3309,7 @@ ul {
 }
 body {
   background-color: #1d1d1d;
+  font-family: 'Raleway', 'sans-serif';
 }
 .page-header {
   min-height: 96px;
