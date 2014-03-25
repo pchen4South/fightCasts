@@ -183,12 +183,14 @@ var formatNestedFighter = function (monFighter) {
 };
 
 var formatNestedGame = function (monGame) {
-  return {
-    id: monGame["_id"],
-    name: monGame.name,
-    nickname: monGame.nickname,
-    characters: map(monGame["_characters"], formatDbResponse)
-  };
+  if(monGame){
+    return {
+      id: monGame["_id"],
+      name: monGame.name,
+      nickname: monGame.nickname,
+      characters: map(monGame["_characters"], formatDbResponse)
+    }
+  }else return {};
 };
 
 var formatNestedMatch = function (monMatch) {
@@ -276,8 +278,17 @@ var getFightersNested = function (cb) {
   });
 };
 
-var getMatchesNested = function (cb) {
-  match.model.find()
+var getMatchesNested = function (query, cb) {
+  
+  //check for existing query, if not then query should be empty and cb should be function
+  if(typeof query === typeof(Function)){
+    cb = query;
+    query = {};
+  }
+  
+  console.log("QUERY: ", query);
+  
+  match.model.find(query)
   .populate("_fighterOne")
   .populate("_fighterTwo")
   .populate("_videos")

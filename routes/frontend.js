@@ -5,6 +5,8 @@ var first = _.first;
 var api = require('../api');
 var filter = _.filter;
 
+var gameFilter = {default: 'SF4'};
+
 var createPayload = function (matches) {
   var matchesByCategory = sortByCategory(matches);
   
@@ -59,6 +61,7 @@ var getFeaturedMatches = function(matchArray){
   else return [{}];
 };
 
+
 module.exports = function (app) {
   //var returnIndex = function (req, res) {
   //  api.getMatchesNested(function (err, matches) {
@@ -69,8 +72,11 @@ module.exports = function (app) {
   //};
 
   var returnIndex = function (req, res) {
+    var query = req.query;
+    if (!_.isEmpty(query)){query = parseQuery(query)};
+  
     async.parallel({
-      matches: api.getMatchesNested,
+      matches: async.apply(api.getMatchesNested, query),
       featured: api.getFeatured 
     }, function (err, results) {
       //build payload.  replace the line below
@@ -79,7 +85,29 @@ module.exports = function (app) {
       res.render("index", payload);
     });
   };
-
+  
+  var checkForQueryParams = function(req, res){
+    var query = req.query;
+    console.log("req.query", query);
+    if (_.isEmpty(query)) returnIndex(req,res)
+    else{
+      console.log("nonempty query");
+      query = parseQuery(query);
+      api.getMatchesNested(query, function(err, results){
+        var payload = createPayload(results);
+        res.send(payload);
+        // res.render("index", payload);
+      });
+    }
+  };
+  
+  var parseQuery = function(query){
+    var searchString = query.search;
+    var gameString = query.game;
+    
+    if(!gameString){gameString = "SF4"}
+    return {title: {"$regex": new RegExp(searchString, "i")}};
+  };
 
   app.get("/", returnIndex);
   app.get("/matches", returnIndex);
