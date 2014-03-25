@@ -1,4 +1,6 @@
 <div class="tile-region-7">
+
+  {{#if featuredMatches.pro}}
   {{#with featuredMatches.pro}}
   <div class="tile-6x1">
     <h3 class="subheader">top pro matches</h3> 
@@ -9,6 +11,8 @@
   </div>
   {{/with}}
   <div class="tile-1x1"></div>
+  {{/if}}
+
   <div class="tile-6x1">
     <h3 class="subheader">new pro matches</h3> 
   </div>
@@ -35,6 +39,8 @@
 </div>
 
 <div class="tile-region-7">
+
+  {{#if featuredMatches.community}}
   <div class="tile-1x1"></div>
   <div class="tile-6x1">
     <h3 class="subheader">top community matches</h3> 
@@ -46,6 +52,8 @@
   </div>
   {{/with}}
   <div class="tile-1x1"></div>
+  {{/if}}
+
   <div class="tile-6x1">
     <h3 class="subheader">new community matches</h3> 
   </div>
