@@ -96,6 +96,14 @@ module.exports = function (app) {
       res.render("admin/matches", results);
     });
   });  
+  app.get("/admin/featuredMatches", function (req, res) {
+    api.getAll(function (err, results) {
+      if(results){
+        results.layout = "adminLayout";
+      }
+      res.render("admin/featuredMatches", results);
+    });
+  });  
   
   app.get("/admin/submittedmatches/:_id", function (req, res) {
     var id = req.params._id;
@@ -201,11 +209,29 @@ module.exports = function (app) {
   
   app.post("/admin/matches", function (req, res){
     api.createMatch(req.body, function (err, result) {
-      console.log(err);
-      console.log(result);
       res.redirect("/admin/matches");
     });
   });  
+
+  app.post("/admin/featuredMatches", function (req, res){
+    var matchId = req.body.match;
+
+    if (!matchId) return res.redirect("admin/featuredMatches");
+
+    api.getMatch(matchId, function (err, match) {
+      if (err) return res.redirect("/admin/featuredMatches");
+      if (!match) return res.redirect("/admin/featuredMatches");
+      var featuredMatchHash = {
+        match: match.id,
+        category: match.category,
+        game: match.game   
+      }
+      api.createFeaturedMatch(featuredMatchHash, function (err, result) {
+        res.redirect("admin/featuredMatches"); 
+      });
+    });
+  });  
+  
   
   app.post("/admin/convertmatches", function (req, res){
     api.createMatch(req.body, function (err, result) {      
