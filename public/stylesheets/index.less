@@ -3,10 +3,16 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   color: @text-color;
-  //font-family: 'Trebuchet MS', 'sans-serif';
   font-weight: 100;
   font-size: @font-smallish;
 }
+
+@tile-color-1: #ee8444;
+@tile-color-2: #c60c30;
+@tile-color-3: #6a656c;
+@tile-color-4: #f2f6f7;
+@tile-color-5: #060606;
+@tile-color-6: #D1D9DA;
 
 @import "variables.less";
 @import "mixins.less";
@@ -22,12 +28,7 @@
 
 @default-background-color: #1d1d1d;
 
-@tile-color-1: #ff6600;
-//@tile-color-2: #ff0000;
-@tile-color-2: darken(#ff0000, 9%);
-@tile-color-3: #6a656c;
-@tile-color-4: #f2f6f7;
-@tile-color-5: #060606;
+
 
 @text-color: @tile-color-4;
 
@@ -62,6 +63,7 @@ ul {
 
 body {
   background-color: @default-background-color;
+  font-family: 'Raleway', 'sans-serif';
 }
 
 .page-header {
@@ -113,7 +115,7 @@ body {
       height: @subheader-height;
       line-height: @subheader-height;
       padding-right: 24px;
-      color: @tile-color-3;
+      color: @tile-color-6;
     }
     .game {
       .hover-border(transparent);
@@ -155,7 +157,7 @@ body {
 
 .subheader {
   font-size: @font-medium;
-  color: @tile-color-3;
+  color: @tile-color-6;
   margin: 8px 0px 0px 0px;
   padding: 0px;
   .subheader-secondary {
@@ -179,15 +181,13 @@ body {
       height: 100%;
       margin-top: 6px;
       .vs {
-        .skew(-10deg, 0deg);
+        /* .skew(-10deg, 0deg); */
         width: 60%;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
-        font-family: Helvetica Arial sans-serif;
-        background-color: @tile-color-1;
-        //background-color: @tile-color-1;
-        color: lighten(@tile-color-5, 15%);
+       /*  background-color: @tile-color-1; */
+        color: white;
         font-weight: 600;
         font-style: italic;
       }
