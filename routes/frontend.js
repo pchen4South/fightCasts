@@ -86,20 +86,6 @@ module.exports = function (app) {
     });
   };
   
-  var checkForQueryParams = function(req, res){
-    var query = req.query;
-    console.log("req.query", query);
-    if (_.isEmpty(query)) returnIndex(req,res)
-    else{
-      console.log("nonempty query");
-      query = parseQuery(query);
-      api.getMatchesNested(query, function(err, results){
-        var payload = createPayload(results);
-        res.send(payload);
-        // res.render("index", payload);
-      });
-    }
-  };
   
   var parseQuery = function(query){
     var searchString = query.search;
