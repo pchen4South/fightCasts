@@ -24,7 +24,6 @@ passport.deserializeUser(function(user, done) {
 });
 
 function ensureAuthenticated(req, res, next) {
-  console.log('hi');
   if (req.isAuthenticated())
     return next();
   else
@@ -39,7 +38,7 @@ module.exports = function (app) {
   );
   
   app.get("/admin/login", function(req,res){
-    res.render('login');
+    res.render('login', {layout: "adminLayout"});
   });
     
   //read
