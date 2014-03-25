@@ -77,7 +77,7 @@ module.exports = function (app) {
   
     async.parallel({
       matches: async.apply(api.getMatchesNested, query),
-      featured: api.getFeatured 
+      featured: api.getFeaturedMatch 
     }, function (err, results) {
       //build payload.  replace the line below
       var payload = createPayload(results.matches, results.featured);

@@ -12,6 +12,7 @@ var team = require('./models/teamModel');
 var fighter = require('./models/fighterModel');
 var match = require('./models/matchModel');
 var submittedMatch = require('./models/submittedMatchModel');
+var featuredMatch = require('./models/featuredMatchModel');
 
 var formatDbResponse = function (result) {
   var cleaned;
@@ -122,11 +123,12 @@ var searchMatches = function(query, cb){
 }
 
 //Read
-
-var getFeatured = function (cb) {
-  setTimeout(function () {
-    cb(null, {}); 
-  }, 100);
+var getFeaturedMatch = function (cb) {
+  featuredMatch.model.findOne({sort: {"createdAt": -1}}, function (err, featuredMatch) {
+    if (err) return cb(err); 
+    else if (!featuredMatch) return cb(null, {});
+    else getMatchNested(featuredMatch._match, cb);
+  });
 }
 
 var getPerson = partial(get, person.model);
@@ -285,9 +287,7 @@ var getMatchesNested = function (query, cb) {
     cb = query;
     query = {};
   }
-  
-  console.log("QUERY: ", query);
-  
+
   match.model.find(query)
   .populate("_fighterOne")
   .populate("_fighterTwo")
@@ -407,5 +407,5 @@ module.exports = {
   getGamesNested: getGamesNested,
   
   searchMatches: searchMatches,
-  getFeatured: getFeatured
+  getFeaturedMatch: getFeaturedMatch
 }
