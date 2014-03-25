@@ -2506,7 +2506,8 @@ select[multiple].input-lg {
 }
 .tile-mixin {
   transition: border .4s;
-  border: 2px solid #060606;
+  box-shadow: 4px 4px #0e0e0e;
+  border: 2px solid #2c2c2c;
   position: relative;
   padding: 4px;
   height: 100%;
@@ -3112,7 +3113,8 @@ select[multiple].input-lg {
 .tile-match-featured {
   display: inline-block;
   transition: border .4s;
-  border: 2px solid #060606;
+  box-shadow: 4px 4px #0e0e0e;
+  border: 2px solid #2c2c2c;
   position: relative;
   padding: 4px;
   height: 100%;
@@ -3154,7 +3156,7 @@ select[multiple].input-lg {
   margin-right: 0px;
   padding-left: 12px;
   padding-right: 12px;
-  color: #ff7300;
+  color: #ee8444;
   font-weight: 300;
   font-size: 24px;
   font-weight: 100;
@@ -3166,7 +3168,7 @@ select[multiple].input-lg {
   font-size: 12px;
 }
 .tile-match-featured .fight-card-header .match-details .caster-list .caster-name {
-  color: #ff7300;
+  color: #ee8444;
   font-size: 12px;
 }
 .tile-match-featured .fight-card {
@@ -3176,7 +3178,8 @@ select[multiple].input-lg {
 .tile-match-listitem {
   display: inline-block;
   transition: border .4s;
-  border: 2px solid #060606;
+  box-shadow: 4px 4px #0e0e0e;
+  border: 2px solid #2c2c2c;
   position: relative;
   padding: 4px;
   height: 100%;
@@ -3192,7 +3195,8 @@ select[multiple].input-lg {
 .tile-match-listitemtall {
   display: inline-block;
   transition: border .4s;
-  border: 2px solid #060606;
+  box-shadow: 4px 4px #0e0e0e;
+  border: 2px solid #2c2c2c;
   position: relative;
   padding: 4px;
   height: 100%;
@@ -3230,7 +3234,7 @@ select[multiple].input-lg {
 .tile-match-listitemtall .fight-card-header .match-details .event-name {
   margin-left: 0px;
   margin-right: 0px;
-  color: #ff7300;
+  color: #ee8444;
   font-size: 12px;
 }
 .tile-match-listitemtall .fight-card-header .match-details .caster-list {
@@ -3239,7 +3243,7 @@ select[multiple].input-lg {
   font-size: 12px;
 }
 .tile-match-listitemtall .fight-card-header .match-details .caster-list .caster-name {
-  color: #ff7300;
+  color: #ee8444;
   font-size: 12px;
 }
 .tile-match-listitemtall .fight-card {
@@ -3258,7 +3262,8 @@ select[multiple].input-lg {
 }
 .tile-match-main {
   transition: border .4s;
-  border: 2px solid #060606;
+  box-shadow: 4px 4px #0e0e0e;
+  border: 2px solid #2c2c2c;
   position: relative;
   padding: 4px;
   height: 100%;
@@ -3277,7 +3282,8 @@ select[multiple].input-lg {
 }
 .tile-match-main-details {
   transition: border .4s;
-  border: 2px solid #060606;
+  box-shadow: 4px 4px #0e0e0e;
+  border: 2px solid #2c2c2c;
   position: relative;
   padding: 4px;
   height: 100%;
@@ -3301,7 +3307,7 @@ select[multiple].input-lg {
   font-size: 16px;
 }
 .tile-match-main-details .caster-list {
-  color: #ff7300;
+  color: #ee8444;
 }
 ul {
   list-style-type: none;
@@ -3353,6 +3359,7 @@ body {
 }
 .page-header .searchBar .searchForm .searchBox {
   transition: border .4s;
+  box-shadow: 4px 4px #0e0e0e;
   border: 2px solid #060606;
   display: inline-block;
   border-radius: 32px;
@@ -3384,10 +3391,11 @@ body {
   height: 32px;
   line-height: 32px;
   padding-right: 24px;
-  color: #6a656c;
+  color: #d1d9da;
 }
 .page-subheader .game-list .game {
   transition: border .4s;
+  box-shadow: 4px 4px #0e0e0e;
   border: 2px solid transparent;
   border-radius: 32px;
   display: inline-block;
@@ -3426,8 +3434,8 @@ body {
 }
 .page-subheader .game-list .game.active {
   background: #0d0d0d;
-  border: 2px solid #ff7300;
-  color: #ff7300;
+  border: 2px solid #ee8444;
+  color: #ee8444;
 }
 .page-subheader .game-list .game.active .icon {
   background-image: url("/images/SF4-trans.png");
@@ -3436,12 +3444,12 @@ body {
   background-position: center center;
 }
 .page-subheader .game-list .game.active .name {
-  color: #ff7300;
+  color: #ee8444;
 }
 .subheader {
   font-weight: 100;
   font-size: 24px;
-  color: #6a656c;
+  color: #d1d9da;
   margin: 8px 0px 0px 0px;
   padding: 0px;
 }
@@ -3473,15 +3481,13 @@ body {
   margin-top: 6px;
 }
 .fight-card .fighter-list .vs-box .vs {
-  -webkit-transform: skew(-10deg, 0deg);
-  -ms-transform: skewX(-10deg) skewY(0deg);
-  transform: skew(-10deg, 0deg);
+  /* .skew(-10deg, 0deg); */
   width: 60%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  background-color: #ff7300;
-  color: #2c2c2c;
+  /*  background-color: @tile-color-1; */
+  color: white;
   font-weight: 600;
   font-style: italic;
 }
