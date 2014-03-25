@@ -122,6 +122,13 @@ var searchMatches = function(query, cb){
 }
 
 //Read
+
+var getFeatured = function (cb) {
+  setTimeout(function () {
+    cb(null, {}); 
+  }, 100);
+}
+
 var getPerson = partial(get, person.model);
 var getCharacter = partial(get, character.model);
 var getGame = partial(get, game.model);
@@ -388,5 +395,6 @@ module.exports = {
   getFightersNested: getFightersNested,
   getGamesNested: getGamesNested,
   
-  searchMatches: searchMatches
+  searchMatches: searchMatches,
+  getFeatured: getFeatured
 }

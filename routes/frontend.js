@@ -1,11 +1,11 @@
 var _ = require('lodash');
+var async = require('async');
 var find = _.find;
 var first = _.first;
 var api = require('../api');
 var filter = _.filter;
 
 var createPayload = function (matches) {
-
   var matchesByCategory = sortByCategory(matches);
   
   matchesByCategory.pro.sort(sortByDateMostRecent);
@@ -60,23 +60,29 @@ var getFeaturedMatches = function(matchArray){
 };
 
 module.exports = function (app) {
+  //var returnIndex = function (req, res) {
+  //  api.getMatchesNested(function (err, matches) {
+  //    var payload = createPayload(matches);
+  //    res.render("index", payload); 
+  //   });
+
+  //};
+
   var returnIndex = function (req, res) {
-    api.getMatchesNested(function (err, matches) {
-      var payload = createPayload(matches);
-      res.render("index", payload); 
-     });
+    async.parallel({
+      matches: api.getMatchesNested,
+      featured: api.getFeatured 
+    }, function (err, results) {
+      //build payload.  replace the line below
+      var payload = createPayload(results.matches, results.featured);
+
+      res.render("index", payload);
+    });
   };
 
-  app.get("/test", function (req, res) {
-    res.render("test");
-  });
+
   app.get("/", returnIndex);
   app.get("/matches", returnIndex);
-  app.get("/matches/submit", function (req, res) {
-    api.getAll(function (err, results) {
-      res.render("submitForm", results); 
-    });
-  });
   app.get('/matches/:id', function (req, res) {
     var id = req.params.id;
     

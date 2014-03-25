@@ -3364,7 +3364,7 @@ body {
   display: inline-block;
 }
 .page-subheader {
-  border-bottom: 2px solid #f2f6f7;
+  border-bottom: 1px solid #f2f6f7;
   height: 32px;
 }
 .page-subheader .game-list {
@@ -3416,10 +3416,10 @@ body {
 }
 .page-subheader .game-list .game.active {
   background: #0d0d0d;
-  border-top: 2px solid #f2f6f7;
-  border-left: 2px solid #f2f6f7;
-  border-right: 2px solid #f2f6f7;
-  border-bottom: 2px solid transparent;
+  border-top: 1px solid #f2f6f7;
+  border-left: 1px solid #f2f6f7;
+  border-right: 1px solid #f2f6f7;
+  border-bottom: 1px solid transparent;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
