@@ -11,42 +11,33 @@
 </head>
 
 <body>
-  <nav class="container page-header">
-    <div class="row">
-      <a href="/" class="page-brand">fight casts</a> 
-      {{> searchBar}}      
-    </div>
-  </nav>
-
-  <div class="container page-subheader">
-    <div class="row">
-      <ul class="game-list">
-        <div class="subheader-text">
-          Choose a game: 
-        </div>
-        <li class="game active">
-          <div class="icon"></div>
-          <div class="name">
-            Street Fighter IV
-          </div>
-        </li> 
-        <li class="game">
-          <div class="icon"></div>
-          <div class="name">
-            Marvel vs Capcom III
-          </div>
-        </li> 
-        <li class="game">
-          <div class="icon"></div>
-          <div class="name">
-            Smash Bros. Melee
-          </div>
-        </li> 
-      </ul> 
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <a href="/" class="page-brand">fight casts</a> 
+        {{> searchBar}}      
+      </div>
     </div>
   </div>
 
-  <div class="container" id="main-content">
-    {{{body}}}
+  <div class="page-subheader">
+    <div class="container">
+      <div class="row">
+        <ul class="game-list">
+          <li class="game active">
+            <div class="icon"></div>
+            <div class="name">
+              Street Fighter IV
+            </div>
+          </li> 
+        </ul> 
+      </div>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <div class="container">
+      {{{body}}}
+    </div>
   </div>
 </body>

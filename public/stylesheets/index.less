@@ -20,11 +20,8 @@
 @icon-font-name: "glyphicons-halflings-regular";
 @import "glyphicons.less";
 
-@default-background-color: #1d1d1d;
-
 @tile-color-1: #ff6600;
-//@tile-color-2: #ff0000;
-@tile-color-2: darken(#ff0000, 9%);
+@tile-color-2: darken(#ff0000, 10%);
 @tile-color-3: #6a656c;
 @tile-color-4: #f2f6f7;
 @tile-color-5: #060606;
@@ -61,7 +58,12 @@ ul {
 }
 
 body {
-  background-color: @default-background-color;
+  margin: 0px;
+  background-color: @tile-color-2;
+}
+
+#main-content {
+  background-color: @tile-color-5;
 }
 
 .page-header {
@@ -87,10 +89,10 @@ body {
         .hover-border();
         display: inline-block;
         border-radius: 32px;
-        border: 2px solid @tile-color-3;
+        border: 2px solid @tile-color-4;
         width: 200px;
         height: 100%;
-        background: #0d0d0d;
+        background-color: @tile-color-5;
         color: @text-color;
       }
       .searchBtn {
@@ -101,9 +103,8 @@ body {
 }
 
 .page-subheader {
-  //background-color: @tile-color-2;
+  border-bottom: 2px solid @tile-color-4;
   height: @subheader-height;
-  padding-left: 2px;
   .game-list {
     margin: 0px;
     height: @subheader-height;
@@ -113,22 +114,16 @@ body {
       height: @subheader-height;
       line-height: @subheader-height;
       padding-right: 24px;
-      color: @tile-color-3;
     }
     .game {
-      .hover-border(transparent);
-      border-radius: 32px;
-      display: inline-block;
+      .tile-region-4();
       height: @subheader-height;
-      //this width is (lcd of 32 and 48) x 2
-      width: 192px;
-      float: left;
       .icon {
         display: inline-block;
         height: @subheader-height;
         float: left;
         width: 20%;
-        .center-bg("/images/SF4-gray-trans.png");
+        .center-bg("/images/SF4-gray.png");
       }
       .name {
         .text-overflow();
@@ -138,17 +133,15 @@ body {
         width: 80%;
         padding-top: 4px;
         text-align: left;
-        font-size: @font-smallish;
-        color: @tile-color-3;
       }
     }
 
     .game.active {
       background: #0d0d0d;
-      border: 2px solid @tile-color-4;
-      .name {
-        color: @tile-color-4;
-      }
+      border-top: 2px solid @tile-color-4;
+      border-left: 2px solid @tile-color-4;
+      border-right: 2px solid @tile-color-4;
+      border-bottom: 2px solid transparent;
     }
   }
 }

@@ -3148,7 +3148,6 @@ select[multiple].input-lg {
   margin-right: 0px;
   padding-left: 12px;
   padding-right: 12px;
-  color: #d10000;
   font-family: 'Trebuchet MS', 'sans-serif';
   font-weight: 300;
   text-shadow: 2px 2px black;
@@ -3160,7 +3159,7 @@ select[multiple].input-lg {
   color: #ff6600;
 }
 .tile-match-featured .fight-card-header .match-details .caster-list .caster-name {
-  color: #ff6600;
+  color: #cc0000;
   font-size: 12px;
 }
 .tile-match-featured .fight-card {
@@ -3223,7 +3222,6 @@ select[multiple].input-lg {
   margin-left: 0px;
   margin-right: 0px;
   font-family: 'Trebuchet MS', 'sans-serif';
-  color: #d10000;
   font-size: 12px;
 }
 .tile-match-listitemtall .fight-card-header .match-details .caster-list {
@@ -3232,7 +3230,7 @@ select[multiple].input-lg {
   font-size: 12px;
 }
 .tile-match-listitemtall .fight-card-header .match-details .caster-list .caster-name {
-  color: #ff6600;
+  color: #cc0000;
   font-size: 12px;
 }
 .tile-match-listitemtall .fight-card {
@@ -3299,7 +3297,11 @@ ul {
   padding-left: 0px;
 }
 body {
-  background-color: #1d1d1d;
+  margin: 0px;
+  background-color: #cc0000;
+}
+#main-content {
+  background-color: #060606;
 }
 .page-header {
   min-height: 96px;
@@ -3346,10 +3348,10 @@ body {
   border: 2px solid #060606;
   display: inline-block;
   border-radius: 32px;
-  border: 2px solid #6a656c;
+  border: 2px solid #f2f6f7;
   width: 200px;
   height: 100%;
-  background: #0d0d0d;
+  background-color: #060606;
   color: #f2f6f7;
 }
 .page-header .searchBar .searchForm .searchBox:focus {
@@ -3362,8 +3364,8 @@ body {
   display: inline-block;
 }
 .page-subheader {
+  border-bottom: 2px solid #f2f6f7;
   height: 32px;
-  padding-left: 2px;
 }
 .page-subheader .game-list {
   margin: 0px;
@@ -3375,29 +3377,28 @@ body {
   height: 32px;
   line-height: 32px;
   padding-right: 24px;
-  color: #6a656c;
 }
 .page-subheader .game-list .game {
-  transition: border .4s;
-  border: 2px solid transparent;
-  border-radius: 32px;
-  display: inline-block;
-  height: 32px;
-  width: 192px;
+  position: relative;
   float: left;
+  width: 16.66666667%;
+  min-height: 1px;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 128px;
+  height: 32px;
 }
-.page-subheader .game-list .game:focus {
-  border: 2px solid #f2f6f7;
-}
-.page-subheader .game-list .game:hover {
-  border: 2px solid #f2f6f7;
+@media (min-width: 1200px) {
+  .page-subheader .game-list .game {
+    width: 192px;
+  }
 }
 .page-subheader .game-list .game .icon {
   display: inline-block;
   height: 32px;
   float: left;
   width: 20%;
-  background-image: url("/images/SF4-gray-trans.png");
+  background-image: url("/images/SF4-gray.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -3412,15 +3413,13 @@ body {
   width: 80%;
   padding-top: 4px;
   text-align: left;
-  font-size: 16px;
-  color: #6a656c;
 }
 .page-subheader .game-list .game.active {
   background: #0d0d0d;
-  border: 2px solid #f2f6f7;
-}
-.page-subheader .game-list .game.active .name {
-  color: #f2f6f7;
+  border-top: 2px solid #f2f6f7;
+  border-left: 2px solid #f2f6f7;
+  border-right: 2px solid #f2f6f7;
+  border-bottom: 2px solid transparent;
 }
 .subheader {
   font-size: 24px;
@@ -3492,7 +3491,7 @@ body {
 }
 .fight-card .fighter-list .fighter .character-list .character-name {
   vertical-align: top;
-  color: #d10000;
+  color: #cc0000;
   font-size: 12px;
   font-style: italic;
 }
