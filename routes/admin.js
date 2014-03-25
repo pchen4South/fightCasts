@@ -23,7 +23,7 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
-function ensureAuthenticated(req, res, next) {
+var ensureAuthenticated = function (req, res, next) {
   if (req.isAuthenticated())
     return next();
   else
