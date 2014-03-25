@@ -5,6 +5,8 @@ var first = _.first;
 var api = require('../api');
 var filter = _.filter;
 
+var gameFilter = {default: 'SF4'};
+
 var createPayload = function (matches) {
   var matchesByCategory = sortByCategory(matches);
   
@@ -18,7 +20,7 @@ var createPayload = function (matches) {
       pro: getFeaturedMatches(matchesByCategory.pro)[0] || {},
       community: getFeaturedMatches(matchesByCategory.community)[0] || {}, 
       scrub: getFeaturedMatches(matchesByCategory.scrub)[0] || {}, 
-      default: matchesByCategory.pro[0], 
+      default: matchesByCategory.pro[0],
     },
     communityMatches: first(matchesByCategory.community, 3)
   };
@@ -59,28 +61,30 @@ var getFeaturedMatches = function(matchArray){
   else return [{}];
 };
 
+
 module.exports = function (app) {
-  //var returnIndex = function (req, res) {
-  //  api.getMatchesNested(function (err, matches) {
-  //    var payload = createPayload(matches);
-  //    res.render("index", payload); 
-  //   });
-
-  //};
-
   var returnIndex = function (req, res) {
+    var query = req.query;
+    if (!_.isEmpty(query)){query = parseQuery(query)};
+  
     async.parallel({
-      matches: api.getMatchesNested,
-      featured: api.getFeaturedMatch
+      matches: async.apply(api.getMatchesNested, query),
+      featured: api.getFeaturedMatch 
     }, function (err, results) {
       //build payload.  replace the line below
       var payload = createPayload(results.matches, results.featured);
 
-      console.log(results.featured);
       res.render("index", payload);
     });
   };
-
+    
+  var parseQuery = function(query){
+    var searchString = query.search;
+    var gameString = query.game;
+    
+    if(!gameString){gameString = "SF4"}
+    return {title: {"$regex": new RegExp(searchString, "i")}};
+  };
 
   app.get("/", returnIndex);
   app.get("/matches", returnIndex);

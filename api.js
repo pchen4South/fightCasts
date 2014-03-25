@@ -108,30 +108,6 @@ var getMultiple = function (modelType, cb) {
   });
 };
 
-var searchMatches = function(query, cb){
-  match.model.find(query)
-  .populate("_fighterOne")
-  .populate("_fighterTwo")
-  .populate("_videos")
-  .populate("_teams")
-  .populate("_event")
-  .populate("_game")
-  .populate("_channel")
-  .populate("_casters")
-  .exec(function (err, res) {
-    match.model.populate(res, personOneOptions, function (err, matches) {
-      match.model.populate(matches, charactersOneOptions, function (err, results) {
-        match.model.populate(matches, personTwoOptions, function (err, results) {
-          match.model.populate(matches, charactersTwoOptions, function (err, results) {
-            if (err) cb(err); 
-            else cb(null, map(results, formatNestedMatch));   
-          });
-        });
-      });
-    });
-  });
-}
-
 //Read
 var getFeaturedMatch = function (cb) {
   featuredMatch.model.findOne({sort: {"createdAt": -1}}, function (err, featuredMatch) {
@@ -196,12 +172,14 @@ var formatNestedFighter = function (monFighter) {
 };
 
 var formatNestedGame = function (monGame) {
-  return {
-    id: monGame["_id"],
-    name: monGame.name,
-    nickname: monGame.nickname,
-    characters: map(monGame["_characters"], formatDbResponse)
-  };
+  if(monGame){
+    return {
+      id: monGame["_id"],
+      name: monGame.name,
+      nickname: monGame.nickname,
+      characters: map(monGame["_characters"], formatDbResponse)
+    }
+  }else return {};
 };
 
 var formatNestedMatch = function (monMatch) {
@@ -289,8 +267,15 @@ var getFightersNested = function (cb) {
   });
 };
 
-var getMatchesNested = function (cb) {
-  match.model.find()
+var getMatchesNested = function (query, cb) {
+  
+  //check for existing query, if not then query should be empty and cb should be function
+  if(typeof query === typeof(Function)){
+    cb = query;
+    query = {};
+  }
+
+  match.model.find(query)
   .populate("_fighterOne")
   .populate("_fighterTwo")
   .populate("_videos")
@@ -410,7 +395,6 @@ module.exports = {
   getMatchesNested: getMatchesNested,
   getFightersNested: getFightersNested,
   getGamesNested: getGamesNested,
-  
-  searchMatches: searchMatches,
+
   getFeaturedMatch: getFeaturedMatch
 }
