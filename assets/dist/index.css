@@ -5,7 +5,6 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   color: #f2f6f7;
-  font-family: 'Raleway', 'sans-serif';
   font-weight: 100;
   font-size: 16px;
 }
@@ -2507,12 +2506,11 @@ select[multiple].input-lg {
 }
 .tile-mixin {
   transition: border .4s;
-  border: 2px solid #060606;
+  border: 2px solid #6a656c;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: #2c2c2c;
 }
 .tile-mixin:focus {
   border: 2px solid #f2f6f7;
@@ -3113,12 +3111,11 @@ select[multiple].input-lg {
 .tile-match-featured {
   display: inline-block;
   transition: border .4s;
-  border: 2px solid #060606;
+  border: 2px solid #6a656c;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: #2c2c2c;
 }
 .tile-match-featured:hover {
   text-decoration: none;
@@ -3132,10 +3129,6 @@ select[multiple].input-lg {
 .tile-match-featured .fight-card-header {
   height: 75%;
   padding: 4px 4px 6px 4px;
-  background-image: url("/images/SF4-gray-trans.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
 }
 .tile-match-featured .fight-card-header .flags {
   margin-left: 0px;
@@ -3155,19 +3148,19 @@ select[multiple].input-lg {
   margin-right: 0px;
   padding-left: 12px;
   padding-right: 12px;
-  color: #ff7300;
+  color: #d10000;
+  font-family: 'Trebuchet MS', 'sans-serif';
   font-weight: 300;
-  font-size: 24px;
-  font-weight: 100;
   text-shadow: 2px 2px black;
 }
 .tile-match-featured .fight-card-header .match-details .caster-list {
   margin-left: 0px;
   margin-right: 0px;
   font-size: 12px;
+  color: #ff6600;
 }
 .tile-match-featured .fight-card-header .match-details .caster-list .caster-name {
-  color: #ff7300;
+  color: #ff6600;
   font-size: 12px;
 }
 .tile-match-featured .fight-card {
@@ -3177,12 +3170,11 @@ select[multiple].input-lg {
 .tile-match-listitem {
   display: inline-block;
   transition: border .4s;
-  border: 2px solid #060606;
+  border: 2px solid #6a656c;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: #2c2c2c;
 }
 .tile-match-listitem:focus {
   border: 2px solid #f2f6f7;
@@ -3193,12 +3185,11 @@ select[multiple].input-lg {
 .tile-match-listitemtall {
   display: inline-block;
   transition: border .4s;
-  border: 2px solid #060606;
+  border: 2px solid #6a656c;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: #2c2c2c;
 }
 .tile-match-listitemtall:hover {
   text-decoration: none;
@@ -3231,7 +3222,8 @@ select[multiple].input-lg {
 .tile-match-listitemtall .fight-card-header .match-details .event-name {
   margin-left: 0px;
   margin-right: 0px;
-  color: #ff7300;
+  font-family: 'Trebuchet MS', 'sans-serif';
+  color: #d10000;
   font-size: 12px;
 }
 .tile-match-listitemtall .fight-card-header .match-details .caster-list {
@@ -3240,7 +3232,7 @@ select[multiple].input-lg {
   font-size: 12px;
 }
 .tile-match-listitemtall .fight-card-header .match-details .caster-list .caster-name {
-  color: #ff7300;
+  color: #ff6600;
   font-size: 12px;
 }
 .tile-match-listitemtall .fight-card {
@@ -3259,12 +3251,11 @@ select[multiple].input-lg {
 }
 .tile-match-main {
   transition: border .4s;
-  border: 2px solid #060606;
+  border: 2px solid #6a656c;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: #2c2c2c;
 }
 .tile-match-main:focus {
   border: 2px solid #f2f6f7;
@@ -3278,12 +3269,11 @@ select[multiple].input-lg {
 }
 .tile-match-main-details {
   transition: border .4s;
-  border: 2px solid #060606;
+  border: 2px solid #6a656c;
   position: relative;
   padding: 4px;
   height: 100%;
   width: 100%;
-  background-color: #2c2c2c;
 }
 .tile-match-main-details:focus {
   border: 2px solid #f2f6f7;
@@ -3302,7 +3292,7 @@ select[multiple].input-lg {
   font-size: 16px;
 }
 .tile-match-main-details .caster-list {
-  color: #ff7300;
+  color: #ff6600;
 }
 ul {
   list-style-type: none;
@@ -3313,6 +3303,7 @@ body {
 }
 .page-header {
   min-height: 96px;
+  padding-left: 2px;
 }
 .page-header .page-brand {
   position: relative;
@@ -3322,7 +3313,6 @@ body {
   padding-left: 0px;
   padding-right: 0px;
   font-size: 48px;
-  font-weight: 100;
   text-decoration: none;
   color: #f2f6f7;
 }
@@ -3373,6 +3363,7 @@ body {
 }
 .page-subheader {
   height: 32px;
+  padding-left: 2px;
 }
 .page-subheader .game-list {
   margin: 0px;
@@ -3426,20 +3417,12 @@ body {
 }
 .page-subheader .game-list .game.active {
   background: #0d0d0d;
-  border: 2px solid #ff7300;
-  color: #ff7300;
-}
-.page-subheader .game-list .game.active .icon {
-  background-image: url("/images/SF4-trans.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
+  border: 2px solid #f2f6f7;
 }
 .page-subheader .game-list .game.active .name {
-  color: #ff7300;
+  color: #f2f6f7;
 }
 .subheader {
-  font-weight: 100;
   font-size: 24px;
   color: #6a656c;
   margin: 8px 0px 0px 0px;
@@ -3480,7 +3463,8 @@ body {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  background-color: #ff7300;
+  font-family: Helvetica Arial sans-serif;
+  background-color: #ff6600;
   color: #2c2c2c;
   font-weight: 600;
   font-style: italic;
@@ -3501,13 +3485,14 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: bottom;
+  text-shadow: 2px 2px black;
 }
 .fight-card .fighter-list .fighter .character-list {
   margin-top: -6px;
 }
 .fight-card .fighter-list .fighter .character-list .character-name {
   vertical-align: top;
-  color: #c60c30;
+  color: #d10000;
   font-size: 12px;
   font-style: italic;
 }

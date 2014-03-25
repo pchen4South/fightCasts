@@ -3,7 +3,7 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   color: @text-color;
-  font-family: 'Raleway', 'sans-serif';
+  //font-family: 'Trebuchet MS', 'sans-serif';
   font-weight: 100;
   font-size: @font-smallish;
 }
@@ -22,8 +22,9 @@
 
 @default-background-color: #1d1d1d;
 
-@tile-color-1: #ff7300;
-@tile-color-2: #c60c30;
+@tile-color-1: #ff6600;
+//@tile-color-2: #ff0000;
+@tile-color-2: darken(#ff0000, 9%);
 @tile-color-3: #6a656c;
 @tile-color-4: #f2f6f7;
 @tile-color-5: #060606;
@@ -65,10 +66,10 @@ body {
 
 .page-header {
   min-height: 96px;
+  padding-left: 2px;
   .page-brand {
     .make-xs-column(6, 0px);
     font-size: @font-large;
-    font-weight: 100;
     text-decoration: none;
     color: @text-color;
   }
@@ -100,7 +101,9 @@ body {
 }
 
 .page-subheader {
+  //background-color: @tile-color-2;
   height: @subheader-height;
+  padding-left: 2px;
   .game-list {
     margin: 0px;
     height: @subheader-height;
@@ -142,20 +145,15 @@ body {
 
     .game.active {
       background: #0d0d0d;
-      border: 2px solid @tile-color-1;
-      color: @tile-color-1;
-      .icon {
-        .center-bg("/images/SF4-trans.png");
-      }
+      border: 2px solid @tile-color-4;
       .name {
-        color: @tile-color-1;
+        color: @tile-color-4;
       }
     }
   }
 }
 
 .subheader {
-  font-weight: 100;
   font-size: @font-medium;
   color: @tile-color-3;
   margin: 8px 0px 0px 0px;
@@ -186,7 +184,9 @@ body {
         margin-left: auto;
         margin-right: auto;
         text-align: center;
+        font-family: Helvetica Arial sans-serif;
         background-color: @tile-color-1;
+        //background-color: @tile-color-1;
         color: lighten(@tile-color-5, 15%);
         font-weight: 600;
         font-style: italic;
@@ -199,6 +199,7 @@ body {
         .make-row(0px);
         .text-overflow();
         vertical-align: bottom;
+        text-shadow: 2px 2px black;
       }
       .character-list {
         margin-top: -6px;
@@ -220,6 +221,7 @@ body {
     }
   }
 }
+
 img.gameLogoSmall{
   width: 32px;
   height: 32px;
