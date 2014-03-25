@@ -71,11 +71,12 @@ module.exports = function (app) {
   var returnIndex = function (req, res) {
     async.parallel({
       matches: api.getMatchesNested,
-      featured: api.getFeatured 
+      featured: api.getFeaturedMatch
     }, function (err, results) {
       //build payload.  replace the line below
       var payload = createPayload(results.matches, results.featured);
 
+      console.log(results.featured);
       res.render("index", payload);
     });
   };
