@@ -98,30 +98,6 @@ var getMultiple = function (modelType, cb) {
   });
 };
 
-var searchMatches = function(query, cb){
-  match.model.find(query)
-  .populate("_fighterOne")
-  .populate("_fighterTwo")
-  .populate("_videos")
-  .populate("_teams")
-  .populate("_event")
-  .populate("_game")
-  .populate("_channel")
-  .populate("_casters")
-  .exec(function (err, res) {
-    match.model.populate(res, personOneOptions, function (err, matches) {
-      match.model.populate(matches, charactersOneOptions, function (err, results) {
-        match.model.populate(matches, personTwoOptions, function (err, results) {
-          match.model.populate(matches, charactersTwoOptions, function (err, results) {
-            if (err) cb(err); 
-            else cb(null, map(results, formatNestedMatch));   
-          });
-        });
-      });
-    });
-  });
-}
-
 //Read
 var getFeaturedMatch = function (cb) {
   featuredMatch.model.findOne({sort: {"createdAt": -1}}, function (err, featuredMatch) {
@@ -405,7 +381,6 @@ module.exports = {
   getMatchesNested: getMatchesNested,
   getFightersNested: getFightersNested,
   getGamesNested: getGamesNested,
-  
-  searchMatches: searchMatches,
+
   getFeaturedMatch: getFeaturedMatch
 }

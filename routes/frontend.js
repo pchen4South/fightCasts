@@ -20,7 +20,7 @@ var createPayload = function (matches) {
       pro: getFeaturedMatches(matchesByCategory.pro)[0] || {},
       community: getFeaturedMatches(matchesByCategory.community)[0] || {}, 
       scrub: getFeaturedMatches(matchesByCategory.scrub)[0] || {}, 
-      default: matchesByCategory.pro[0], 
+      default: matchesByCategory.pro[0],
     },
     communityMatches: first(matchesByCategory.community, 3)
   };
@@ -63,14 +63,6 @@ var getFeaturedMatches = function(matchArray){
 
 
 module.exports = function (app) {
-  //var returnIndex = function (req, res) {
-  //  api.getMatchesNested(function (err, matches) {
-  //    var payload = createPayload(matches);
-  //    res.render("index", payload); 
-  //   });
-
-  //};
-
   var returnIndex = function (req, res) {
     var query = req.query;
     if (!_.isEmpty(query)){query = parseQuery(query)};
@@ -85,8 +77,7 @@ module.exports = function (app) {
       res.render("index", payload);
     });
   };
-  
-  
+    
   var parseQuery = function(query){
     var searchString = query.search;
     var gameString = query.game;
