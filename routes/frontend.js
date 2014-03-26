@@ -91,9 +91,19 @@ module.exports = function (app) {
   app.get('/matches/:id', function (req, res) {
     var id = req.params.id;
     
-    api.getMatchNested(id, function (err, match) {
-      res.render("match", match); 
-    });
+    async.parallel({
+      matches: api.getMatchesNested,
+      featured: api.getFeaturedMatch 
+    }, function (err, results) {
+      //build payload.  replace the line below
+      var payload = createPayload(results.matches, results.featured);
+    
+      api.getMatchNested(id, function (err, match) {
+      
+        payload.focusedMatch = match;
+        res.render("index", payload); 
+      });
+    })   
   });
 };
 

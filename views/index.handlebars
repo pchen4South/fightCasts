@@ -27,15 +27,27 @@
 </div>
 
 <div class="col-xs-10">
+  {{#if focusedMatch}}
+    {{#with focusedMatch}}
+    <div class="tile-10x1">
+      <h3 class="subheader">
+        match details /
+        <span class="subheader-secondary">{{title}}</span>
+      </h3> 
+    </div>
+    {{> tiles/match-tile-main}}
+    {{/with}}
+  {{else}}
   {{#with featuredMatches.pro}}
-  <div class="tile-10x1">
-    <h3 class="subheader">
-      match details /
-      <span class="subheader-secondary">{{title}}</span>
-    </h3> 
-  </div>
-  {{> tiles/match-tile-main}}
-  {{/with}}
+    <div class="tile-10x1">
+      <h3 class="subheader">
+        match details /
+        <span class="subheader-secondary">{{title}}</span>
+      </h3> 
+    </div>
+    {{> tiles/match-tile-main}}
+    {{/with}}
+  {{/if}}
 </div>
 
 <div class="tile-region-7">
