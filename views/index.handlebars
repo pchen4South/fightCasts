@@ -1,7 +1,7 @@
 <div class="tile-region-7">
 
-  {{#if featuredMatches.pro}}
-  {{#with featuredMatches.pro}}
+  {{#if featuredPro}}
+  {{#with featuredPro}}
   <div class="tile-6x1">
     <h3 class="subheader">top pro matches</h3> 
   </div>
@@ -17,7 +17,7 @@
     <h3 class="subheader">new pro matches</h3> 
   </div>
   <div class="tile-1x1"></div>
-  {{#each matches.pro}}
+  {{#each proMatches}}
     <div class="tile-6x2">
       {{> tiles/match-tile-listitemtall}}
     </div>
@@ -38,7 +38,7 @@
     {{> tiles/match-tile-main}}
     {{/with}}
   {{else}}
-  {{#with featuredMatches.pro}}
+  {{#with featuredPro}}
     <div class="tile-10x1">
       <h3 class="subheader">
         match details /
@@ -52,13 +52,13 @@
 
 <div class="tile-region-7">
 
-  {{#if featuredMatches.community}}
+  {{#if featuredCommunity}}
   <div class="tile-1x1"></div>
   <div class="tile-6x1">
     <h3 class="subheader">top community matches</h3> 
   </div>
   <div class="tile-1x1"></div>
-  {{#with featuredMatches.community}}
+  {{#with featuredCommunity}}
   <div class="tile-6x4">
     {{> tiles/match-tile-featured}}
   </div>
@@ -69,7 +69,7 @@
   <div class="tile-6x1">
     <h3 class="subheader">new community matches</h3> 
   </div>
-  {{#each matches.community}}
+  {{#each communityMatches}}
     <div class="tile-1x2">
     </div>
     <div class="tile-6x2">

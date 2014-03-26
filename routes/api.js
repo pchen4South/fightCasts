@@ -142,7 +142,3 @@ var getFeaturedMatches = function(matchArray){
   });
   return featured;
 };
-
-
-
-
