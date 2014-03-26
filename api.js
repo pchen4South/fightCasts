@@ -117,7 +117,6 @@ var getMultiple = function (modelType, cb) {
 
 var getFeaturedMatch = function (params, cb) {
   featuredMatch.model.findOne(params, {}, {sort: {"createdAt": -1}}, function (err, featuredMatch) {
-    console.log(featuredMatch);
     if (err) return cb(err); 
     else if (!featuredMatch) return cb(null, {});
     else getMatchNested(featuredMatch._match, cb);

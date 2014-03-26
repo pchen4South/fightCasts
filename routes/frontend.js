@@ -44,7 +44,7 @@ module.exports = function (app) {
         featuredCommunity: results.featuredCommunity
       };
 
-      res.send("index", payload); 
+      res.render("index", payload); 
     }); 
   });
   app.get('/matches/:id', function (req, res) {
