@@ -84,16 +84,15 @@
 
 html{
   height: 100%;
-  background: @tile-color-5;
 }
 
 body {
   margin: 0px;
-  background-color: @tile-color-2;
+  background-color: @background-color;
 }
 
 #main-content {
-  background-color: @tile-color-5;
+  background-color: @background-dark;
 }
 
 ul {
@@ -104,7 +103,7 @@ ul {
 .search-box {
   border: 2px solid @hover-color;
   border-radius: 32px;
-  background-color: @background-color;
+  background-color: transparent;
 }
 
 .page-header {
@@ -115,7 +114,7 @@ ul {
     .header();
     .site-header();
   }
-  .search-bar{
+  .search-bar {
     .tile-region-4();
     .tile-offset-1();
     top: 24px;
