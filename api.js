@@ -89,8 +89,8 @@ var createMatch = function(data, cb){
 var createFeaturedMatch = function (data, cb) {
   var formatted = {
     _match: data.match,
-    category: data.category,
-    game: "SF4AE2012"
+    _game: data.game,
+    category: data.category
   };
   return featuredMatch.model.create(formatted, cb);
 };
@@ -109,8 +109,9 @@ var getMultiple = function (modelType, cb) {
 };
 
 //Read
-var getFeaturedMatch = function (cb) {
-  featuredMatch.model.findOne({sort: {"createdAt": -1}}, function (err, featuredMatch) {
+
+var getFeaturedMatch = function (params, cb) {
+  featuredMatch.model.findOne(params, {}, {sort: {"createdAt": -1}}, function (err, featuredMatch) {
     if (err) return cb(err); 
     else if (!featuredMatch) return cb(null, {});
     else getMatchNested(featuredMatch._match, cb);
@@ -268,9 +269,7 @@ var getFightersNested = function (cb) {
 };
 
 var getMatchesNested = function (query, cb) {
-  
-  //check for existing query, if not then query should be empty and cb should be function
-  if(typeof query === typeof(Function)){
+  if (typeof query === "Function"){
     cb = query;
     query = {};
   }

@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var matchSchema = require('./matchModel').schema;
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var FeaturedMatches = new mongoose.Schema({
-  _match: {type: mongoose.Schema.Types.ObjectId, ref: "Match"},
-  //TODO: implement some kind of game field whether foreign key or string
-  game: String,
+  _match: {type: ObjectId, ref: "Match"},
+  _game: {type: ObjectId, ref: "Game"},
   category: String
 });
 
