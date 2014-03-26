@@ -41,6 +41,7 @@ var createEvent = partial(create, event.model);
 var createChannel = partial(create, channel.model);
 var createTeam = partial(create, team.model);
 var createSubmittedMatch = partial(create, submittedMatch.model);
+var createFeaturedMatch = partial(create, featuredMatch.model);
 
 var createCharacter = function(chardata, cb){
   character.model.create(chardata, function(err, newchar){
@@ -49,8 +50,8 @@ var createCharacter = function(chardata, cb){
       game.model.find({nickname: newchar.game})
       .populate('_characters')
       .exec(function(err, game){
-        if(err){console.log(err)}
-        else{
+        if (err) console.log(err);
+        else {
           game = game[0];
           game._characters.push(newchar);
           game.save(cb);
@@ -85,6 +86,15 @@ var createMatch = function(data, cb){
   return match.model.create(formatted, cb);
 };
 
+var createFeaturedMatch = function (data, cb) {
+  var formatted = {
+    _match: data.match,
+    _game: data.game,
+    category: data.category
+  };
+  return featuredMatch.model.create(formatted, cb);
+};
+
 var get = function (modelType, id, cb) {
   return modelType.findById(id, function (err, res) {
     return cb(err, formatDbResponse(res)); 
@@ -99,8 +109,9 @@ var getMultiple = function (modelType, cb) {
 };
 
 //Read
-var getFeaturedMatch = function (cb) {
-  featuredMatch.model.findOne({sort: {"createdAt": -1}}, function (err, featuredMatch) {
+
+var getFeaturedMatch = function (params, cb) {
+  featuredMatch.model.findOne(params, {}, {sort: {"createdAt": -1}}, function (err, featuredMatch) {
     if (err) return cb(err); 
     else if (!featuredMatch) return cb(null, {});
     else getMatchNested(featuredMatch._match, cb);
@@ -128,6 +139,7 @@ var getTeams = partial(getMultiple, team.model);
 var getFighters = partial(getMultiple, fighter.model);
 var getMatches = partial(getMultiple, match.model);
 var getSubmittedMatches = partial(getMultiple, submittedMatch.model);
+var getFeaturedMatches = partial(getMultiple, featuredMatch.model);
 
 //helpers for getMatchNested
 var personOneOptions = {
@@ -257,9 +269,7 @@ var getFightersNested = function (cb) {
 };
 
 var getMatchesNested = function (query, cb) {
-  
-  //check for existing query, if not then query should be empty and cb should be function
-  if(typeof query === typeof(Function)){
+  if (typeof query === "Function"){
     cb = query;
     query = {};
   }
@@ -299,7 +309,8 @@ var getAll = function (cb) {
     channels: getChannels,
     teams: getTeams,
     fighters: getFightersNested,
-    matches: getMatchesNested
+    matches: getMatchesNested,
+    featuredMatches: getFeaturedMatches
   }, cb);
 };
 
@@ -353,6 +364,7 @@ module.exports = {
   createFighter: createFighter,
   createMatch: createMatch,
   createSubmittedMatch: createSubmittedMatch,
+  createFeaturedMatch: createFeaturedMatch,
   
   getAll: getAll,
   getPerson: getPerson, 
@@ -378,6 +390,7 @@ module.exports = {
   getTeams: getTeams,
   getFighters: getFighters,
   getMatches: getMatches,
+  getFeaturedMatches: getFeaturedMatches,
   getMatchesNested: getMatchesNested,
   getFightersNested: getFightersNested,
   getGamesNested: getGamesNested,
