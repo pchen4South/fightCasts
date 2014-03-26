@@ -269,11 +269,12 @@ var getFightersNested = function (cb) {
 };
 
 var getMatchesNested = function (query, cb) {
-  if (typeof query === "Function"){
+  
+  if (typeof query === typeof(Function)){
     cb = query;
     query = {};
   }
-
+  
   match.model.find(query)
   .populate("_fighterOne")
   .populate("_fighterTwo")
