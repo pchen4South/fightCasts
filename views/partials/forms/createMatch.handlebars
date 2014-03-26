@@ -5,7 +5,7 @@
     <input class="form-control" type="text" name="title" id="title" placeholder="match title">
     </input>
     
-    <label for="title">Description</label>
+    <label for="description">Description</label>
     <textarea class="form-control" type="text" name="description" id="description" placeholder="description">
     </textarea>
     </input>
@@ -45,6 +45,10 @@
       {{#each events}}
         <option value={{id}}>{{name}}</option>
       {{/each}}
+    </select>
+    
+    <label for="playedAt">Date Played</label>
+    <input class="form-control" type="text" name="playedAt" id="playedAt" placeholder="mm/dd/yyyy">
     </select>
 
 

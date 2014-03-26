@@ -70,11 +70,15 @@ var createFighter = function (data, cb) {
 };
 
 var createMatch = function(data, cb){
+  var dateString = data.playedAt.split("/");
+  var jsDate = new Date(dateString[2], dateString[0] - 1, dateString[1]);
+
   var formatted = {
     approved: data.approved,
     title: data.title,
     category: data.category,
     description: data.description,
+    playedAt: jsDate,
     _casters: data.casters,
     _fighterOne: data.fighterOne,
     _fighterTwo: data.fighterTwo,
@@ -202,7 +206,8 @@ var formatNestedMatch = function (monMatch) {
       channel: formatDbResponse(monMatch["_channel"]),
       category: monMatch.category,
       createdAt: monMatch.createdAt,
-      updatedAt: monMatch.updatedAt
+      updatedAt: monMatch.updatedAt,
+      playedAt: monMatch.playedAt
     };
   } else return {};
 };
