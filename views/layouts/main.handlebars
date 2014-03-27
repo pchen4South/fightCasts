@@ -5,30 +5,39 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="page-header">
-      <a href="/" class="page-brand">fight casts</a> 
-      <div class="search-bar">
-        {{> searchBar}}      
-      </div>
-    </div>
-  </div>
-
-  <div class="page-subheader">
+  <div id="header">
     <div class="container">
-      <div class="row">
-        <ul class="game-list">
-          <li class="game active">
-            <div class="icon"></div>
-            <div class="name">
-              Street Fighter IV
-            </div>
-          </li> 
-        </ul> 
+      <div class="page-header">
+        <a href="/" class="page-brand">fight casts</a> 
+        <div class="search-bar">
+          {{> searchBar}}      
+        </div>
       </div>
     </div>
+
+    <div class="container">
+      <div class="page-subheader">
+        <div class="tab-wrapper">
+          <div class="tab active">
+          </div>
+        </div>
+        <div class="tab-wrapper">
+          <div class="tab">
+          </div>
+        </div>
+        <div class="tab-wrapper">
+          <div class="tab">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- this divider provides the base border between sections -->
+    <div id="divider"></div>
+
   </div>
 
+  
   <div id="main-content">
     <div class="container">
       {{{body}}}

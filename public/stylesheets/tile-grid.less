@@ -16,7 +16,7 @@
 
 .tile-grid-mixin (@x: 1, @y: 1) {
   .make-xs-column(@x, 0px);
-  padding: 4px !important;
+  padding: 4px;
   height: (@y*32px);
   width: (@x*32px);
   @media (min-width: @screen-lg-min) {
@@ -72,6 +72,14 @@
 
 .tile-1x8 {
   .tile-grid-mixin(1, 8);
+}
+
+.tile-2x1 {
+  .tile-grid-mixin(2, 1);
+}
+
+.tile-3x1 {
+  .tile-grid-mixin(3, 1);
 }
 
 .tile-4x1 {

@@ -12,7 +12,7 @@
 
 @tile-color-1: #ff6600;
 @tile-color-2: darken(#ff0000, 10%);
-@tile-color-3: #6a656c;
+@tile-color-3: lighten(#6a656c, 10%);
 @tile-color-4: #f2f6f7;
 @tile-color-5: #060606;
 
@@ -23,6 +23,12 @@
 @background-light: @tile-color-3;
 @background-color: @tile-color-2;
 @hover-color: @tile-color-4;
+@border-color: @tile-color-4;
+@border-light-color: @tile-color-3;
+@tab-color: @tile-color-5;
+@tab-active-color: @tile-color-5;
+@tab-border-color: @tile-color-3;
+@tab-active-border-color: @tile-color-4;
 
 @default-tile-color: @tile-color-3;
 
@@ -53,12 +59,10 @@
 }
 
 .content-text {
-  font-family: "Verdana", "Geneva", sans-serif;
+  font-family: "Tahoma", "Geneva", sans-serif;
   font-size: @font-smallish;
-  font-weight: 100;
 }
 
-//new more semantically meaningful font names
 .site-header {
   font-size: @font-large;
   color: @header-color;
@@ -75,23 +79,33 @@
 }
 
 *, *:before, *:after {
-  .content-text();
+  .box-sizing(border-box);
   color: @text-color;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-
-html{
-  height: 100%;
+  font-weight: 100;
 }
 
 body {
+  .content-text();
   margin: 0px;
+  background-color: @background-dark;
+}
+
+#header {
+  position: relative;
   background-color: @background-color;
 }
 
+#divider {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background-color: @border-color;
+}
+
 #main-content {
+  position: relative;
   background-color: @background-dark;
 }
 
@@ -100,10 +114,61 @@ ul {
   padding-left: 0px;
 }
 
-.search-box {
-  border: 2px solid @hover-color;
-  border-radius: 32px;
-  background-color: transparent;
+//insanity comes from positioning the stupid, stupid icon
+.search-form {
+  .hover-color();
+  position: relative;
+  .icon {
+    .size(32px, 32px);
+    position: absolute;
+    display: block;
+    z-index: 99;
+    top: 12px;
+    left: 12px;
+    font-family: "Glyphicons Halflings";
+    color: inherit;
+  }
+
+  .search-box {
+    .size(100%, 48px);
+    .hover-border();
+    .hover-color();
+    position: relative;
+    outline: 0;
+    padding-left: 32px;
+    background-color: @background-dark;
+    border-radius: 32px;
+  }
+}
+
+//N.B. think twice before fucking w/ this stuff.  
+//it's all there for a reason
+.tab {
+  .size(100%, 100%);
+  background-color: @tab-color;
+  border-top: 2px solid @tab-border-color;
+  border-left: 2px solid @tab-border-color;
+  border-right: 2px solid @tab-border-color;
+  //note, bottom border is border-color to maintain line
+  border-bottom: 2px solid @border-color;
+  &:hover {
+    position: relative;
+    z-index: 99;
+    border-top: 2px solid @tab-active-border-color;
+    border-left: 2px solid @tab-active-border-color;
+    border-right: 2px solid @tab-active-border-color;
+    border-bottom: none;
+  }
+}
+
+.tab.active {
+  position: relative;
+  z-index: 99;
+  background-color: @tab-active-color;
+  border-top: 2px solid @tab-active-border-color;
+  border-left: 2px solid @tab-active-border-color;
+  border-right: 2px solid @tab-active-border-color;
+  border-bottom: none;
 }
 
 .page-header {
@@ -117,53 +182,15 @@ ul {
   .search-bar {
     .tile-region-4();
     .tile-offset-1();
-    top: 24px;
+    top: 12px;
   }
 }
 
 .page-subheader {
-  border-bottom: 1px solid @tile-color-4;
-  height: @subheader-height;
-  .game-list {
-    margin: 0px;
-    height: @subheader-height;
-    .subheader-text {
-      display: inline-block;
-      float: left;
-      height: @subheader-height;
-      line-height: @subheader-height;
-      padding-right: 24px;
-    }
-    .game {
-      .tile-region-4();
-      height: @subheader-height;
-      .icon {
-        display: inline-block;
-        height: @subheader-height;
-        float: left;
-        width: 20%;
-        .center-bg("/images/SF4-gray.png");
-      }
-      .name {
-        .text-overflow();
-        display: inline;
-        float: left;
-        height: @subheader-height;
-        width: 80%;
-        padding-top: 4px;
-        text-align: left;
-      }
-    }
-
-    .game.active {
-      background: #0d0d0d;
-      border-top: 1px solid @tile-color-4;
-      border-left: 1px solid @tile-color-4;
-      border-right: 1px solid @tile-color-4;
-      border-bottom: 1px solid transparent;
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-    }
+  .make-row();
+  .tab-wrapper {
+    .tile-2x1();
+    padding-bottom: 0px;
   }
 }
 
@@ -232,6 +259,5 @@ ul {
 }
 
 img.gameLogoSmall{
-  width: 32px;
-  height: 32px;
+  .size(32px, 32px);
 }

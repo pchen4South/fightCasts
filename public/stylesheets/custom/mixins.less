@@ -6,12 +6,23 @@
 }
 
 .hover-border (@initial-color: @background-light, @hover-color: @hover-color) {
-  transition: border .4s;
+  .transition(border .2s);
   border: 2px solid @initial-color;
   &:focus {
     border: 2px solid @hover-color;
   }
   &:hover {
     border: 2px solid @hover-color;
+  }
+}
+
+.hover-color (@initial-color: @background-light, @hover-color: @hover-color) {
+  .transition(color .2s);
+  color: @initial-color;
+  &:focus {
+    color: @hover-color;
+  }
+  &:hover {
+    color: @hover-color;
   }
 }
