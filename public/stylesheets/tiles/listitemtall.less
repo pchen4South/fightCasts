@@ -14,14 +14,10 @@
 
     .flags {
       .flag.one {
-        position: absolute;
-        top: 0px;
-        left: 0px;
+        .top-left();
       } 
       .flag.two {
-        position: absolute;
-        top: 0px;
-        right: 0px;
+        .top-right();
       } 
     }
 
@@ -29,7 +25,6 @@
       text-align: center;
       .event-name {
         .make-row();
-        font-family: 'Trebuchet MS', 'sans-serif';
         font-size: @font-small;
       }
       .caster-list {
