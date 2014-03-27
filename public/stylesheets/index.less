@@ -12,7 +12,7 @@
 
 @tile-color-1: #ff6600;
 @tile-color-2: darken(#ff0000, 10%);
-@tile-color-3: lighten(#6a656c, 10%);
+@tile-color-3: lighten(#6a656c, 5%);
 @tile-color-4: #f2f6f7;
 @tile-color-5: #060606;
 
@@ -61,6 +61,10 @@
 .content-text {
   font-family: "Exo", sans-serif;
   font-size: @font-smallish;
+}
+
+.content-secondary-text {
+  font-family: "Dosis", sans-serif;
 }
 
 .site-header {
@@ -212,13 +216,14 @@ ul {
 
 .subheader {
   .section-header();
-  margin: 8px 0px 0px 0px;
+  font-size: @font-mediumish;
+  margin: 0px;
   padding: 0px;
 }
 
 
 .tile-subheader{
-  font-size: @font-smallish;
+  .header-text();
 }
 
 .fight-card {
@@ -232,14 +237,13 @@ ul {
       margin-top: 6px;
       .vs {
         .skew(-10deg, 0deg);
-        width: 60%;
+        width: 70%;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
-        font-family: Helvetica Arial sans-serif;
         background-color: @tile-color-1;
         color: lighten(@tile-color-5, 15%);
-        font-weight: 600;
+        font-weight: 900;
         font-style: italic;
       }
     }
@@ -249,6 +253,7 @@ ul {
       .fighter-name {
         .make-row(0px);
         .text-overflow();
+        .content-secondary-text();
         vertical-align: bottom;
         text-shadow: 2px 2px black;
       }
