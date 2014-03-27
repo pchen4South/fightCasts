@@ -54,17 +54,17 @@
 @import "tiles/main-details.less";
 
 .header-text {
-  font-family: "Georgia", serif;
+  font-family: "Tulpen One", sans-serif;
   text-decoration: none;
 }
 
 .content-text {
-  font-family: "Tahoma", "Geneva", sans-serif;
+  font-family: "Exo", sans-serif;
   font-size: @font-smallish;
 }
 
 .site-header {
-  font-size: @font-large;
+  font-size: @font-largish;
   color: @header-color;
 }
 
@@ -198,7 +198,7 @@ ul {
   .search-bar {
     .tile-region-4();
     .tile-offset-1();
-    top: 12px;
+    top: 24px;
   }
 }
 
@@ -259,7 +259,6 @@ ul {
           vertical-align: top;
           color: @tile-color-2;
           font-size: @font-small;
-          font-style: italic;
         }
       }
     }
@@ -270,6 +269,39 @@ ul {
     .fighter.second {
       text-align: left;
       padding-left: 8px;
+    }
+  }
+}
+
+.fight-card-header {
+  position: relative;
+  padding: 4px 4px 6px 4px;
+
+  .flags {
+    .flag.one {
+      .top-left();
+    } 
+    .flag.two {
+      .top-right();
+    } 
+  }
+
+  .match-details {
+    text-align: center;
+    .event-name {
+      .make-row(); 
+      font-size: @font-small;
+      padding-left: 32px;
+      padding-right: 32px;
+      text-shadow: 2px 2px black;
+    }
+    .caster-list {
+      .make-row();
+      font-size: @font-small;
+      .caster-name {
+        color: @tile-color-1;
+        font-size: @font-small;
+      }
     }
   }
 }

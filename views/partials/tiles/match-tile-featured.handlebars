@@ -1,32 +1,4 @@
 <a class="tile-match-featured" href="/matches/{{id}}">
-  <div class="fight-card-header">
-
-    <div class="flags">
-      {{#with fighterOne}}
-        <img class="flag one" src="{{countryIcon person.country}}"/>
-      {{/with}}
-      {{#with fighterTwo}}
-        <img class="flag two" src="{{countryIcon person.country}}"/>
-      {{/with}}
-    </div>
-
-    <div class="match-details">
-      <div class="event-name">
-      {{#with event}} 
-        {{name}}
-      {{/with}}
-      </div>  
-
-      {{#if casters}}
-      <div class="caster-list">
-        cast by 
-        {{#each casters}} 
-          <span class="caster-name">{{name}}</span>
-        {{/each}}
-      </div>
-      {{/if}}
-    </div>
-  </div>
-
+  {{> fightcard-header}}
   {{> fightcard}}
 </a>

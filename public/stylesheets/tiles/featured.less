@@ -8,38 +8,8 @@
   .tile-mixin(); 
   .fight-card-header {
     height: 75%;
-    padding: 4px 4px 6px 4px;
-    //.center-bg("/images/SF4-gray-trans.png");
-    .flags {
-      .make-row();  
-      .flag.one {
-        float: left;
-      }
-      .flag.two {
-        float: right;
-      }
-    }
-
-    .match-details {
-      text-align: center;
-      .event-name {
-        .make-row(); 
-        padding-left: 12px;
-        padding-right: 12px;
-        font-family: 'Trebuchet MS', 'sans-serif';
-        font-weight: 300;
-        text-shadow: 2px 2px black;
-      }
-      .caster-list {
-        .make-row();
-        font-size: @font-small;
-        color: @tile-color-1;
-        .caster-name {
-          color: @tile-color-2;
-          font-size: @font-small;
-        }
-      }
-    }
+    min-height: 75%;
+    .center-bg("/images/SF4-gray-trans.png");
   }
   .fight-card {
     height: 25%;
