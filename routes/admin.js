@@ -256,20 +256,26 @@ module.exports = function (app) {
         res.redirect("admin/matches");
       })
     })
-  });  app.post("/admin/matches/:_id/feature", function(req,res){
+  });  
+  
+  app.post("/admin/matches/:_id/feature", function(req,res){
     var id = req.body.id;
     api.getMatch(id, function(err, result){
-      api.updateMatchById(id, { $set: { featured: true }}, function(err, result){
-        res.redirect("admin/matches");
+      api.createFeaturedMatch({match: result.id, game: result._game, category: result.category}, function(err, result){
+         api.updateMatchById(id, { $set: { featured: true }}, function(err, result){
+          res.redirect("admin/matches");
+        })
       })
     })
-  });  app.post("/admin/matches/:_id/unfeature", function(req,res){
-    var id = req.body.id;
-    api.getMatch(id, function(err, result){
-      api.updateMatchById(id, { $set: { featured: false }}, function(err, result){
-        res.redirect("admin/matches");
+  });  
+  app.post("/admin/matches/:_id/unfeature",
+    function(req,res){
+      var id = req.body.id;
+      api.getMatch(id, function(err, result){
+        api.updateMatchById(id, { $set: { featured: false }}, function(err, result){
+          res.redirect("admin/matches");
+        })
       })
-    })
   });  
   
   app.post("/admin/matches/:_id/unapprove", function(req,res){

@@ -27,3 +27,21 @@ img.gameLogoSmall{
   padding-right: 10px;
   width: 300px;
 }
+
+.adminControls{
+  display: inline-block;
+  width: 20%;
+  height: inherit;
+  vertical-align: top;
+}
+.itemInfo{
+  display: inline-block;
+  width: 75%;
+}
+
+.dataItem{
+  background-color: #e0e0e0;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  padding: 2px;
+}

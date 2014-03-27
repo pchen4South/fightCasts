@@ -9,10 +9,11 @@ var teamSchema = require('./teamModel').schema;
 var videoSchema = require('./videoModel').schema;
 
 var Matches = new mongoose.Schema({
-  approved: {type: Boolean, default: false},
+  approved: {type: Boolean, default: true},
   featured: {type: Boolean, default: false},
   title: String,
   description: String,
+  playedAt: Date,
   _casters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Person" }],
   _fighterOne: { type: mongoose.Schema.Types.ObjectId, ref: "Fighter" },
   _fighterTwo: { type: mongoose.Schema.Types.ObjectId, ref: "Fighter" },
