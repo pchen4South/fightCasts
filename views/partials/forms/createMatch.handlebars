@@ -19,7 +19,7 @@
     </select>
         
     <label for="fighterOne">Player One</label>
-    <select multiple class="form-control" id="fighterOne" name="fighterOne">
+    <select class="form-control" id="fighterOne" name="fighterOne">
       {{#each fighters}}
         <option value={{id}}>{{person.name}} as
           {{#each characters}}
@@ -30,7 +30,7 @@
     </select>
     
     <label for="fighterTwo">Player Two</label>
-    <select multiple class="form-control" id="fighterTwo" name="fighterTwo">
+    <select class="form-control" id="fighterTwo" name="fighterTwo">
       {{#each fighters}}
         <option value={{id}}>{{person.name}} as
           {{#each characters}}
