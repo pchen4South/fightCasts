@@ -11,8 +11,8 @@
 @import "glyphicons.less";
 
 @tile-color-1: #2980b9;
-@tile-color-2: darken(#826AE6, 10%);
-//@tile-color-2: darken(#ff0000, 10%);
+//@tile-color-2: darken(#826AE6, 10%);
+@tile-color-2: darken(#ff0000, 20%);
 @tile-color-3: lighten(#6a656c, 5%);
 @tile-color-4: #f2f6f7;
 @tile-color-5: darken(#333333, 10%);
@@ -30,7 +30,7 @@
 @hover-color: @tile-color-4;
 @border-color: @tile-color-4;
 @border-light-color: @tile-color-3;
-@tab-active-color: @content-color;
+@tab-active-color: @header-color;
 @tab-color: lighten(@tab-active-color, 10%);
 
 @default-tile-color: lighten(@tile-color-5, 10%);
@@ -41,6 +41,7 @@
 @font-medium: 24px;
 @font-smallish: 16px;
 @font-small: 12px;
+@font-smaller: 10px;
 @font-tiny: 8px;
 
 @header-height: 96px;
@@ -161,6 +162,7 @@ ul {
 }
 
 .tab.active {
+  background-color: @tab-active-color;
 }
 
 .sf4 {
@@ -198,7 +200,7 @@ ul {
   .make-row();
   .tab-wrapper {
     .tile-2x1();
-    padding: 2px;
+    padding: 0px 2px;
   }
 }
 
@@ -216,6 +218,7 @@ ul {
 
 .fight-card {
   display: block;
+  padding: 4px;
   .fighter-list {
     height: 100%;
     .make-row(0px);
@@ -225,19 +228,19 @@ ul {
       margin-top: 6px;
       .vs {
         .skew(-10deg, 0deg);
+        padding-top: 2px;
         width: 70%;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
-        background-color: @tile-color-1;
-        color: lighten(@tile-color-5, 15%);
-        font-weight: 900;
+        background-color: @default-tile-color;
+        color: @background-light;
+        font-weight: 600;
         font-style: italic;
       }
     }
     .fighter {
       .make-xs-column(10, 0px);
-      margin-top: -2px;
       .fighter-name {
         .make-row(0px);
         .text-overflow();
@@ -245,10 +248,8 @@ ul {
         vertical-align: bottom;
       }
       .character-list {
-        margin-top: -6px;
+        margin-top: -8px;
         .character-name {
-          vertical-align: top;
-          color: @tile-color-2;
           font-size: @font-small;
         }
       }
@@ -265,19 +266,7 @@ ul {
 }
 
 .fight-card-header {
-  position: relative;
-  padding: 4px 4px 6px 4px;
-
-  .flags {
-    display: none;
-    .flag.one {
-      .top-left();
-    } 
-    .flag.two {
-      .top-right();
-    } 
-  }
-
+  padding: 4px;
   .match-details {
     text-align: center;
     .event-name {
@@ -290,7 +279,6 @@ ul {
       .make-row();
       font-size: @font-small;
       .caster-name {
-        color: @tile-color-1;
         font-size: @font-small;
       }
     }

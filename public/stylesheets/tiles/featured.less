@@ -1,25 +1,31 @@
 .tile-match-featured {
+  .tile-mixin(); 
+  position: relative;
   display: inline-block;
   height: 100%;
   width: 100%;
   &:hover {
     text-decoration: none;
   }
-  .tile-mixin(); 
-  .fight-card-header {
-    height: 15%;
-  }
 
   .video {
-    height: 70%;
+    .size(100%, 66%);
     .embedded-video {
-      height: 100%;
-      width: 100%;
+      .size(100%, 100%);
     }
   }
 
-  .fight-card {
-    height: 15%;
-    padding: 6px 4px 4px 4px;
+  .content {
+    .bottom-left();
+    .size(100%, 88px);
+    .fight-card-header {
+      .top-left();
+      .size(100%, 32px);
+    }
+    .fight-card {
+      .bottom-left();
+      .size(100%, 42px);
+      background-color: @background-color;
+    }
   }
 }
