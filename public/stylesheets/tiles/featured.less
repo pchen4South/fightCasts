@@ -6,6 +6,11 @@
   width: 100%;
   &:hover {
     text-decoration: none;
+    .content {
+      .fight-card {
+        background-color: @background-color-dark;
+      }
+    }
   }
 
   .video {
@@ -25,6 +30,7 @@
     .fight-card {
       .bottom-left();
       .size(100%, 42px);
+      transition: all .2s;
       background-color: @background-color;
     }
   }

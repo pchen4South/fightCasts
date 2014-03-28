@@ -4,6 +4,9 @@
   display: block;
   &:hover {
     text-decoration: none;
+    .fight-card {
+      background-color: @background-color-dark;
+    }
   }
   .fight-card-header {
     .top-left();
@@ -13,6 +16,7 @@
   .fight-card {
     .bottom-left();
     .size(100%, 42px);
+    transition: all .2s;
     background-color: @background-color;
   }
 }

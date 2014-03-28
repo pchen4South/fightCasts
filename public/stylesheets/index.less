@@ -27,6 +27,7 @@
 @background-dark: @tile-color-5;
 @background-light: @tile-color-4;
 @background-color: @tile-color-2;
+@background-color-dark: darken(@tile-color-2, 10%);
 @hover-color: @tile-color-4;
 @border-color: @tile-color-4;
 @border-light-color: @tile-color-3;
@@ -104,7 +105,7 @@ body {
 }
 
 #subheader {
-  background-color: darken(@header-color, 10%); 
+  background-color: @background-color-dark;
 }
 
 #divider {
