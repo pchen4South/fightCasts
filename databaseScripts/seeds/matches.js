@@ -48,7 +48,7 @@ module.exports = [{
   videoNames: "Pete vs Viperboy",
   fighterOne: "Pete", 
   fighterTwo: "Steve",
-  game: "Super Smash Brothers Melee",
+  game: "Super Street Fighter 4 Arcade Edition",
   casterNames: ["Rohan"],
   eventName: "",
   category: "community",

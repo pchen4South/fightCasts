@@ -22,9 +22,7 @@
     <select class="form-control" id="fighterOne" name="fighterOne">
       {{#each fighters}}
         <option value={{id}}>{{person.name}} as
-          {{#each characters}}
-            {{name}}
-          {{/each}}
+          {{characters}}
         </option>
       {{/each}}
     </select>
@@ -33,9 +31,7 @@
     <select class="form-control" id="fighterTwo" name="fighterTwo">
       {{#each fighters}}
         <option value={{id}}>{{person.name}} as
-          {{#each characters}}
-            {{name}}
-          {{/each}}
+          {{characters}}
         </option>
       {{/each}}
     </select>
@@ -69,7 +65,7 @@
     <label for="game">Game</label>
     <select class="form-control" id="game" name="game">
       {{#each games}}
-        <option value={{id}}>{{name}}</option>
+        <option value="{{name}}">{{name}}</option>
       {{/each}}
     </select>
 

@@ -11,14 +11,13 @@
    <li class = "dataItem">
    <form role = "form" method = "POST"> 
     <div class = "adminControls">
-    <img class = "gameLogoSmall" src = {{gameIcon game.nickname}}> </img> 
+    <img class = "gameLogoSmall" src = {{gameIcon game}}> </img> 
     <button formaction = "/admin/matches/{{id}}/delete"
           type = "submit"
           class = "btn btn-xs btn-default" 
           name = "id" value = {{id}}> 
           <span class = "glyphicon glyphicon-trash"></span> 
     </button>
-          
     {{#if approved}}
 
         <button formaction = "/admin/matches/{{id}}/unapprove" type = "submit"

@@ -15,7 +15,6 @@ var Matches = new mongoose.Schema({
   description: String,
   playedAt: Date,
   game: String,
-  characters: String,
   _casters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Person" }],
   _fighterOne: { type: mongoose.Schema.Types.ObjectId, ref: "Fighter" },
   _fighterTwo: { type: mongoose.Schema.Types.ObjectId, ref: "Fighter" },

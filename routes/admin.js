@@ -21,17 +21,14 @@ module.exports = function (app) {
       res.render("admin/people", results);
     });
   });
-  app.get("/admin/characters", function (req, res) {
-      var results = {"layout": "adminLayout"};
-      results.games = gameData;
-
-      res.render("admin/characters", results);
-
-  });
   app.get("/admin/games", function (req, res) {
-    var results = gameData;
-    results.layout = "adminLayout";
-    res.render("admin/games", results);
+    api.getAll(function (err, results) {
+      if(results){
+        results.layout = "adminLayout";
+        results.games = gameData;
+      }
+      res.render("admin/games", results);
+    });      
   });
     
   app.get("/admin/casters", function (req, res) {
@@ -82,6 +79,7 @@ module.exports = function (app) {
     api.getAll(function (err, results) {
       if(results){
         results.layout = "adminLayout";
+        results.games = gameData;
       }
       res.render("admin/matches", results);
     });
@@ -144,21 +142,7 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/admin/characters", function (req, res) {
-    var character = req.body;
-    var game = character.game;
-    switch(game){
-      case "Super Smash Brothers Melee":
-        character.game = "SSBM";
-        break;
-      case "Super Street Fighter 4 AE":
-        character.game = "SS4AE";
-        break;
-    }   
-    api.createCharacter(character, function (err, result) {
-      res.redirect("/admin/characters");
-    });
-  });
+
 
   app.post("/admin/games", function (req, res) {
     api.createGame(req.body, function (err, result) {
@@ -251,7 +235,7 @@ module.exports = function (app) {
   app.post("/admin/matches/:_id/feature", function(req,res){
     var id = req.body.id;
     api.getMatch(id, function(err, result){
-      api.createFeaturedMatch({match: result.id, game: result._game, category: result.category}, function(err, result){
+      api.createFeaturedMatch({match: result.id, game: result.game, category: result.category}, function(err, result){
          api.updateMatchById(id, { $set: { featured: true }}, function(err, result){
           res.redirect("admin/matches");
         })
@@ -342,12 +326,6 @@ module.exports = function (app) {
     });
   }); 
 
-  app.post("/admin/characters/:_id/delete", function(req, res){
-    var id = req.body.id;
-    api.deleteCharacter(id, function(err, result){
-      console.log("deleted character", result.name);
-      res.redirect("admin/characters");
-    });
-  });
+
   
 };

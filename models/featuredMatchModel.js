@@ -5,7 +5,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var FeaturedMatches = new mongoose.Schema({
   _match: {type: ObjectId, ref: "Match"},
-  _game: {type: ObjectId, ref: "Game"},
+  game: String,
   category: String
 });
 
