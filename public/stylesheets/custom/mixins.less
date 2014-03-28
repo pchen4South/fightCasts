@@ -18,7 +18,7 @@
 }
 
 .hover-border (@initial-color: @background-light, @hover-color: @hover-color) {
-  .transition(border .2s);
+  .transition(all .2s);
   border: 2px solid @initial-color;
   &:focus {
     border: 2px solid @hover-color;
@@ -29,12 +29,23 @@
 }
 
 .hover-color (@initial-color: @background-light, @hover-color: @hover-color) {
-  .transition(color .2s);
+  .transition(all .2s);
   color: @initial-color;
   &:focus {
     color: @hover-color;
   }
   &:hover {
     color: @hover-color;
+  }
+}
+
+.hover-background (@initial-color: @default-tile-color, @hover-color: @hover-color) {
+  .transition(all .2s);
+  background-color: @initial-color;
+  &:focus {
+    background-color: @hover-color;
+  }
+  &:hover {
+    background-color: @hover-color;
   }
 }

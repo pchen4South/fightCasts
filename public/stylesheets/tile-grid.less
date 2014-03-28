@@ -1,7 +1,9 @@
-.tile-mixin {
-  .hover-border(@tile-color-3);
+.tile-mixin (@padding: 12px) {
+  .hover-background(@default-tile-color, lighten(@default-tile-color, 10%));
+  background-color: @default-tile-color;
+  border-radius: 2px;
   position: relative;
-  padding: 4px;
+  padding: @padding;
   height: 100%;
   width: 100%;
 }
@@ -32,6 +34,10 @@
   @media (min-width: @screen-lg-min) {
     margin-left: @count * 48px;
   }
+}
+
+.pad-0 {
+  padding: 0px !important;
 }
 
 .tile-region-1 {
@@ -120,6 +126,10 @@
 
 .tile-6x4 {
   .tile-grid-mixin(6, 4);
+}
+
+.tile-6x6 {
+  .tile-grid-mixin(6, 6);
 }
 
 .tile-6x8 {

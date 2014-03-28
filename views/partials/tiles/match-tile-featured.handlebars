@@ -1,4 +1,14 @@
 <a class="tile-match-featured" href="/matches/{{id}}">
-  {{> fightcard-header}}
+  <div class="video">
+    <iframe class="embedded-video"
+      iv_load_policy=3
+      src={{ytUrl videos}}&color=white
+      frameborder="0" 
+      rel=0
+      modestbranding
+      allowfullscreen>
+    </iframe>
+  </div>
   {{> fightcard}}
+  {{> fightcard-header}}
 </a>

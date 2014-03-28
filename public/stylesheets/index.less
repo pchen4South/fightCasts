@@ -10,28 +10,30 @@
 @icon-font-name: "glyphicons-halflings-regular";
 @import "glyphicons.less";
 
-@tile-color-1: #ff6600;
+@tile-color-1: #2980b9;
+@tile-color-2: darken(#826AE6, 10%);
 //@tile-color-2: darken(#ff0000, 10%);
-@tile-color-2: lighten(#630b0b, 5%);
 @tile-color-3: lighten(#6a656c, 5%);
 @tile-color-4: #f2f6f7;
-@tile-color-5: #060606;
+@tile-color-5: darken(#333333, 10%);
+@tile-color-6: lighten(@tile-color-2, 25%);
+@tile-color-7: lighten(@tile-color-1, 25%);
 
 @text-color: @tile-color-4;
 @secondary-text-color: @tile-color-3;
-@header-color: @tile-color-4;
+@dark-text-color: @tile-color-5;
+@header-color: @tile-color-2;
+@content-color: @tile-color-5;
 @background-dark: @tile-color-5;
-@background-light: @tile-color-3;
+@background-light: @tile-color-4;
 @background-color: @tile-color-2;
 @hover-color: @tile-color-4;
 @border-color: @tile-color-4;
 @border-light-color: @tile-color-3;
-@tab-color: lighten(@tile-color-5, 15%);
-@tab-active-color: @tile-color-5;
-@tab-border-color: @tile-color-3;
-@tab-active-border-color: @tile-color-4;
+@tab-active-color: @content-color;
+@tab-color: lighten(@tab-active-color, 10%);
 
-@default-tile-color: @tile-color-3;
+@default-tile-color: lighten(@tile-color-5, 10%);
 
 @font-largish: 64px;
 @font-large: 48px;
@@ -70,7 +72,7 @@
 
 .site-header {
   font-size: @font-largish;
-  color: @header-color;
+  color: @text-color;
 }
 
 .section-header {
@@ -92,12 +94,16 @@
 body {
   .content-text();
   margin: 0px;
-  background-color: @background-dark;
+  background-color: @content-color;
 }
 
 #header {
   position: relative;
-  background-color: @background-color;
+  background-color: @header-color;
+}
+
+#subheader {
+  background-color: darken(@header-color, 10%); 
 }
 
 #divider {
@@ -105,13 +111,13 @@ body {
   bottom: 0px;
   left: 0px;
   width: 100%;
-  height: 1px;
+  //height: 1px;
   background-color: @border-color;
 }
 
 #main-content {
   position: relative;
-  background-color: @background-dark;
+  background-color: @content-color;
 }
 
 ul {
@@ -121,7 +127,8 @@ ul {
 
 //insanity comes from positioning the stupid, stupid icon
 .search-form {
-  .hover-color();
+  //.hover-color(@text-color, @dark-text-color);
+  color: @secondary-text-color;
   position: relative;
   .icon {
     .size(32px, 32px);
@@ -136,45 +143,24 @@ ul {
 
   .search-box {
     .size(100%, 32px);
-    .hover-border();
-    .hover-color();
+    .hover-color(@secondary-text-color, @dark-text-color);
+    background-color: @background-light;
     position: relative;
     outline: 0;
     padding-left: 32px;
-    background-color: @background-dark;
-    border-radius: 32px;
+    border: none;
+    border-radius: 2px;
   }
 }
 
-//N.B. think twice before fucking w/ this stuff.  
-//it's all there for a reason
 .tab {
   .size(100%, 100%);
-  background-color: @tab-color;
-  border-top: 1px solid @tab-border-color;
-  border-left: 1px solid @tab-border-color;
-  border-right: 1px solid @tab-border-color;
-  //note, bottom border is border-color to maintain line
-  border-bottom: 1px solid @border-color;
-  &:hover {
-    position: relative;
-    z-index: 99;
-    background-color: @tab-active-color;
-    border-top: 1px solid @tab-active-border-color;
-    border-left: 1px solid @tab-active-border-color;
-    border-right: 1px solid @tab-active-border-color;
-    border-bottom: 1px solid transparent;
-  }
+  text-align: center;
+  font-size: @font-small;
+  vertical-align: bottom;
 }
 
 .tab.active {
-  position: relative;
-  z-index: 99;
-  background-color: @tab-active-color;
-  border-top: 1px solid @tab-active-border-color;
-  border-left: 1px solid @tab-active-border-color;
-  border-right: 1px solid @tab-active-border-color;
-  border-bottom: none;
 }
 
 .sf4 {
@@ -186,7 +172,7 @@ ul {
 }
 
 .active.sf4 {
-  .center-bg("/images/SSFIVAE.png");
+  .center-bg("/images/SSFIVAE-gray.png");
 }
 
 .active.mvc3 {
@@ -212,7 +198,7 @@ ul {
   .make-row();
   .tab-wrapper {
     .tile-2x1();
-    padding-bottom: 0px;
+    padding: 2px;
   }
 }
 
@@ -257,7 +243,6 @@ ul {
         .text-overflow();
         .content-secondary-text();
         vertical-align: bottom;
-        text-shadow: 2px 2px black;
       }
       .character-list {
         margin-top: -6px;
@@ -284,6 +269,7 @@ ul {
   padding: 4px 4px 6px 4px;
 
   .flags {
+    display: none;
     .flag.one {
       .top-left();
     } 
@@ -299,7 +285,6 @@ ul {
       font-size: @font-small;
       padding-left: 32px;
       padding-right: 32px;
-      text-shadow: 2px 2px black;
     }
     .caster-list {
       .make-row();
