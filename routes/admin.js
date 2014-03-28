@@ -1,13 +1,7 @@
 var api = require('../api');
-
-// function requireLogin(req, res, next) {
-  // if (req.session.loggedIn) {
-    // next(); // allow the next route to run
-  // } else {
-    // // require the user to log in
-    // res.render("admin/login"); // or render a form, etc.
-  // }
-// }
+var gameData = require('../models/gameCharacterData');
+var _ = require('lodash');
+var keys = _.keys;
 
 module.exports = function (app) {
   //read
@@ -28,20 +22,16 @@ module.exports = function (app) {
     });
   });
   app.get("/admin/characters", function (req, res) {
-    api.getAll(function (err, results) {
-      if(results){
-        results.layout = "adminLayout";
-      }
+      var results = {"layout": "adminLayout"};
+      results.games = gameData;
+
       res.render("admin/characters", results);
-    });
+
   });
   app.get("/admin/games", function (req, res) {
-    api.getAll(function (err, results) {
-      if(results){
-        results.layout = "adminLayout";
-      }
-      res.render("admin/games", results);
-    });
+    var results = gameData;
+    results.layout = "adminLayout";
+    res.render("admin/games", results);
   });
     
   app.get("/admin/casters", function (req, res) {

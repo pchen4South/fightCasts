@@ -3,8 +3,8 @@ var _ = require('lodash');
 var partial = _.partial;
 var map = _.map;
 var person = require('./models/personModel');
-var character = require('./models/characterModel');
-var game = require('./models/gameModel');
+// var character = require('./models/characterModel');
+// var game = require('./models/gameModel');
 var event = require('./models/eventModel');
 var video = require('./models/videoModel');
 var channel = require('./models/channelModel');
@@ -35,7 +35,7 @@ var create = function (modelType, data, cb) {
 
 //create
 var createPerson = partial(create, person.model);
-var createGame = partial(create, game.model);
+// var createGame = partial(create, game.model);
 var createVideo = partial(create, video.model);
 var createEvent = partial(create, event.model);
 var createChannel = partial(create, channel.model);
@@ -43,23 +43,23 @@ var createTeam = partial(create, team.model);
 var createSubmittedMatch = partial(create, submittedMatch.model);
 var createFeaturedMatch = partial(create, featuredMatch.model);
 
-var createCharacter = function(chardata, cb){
-  character.model.create(chardata, function(err, newchar){
-    if (err){cb(err)}
-    else{
-      game.model.find({nickname: newchar.game})
-      .populate('_characters')
-      .exec(function(err, game){
-        if (err) console.log(err);
-        else {
-          game = game[0];
-          game._characters.push(newchar);
-          game.save(cb);
-        }
-      });
-    }
-  });
-};
+// var createCharacter = function(chardata, cb){
+  // character.model.create(chardata, function(err, newchar){
+    // if (err){cb(err)}
+    // else{
+      // game.model.find({nickname: newchar.game})
+      // .populate('_characters')
+      // .exec(function(err, game){
+        // if (err) console.log(err);
+        // else {
+          // game = game[0];
+          // game._characters.push(newchar);
+          // game.save(cb);
+        // }
+      // });
+    // }
+  // });
+// };
 
 var createFighter = function (data, cb) {
   var formatted = {
@@ -124,8 +124,8 @@ var getFeaturedMatch = function (params, cb) {
 }
 
 var getPerson = partial(get, person.model);
-var getCharacter = partial(get, character.model);
-var getGame = partial(get, game.model);
+// // var getCharacter = partial(get, character.model);
+// var getGame = partial(get, game.model);
 var getVideo = partial(get, video.model);
 var getEvent = partial(get, event.model);
 var getChannel = partial(get, channel.model);
@@ -135,8 +135,8 @@ var getMatch = partial(get, match.model);
 var getSubmittedMatch = partial(get, submittedMatch.model);
 
 var getPeople = partial(getMultiple, person.model);
-var getCharacters = partial(getMultiple, character.model);
-var getGames = partial(getMultiple, game.model);
+// var getCharacters = partial(getMultiple, character.model);
+// var getGames = partial(getMultiple, game.model);
 var getVideos = partial(getMultiple, video.model);
 var getEvents = partial(getMultiple, event.model);
 var getChannels = partial(getMultiple, channel.model);
@@ -246,23 +246,23 @@ var getMatchNested = function (id, cb) {
   });
 };
 
-var getGameNested = function (id, cb) {
-  game.model.findById(id)
-  .populate("_characters")
-  .exec(function (err, games) {
-    if (err) cb(err);
-    else cb(null, formatNestedGame(game)); 
-  });
-};
+// var getGameNested = function (id, cb) {
+  // game.model.findById(id)
+  // .populate("_characters")
+  // .exec(function (err, games) {
+    // if (err) cb(err);
+    // else cb(null, formatNestedGame(game)); 
+  // });
+// };
 
-var getGamesNested = function (cb) {
-  game.model.find()
-  .populate("_characters")
-  .exec(function (err, games) {
-    if (err) cb(err); 
-    else cb(null, map(games, formatNestedGame));
-  })
-};
+// var getGamesNested = function (cb) {
+  // game.model.find()
+  // .populate("_characters")
+  // .exec(function (err, games) {
+    // if (err) cb(err); 
+    // else cb(null, map(games, formatNestedGame));
+  // })
+// };
 
 var getFightersNested = function (cb) {
   fighter.model.find()
@@ -338,8 +338,8 @@ var deleteModelById = function (modelType, id, cb) {
 };
 
 var deletePerson = partial(deleteModelById, person.model);
-var deleteCharacter = partial(deleteModelById, character.model);
-var deleteGame = partial(deleteModelById, game.model);
+// var deleteCharacter = partial(deleteModelById, character.model);
+// var deleteGame = partial(deleteModelById, game.model);
 var deleteVideo = partial(deleteModelById, video.model);
 var deleteEvent = partial(deleteModelById, event.model);
 var deleteChannel = partial(deleteModelById, channel.model);
@@ -350,7 +350,7 @@ var deleteSubmittedMatch = partial(deleteModelById, submittedMatch.model);
 
 
 module.exports = {
-  deleteGame: deleteGame,
+  // deleteGame: deleteGame,
   deletePerson: deletePerson,
   deleteVideo: deleteVideo,
   deleteEvent: deleteEvent,
@@ -358,12 +358,12 @@ module.exports = {
   deleteTeam: deleteTeam,
   deleteFighter: deleteFighter,
   deleteMatch: deleteMatch,
-  deleteCharacter: deleteCharacter,  
+  // deleteCharacter: deleteCharacter,  
   deleteSubmittedMatch: deleteSubmittedMatch,
   updateMatchById: updateMatchById,
   createPerson: createPerson, 
-  createCharacter: createCharacter,
-  createGame: createGame,
+  // createCharacter: createCharacter,
+  // createGame: createGame,
   createEvent: createEvent,
   createVideo: createVideo,
   createChannel: createChannel,
@@ -375,8 +375,8 @@ module.exports = {
   
   getAll: getAll,
   getPerson: getPerson, 
-  getCharacter: getCharacter,
-  getGame: getGame,
+  // getCharacter: getCharacter,
+  // getGame: getGame,
   getEvent: getEvent,
   getVideo: getVideo,
   getChannel: getChannel,
@@ -385,12 +385,12 @@ module.exports = {
   getMatch: getMatch,
   getMatchNested: getMatchNested,
   getFighterNested: getFighterNested,
-  getGameNested: getGameNested,
+  // getGameNested: getGameNested,
   getSubmittedMatch: getSubmittedMatch,
   
   getPeople: getPeople, 
-  getCharacters: getCharacters,
-  getGames: getGames,
+  // getCharacters: getCharacters,
+  // getGames: getGames,
   getEvents: getEvents,
   getVideos: getVideos,
   getChannels: getChannels,
@@ -400,7 +400,7 @@ module.exports = {
   getFeaturedMatches: getFeaturedMatches,
   getMatchesNested: getMatchesNested,
   getFightersNested: getFightersNested,
-  getGamesNested: getGamesNested,
+  // getGamesNested: getGamesNested,
 
   getFeaturedMatch: getFeaturedMatch
 }

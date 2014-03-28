@@ -3,8 +3,8 @@ var timestamps = require('mongoose-timestamp');
 
 var fighterSchema = require('./fighterModel').schema;
 var eventSchema = require('./eventModel').schema;
-var gameSchema = require('./gameModel').schema;
-var channelSchema = require('./channelModel').schema;
+// var gameSchema = require('./gameModel').schema;
+// var channelSchema = require('./channelModel').schema;
 var teamSchema = require('./teamModel').schema;
 var videoSchema = require('./videoModel').schema;
 
@@ -14,14 +14,15 @@ var Matches = new mongoose.Schema({
   title: String,
   description: String,
   playedAt: Date,
+  game: String,
+  characters: String,
   _casters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Person" }],
   _fighterOne: { type: mongoose.Schema.Types.ObjectId, ref: "Fighter" },
   _fighterTwo: { type: mongoose.Schema.Types.ObjectId, ref: "Fighter" },
   _videos: [{type: mongoose.Schema.Types.ObjectId, ref: "Video"}],
   _teams: [{type: mongoose.Schema.Types.ObjectId, ref: "Team"}],
   _event: {type: mongoose.Schema.Types.ObjectId, ref: "Event"},
-  _game: {type: mongoose.Schema.Types.ObjectId, ref: "Game"},
-  _channel: {type: mongoose.Schema.Types.ObjectId, ref: "Channel"},
+  
   //pro / scrub / community
   category: String
 });
