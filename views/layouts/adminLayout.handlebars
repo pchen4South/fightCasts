@@ -21,7 +21,6 @@
       </ul>
     </div>
   </nav>
-{{#if user}}
   <nav class = "navbar navbar-default" role= "navigation">
     <div class = "container">
       <ul class="nav navbar-nav navbar-left">
@@ -34,45 +33,15 @@
         </li>        
         
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Video<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            {{>forms/createVideo}}
-          </ul>
-        </li>     
-        
-        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Event<b class="caret"></b></a>
           <ul class="dropdown-menu">
             {{>forms/createEvent}}
           </ul>
         </li>   
         
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Channel<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            {{>forms/createChannel}}
-          </ul>
-        </li>
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Team<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            {{>forms/createTeam}}
-          </ul>
-        </li>
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fighter<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            {{>forms/createFighter}}
-          </ul>
-        </li>
-      
-      
       </ul>
     </div>
   </nav>
-  {{/if}}  
   <script src="/vendor/javascripts/jquery.js"></script>
   <script src="/vendor/javascripts/bootstrap.min.js"></script>
 
