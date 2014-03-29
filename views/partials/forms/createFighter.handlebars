@@ -12,11 +12,13 @@
       </select>
 
       <label for="characters">Character</label>
-      <select class="form-control" 
+      <select multiple class="form-control" 
               id="characters" 
               name="characters">
         {{#each games}}
+          {{#each characters}}
           <option value={{id}}>{{name}}</option>
+          {{/each}}
         {{/each}}
       </select>
 

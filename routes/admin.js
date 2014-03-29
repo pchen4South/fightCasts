@@ -9,6 +9,7 @@ module.exports = function (app) {
     api.getAll(function (err, results) {
       if(results){
         results.layout = "adminLayout";
+        results.games = gameData;
       }
       res.render("admin/dashboard", results);
     });
@@ -17,6 +18,7 @@ module.exports = function (app) {
     api.getAll(function (err, results) {
       if(results){
         results.layout = "adminLayout";
+        results.games = gameData;
       }
       res.render("admin/people", results);
     });
@@ -39,6 +41,7 @@ module.exports = function (app) {
     api.getAll(function (err, results) {
       if(results){
         results.layout = "adminLayout";
+        results.games = gameData;
       }
       res.render("admin/videos", results);
     });
@@ -46,6 +49,7 @@ module.exports = function (app) {
   app.get("/admin/events", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
+        results.games = gameData;
         results.layout = "adminLayout";
       }
       res.render("admin/events", results);
@@ -54,6 +58,7 @@ module.exports = function (app) {
   app.get("/admin/channels", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
+        results.games = gameData;
         results.layout = "adminLayout";
       }
       res.render("admin/channels", results);
@@ -62,6 +67,7 @@ module.exports = function (app) {
   app.get("/admin/teams", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
+        results.games = gameData;
         results.layout = "adminLayout";
       }
       res.render("admin/teams", results);
@@ -70,6 +76,7 @@ module.exports = function (app) {
   app.get("/admin/fighters", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
+        results.games = gameData;
         results.layout = "adminLayout";
       }
       res.render("admin/fighters", results);
@@ -87,6 +94,7 @@ module.exports = function (app) {
   app.get("/admin/featuredMatches", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
+        results.games = gameData;
         results.layout = "adminLayout";
       }
       res.render("admin/featuredMatches", results);

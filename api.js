@@ -1,5 +1,6 @@
 var async = require('async');
 var _ = require('lodash');
+var filter = _.filter;
 var forEach = _.forEach;
 var keys = _.keys;
 var partial = _.partial;
@@ -44,9 +45,19 @@ var createSubmittedMatch = partial(create, submittedMatch.model);
 var createFeaturedMatch = partial(create, featuredMatch.model);
 
 var createFighter = function (data, cb) {
+  
+  var characters = [];
+  forEach(data.characters, function(charId){
+    var chars = gamesList["1"].characters;  
+    var found = filter(chars, {"id": charId});
+    characters.push(found[0].name);
+  });
+
+  console.log(characters);
+  
   var formatted = {
     _person: data.person,
-    characters: data.characters 
+    characters: characters 
   };
   return fighter.model.create(formatted, cb);
 };
