@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.static(__dirname + '/assets'));
 app.use(express.methodOverride());
 
-require('./routes/api')(app);
+//require('./routes/api')(app);
 require('./routes/admin')(app);
 require('./routes/frontend')(app);
 
