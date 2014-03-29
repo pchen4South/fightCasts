@@ -1,0 +1,22 @@
+<div class="fight-card-header">
+  <div class="match-details">
+    <div class="event-name">
+    {{#if event.name}}
+    {{#with event}} 
+      {{name}}
+    {{/with}}
+    {{else}}
+      Online Ladder
+    {{/if}}
+    </div>  
+
+    {{#if casters}}
+    <div class="caster-list">
+      cast by 
+      {{#each casters}} 
+        <span class="caster-name">{{name}}</span>
+      {{/each}}
+    </div>
+    {{/if}}
+  </div>
+</div>

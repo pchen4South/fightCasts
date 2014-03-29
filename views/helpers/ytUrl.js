@@ -6,8 +6,9 @@ var prefix = "//www.youtube.com/embed/";
 
 module.exports = function (videos) {
   var ids = pluck(videos, "url");
-
-  return (videos.length > 0) 
-    ? prefix + first(ids) + "?playlist=" + rest(ids, 1).join()
-    : "";
+  if(videos){
+    return (videos.length > 0) 
+      ? prefix + first(ids) + "?playlist=" + rest(ids, 1).join()
+      : "";
+  } else return "";
 }

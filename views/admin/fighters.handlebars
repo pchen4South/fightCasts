@@ -16,10 +16,7 @@
         <img src = "{{countryIcon person.country}}"/>
         <b>{{person.name}}</b>
         as 
-        {{#each characters}}
-          <img class = "gameLogoSmall" src = "{{gameIcon game}}"/>
-          <b>{{name}} </b>
-        {{/each}}
+        {{characters}}
         </li>
       </div>
       {{/each}}

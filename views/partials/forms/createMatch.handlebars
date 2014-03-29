@@ -4,6 +4,11 @@
     <label for="title">Title</label>
     <input class="form-control" type="text" name="title" id="title" placeholder="match title">
     </input>
+    
+    <label for="description">Description</label>
+    <textarea class="form-control" type="text" name="description" id="description" placeholder="description">
+    </textarea>
+    </input>
 
     <label for="casters">Casters</label>
     <select multiple class="form-control" id="casters" name="casters">
@@ -14,23 +19,19 @@
     </select>
         
     <label for="fighterOne">Player One</label>
-    <select multiple class="form-control" id="fighterOne" name="fighterOne">
+    <select class="form-control" id="fighterOne" name="fighterOne">
       {{#each fighters}}
         <option value={{id}}>{{person.name}} as
-          {{#each characters}}
-            {{name}}
-          {{/each}}
+          {{characters}}
         </option>
       {{/each}}
     </select>
     
     <label for="fighterTwo">Player Two</label>
-    <select multiple class="form-control" id="fighterTwo" name="fighterTwo">
+    <select class="form-control" id="fighterTwo" name="fighterTwo">
       {{#each fighters}}
         <option value={{id}}>{{person.name}} as
-          {{#each characters}}
-            {{name}}
-          {{/each}}
+          {{characters}}
         </option>
       {{/each}}
     </select>
@@ -40,6 +41,10 @@
       {{#each events}}
         <option value={{id}}>{{name}}</option>
       {{/each}}
+    </select>
+    
+    <label for="playedAt">Date Played</label>
+    <input class="form-control" type="text" name="playedAt" id="playedAt" placeholder="mm/dd/yyyy">
     </select>
 
 
@@ -60,7 +65,7 @@
     <label for="game">Game</label>
     <select class="form-control" id="game" name="game">
       {{#each games}}
-        <option value={{id}}>{{name}}</option>
+        <option value="{{id}}">{{name}}</option>
       {{/each}}
     </select>
 

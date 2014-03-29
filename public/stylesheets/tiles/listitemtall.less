@@ -1,53 +1,19 @@
 .tile-match-listitemtall {
-  display: inline-block;
-  height: 100%;
-  width: 100%;
+  .tile-mixin(); 
   &:hover {
     text-decoration: none;
+    .fight-card {
+      background-color: lighten(@background-color, 10%);
+    }
   }
-  .tile-mixin(); 
   .fight-card-header {
-    position: relative;
-    height: 50%;
-    min-height: 50%;
-    padding: 4px 4px 6px 4px;
-
-    .flags {
-      .flag.one {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-      } 
-      .flag.two {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-      } 
-    }
-
-    .match-details {
-      text-align: center;
-      .event-name {
-        .make-row();
-        font-family: 'Trebuchet MS', 'sans-serif';
-        color: @tile-color-2;
-        color: @tile-color-6;
-        font-size: @font-small;
-      }
-      .caster-list {
-        .make-row();
-        font-size: @font-small;
-        .caster-name {
-          color: @tile-color-1;
-          font-size: @font-small;
-        }
-      }
-    }
+    .top-left();
+    .size(100%, 32px);
   }
-
   .fight-card {
-    min-height: 50%;
-    height: 50%;
-    padding: 6px 4px 4px 4px;
+    .bottom-left();
+    .size(100%, 42px);
+    .transition(all .2s);
+    background-color: @background-color;
   }
 }

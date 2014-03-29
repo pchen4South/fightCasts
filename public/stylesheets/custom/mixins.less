@@ -5,14 +5,59 @@
   background-position: center center;
 }
 
-.hover-border (@initial-color: @tile-color-5, @hover-color: @tile-color-4) {
-  transition: border .4s;
-  box-shadow: 4px 4px #0e0e0e;
+.top-left {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.top-right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.hover-border (@initial-color: @background-light, @hover-color: @hover-color) {
+  .transition(all .2s);
   border: 2px solid @initial-color;
   &:focus {
     border: 2px solid @hover-color;
   }
   &:hover {
     border: 2px solid @hover-color;
+  }
+}
+
+.hover-color (@initial-color: @background-light, @hover-color: @hover-color) {
+  .transition(all .2s);
+  color: @initial-color;
+  &:focus {
+    color: @hover-color;
+  }
+  &:hover {
+    color: @hover-color;
+  }
+}
+
+.hover-background (@initial-color: @default-tile-color, @hover-color: @hover-color) {
+  .transition(all .2s);
+  background-color: @initial-color;
+  &:focus {
+    background-color: @hover-color;
+  }
+  &:hover {
+    background-color: @hover-color;
   }
 }

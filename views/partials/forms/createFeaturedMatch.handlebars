@@ -1,0 +1,16 @@
+<form role="form" method="POST" action="/admin/featuredMatches">
+  <div class="form-group">
+
+    <label for="match">Match</label>
+    <select class="form-control" id="match" name="match">
+      {{#each matches}} 
+        <option value={{id}}>{{title}}</option>
+      {{/each}}
+    </select>
+
+  </div> 
+  
+  <button type="submit" class="btn btn-default">
+    Create! 
+  </button>
+</form> 

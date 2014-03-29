@@ -10,24 +10,6 @@ module.exports = function (app) {
   //PLAYER
   app.post("/api/v1/people", api.createPerson);
 
-  //CHARACTER
-  app.post("/api/v1/characters", api.createCharacter);
-  app.get("/api/v1/characters", function (req, res) {
-    api.getCharacters(function (err, characters) {
-      if (err) res.send(400, {err: err.message});
-      else res.json(characters); 
-    }); 
-  });
-
-  //GAME
-  app.post("/api/v1/games", api.createGame);
-  app.get("/api/v1/games", function (req, res) {
-    api.getGamesNested(function (err, games) {
-      if (err) res.send(400, {err: err.message});
-      else res.json(games); 
-    }); 
-  });
-
   //VIDEO
   app.post("/api/v1/videos", api.createVideo);
 
@@ -43,12 +25,12 @@ module.exports = function (app) {
   //FIGHTER
   
   //MATCH
-  app.get("/api/v1/matches/search", function (req, res, next) {
-    var query = req.query.title;
+  app.get("/api/v1/matches/", function (req, res, next) {
+    var query = req.query.search;
     var querystring = query;
     query = {"title": {"$regex": new RegExp(query, "i")}};
  
-    api.searchMatches(query,function (err, results) {
+    api.getMatchesNested(query,function (err, results) {
       if (err) res.send(400, {err: err.message});
       else {
         res.render("results",{matches: results, query: querystring}); 
@@ -142,7 +124,3 @@ var getFeaturedMatches = function(matchArray){
   });
   return featured;
 };
-
-
-
-

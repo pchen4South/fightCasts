@@ -15,8 +15,10 @@
       <select multiple class="form-control" 
               id="characters" 
               name="characters">
-        {{#each characters}}
+        {{#each games}}
+          {{#each characters}}
           <option value={{id}}>{{name}}</option>
+          {{/each}}
         {{/each}}
       </select>
 

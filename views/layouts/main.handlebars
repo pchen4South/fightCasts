@@ -2,51 +2,36 @@
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" type="text/css" href="/dist/index.css">
-<!--   <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel = 'stylesheet'
-    type = 'text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Lato:300' 
-  rel='stylesheet' type='text/css'> -->
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400'
-  rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Tulpen+One|Exo:400,900italic|Dosis' rel='stylesheet' type='text/css'>
+  <link rel="icon" type="image/png" href="/images/favicon.ico">
 </head>
 
 <body>
-  <nav class="container page-header">
-    <div class="row">
-      <a href="/" class="page-brand">fight casts</a> 
-      {{> searchBar}}      
-    </div>
-  </nav>
-
-  <div class="container page-subheader">
-    <div class="row">
-      <ul class="game-list">
-        <div class="subheader-text">
-          Choose a game: 
+  <div id="header">
+    <div class="container">
+      <div class="page-header">
+        <a href="/" class="page-brand">fight casts</a> 
+        <div class="search-bar">
+          {{> searchBar}}      
         </div>
-        <li class="game active">
-          <div class="icon"></div>
-          <div class="name">
-            Street Fighter IV
-          </div>
-        </li> 
-        <li class="game">
-          <div class="icon"></div>
-          <div class="name">
-            Marvel vs Capcom III
-          </div>
-        </li> 
-        <li class="game">
-          <div class="icon"></div>
-          <div class="name">
-            Smash Bros. Melee
-          </div>
-        </li> 
-      </ul> 
+      </div>
     </div>
   </div>
 
-  <div class="container" id="main-content">
-    {{{body}}}
+  <div id="subheader">
+    <div class="container">
+      <div class="page-subheader">
+        <div class="tab-wrapper">
+          <div class="tab sf4 active">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <div class="container">
+      {{{body}}}
+    </div>
   </div>
 </body>

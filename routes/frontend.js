@@ -1,88 +1,103 @@
 var _ = require('lodash');
+var async = require('async');
 var find = _.find;
 var first = _.first;
-var api = require('../api');
 var filter = _.filter;
-
-var createPayload = function (matches) {
-
-  var matchesByCategory = sortByCategory(matches);
-  
-  matchesByCategory.pro.sort(sortByDateMostRecent);
-  matchesByCategory.scrub.sort(sortByDateMostRecent);
-  matchesByCategory.community.sort(sortByDateMostRecent);
-  
-  return {
-    matches: matchesByCategory,
-    featuredMatches: {
-      pro: getFeaturedMatches(matchesByCategory.pro)[0] || {},
-      community: getFeaturedMatches(matchesByCategory.community)[0] || {}, 
-      scrub: getFeaturedMatches(matchesByCategory.scrub)[0] || {}, 
-      default: matchesByCategory.pro[0], 
-    },
-    communityMatches: first(matchesByCategory.community, 3)
-  };
-};
-
-var sortByCategory = function (matchArray){
-  var community = [];
-  var pro = [];
-  var scrub = [];
-  
-  for(var i = 0; i < matchArray.length; ++i){
-    switch(matchArray[i].category){
-      case "pro":
-        pro.push(matchArray[i]);
-        break;
-      case "scrub":
-        scrub.push(matchArray[i]);
-        break;
-      case "community":
-        community.push(matchArray[i]);
-        break;
-    }
+var extend = _.extend;
+var clone = _.clone;
+var sortBy = _.sortBy;
+var partial = _.partial;
+var isEmpty = _.isEmpty;
+var api = require('../api');
+var gameFilter = {default: 'SF4'};
+var subheaders = {
+  default: {
+    topLeft: 'top pro match',
+    topRight: 'top community match',
+    botLeft: 'new pro matches',
+    botRight: 'new community matches'},
+    searchPage: {botLeft: 'results: pro',
+    botRight: 'results: community'
   }
-  
-  return {pro: pro, community: community, scrub:scrub};  
-  
 };
-
-var sortByDateMostRecent = function(date1,date2){
-  return date1 - date2;
-};
-
-var getFeaturedMatches = function(matchArray){
-  var featured = filter(matchArray, function(element){
-    return element.featured == true;
-  });
-  if (featured) return featured;
-  else return [{}];
-};
-
+                  
 module.exports = function (app) {
-  var returnIndex = function (req, res) {
-    api.getMatchesNested(function (err, matches) {
-      var payload = createPayload(matches);
-      res.render("index", payload); 
-     });
+  var getMatches = function (rawQuery, cb) {
+    var query = !isEmpty(rawQuery) ? parseQuery(rawQuery) : {};
+    var comQuery = {category: "community"};
+    var proQuery = {category: "pro"};
+    var communityMatchesQuery = extend(clone(query), comQuery);
+    var proMatchesQuery = extend(clone(query), proQuery);
+  
+    async.parallel({
+      proMatches: partial(api.getMatchesNested, proMatchesQuery),
+      communityMatches: partial(api.getMatchesNested, communityMatchesQuery),
+      featuredPro: partial(api.getFeaturedMatch, proQuery),
+      featuredCommunity: partial(api.getFeaturedMatch, comQuery)
+    }, cb);
+  };
+    
+  var parseQuery = function(query){
+    var searchString = query.search;
+    var gameString = query.game;
+    
+    if(!gameString){gameString = "SF4"}
+    return {title: {"$regex": new RegExp(searchString, "i")}};
   };
 
-  app.get("/test", function (req, res) {
-    res.render("test");
-  });
-  app.get("/", returnIndex);
-  app.get("/matches", returnIndex);
-  app.get("/matches/submit", function (req, res) {
-    api.getAll(function (err, results) {
-      res.render("submitForm", results); 
-    });
+  app.get("/", function (req, res) {
+    var searched = req.query.search;
+    //queryFlag is true when there is a search query
+    var queryFlag = !isEmpty(req.query);
+    if(queryFlag){
+      var searched = req.query.search;
+      var subheaderText = subheaders.searchPage;
+    }else var subheaderText = subheaders.default;
+
+    
+    getMatches(req.query, function (err, results) {
+      var focused = {};     
+      if(results.proMatches){focused = results.proMatches[0]}
+      else if(results.communityMatches){focused = results.communityMatches[0]}
+      else focused = results.featuredPro;
+    
+      var payload = {
+        proMatches: sortBy(results.proMatches, "createdAt"),
+        communityMatches: sortBy(results.communityMatches, "createdAt"),
+        featuredPro: queryFlag ? null : results.featuredPro,
+        featuredCommunity: queryFlag ? null : results.featuredCommunity,
+        subheaders: subheaderText,
+        searched: searched,
+        defaultFocused: focused
+      };
+  
+      res.render("index", payload); 
+    }); 
   });
   app.get('/matches/:id', function (req, res) {
     var id = req.params.id;
+    //queryFlag is true when there is a search query
+    var queryFlag = !isEmpty(req.query);
+    if(queryFlag){
+      var searched = req.query.search;
+      var subheaderText = subheaders.searchPage;
+    }else var subheaderText = subheaders.default;
     
-    api.getMatchNested(id, function (err, match) {
-      res.render("match", match); 
+    async.parallel({
+      matchData: partial(getMatches, req.query),
+      focusedMatch: partial(api.getMatchNested, id)
+    }, function (err, results) {
+      var payload = {
+        proMatches: sortBy(results.matchData.proMatches, "createdAt"),
+        communityMatches: sortBy(results.matchData.communityMatches, "createdAt"),
+        featuredPro: queryFlag ? null : results.matchData.featuredPro,
+        featuredCommunity: queryFlag ? null : results.matchData.featuredCommunity,
+        focusedMatch: results.focusedMatch,
+        searched: searched,
+        subheaders: subheaderText
+      };
+
+      res.render("index", payload); 
     });
   });
 };
-

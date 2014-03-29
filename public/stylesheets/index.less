@@ -1,19 +1,3 @@
-*, *:before, *:after {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  color: @text-color;
-  font-weight: 100;
-  font-size: @font-smallish;
-}
-
-@tile-color-1: #ee8444;
-@tile-color-2: #c60c30;
-@tile-color-3: #6a656c;
-@tile-color-4: #f2f6f7;
-@tile-color-5: #060606;
-@tile-color-6: #D1D9DA;
-
 @import "variables.less";
 @import "mixins.less";
 @import "scaffolding.less";
@@ -26,13 +10,31 @@
 @icon-font-name: "glyphicons-halflings-regular";
 @import "glyphicons.less";
 
-@default-background-color: #1d1d1d;
-
-
+@tile-color-1: #2980b9;
+//@tile-color-2: darken(#826AE6, 10%);
+@tile-color-2: darken(#ff0000, 20%);
+@tile-color-3: lighten(#6a656c, 5%);
+@tile-color-4: #f2f6f7;
+@tile-color-5: darken(#333333, 10%);
+@tile-color-6: lighten(@tile-color-2, 25%);
+@tile-color-7: lighten(@tile-color-1, 25%);
 
 @text-color: @tile-color-4;
+@secondary-text-color: @tile-color-3;
+@dark-text-color: @tile-color-5;
+@header-color: @tile-color-2;
+@content-color: @tile-color-5;
+@background-dark: @tile-color-5;
+@background-light: @tile-color-4;
+@background-color: @tile-color-2;
+@background-color-dark: darken(@tile-color-2, 10%);
+@hover-color: @tile-color-4;
+@border-color: @tile-color-4;
+@border-light-color: @tile-color-3;
+@tab-active-color: @header-color;
+@tab-color: lighten(@tab-active-color, 10%);
 
-@default-tile-color: @tile-color-3;
+@default-tile-color: lighten(@tile-color-5, 10%);
 
 @font-largish: 64px;
 @font-large: 48px;
@@ -40,139 +42,182 @@
 @font-medium: 24px;
 @font-smallish: 16px;
 @font-small: 12px;
+@font-smaller: 10px;
 @font-tiny: 8px;
 
-@header-margin: 16px 0px;
-
+@header-height: 96px;
 @subheader-height: 32px;
 
 @import "custom/grid.less";
 @import "custom/mixins.less";
 @import "tile-grid.less";
 @import "tiles/featured.less";
-@import "tiles/listitem.less";
 @import "tiles/listitemtall.less";
-@import "tiles/info.less";
 @import "tiles/main.less";
 @import "tiles/main-details.less";
+
+.header-text {
+  font-family: "Tulpen One", sans-serif;
+  text-decoration: none;
+}
+
+.content-text {
+  font-family: "Exo", sans-serif;
+  font-size: @font-smallish;
+}
+
+.content-secondary-text {
+  font-family: "Dosis", sans-serif;
+}
+
+.site-header {
+  font-size: @font-largish;
+  color: @text-color;
+}
+
+.section-header {
+  .header-text();
+  font-size: @font-medium;
+  color: @secondary-text-color;
+}
+
+.header {
+  .header-text();
+}
+
+*, *:before, *:after {
+  .box-sizing(border-box);
+  color: @text-color;
+  font-weight: 100;
+}
+
+body {
+  .content-text();
+  margin: 0px;
+  background-color: @content-color;
+}
+
+#header {
+  position: relative;
+  background-color: @header-color;
+}
+
+#subheader {
+  background-color: @background-color-dark;
+}
+
+#divider {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  //height: 1px;
+  background-color: @border-color;
+}
+
+#main-content {
+  position: relative;
+  background-color: @content-color;
+}
 
 ul {
   list-style-type: none;
   padding-left: 0px;
 }
 
-body {
-  background-color: @default-background-color;
-  font-family: 'Raleway', 'sans-serif';
+//insanity comes from positioning the stupid, stupid icon
+.search-form {
+  //.hover-color(@text-color, @dark-text-color);
+  color: @secondary-text-color;
+  position: relative;
+  .icon {
+    .size(32px, 32px);
+    position: absolute;
+    display: block;
+    z-index: 99;
+    top: 6px;
+    left: 12px;
+    font-family: "Glyphicons Halflings";
+    color: inherit;
+  }
+
+  .search-box {
+    .size(100%, 32px);
+    .hover-color(@secondary-text-color, @dark-text-color);
+    background-color: @background-light;
+    position: relative;
+    outline: 0;
+    padding-left: 32px;
+    border: none;
+    border-radius: 2px;
+  }
+}
+
+.tab {
+  .size(100%, 100%);
+  text-align: center;
+  font-size: @font-small;
+  vertical-align: bottom;
+}
+
+.tab.active {
+  background-color: @tab-active-color;
+}
+
+.sf4 {
+  .center-bg("/images/SSFIVAE-gray.png");
+}
+
+.mvc3 {
+  .center-bg("/images/UMVC3-gray.png");
+}
+
+.active.sf4 {
+  .center-bg("/images/SSFIVAE-gray.png");
+}
+
+.active.mvc3 {
+  .center-bg("/images/UMVC3.png");
 }
 
 .page-header {
-  min-height: 96px;
-  padding-left: 2px;
+  .make-row(0px);
+  height: @header-height;
   .page-brand {
-    .make-xs-column(6, 0px);
-    font-size: @font-large;
-    text-decoration: none;
-    color: @text-color;
+    .tile-region-6();
+    .header();
+    .site-header();
   }
-  .searchBar{
-    .make-xs-column(6, 0px);
+  .search-bar {
+    .tile-region-4();
     .tile-offset-1();
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    top: 22px;
-    .searchForm {
-      display: inline-block;
-      width: 300px;
-      .searchBox {
-        .hover-border();
-        display: inline-block;
-        border-radius: 32px;
-        border: 2px solid @tile-color-3;
-        width: 200px;
-        height: 100%;
-        background: #0d0d0d;
-        color: @text-color;
-      }
-      .searchBtn {
-        display: inline-block;
-      }
-    }
+    top: 36px;
   }
 }
 
 .page-subheader {
-  //background-color: @tile-color-2;
-  height: @subheader-height;
-  padding-left: 2px;
-  .game-list {
-    margin: 0px;
-    height: @subheader-height;
-    .subheader-text {
-      display: inline-block;
-      float: left;
-      height: @subheader-height;
-      line-height: @subheader-height;
-      padding-right: 24px;
-      color: @tile-color-6;
-    }
-    .game {
-      .hover-border(transparent);
-      border-radius: 32px;
-      display: inline-block;
-      height: @subheader-height;
-      //this width is (lcd of 32 and 48) x 2
-      width: 192px;
-      float: left;
-      .icon {
-        display: inline-block;
-        height: @subheader-height;
-        float: left;
-        width: 20%;
-        .center-bg("/images/SF4-gray-trans.png");
-      }
-      .name {
-        .text-overflow();
-        display: inline;
-        float: left;
-        height: @subheader-height;
-        width: 80%;
-        padding-top: 4px;
-        text-align: left;
-        font-size: @font-smallish;
-        color: @tile-color-3;
-      }
-    }
-
-    .game.active {
-      background: #0d0d0d;
-      border: 2px solid @tile-color-4;
-      .name {
-        color: @tile-color-4;
-      }
-    }
+  .make-row();
+  .tab-wrapper {
+    .tile-2x1();
+    padding: 0px 2px;
   }
 }
 
 .subheader {
-  font-size: @font-medium;
-  color: @tile-color-6;
-  margin: 8px 0px 0px 0px;
+  .section-header();
+  font-size: @font-mediumish;
+  margin: 0px;
   padding: 0px;
-  .subheader-secondary {
-    .text-overflow();
-    font-size: @font-medium; 
-  }
 }
 
 
 .tile-subheader{
-  font-size: @font-smallish;
+  .header-text();
 }
 
 .fight-card {
   display: block;
+  padding: 4px;
   .fighter-list {
     height: 100%;
     .make-row(0px);
@@ -181,33 +226,30 @@ body {
       height: 100%;
       margin-top: 6px;
       .vs {
-        /* .skew(-10deg, 0deg); */
-        width: 60%;
+        .skew(-10deg, 0deg);
+        padding-top: 2px;
+        width: 70%;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
-       /*  background-color: @tile-color-1; */
-        color: white;
+        background-color: @default-tile-color;
+        color: @background-light;
         font-weight: 600;
         font-style: italic;
       }
     }
     .fighter {
       .make-xs-column(10, 0px);
-      margin-top: -2px;
       .fighter-name {
         .make-row(0px);
         .text-overflow();
+        .content-secondary-text();
         vertical-align: bottom;
-        text-shadow: 2px 2px black;
       }
       .character-list {
-        margin-top: -6px;
+        margin-top: -8px;
         .character-name {
-          vertical-align: top;
-          color: @tile-color-2;
           font-size: @font-small;
-          font-style: italic;
         }
       }
     }
@@ -222,7 +264,26 @@ body {
   }
 }
 
+.fight-card-header {
+  padding: 4px;
+  .match-details {
+    text-align: center;
+    .event-name {
+      .make-row(); 
+      font-size: @font-small;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+    .caster-list {
+      .make-row();
+      font-size: @font-small;
+      .caster-name {
+        font-size: @font-small;
+      }
+    }
+  }
+}
+
 img.gameLogoSmall{
-  width: 32px;
-  height: 32px;
+  .size(32px, 32px);
 }

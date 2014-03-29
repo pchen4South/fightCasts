@@ -8,17 +8,18 @@
 <div class ="col-md-6">
   <ul class="datalist">
   {{#each matches}} 
-   <li>
+   <li class = "dataItem">
    <form role = "form" method = "POST"> 
-    <img class = "gameLogoSmall" src = {{gameIcon game.nickname}}> </img> 
+    <div class = "adminControls">
+    <img class = "gameLogoSmall" src = {{gameIcon game}}> </img> 
     <button formaction = "/admin/matches/{{id}}/delete"
           type = "submit"
           class = "btn btn-xs btn-default" 
           name = "id" value = {{id}}> 
           <span class = "glyphicon glyphicon-trash"></span> 
     </button>
-          
     {{#if approved}}
+
         <button formaction = "/admin/matches/{{id}}/unapprove" type = "submit"
         class = "btn btn-xs btn-default" name = "id" value = {{id}}>
           <span class="glyphicon glyphicon-thumbs-up"></span></button>
@@ -33,12 +34,18 @@
             <span class="glyphicon glyphicon-star-empty"></span>
           </button>
         {{/if}}
-          {{title}} <i> {{category}} </i> {{description}}
+        </div>
+        <div class = "itemInfo">
+          {{title}} <i> {{category}} </i> <br> Played on: {{playedAt}} <br>Description: {{description}} 
+        </div>
     {{else}}
         <button formaction = "/admin/matches/{{id}}/approve" type = "submit"
         class = "btn btn-xs btn-default" name = "id" value = {{id}}>
         <span class="glyphicon glyphicon-thumbs-down"></span></button>
-          {{title}} <i> {{category}} </i> {{description}}
+      </div>
+      <div class = "itemInfo">
+        {{title}} <i> {{category}} </i> <br> Played on: {{playedAt}} <br>Description: {{description}} 
+      </div>
     </form>
     {{/if}}
     </li>
