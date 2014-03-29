@@ -10,12 +10,16 @@ var partial = _.partial;
 var isEmpty = _.isEmpty;
 var api = require('../api');
 var gameFilter = {default: 'SF4'};
-var subheaders = {default: {topLeft: 'top pro match',
-                            topRight: 'top community match',
-                            botLeft: 'new pro matches',
-                            botRight: 'new community matches'},
-                  searchPage: {botLeft: 'results: pro',
-                               botRight: 'results: community'}}
+var subheaders = {
+  default: {
+    topLeft: 'top pro match',
+    topRight: 'top community match',
+    botLeft: 'new pro matches',
+    botRight: 'new community matches'},
+    searchPage: {botLeft: 'results: pro',
+    botRight: 'results: community'
+  }
+};
                   
 module.exports = function (app) {
   var getMatches = function (rawQuery, cb) {
