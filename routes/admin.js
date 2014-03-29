@@ -4,10 +4,11 @@ var api = require('../api');
 var gameData = require('../models/gameCharacterData');
 var _ = require('lodash');
 var keys = _.keys;
+var creds = require('../creds');
 
 passport.use(new LocalStrategy(function(user, password, done){
   if (user && password) {
-    if (user == "admin" && password == "jibob682") {
+    if (user == creds["admin"].username && password == creds["admin"].password) {
       return done(null, {id:1, user:user});
     } else return done(null, false);
   } else return done(null, false);
