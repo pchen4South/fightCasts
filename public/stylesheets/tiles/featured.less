@@ -1,14 +1,10 @@
 .tile-match-featured {
   .tile-mixin(); 
-  position: relative;
-  display: inline-block;
-  height: 100%;
-  width: 100%;
   &:hover {
     text-decoration: none;
     .content {
       .fight-card {
-        background-color: @background-color-dark;
+        background-color: lighten(@background-color, 10%);
       }
     }
   }
@@ -30,7 +26,7 @@
     .fight-card {
       .bottom-left();
       .size(100%, 42px);
-      transition: all .2s;
+      .transition(all .2s);
       background-color: @background-color;
     }
   }
