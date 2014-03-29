@@ -1,9 +1,9 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var api = require('../api');
-var gameData = require('../models/gameCharacterData');
 var _ = require('lodash');
 var keys = _.keys;
+var api = require('../api');
+var gameData = require('../models/gameCharacterData');
 
 passport.use(new LocalStrategy(function(user, password, done){
   if (user && password) {
@@ -22,10 +22,8 @@ passport.deserializeUser(function(user, done) {
 });
 
 var ensureAuthenticated = function (req, res, next) {
-    if (req.isAuthenticated())
-          return next();
-          else
-                res.redirect('/admin/login');
+ if (req.isAuthenticated()) return next();
+ else res.redirect('/admin/login');
 }
 
 module.exports = function (app) {
@@ -50,29 +48,9 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/admin/games", function (req, res) {
-    api.getAll(function (err, results) {
-      if(results){
-        results.layout = "adminLayout";
-        results.games = gameData;
-      }
-      res.render("admin/games", results);
-    });      
-  });
-    
   app.get("/admin/casters",  ensureAuthenticated, 
     function (req, res) {
       res.redirect("/admin");
-  });
-
-  app.get("/admin/videos", function (req, res) {
-    api.getAll(function (err, results) {
-      if(results){
-        results.layout = "adminLayout";
-        results.games = gameData;
-      }
-      res.render("admin/videos", results);
-    });
   });
 
   app.get("/admin/events", function (req, res) {
@@ -82,36 +60,6 @@ module.exports = function (app) {
         results.layout = "adminLayout";
       }
       res.render("admin/events", results);
-    });
-  });
-
-  app.get("/admin/channels", function (req, res) {
-    api.getAll(function (err, results) {
-      if(results){
-        results.games = gameData;
-        results.layout = "adminLayout";
-      }
-      res.render("admin/channels", results);
-    });
-  });
-
-  app.get("/admin/teams", function (req, res) {
-    api.getAll(function (err, results) {
-      if(results){
-        results.games = gameData;
-        results.layout = "adminLayout";
-      }
-      res.render("admin/teams", results);
-    });
-  });
-
-  app.get("/admin/fighters", function (req, res) {
-    api.getAll(function (err, results) {
-      if(results){
-        results.games = gameData;
-        results.layout = "adminLayout";
-      }
-      res.render("admin/fighters", results);
     });
   });
 
@@ -189,20 +137,10 @@ module.exports = function (app) {
       });
   });
 
-
-
   app.post("/admin/games", ensureAuthenticated,
     function (req, res) {
       api.createGame(req.body, function (err, result) {
         res.redirect("/admin/games");
-      });
-  });
-
-
-  app.post("/admin/videos",  ensureAuthenticated,
-    function (req, res) {
-      api.createVideo(req.body, function (err, result) {
-        res.redirect("/admin/videos");
       });
   });
 
@@ -213,27 +151,6 @@ module.exports = function (app) {
       });
   });
 
-  app.post("/admin/channels", ensureAuthenticated,
-    function (req, res) {
-      api.createChannel(req.body, function (err, result) {
-        res.redirect("/admin/channels");
-      });
-  });
-
-  app.post("/admin/teams",  ensureAuthenticated,
-    function (req, res) {
-      api.createTeam(req.body, function (err, result) {
-        res.redirect("/admin/teams");
-      });
-  });
-
-  app.post("/admin/fighters",  ensureAuthenticated,
-    function (req, res) {
-      api.createFighter(req.body, function (err, result) {
-        res.redirect("/admin/fighters");
-      });
-  });
-  
   app.post("/admin/matches", function (req, res){
     api.createMatch(req.body, function (err, result) {
       res.redirect("/admin/matches");
@@ -258,7 +175,6 @@ module.exports = function (app) {
       });
     });
   });  
-  
   
   app.post("/admin/convertmatches",  ensureAuthenticated,
     function (req, res){
@@ -326,15 +242,6 @@ module.exports = function (app) {
       });
   }); 
   
-  app.post("/admin/videos/:_id/delete",  ensureAuthenticated,
-    function(req, res){
-      var id = req.body.id;
-      api.deleteVideo(id, function(err, result){
-        console.log("DELETED Video: ", result.name);
-        res.redirect("admin/videos");
-      });
-  });  
-  
   app.post("/admin/events/:_id/delete",  ensureAuthenticated,
     function(req, res){
       var id = req.body.id;
@@ -344,33 +251,6 @@ module.exports = function (app) {
       });
   });
 
-  app.post("/admin/channels/:_id/delete",  ensureAuthenticated,
-    function(req, res){
-      var id = req.body.id;
-      api.deleteChannel(id, function(err, result){
-        console.log("DELETED Channel: ", result.name);
-        res.redirect("admin/channels");
-      });
-  }); 
-  
-  app.post("/admin/teams/:_id/delete",  ensureAuthenticated,
-    function(req, res){
-      var id = req.body.id;
-      api.deleteTeam(id, function(err, result){
-        console.log("DELETED team: ", result.name);
-        res.redirect("admin/teams");
-      });
-  });  
-  
-  app.post("/admin/fighters/:_id/delete",  ensureAuthenticated,
-    function(req, res){
-      var id = req.body.id;
-      api.deleteFighter(id, function(err, result){
-        console.log("deleted fighter");
-        res.redirect("admin/fighters");
-      });
-  });
-  
   app.post("/admin/matches/:_id/delete",  ensureAuthenticated,
     function(req, res){
       var id = req.body.id;

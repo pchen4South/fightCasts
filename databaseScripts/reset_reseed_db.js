@@ -116,7 +116,7 @@ var featuredMatchCreation = function(cb){
           cb(null,res);
       })
     })
-   })
+ })
 }
 
 var resetDb = function (mongoose) {
