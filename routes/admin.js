@@ -1,7 +1,32 @@
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var api = require('../api');
 var gameData = require('../models/gameCharacterData');
 var _ = require('lodash');
 var keys = _.keys;
+
+passport.use(new LocalStrategy(function(user, password, done){
+  if (user && password) {
+    if (user == "admin" && password == "jibob682") {
+      return done(null, {id:1, user:user});
+    } else return done(null, false);
+  } else return done(null, false);
+}));
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
+
+var ensureAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated())
+          return next();
+          else
+                res.redirect('/admin/login');
+}
 
 module.exports = function (app) {
   //read
@@ -14,6 +39,7 @@ module.exports = function (app) {
       res.render("admin/dashboard", results);
     });
   });
+
   app.get("/admin/people", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
@@ -23,6 +49,7 @@ module.exports = function (app) {
       res.render("admin/people", results);
     });
   });
+
   app.get("/admin/games", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
@@ -47,6 +74,7 @@ module.exports = function (app) {
       res.render("admin/videos", results);
     });
   });
+
   app.get("/admin/events", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
@@ -56,6 +84,7 @@ module.exports = function (app) {
       res.render("admin/events", results);
     });
   });
+
   app.get("/admin/channels", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
@@ -65,6 +94,7 @@ module.exports = function (app) {
       res.render("admin/channels", results);
     });
   });
+
   app.get("/admin/teams", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
@@ -74,6 +104,7 @@ module.exports = function (app) {
       res.render("admin/teams", results);
     });
   });
+
   app.get("/admin/fighters", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
@@ -83,6 +114,7 @@ module.exports = function (app) {
       res.render("admin/fighters", results);
     });
   });
+
   app.get("/admin/matches", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
@@ -92,6 +124,7 @@ module.exports = function (app) {
       res.render("admin/matches", results);
     });
   });  
+
   app.get("/admin/featuredMatches", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
@@ -102,7 +135,7 @@ module.exports = function (app) {
     });
   });  
   
-  app.get("/admin/submittedmatches/:_id",  ensureAuthenticated,
+  app.get("/admin/submittedmatches/:_id", ensureAuthenticated,
     function (req, res) {
       var id = req.params._id;
       
@@ -128,7 +161,7 @@ module.exports = function (app) {
       });
   });
   
-  app.get("/admin/submittedmatches",  ensureAuthenticated,
+  app.get("/admin/submittedmatches", ensureAuthenticated,
     function (req, res) {
       api.getAll(function (err, results) {      
         if(results){
@@ -149,7 +182,7 @@ module.exports = function (app) {
   });
 
   //create
-  app.post("/admin/people",  ensureAuthenticated,
+  app.post("/admin/people", ensureAuthenticated,
     function (req, res) {
       api.createPerson(req.body, function (err, result) {
         res.redirect("/admin/people");
@@ -158,7 +191,7 @@ module.exports = function (app) {
 
 
 
-  app.post("/admin/games",  ensureAuthenticated,
+  app.post("/admin/games", ensureAuthenticated,
     function (req, res) {
       api.createGame(req.body, function (err, result) {
         res.redirect("/admin/games");
@@ -244,13 +277,11 @@ module.exports = function (app) {
   });
 
   //update
-  app.post("/admin/matches/:_id/approve",  ensureAuthenticated,
-    function(req,res){
-      var id = req.body.id;
-      api.getMatch(id, function(err, result){
-        api.updateMatchById(id, { $set: { approved: true }}, function(err, result){
-          res.redirect("admin/matches");
-        })
+  app.post("/admin/matches/:_id/approve",  ensureAuthenticated, function(req,res) {
+    var id = req.body.id;
+    api.getMatch(id, function(err, result){
+      api.updateMatchById(id, { $set: { approved: true }}, function(err, result){
+        res.redirect("admin/matches");
       })
     })
   });  
@@ -357,7 +388,4 @@ module.exports = function (app) {
         res.redirect("admin/games");
       });
   }); 
-
-
-  
 };

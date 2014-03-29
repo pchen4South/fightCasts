@@ -1,4 +1,5 @@
 var express = require('express');
+var passport = require('passport');
 var exphbs = require('express3-handlebars');
 var app = express();
 var mongoose = require('mongoose');
