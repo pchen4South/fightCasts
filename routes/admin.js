@@ -29,8 +29,16 @@ var ensureAuthenticated = function (req, res, next) {
 }
 
 module.exports = function (app) {
+   app.post('/admin/login', 
+    passport.authenticate('local', { failureRedirect: "/admin/login",
+                                   successRedirect: "/admin"})
+  );
+  
+  app.get("/admin/login", function(req,res){
+    res.render('login', {layout: "adminLayout"});
+  });
   //read
-  app.get("/admin", function (req, res) {
+  app.get("/admin", ensureAuthenticated, function (req, res) {
     api.getAll(function (err, results) {
       if(results){
         results.layout = "adminLayout";
@@ -40,7 +48,7 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/admin/people", function (req, res) {
+  app.get("/admin/people",ensureAuthenticated, function (req, res) {
     api.getAll(function (err, results) {
       if(results){
         results.layout = "adminLayout";
@@ -50,7 +58,7 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/admin/games", function (req, res) {
+  app.get("/admin/games", ensureAuthenticated,function (req, res) {
     api.getAll(function (err, results) {
       if(results){
         results.layout = "adminLayout";
@@ -65,7 +73,7 @@ module.exports = function (app) {
       res.redirect("/admin");
   });
 
-  app.get("/admin/videos", function (req, res) {
+  app.get("/admin/videos", ensureAuthenticated,function (req, res) {
     api.getAll(function (err, results) {
       if(results){
         results.layout = "adminLayout";
@@ -75,7 +83,7 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/admin/events", function (req, res) {
+  app.get("/admin/events", ensureAuthenticated,function (req, res) {
     api.getAll(function (err, results) {
       if(results){
         results.games = gameData;
@@ -85,7 +93,7 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/admin/channels", function (req, res) {
+  app.get("/admin/channels",ensureAuthenticated, function (req, res) {
     api.getAll(function (err, results) {
       if(results){
         results.games = gameData;
@@ -95,7 +103,7 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/admin/teams", function (req, res) {
+  app.get("/admin/teams", ensureAuthenticated,function (req, res) {
     api.getAll(function (err, results) {
       if(results){
         results.games = gameData;
@@ -105,7 +113,7 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/admin/fighters", function (req, res) {
+  app.get("/admin/fighters",ensureAuthenticated, function (req, res) {
     api.getAll(function (err, results) {
       if(results){
         results.games = gameData;
@@ -115,7 +123,7 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/admin/matches", function (req, res) {
+  app.get("/admin/matches", ensureAuthenticated,function (req, res) {
     api.getAll(function (err, results) {
       if(results){
         results.layout = "adminLayout";
@@ -125,7 +133,7 @@ module.exports = function (app) {
     });
   });  
 
-  app.get("/admin/featuredMatches", function (req, res) {
+  app.get("/admin/featuredMatches", ensureAuthenticated,function (req, res) {
     api.getAll(function (err, results) {
       if(results){
         results.games = gameData;
@@ -190,15 +198,6 @@ module.exports = function (app) {
   });
 
 
-
-  app.post("/admin/games", ensureAuthenticated,
-    function (req, res) {
-      api.createGame(req.body, function (err, result) {
-        res.redirect("/admin/games");
-      });
-  });
-
-
   app.post("/admin/videos",  ensureAuthenticated,
     function (req, res) {
       api.createVideo(req.body, function (err, result) {
@@ -234,13 +233,13 @@ module.exports = function (app) {
       });
   });
   
-  app.post("/admin/matches", function (req, res){
+  app.post("/admin/matches", ensureAuthenticated, function (req, res){
     api.createMatch(req.body, function (err, result) {
       res.redirect("/admin/matches");
     });
   });  
 
-  app.post("/admin/featuredMatches", function (req, res){
+  app.post("/admin/featuredMatches",ensureAuthenticated,  function (req, res){
     var matchId = req.body.match;
 
     if (!matchId) return res.redirect("admin/featuredMatches");
@@ -286,7 +285,7 @@ module.exports = function (app) {
     })
   });  
   
-  app.post("/admin/matches/:_id/feature", function(req,res){
+  app.post("/admin/matches/:_id/feature", ensureAuthenticated, function(req,res){
     var id = req.body.id;
     api.getMatch(id, function(err, result){
       api.createFeaturedMatch({match: result.id, game: result.game, category: result.category}, function(err, result){
@@ -296,7 +295,7 @@ module.exports = function (app) {
       })
     })
   });  
-  app.post("/admin/matches/:_id/unfeature",
+  app.post("/admin/matches/:_id/unfeature", ensureAuthenticated,
     function(req,res){
       var id = req.body.id;
       api.getMatch(id, function(err, result){
