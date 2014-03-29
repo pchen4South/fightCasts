@@ -133,7 +133,7 @@ var getMatchesNested = function (query, cb) {
   .populate("_casters")
   .exec(function (err, res) {
     if (err) cb(err); 
-    else cb(null, map(results, formatNestedMatch));
+    else cb(null, map(res, formatNestedMatch));
   });
 };
 
