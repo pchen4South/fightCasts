@@ -15,9 +15,7 @@ var fighterModel = require('./models/matchModel').Fighter;
 var gamesList = require('./models/gameCharacterData');
 
 var create = function (modelType, data, cb) {
-  return modelType.create(data, function (err, res) {
-    return cb(err, formatDbResponse(res)); 
-  });
+  return modelType.create(data, cb);
 };
 
 //create
@@ -110,10 +108,7 @@ var updateMatchById = function(id, updateOptions, cb){
 
 //delete
 var deleteModelById = function (modelType, id, cb) {
-  return modelType.findByIdAndRemove(id, function (err, res) {
-    if (err) cb(err);
-    else cb(err, formatDbResponse(res)); 
-  });
+  return modelType.findByIdAndRemove(id, cb);
 };
 
 var deletePerson = partial(deleteModelById, personModel);

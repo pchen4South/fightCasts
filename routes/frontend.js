@@ -34,7 +34,7 @@ var presentMatch = function (match) {
 
 module.exports = function (app) {
   var getMatches = function (rawQuery, cb) {
-    var query = !isEmpty(rawQuery) ? createQuery(rawQuery) : {};
+    var query = createQuery(rawQuery);
     var comQuery = {category: "community"};
     var proQuery = {category: "pro"};
     var communityMatchesQuery = extend(clone(query), comQuery);
@@ -78,7 +78,7 @@ module.exports = function (app) {
         defaultFocused: focused
       };
   
-      console.log(JSON.stringify(payload, null, 4));
+      //console.log(JSON.stringify(payload, null, 4));
       res.render("index", payload); 
     }); 
   });
