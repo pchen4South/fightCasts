@@ -13,7 +13,11 @@
   {{/if}}
 
   <div class="tile-6x1">
-    <h3 class="subheader">{{subheaders.botLeft}}</h3> 
+    <h3 class="subheader">{{subheaders.botLeft}}
+    {{#if searched}}
+      <span class="subheader-secondary">{{searched}}</span>
+    {{/if}}
+    </h3>
   </div>
   <div class="tile-1x1"></div>
   {{#if proMatches}}
@@ -72,7 +76,12 @@
   {{/if}}
 
   <div class="tile-6x1">
-    <h3 class="subheader">{{subheaders.botRight}}</h3> 
+    <h3 class="subheader">
+      {{subheaders.botRight}}
+      {{#if searched}}
+        <span class="subheader-secondary">{{searched}}</span>
+      {{/if}}
+    </h3>
   </div>
   {{#if communityMatches}}
     {{#each communityMatches}}
