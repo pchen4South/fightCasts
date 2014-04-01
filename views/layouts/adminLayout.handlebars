@@ -1,53 +1,38 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8" />
-  <link rel="stylesheet" type="text/css" href="/vendor/stylesheets/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+   <link rel="stylesheet" type="text/css" href="/dist/index.css">
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">FightCasts</a> 
+  <div id="header">
+    <div class="container">
+      <div class="page-header">
+        <a href="/" class="page-brand">fight casts</a> 
+        <div class="search-bar">
+          logged in as: {{user}}     
+        </div>
       </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-        <a href = "#">
-          Logged in as: 
-            {{user}}
-        </a>
-        </li> 
-      </ul>
     </div>
-  </nav>
-  <nav class = "navbar navbar-default" role= "navigation">
-    <div class = "container">
-      <ul class="nav navbar-nav navbar-left">
-        <p class="navbar-text navbar-left">Create: </p>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Person<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            {{>forms/createPerson}}
-          </ul>
-        </li>        
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Event<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            {{>forms/createEvent}}
-          </ul>
-        </li>   
-        
-      </ul>
-    </div>
-  </nav>
-  <script src="/vendor/javascripts/jquery.js"></script>
-  <script src="/vendor/javascripts/bootstrap.min.js"></script>
+  </div>
+  
+  <div id="subheader">
+     <div class="container">
+      <div class="page-subheader">
+        <div class="tab-wrapper">
+        </div>
+      </div>
+    </div> 
+  </div>
 
-  <section class="col-md-12">
-    <div class="container-fluid">
-      {{{body}}}
+  <script src="/vendor/javascripts/jquery.js"></script>
+  <script src="/vendor/javascripts/handlebars.js"></script>
+  <script src="/vendor/javascripts/ember.min.js"></script>
+  <script src="/vendor/javascripts/bootstrap.min.js"></script>
+  
+  <section class="main-content">
+    <div class="container">
+       {{{body}}}
     </div>
   </section>
 
