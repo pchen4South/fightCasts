@@ -16,8 +16,8 @@ var createSubheaders = function (querystring) {
     botRight: 'new community matches',
   }; 
   var queryHeaders = {
-    botLeft: "pro results: " + querystring,
-    botRight: "community results: " + querystring   
+    botLeft: "pro results: ",
+    botRight: "community results: "
   };
 
   return querystring ? queryHeaders : defaultHeaders;

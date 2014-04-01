@@ -4,7 +4,8 @@ var timestamps = require('mongoose-timestamp');
 var Events = new mongoose.Schema({
   name: String,
   country: String,
-  date: Date 
+  startDate: Date,
+  endDate: Date
 });
 
 Events.plugin(timestamps);

@@ -3,33 +3,29 @@ var createQuery = require('./utils').createQuery;
 
 module.exports = function (app) {
 
+  //CREATE
   app.post("/api/v1/people", function (req, res) {
-    var person = {
-      name: req.body.name,
-      country: req.body.country
-    };
-    api.createPerson(person, function (err, person) {
+    api.createPerson(req.body, function (err, person) {
       if (err) res.send(400, {err: err.message}); 
       else res.json({person: person});
     });
   });
 
   app.post("/api/v1/events", function (req, res) {
-    var event = {
-      name: req.body.name 
-    };
-    api.createEvent(event, function (err, event) {
+    api.createEvent(req.body, function (err, event) {
       if (err) res.send(400, {err: err.message}); 
       else res.json({person: event});
     });
   });
 
-  //TODO: implement once match model solidifies
   app.post("/api/v1/matches", function (req, res) {
-    res.json({message: "This route is not currently supported"});
+    api.createMatch(req.body, function (err, match) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({match: match});
+    });
   });
 
-  //add match to featuredMatches list
+  //UPDATE
   app.post("/api/v1/matches/:id/feature", function (req, res) {
     var matchId = req.params.id;
 
@@ -39,6 +35,7 @@ module.exports = function (app) {
     });
   });
 
+  //READ
   app.get("/api/v1/people", function (req, res) {
     api.getPeople(function (err, people) {
       if (err) res.send(400, {err: err.message}); 
@@ -70,32 +67,14 @@ module.exports = function (app) {
     }); 
   });
 
-  app.get("/api/v1/featuredMatches", function (req, res) {
-    api.getFeaturedMatchesNested(function (err, featuredMatches) {
-      if (err) res.send(400, {err: err.message}); 
-      else res.json({featuredMatches: featuredMatches});
-    });
-  });
-
-  app.get("/api/v1/featuredMatches/:id", function (req, res) {
-    var id = req.params.id;
-
-    api.getFeaturedMatchNested(id, function (err, featuredMatch) {
-      if (err) res.send(400, {err: err.message}); 
-      else res.json({featuredMatch: featuredMatch});
-    });
-  });
-
-  app.get("/api/v1/featuredMatches/pro/latest", function (req, res) {
-    var id = req.params.id;
-
+  app.get("/api/v1/matches/featured/pro", function (req, res) {
     api.getFeaturedProMatch(function (err, featuredMatch) {
       if (err) res.send(400, {err: err.message}); 
       else res.json({featuredMatch: featuredMatch});
     });
   });
 
-  app.get("/api/v1/featuredMatches/community/latest", function (req, res) {
+  app.get("/api/v1/matches/featured/community", function (req, res) {
     api.getFeaturedCommunityMatch(function (err, featuredMatch) {
       if (err) res.send(400, {err: err.message}); 
       else res.json({featuredMatch: featuredMatch});

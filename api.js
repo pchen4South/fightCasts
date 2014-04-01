@@ -1,3 +1,4 @@
+var querystring = require('querystring');
 var async = require('async');
 var _ = require('lodash');
 var isFunction = _.isFunction;
@@ -10,14 +11,51 @@ var eventModel = require('./models/eventModel').model;
 var matchModel = require('./models/matchModel').model;
 var gamesList = require('./models/gameCharacterData');
 
+//helper to extract id from full youtube urls
+var extractVideoId = function (videoUrl) {
+  var queries = videoUrl.split("?")[1];
+  return queries ? querystring.parse(queries)["v"] : videoUrl;
+};
+
 var create = function (modelType, data, cb) {
   return modelType.create(data, cb);
 };
 
 //create
-var createPerson = partial(create, personModel);
-var createEvent = partial(create, eventModel);
-var createMatch = partial(create, matchModel);
+var createPerson = function (personData, cb) {
+  var person = {
+    name: personData.name 
+  };
+
+  personModel.create(person, cb);
+};
+
+var createEvent = function (eventData, cb) {
+  var event = {
+    name: eventData.name,
+    country: eventData.country,
+    startDate: eventData.startDate,
+    endDate: eventData.endDate
+  };
+
+  eventModel.create(event, cb);
+};
+
+var createMatch = function (matchData, cb) {
+  var match = {
+    game: matchData.game,
+    title: matchData.title,
+    description: matchData.description,
+    category: matchData.category,
+    playedAt: matchData.playedAt,
+    featuredAt: matchData.featuredAt,
+    videos: map(matchData.videos, extractVideoId),
+    fighters: results.fighters,
+    casters: results.casters,
+    event: results.event,
+  };
+  matchModel.create(match, cb);
+};
 
 var get = function (modelType, id, cb) {
   modelType.findById(id)
@@ -81,7 +119,7 @@ var getMatchesNested = function (query, cb) {
 
 
 var getMatchNested = function (id, cb) {
-  if (!id) throw new Error("must provide an id!");
+  if (!id) return cb(null, null);
 
   matchModel.findById(id)
   .lean()
@@ -97,7 +135,7 @@ var getMatchNested = function (id, cb) {
 };
 
 var getFeaturedProMatch = function (cb) {
-  matchModel.findOne({category: "pro"})
+  matchModel.findOne({category: "pro", game: "1"})
   .lean()
   .sort("-featuredAt")
   .populate("event casters fighters.person")
@@ -112,7 +150,7 @@ var getFeaturedProMatch = function (cb) {
 };
 
 var getFeaturedCommunityMatch = function (cb) {
-  matchModel.findOne({category: "community"})
+  matchModel.findOne({category: "community", game: "1"})
   .lean()
   .sort("-featuredAt")
   .populate("event casters fighters.person")
@@ -157,14 +195,12 @@ module.exports.deleteEvent = deleteEvent;
 module.exports.deleteMatch = deleteMatch;
 
 module.exports.updateMatchById = updateMatchById;
-
 module.exports.featureMatch = featureMatch;
 
 module.exports.createPerson = createPerson; 
 module.exports.createEvent = createEvent;
 module.exports.createMatch = createMatch;
 
-module.exports.getAll = getAll;
 module.exports.getPerson = getPerson; 
 module.exports.getEvent = getEvent;
 module.exports.getMatch = getMatch;
@@ -176,3 +212,4 @@ module.exports.getPeople = getPeople;
 module.exports.getEvents = getEvents;
 module.exports.getMatches = getMatches;
 module.exports.getMatchesNested = getMatchesNested;
+module.exports.getAll = getAll;

@@ -6,6 +6,7 @@ module.exports = [
     title: "Ryan Hart vs. Daigo",
     description: "Intense exhibition match",
     category: "pro",
+    playedAt: moment().subtract("days", 10).format(),
     featuredAt: moment().subtract("days", 3).format(),
     videos: [
       "https://www.youtube.com/watch?v=4ZhPMU4RSgw",
@@ -25,6 +26,7 @@ module.exports = [
     title: "Ryan Hart vs Infiltration",
     description: "Tight play by Ryan.  Tighter by Infiltration.",
     category: "pro",
+    playedAt: moment().subtract("days", 12).format(),
     featuredAt: moment().subtract("days", 4).format(),
     videos: ["https://www.youtube.com/watch?v=I9RvEdTwE4c"],
     fighters: [
@@ -42,6 +44,7 @@ module.exports = [
     title: "Alioune vs Xian",
     description: "Got.  Dam.",
     category: "pro",
+    playedAt: moment().subtract("days", 24).format(),
     videos: [
       "https://www.youtube.com/watch?v=rY1gSpjJkOI",
       "https://www.youtube.com/watch?v=wQPeIuhXPhQ&list=PLcnjnXijvRcnuhZoNe-tg2n5fpwx79f1d",
@@ -62,6 +65,7 @@ module.exports = [
     title: "Smug vs Solid",
     description: "Wtf dis nub is doing?",
     category: "community",
+    playedAt: moment().subtract("days", 36).format(),
     featuredAt: moment().subtract("days", 2).format(),
     videos: [
       "https://www.youtube.com/watch?v=whTa-FkpIso"
