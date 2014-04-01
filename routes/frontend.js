@@ -16,8 +16,8 @@ var createSubheaders = function (querystring) {
     botRight: 'new community matches',
   }; 
   var queryHeaders = {
-    topLeft: "pro results: " + querystring,
-    topRight: "community results: " + querystring   
+    botLeft: "pro results: " + querystring,
+    botRight: "community results: " + querystring   
   };
 
   return querystring ? queryHeaders : defaultHeaders;
@@ -68,6 +68,7 @@ module.exports = function (app) {
 
   app.get('/matches/:id', function (req, res) {
     var querystring = req.query.search;
+    var id = req.params.id;
     var query = createQuery(req.query);
     var comQuery = {category: "community"};
     var proQuery = {category: "pro"};
@@ -91,6 +92,8 @@ module.exports = function (app) {
       presentMatch(results.focusedMatch);
 
       var payload = {
+        proMatches: results.proMatches,
+        communityMatches: results.communityMatches,
         //featuredPro: querystring ? null : results.featuredPro,
         //featuredCommunity: querystring ? null : results.featuredCommunity,
         focusedMatch: results.focusedMatch,
