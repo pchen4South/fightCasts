@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var gameIcon = require('./views/helpers/gameIcon');
 var countryIcon = require('./views/helpers/countryIcon');
 var ytUrl = require('./views/helpers/ytUrl');
+var prettyDate = require('./views/helpers/prettyDate');
 mongoose.connect('mongodb://localhost:27017/fightCasts');
 
 var hbs = exphbs.create({
@@ -13,7 +14,8 @@ var hbs = exphbs.create({
   helpers: {
     gameIcon: gameIcon, 
     countryIcon: countryIcon,
-    ytUrl: ytUrl
+    ytUrl: ytUrl,
+    prettyDate: prettyDate
   }  
 });
 

@@ -223,20 +223,8 @@ ul {
     .make-row(0px);
     .vs-box {
       .make-xs-column(4, 0px);
+      .center-bg("/images/vs.png");
       height: 100%;
-      margin-top: 6px;
-      .vs {
-        .skew(-10deg, 0deg);
-        padding-top: 2px;
-        width: 70%;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-        background-color: @default-tile-color;
-        color: @background-light;
-        font-weight: 600;
-        font-style: italic;
-      }
     }
     .fighter {
       .make-xs-column(10, 0px);
@@ -270,15 +258,27 @@ ul {
     text-align: center;
     .event-name {
       .make-row(); 
+      .text-overflow();
       font-size: @font-small;
-      padding-left: 32px;
-      padding-right: 32px;
+      .date {
+        .content-secondary-text();
+        font-size: @font-small;
+        color: @tile-color-1;
+      }
     }
     .caster-list {
       .make-row();
+      .text-overflow();
+      .content-secondary-text();
+      color: @tile-color-1;
       font-size: @font-small;
       .caster-name {
         font-size: @font-small;
+      }
+      .caster-name:not(:first-child) {
+        &:before {
+          content: "/";
+        }
       }
     }
   }
