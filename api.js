@@ -150,29 +150,27 @@ var deletePerson = partial(deleteModelById, personModel);
 var deleteEvent = partial(deleteModelById, eventModel);
 var deleteMatch = partial(deleteModelById, matchModel);
 
-module.exports = {
-  deletePerson: deletePerson,
-  deleteEvent: deleteEvent,
-  deleteMatch: deleteMatch,
+module.exports.deletePerson = deletePerson;
+module.exports.deleteEvent = deleteEvent;
+module.exports.deleteMatch = deleteMatch;
 
-  updateMatchById: updateMatchById,
+module.exports.updateMatchById = updateMatchById;
 
-  featureMatch: featureMatch,
+module.exports.featureMatch = featureMatch;
 
-  createPerson: createPerson, 
-  createEvent: createEvent,
-  createMatch: createMatch,
-  
-  getAll: getAll,
-  getPerson: getPerson, 
-  getEvent: getEvent,
-  getMatch: getMatch,
-  getMatchNested: getMatchNested,
-  getFeaturedProMatch: getFeaturedProMatch,
-  getFeaturedCommunityMatch: getFeaturedCommunityMatch,
-  
-  getPeople: getPeople, 
-  getEvents: getEvents,
-  getMatches: getMatches,
-  getMatchesNested: getMatchesNested,
-};
+module.exports.createPerson = createPerson; 
+module.exports.createEvent = createEvent;
+module.exports.createMatch = createMatch;
+
+module.exports.getAll = getAll;
+module.exports.getPerson = getPerson; 
+module.exports.getEvent = getEvent;
+module.exports.getMatch = getMatch;
+module.exports.getMatchNested = getMatchNested;
+module.exports.getFeaturedProMatch = getFeaturedProMatch;
+module.exports.getFeaturedCommunityMatch = getFeaturedCommunityMatch;
+
+module.exports.getPeople = getPeople; 
+module.exports.getEvents = getEvents;
+module.exports.getMatches = getMatches;
+module.exports.getMatchesNested = getMatchesNested;
