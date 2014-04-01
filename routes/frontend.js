@@ -25,6 +25,8 @@ var createSubheaders = function (querystring) {
                   
 //mutative, add fields for templating
 var presentMatch = function (match) {
+  if (!match) return match;
+
   match.fighterOne = match.fighters[0];
   match.fighterTwo = match.fighters[1];
   return match;
@@ -83,6 +85,7 @@ module.exports = function (app) {
       focusedMatch: partial(api.getMatchNested, id)
     }, function (err, results) {
       if (err) return res.redirect("error");
+      if (!results.focusedMatch) return res.redirect("notfound");
 
       //add fields for display
       forEach(results.proMatches, presentMatch);

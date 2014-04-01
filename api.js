@@ -69,6 +69,7 @@ var getMatchesNested = function (query, cb) {
   .populate("event casters fighters.person")
   .exec(function (err, matches) {
     if (err) return cb(err);
+    if (!matches) return cb(null, []);
 
     forEach(matches, populateCharacters);
     forEach(matches, populateGame);
@@ -85,6 +86,7 @@ var getMatchNested = function (id, cb) {
   .populate("event casters fighters.person")
   .exec(function (err, match) {
     if (err) return cb(err);
+    if (!match) return cb(null, null);
 
     populateCharacters(match);
     populateGame(match);
@@ -100,6 +102,7 @@ var getFeaturedProMatch = function (cb) {
   .exec(function (err, match) {
     if (err) return cb(err);  
     if (!match) return cb(null, null);
+
     populateCharacters(match);
     populateGame(match);
     cb(null, match);
@@ -114,6 +117,7 @@ var getFeaturedCommunityMatch = function (cb) {
   .exec(function (err, match) {
     if (err) return cb(err);  
     if (!match) return cb(null, null);
+
     populateCharacters(match);
     populateGame(match);
     cb(null, match);
