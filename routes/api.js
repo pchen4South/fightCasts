@@ -76,4 +76,13 @@ module.exports = function (app) {
       else res.json({featuredMatches: featuredMatches});
     });
   });
+
+  app.get("/api/v1/featuredMatches/:id", function (req, res) {
+    var id = req.params.id;
+
+    api.getFeaturedMatchNested(id, function (err, featuredMatch) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({featuredMatch: featuredMatch});
+    });
+  });
 };

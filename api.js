@@ -6,7 +6,6 @@ var isFunction = _.isFunction;
 var partial = _.partial;
 var map = _.map;
 var forEach = _.forEach;
-var invoke = _.invoke;
 var find = _.find;
 var personModel = require('./models/personModel').model;
 var eventModel = require('./models/eventModel').model;
@@ -106,6 +105,29 @@ var getMatchNested = function (id, cb) {
   });
 };
 
+var getFeaturedMatchNested = function (id, cb) {
+  featuredMatchModel.findById(id)
+  .lean()
+  .populate("match")
+  .exec(function (err, featuredMatch) {
+    if (err) return cb(err);
+    var nestedPopOptions = [
+      {path: "match.event", model: "Event"},
+      {path: "match.casters", model: "Person"},
+      {path: "match.fighters.person", model: "Person"},
+    ];
+
+    featuredMatchModel
+    .populate(featuredMatch, nestedPopOptions, function (err, featuredMatch) {
+      if (err) return cb(err);
+
+      populateCharacters(featuredMatch.match); 
+      populateGame(featuredMatch.match);
+      cb(null, featuredMatch);
+    });
+  });
+};
+
 var getFeaturedMatchesNested = function (cb) {
   featuredMatchModel.find()
   .lean()
@@ -173,6 +195,7 @@ module.exports = {
   getMatch: getMatch,
   getMatchNested: getMatchNested,
   getFeaturedMatch: getFeaturedMatch,
+  getFeaturedMatchNested: getFeaturedMatchNested,
   
   getPeople: getPeople, 
   getEvents: getEvents,
