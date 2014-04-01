@@ -12,6 +12,7 @@ var forEach = _.forEach;
 var partial = _.partial;
 var isEmpty = _.isEmpty;
 var api = require('../api');
+var createQuery = require('./utils').createQuery;
 var gameFilter = {default: 'SF4'};
 var subheaders = {
   default: {
@@ -33,7 +34,7 @@ var presentMatch = function (match) {
 
 module.exports = function (app) {
   var getMatches = function (rawQuery, cb) {
-    var query = !isEmpty(rawQuery) ? parseQuery(rawQuery) : {};
+    var query = !isEmpty(rawQuery) ? createQuery(rawQuery) : {};
     var comQuery = {category: "community"};
     var proQuery = {category: "pro"};
     var communityMatchesQuery = extend(clone(query), comQuery);
@@ -47,14 +48,6 @@ module.exports = function (app) {
     }, cb);
   };
     
-  var parseQuery = function(query){
-    var searchString = query.search;
-    var gameString = query.game;
-    
-    if(!gameString){gameString = "SF4"}
-    return {title: {"$regex": new RegExp(searchString, "i")}};
-  };
-
   app.get("/", function (req, res) {
     var searched = req.query.search;
     //queryFlag is true when there is a search query
@@ -76,8 +69,8 @@ module.exports = function (app) {
       forEach(results.communityMatches, presentMatch);
     
       var payload = {
-        proMatches: sortBy(results.proMatches, "createdAt"),
-        communityMatches: sortBy(results.communityMatches, "createdAt"),
+        proMatches: results.proMatches,
+        communityMatches: results.communityMatches,
         //featuredPro: queryFlag ? null : results.featuredPro,
         //featuredCommunity: queryFlag ? null : results.featuredCommunity,
         subheaders: subheaderText,

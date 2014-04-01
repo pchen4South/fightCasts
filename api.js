@@ -66,6 +66,7 @@ var getMatchesNested = function (query, cb) {
   if (isFunction(query)) cb = query;
 
   matchModel.find(query)
+  .sort("createdAt")
   .populate("event casters fighters.person")
   .exec(function (err, matches) {
     if (err) return cb(err);
