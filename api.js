@@ -33,6 +33,7 @@ var createPerson = function (personData, cb) {
 var createEvent = function (eventData, cb) {
   var event = {
     name: eventData.name,
+    country: eventData.country,
     startDate: eventData.startDate,
     endDate: eventData.endDate
   };

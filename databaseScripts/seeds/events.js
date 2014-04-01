@@ -1,3 +1,4 @@
+//THESE COULD BE EXPANDED TO INCLUDE MORE FIELDS?
 module.exports = [
   {name: "First to ten"},
   {name: "Madcatz Unveiled 2013"},
