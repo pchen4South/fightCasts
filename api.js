@@ -69,11 +69,13 @@ var getMatchesNested = function (query, cb) {
   .populate("event casters fighters.person")
   .exec(function (err, matches) {
     if (err) return cb(err);
-    if (!matches) return cb(null, []);
-
+    if (!matches) {
+      console.log("no matches");
+      return cb(null, []);
+    }
     forEach(matches, populateCharacters);
     forEach(matches, populateGame);
-    cb(null, matches);
+    //cb(null, matches);
   });
 };
 

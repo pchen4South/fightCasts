@@ -33,7 +33,7 @@ module.exports = function (app) {
         results.layout = "adminLayout";
         results.games = gameData;
       }
-      res.render("admin/dashboard", results);
+      res.render("admin", results);
     });
   });
 
