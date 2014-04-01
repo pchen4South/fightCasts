@@ -42,7 +42,7 @@ var createMatch = function (matchData, cb) {
       title: matchData.title,
       description: matchData.description,
       category: matchData.category,
-      playedAt: Date.now(),
+      playedAt: matchData.playedAt,
       featuredAt: matchData.featuredAt,
       videos: map(matchData.videos, extractVideoId),
       fighters: results.fighters,
@@ -75,7 +75,7 @@ var findFighter = function (fighterData, cb) {
 
 var create = function(modelType, data, cb){
   modelType.create(data, cb);
-}
+};
 
 var resetDb = function (mongoose) {
   mongoose.connect('mongodb://localhost:27017/fightCasts', function (err) {
@@ -92,6 +92,7 @@ var resetDb = function (mongoose) {
     });
   });
 };
+
 resetDb(mongoose);
 //
 //prompt.start();
