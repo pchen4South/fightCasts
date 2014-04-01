@@ -1,5 +1,3 @@
-var mongoose = require('mongoose');
-var Model = mongoose.Model;
 var async = require('async');
 var _ = require('lodash');
 var isFunction = _.isFunction;
@@ -7,12 +5,9 @@ var partial = _.partial;
 var map = _.map;
 var forEach = _.forEach;
 var find = _.find;
-var first = _.first;
-var filter = _.filter;
 var personModel = require('./models/personModel').model;
 var eventModel = require('./models/eventModel').model;
 var matchModel = require('./models/matchModel').model;
-var featuredMatchModel = require('./models/featuredMatchModel').model;
 var gamesList = require('./models/gameCharacterData');
 
 var create = function (modelType, data, cb) {
@@ -23,14 +18,6 @@ var create = function (modelType, data, cb) {
 var createPerson = partial(create, personModel);
 var createEvent = partial(create, eventModel);
 var createMatch = partial(create, matchModel);
-
-var featureMatch = function (id, cb) {
-  var data = {
-    match: id 
-  };
-
-  featuredMatchModel.create(data, cb);
-};
 
 var get = function (modelType, id, cb) {
   modelType.findById(id)
@@ -47,12 +34,10 @@ var getMultiple = function (modelType, cb) {
 var getPerson = partial(get, personModel);
 var getEvent = partial(get, eventModel);
 var getMatch = partial(get, matchModel);
-var getFeaturedMatch = partial(get, featuredMatchModel);
 
 var getPeople = partial(getMultiple, personModel);
 var getEvents = partial(getMultiple, eventModel);
 var getMatches = partial(getMultiple, matchModel);
-var getFeaturedMatches = partial(getMultiple, featuredMatchModel);
 
 //mutative, populates characters for a match's fighters
 var populateCharacters = function (match) {
@@ -107,112 +92,31 @@ var getMatchNested = function (id, cb) {
   });
 };
 
-var getFeaturedMatchNested = function (id, cb) {
-  featuredMatchModel.findById(id)
-  .lean()
-  .populate("match")
-  .exec(function (err, featuredMatch) {
-    if (err) return cb(err);
-    var nestedPopOptions = [
-      {path: "match.event", model: "Event"},
-      {path: "match.casters", model: "Person"},
-      {path: "match.fighters.person", model: "Person"},
-    ];
-
-    featuredMatchModel
-    .populate(featuredMatch, nestedPopOptions, function (err, featuredMatch) {
-      if (err) return cb(err);
-
-      populateCharacters(featuredMatch.match); 
-      populateGame(featuredMatch.match);
-      cb(null, featuredMatch);
-    });
-  });
-};
-
-var getFirstFeatured = function (category, featuredMatches) {
-  return first(filter(featuredMatches, function (featuredMatch) {
-    return featuredMatch.match.category === category; 
-  }));
-}
-
 var getFeaturedProMatch = function (cb) {
-  featuredMatchModel.find()
+  matchModel.findOne({category: "pro"})
   .lean()
-  .sort("-createdAt")
-  .populate("match")
-  .exec(function (err, featuredMatches) {
-    if (err) return cb(err);
-    var featuredMatch = getFirstFeatured("pro", featuredMatches);
-    if (!featuredMatch) return cb(null, null);
-
-
-    var nestedPopOptions = [
-      {path: "match.event", model: "Event"},
-      {path: "match.casters", model: "Person"},
-      {path: "match.fighters.person", model: "Person"},
-    ];
-
-    matchModel 
-    .populate(featuredMatch, nestedPopOptions, function (err, featuredMatch) {
-      if (err) return cb(err);
-
-      populateCharacters(featuredMatch.match); 
-      populateGame(featuredMatch.match);
-      cb(null, featuredMatch.match);
-    });
+  .sort("-featuredAt")
+  .populate("event casters fighters.person")
+  .exec(function (err, match) {
+    if (err) return cb(err);  
+    if (!match) return cb(null, null);
+    populateCharacters(match);
+    populateGame(match);
+    cb(null, match);
   });
 };
 
 var getFeaturedCommunityMatch = function (cb) {
-  featuredMatchModel.find()
+  matchModel.findOne({category: "community"})
   .lean()
-  .sort("-createdAt")
-  .populate("match")
-  .exec(function (err, featuredMatches) {
-    if (err) return cb(err);
-    var featuredMatch = getFirstFeatured("community", featuredMatches);
-    if (!featuredMatch) return cb(null, null);
-
-    var nestedPopOptions = [
-      {path: "match.event", model: "Event"},
-      {path: "match.casters", model: "Person"},
-      {path: "match.fighters.person", model: "Person"},
-    ];
-
-    matchModel 
-    .populate(featuredMatch, nestedPopOptions, function (err, featuredMatch) {
-      if (err) return cb(err);
-
-      populateCharacters(featuredMatch.match); 
-      populateGame(featuredMatch.match);
-      cb(null, featuredMatch.match);
-    });
-  });
-};
-
-var getFeaturedMatchesNested = function (cb) {
-  featuredMatchModel.find()
-  .lean()
-  .populate("match")
-  .exec(function (err, featuredMatches) {
-    if (err) return cb(err);
-    var nestedPopOptions = [
-      {path: "match.event", model: "Event"},
-      {path: "match.casters", model: "Person"},
-      {path: "match.fighters.person", model: "Person"},
-    ];
-
-    featuredMatchModel
-    .populate(featuredMatches, nestedPopOptions, function (err, featuredMatches) {
-      if (err) return cb(err);
-
-      forEach(featuredMatches, function (featuredMatch) {
-        populateCharacters(featuredMatch.match); 
-        populateGame(featuredMatch.match);
-      });
-      cb(null, featuredMatches);
-    });
+  .sort("-featuredAt")
+  .populate("event casters fighters.person")
+  .exec(function (err, match) {
+    if (err) return cb(err);  
+    if (!match) return cb(null, null);
+    populateCharacters(match);
+    populateGame(match);
+    cb(null, match);
   });
 };
 
@@ -221,13 +125,16 @@ var getAll = function (cb) {
     people: getPeople,
     events: getEvents,
     matches: getMatchesNested,
-    featuredMatches: getFeaturedMatchesNested
   }, cb);
 };
 
 //update
 var updateMatchById = function(id, updateOptions, cb){
   matchModel.findByIdAndUpdate(id, updateOptions, cb);
+};
+
+var featureMatch = function (id, cb) {
+  matchModel.findByIdAndUpdate(id, {featuredAt: Date.now()}, cb);
 };
 
 //delete
@@ -257,15 +164,11 @@ module.exports = {
   getEvent: getEvent,
   getMatch: getMatch,
   getMatchNested: getMatchNested,
-  getFeaturedMatch: getFeaturedMatch,
-  getFeaturedMatchNested: getFeaturedMatchNested,
   getFeaturedProMatch: getFeaturedProMatch,
   getFeaturedCommunityMatch: getFeaturedCommunityMatch,
   
   getPeople: getPeople, 
   getEvents: getEvents,
   getMatches: getMatches,
-  getFeaturedMatches: getFeaturedMatches,
   getMatchesNested: getMatchesNested,
-  getFeaturedMatchesNested: getFeaturedMatchesNested
 };
