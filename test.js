@@ -45,6 +45,10 @@ var getMatchesNested = function (query, cb) {
   });
 };
 
+var pdate = require('./views/helpers/prettyDate');
+console.log(pdate(Date.now()));
+mongoose.disconnect();
+
 //getMatchesNested(function (err, matches) {
 //  console.log(err);
 //  console.log(JSON.stringify(matches, null, 6));
