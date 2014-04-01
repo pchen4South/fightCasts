@@ -85,4 +85,20 @@ module.exports = function (app) {
       else res.json({featuredMatch: featuredMatch});
     });
   });
+
+  app.get("/api/v1/featuredMatches/pro/latest", function (req, res) {
+    var id = req.params.id;
+
+    api.getFeaturedProMatch(function (err, featuredMatch) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({featuredMatch: featuredMatch});
+    });
+  });
+
+  app.get("/api/v1/featuredMatches/community/latest", function (req, res) {
+    api.getFeaturedCommunityMatch(function (err, featuredMatch) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({featuredMatch: featuredMatch});
+    });
+  });
 };

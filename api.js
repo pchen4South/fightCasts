@@ -7,6 +7,8 @@ var partial = _.partial;
 var map = _.map;
 var forEach = _.forEach;
 var find = _.find;
+var first = _.first;
+var filter = _.filter;
 var personModel = require('./models/personModel').model;
 var eventModel = require('./models/eventModel').model;
 var matchModel = require('./models/matchModel').model;
@@ -128,6 +130,67 @@ var getFeaturedMatchNested = function (id, cb) {
   });
 };
 
+var getFirstFeatured = function (category, featuredMatches) {
+  return first(filter(featuredMatches, function (featuredMatch) {
+    return featuredMatch.match.category === category; 
+  }));
+}
+
+var getFeaturedProMatch = function (cb) {
+  featuredMatchModel.find()
+  .lean()
+  .sort("-createdAt")
+  .populate("match")
+  .exec(function (err, featuredMatches) {
+    if (err) return cb(err);
+    var featuredMatch = getFirstFeatured("pro", featuredMatches);
+    if (!featuredMatch) return cb(null, null);
+
+
+    var nestedPopOptions = [
+      {path: "match.event", model: "Event"},
+      {path: "match.casters", model: "Person"},
+      {path: "match.fighters.person", model: "Person"},
+    ];
+
+    matchModel 
+    .populate(featuredMatch, nestedPopOptions, function (err, featuredMatch) {
+      if (err) return cb(err);
+
+      populateCharacters(featuredMatch.match); 
+      populateGame(featuredMatch.match);
+      cb(null, featuredMatch.match);
+    });
+  });
+};
+
+var getFeaturedCommunityMatch = function (cb) {
+  featuredMatchModel.find()
+  .lean()
+  .sort("-createdAt")
+  .populate("match")
+  .exec(function (err, featuredMatches) {
+    if (err) return cb(err);
+    var featuredMatch = getFirstFeatured("community", featuredMatches);
+    if (!featuredMatch) return cb(null, null);
+
+    var nestedPopOptions = [
+      {path: "match.event", model: "Event"},
+      {path: "match.casters", model: "Person"},
+      {path: "match.fighters.person", model: "Person"},
+    ];
+
+    matchModel 
+    .populate(featuredMatch, nestedPopOptions, function (err, featuredMatch) {
+      if (err) return cb(err);
+
+      populateCharacters(featuredMatch.match); 
+      populateGame(featuredMatch.match);
+      cb(null, featuredMatch.match);
+    });
+  });
+};
+
 var getFeaturedMatchesNested = function (cb) {
   featuredMatchModel.find()
   .lean()
@@ -196,6 +259,8 @@ module.exports = {
   getMatchNested: getMatchNested,
   getFeaturedMatch: getFeaturedMatch,
   getFeaturedMatchNested: getFeaturedMatchNested,
+  getFeaturedProMatch: getFeaturedProMatch,
+  getFeaturedCommunityMatch: getFeaturedCommunityMatch,
   
   getPeople: getPeople, 
   getEvents: getEvents,

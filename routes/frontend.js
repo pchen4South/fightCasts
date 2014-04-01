@@ -42,24 +42,22 @@ module.exports = function (app) {
     async.parallel({
       proMatches: partial(api.getMatchesNested, proMatchesQuery),
       communityMatches: partial(api.getMatchesNested, communityMatchesQuery),
-      //featuredPro: partial(api.getFeaturedMatch, proQuery),
-      //featuredCommunity: partial(api.getFeaturedMatch, comQuery)
+      featuredPro: api.getFeaturedProMatch,
+      featuredCommunity: api.getFeaturedCommunityMatch
     }, function (err, results) {
       if (err) return res.redirect("error");
       
       //add fields for display
       forEach(results.proMatches, presentMatch);
       forEach(results.communityMatches, presentMatch);
-      //presentMatch(results.featuredPro);
-      //presentMatch(results.featuredCommunity);
+      presentMatch(results.featuredPro);
+      presentMatch(results.featuredCommunity);
     
       var payload = {
         proMatches: results.proMatches,
         communityMatches: results.communityMatches,
-        featuredPro: results.proMatches[0],
-        featuredCommunity: results.communityMatches[0],
-        //featuredPro: querystring ? null : results.featuredPro,
-        //featuredCommunity: querystring ? null : results.featuredCommunity,
+        featuredPro: querystring ? null : results.featuredPro,
+        featuredCommunity: querystring ? null : results.featuredCommunity,
         subheaders: createSubheaders(querystring),
         searched: querystring,
       };
@@ -80,8 +78,8 @@ module.exports = function (app) {
     async.parallel({
       proMatches: partial(api.getMatchesNested, proMatchesQuery),
       communityMatches: partial(api.getMatchesNested, communityMatchesQuery),
-      //featuredPro: partial(api.getFeaturedMatch, proQuery),
-      //featuredCommunity: partial(api.getFeaturedMatch, comQuery)
+      featuredPro: api.getFeaturedProMatch,
+      featuredCommunity: api.getFeaturedCommunityMatch,
       focusedMatch: partial(api.getMatchNested, id)
     }, function (err, results) {
       if (err) return res.redirect("error");
@@ -89,15 +87,15 @@ module.exports = function (app) {
       //add fields for display
       forEach(results.proMatches, presentMatch);
       forEach(results.communityMatches, presentMatch);
-      //presentMatch(results.featuredPro);
-      //presentMatch(results.featuredCommunity);
+      presentMatch(results.featuredPro);
+      presentMatch(results.featuredCommunity);
       presentMatch(results.focusedMatch);
 
       var payload = {
         proMatches: results.proMatches,
         communityMatches: results.communityMatches,
-        //featuredPro: querystring ? null : results.featuredPro,
-        //featuredCommunity: querystring ? null : results.featuredCommunity,
+        featuredPro: querystring ? null : results.featuredPro,
+        featuredCommunity: querystring ? null : results.featuredCommunity,
         focusedMatch: results.focusedMatch,
         subheaders: createSubheaders(querystring),
         searched: querystring,

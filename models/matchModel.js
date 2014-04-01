@@ -13,6 +13,7 @@ var Matches = new mongoose.Schema({
   description: String,
   category: String,
   playedAt: Date,
+  featuredAt: {type: Date, default: null},
   videos: Array,
   fighters: [Fighters],
   casters: [{ type: ObjectId, ref: "Person" }],
