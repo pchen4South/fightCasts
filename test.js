@@ -45,8 +45,8 @@ var getMatchesNested = function (query, cb) {
   });
 };
 
-getMatchesNested(function (err, matches) {
-  console.log(err);
-  console.log(JSON.stringify(matches, null, 6));
-  mongoose.disconnect();
-});
+//getMatchesNested(function (err, matches) {
+//  console.log(err);
+//  console.log(JSON.stringify(matches, null, 6));
+//  mongoose.disconnect();
+//});

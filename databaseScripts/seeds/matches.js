@@ -1,9 +1,12 @@
+var moment = require('moment');
+
 module.exports = [
   {
     game: "1",
     title: "Ryan Hart vs. Daigo",
     description: "Intense exhibition match",
     category: "pro",
+    featuredAt: moment().subtract("days", 3).format(),
     videos: [
       "https://www.youtube.com/watch?v=4ZhPMU4RSgw",
     ],
@@ -22,6 +25,7 @@ module.exports = [
     title: "Ryan Hart vs Infiltration",
     description: "Tight play by Ryan.  Tighter by Infiltration.",
     category: "pro",
+    featuredAt: moment().subtract("days", 4).format(),
     videos: ["https://www.youtube.com/watch?v=I9RvEdTwE4c"],
     fighters: [
       {name: "Ryan Hart", characters: ["21"]},
@@ -58,6 +62,7 @@ module.exports = [
     title: "Smug vs Solid",
     description: "Wtf dis nub is doing?",
     category: "community",
+    featuredAt: moment().subtract("days", 2).format(),
     videos: [
       "https://www.youtube.com/watch?v=whTa-FkpIso"
     ],

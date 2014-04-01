@@ -44,6 +44,7 @@ var createMatch = function (matchData, cb) {
       description: matchData.description,
       category: matchData.category,
       playedAt: Date.now(),
+      featuredAt: matchData.featuredAt,
       videos: map(matchData.videos, extractVideoId),
       fighters: results.fighters,
       casters: results.casters,
@@ -53,7 +54,7 @@ var createMatch = function (matchData, cb) {
   });
 };
 
-var findData = function(done) {
+var matchesCreation = function(done) {
   async.map(matches, createMatch, done);
 };
 
@@ -84,8 +85,7 @@ var resetDb = function (mongoose) {
       async.series([
         peopleCreation,
         eventsCreation,
-        findData
-        //matchesCreation
+        matchesCreation
       ], function(err, res){
         if (err) console.log (err);
         mongoose.disconnect();
