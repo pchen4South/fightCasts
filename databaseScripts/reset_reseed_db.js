@@ -15,8 +15,8 @@ var games = require('../models/gameCharacterData');
 
 var personModel = require('../models/personModel').model;
 var eventModel = require('../models/eventModel').model;
-var matchModel = require('../models/matchModel').Match;
-var featuredMatchModel = require('../models/featuredMatchModel');
+var matchModel = require('../models/matchModel').model;
+var featuredMatchModel = require('../models/featuredMatchModel').model;
 
 var peopleCreation = function(done){
   async.map(people, partial(create, personModel), done);

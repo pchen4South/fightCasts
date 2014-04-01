@@ -11,6 +11,7 @@ var find = _.find;
 var personModel = require('./models/personModel').model;
 var eventModel = require('./models/eventModel').model;
 var matchModel = require('./models/matchModel').model;
+var featuredMatchModel = require('./models/featuredMatchModel').model;
 var gamesList = require('./models/gameCharacterData');
 
 var create = function (modelType, data, cb) {
@@ -21,6 +22,14 @@ var create = function (modelType, data, cb) {
 var createPerson = partial(create, personModel);
 var createEvent = partial(create, eventModel);
 var createMatch = partial(create, matchModel);
+
+var featureMatch = function (id, cb) {
+  var data = {
+    match: id 
+  };
+
+  featuredMatchModel.create(data, cb);
+};
 
 var get = function (modelType, id, cb) {
   modelType.findById(id)
@@ -37,10 +46,12 @@ var getMultiple = function (modelType, cb) {
 var getPerson = partial(get, personModel);
 var getEvent = partial(get, eventModel);
 var getMatch = partial(get, matchModel);
+var getFeaturedMatch = partial(get, featuredMatchModel);
 
 var getPeople = partial(getMultiple, personModel);
 var getEvents = partial(getMultiple, eventModel);
 var getMatches = partial(getMultiple, matchModel);
+var getFeaturedMatches = partial(getMultiple, featuredMatchModel);
 
 //mutative, populates characters for a match's fighters
 var populateCharacters = function (match) {
@@ -72,6 +83,7 @@ var getMatchesNested = function (query, cb) {
   .populate("event casters fighters.person")
   .exec(function (err, matches) {
     if (err) return cb(err);
+
     forEach(matches, populateCharacters);
     forEach(matches, populateGame);
     cb(null, matches);
@@ -87,9 +99,35 @@ var getMatchNested = function (id, cb) {
   .populate("event casters fighters.person")
   .exec(function (err, match) {
     if (err) return cb(err);
+
     populateCharacters(match);
     populateGame(match);
     cb(null, match);
+  });
+};
+
+var getFeaturedMatchesNested = function (cb) {
+  featuredMatchModel.find()
+  .lean()
+  .populate("match")
+  .exec(function (err, featuredMatches) {
+    if (err) return cb(err);
+    var nestedPopOptions = [
+      {path: "match.event", model: "Event"},
+      {path: "match.casters", model: "Person"},
+      {path: "match.fighters.person", model: "Person"},
+    ];
+
+    featuredMatchModel
+    .populate(featuredMatches, nestedPopOptions, function (err, featuredMatches) {
+      if (err) return cb(err);
+
+      forEach(featuredMatches, function (featuredMatch) {
+        populateCharacters(featuredMatch.match); 
+        populateGame(featuredMatch.match);
+      });
+      cb(null, featuredMatches);
+    });
   });
 };
 
@@ -98,15 +136,13 @@ var getAll = function (cb) {
     people: getPeople,
     events: getEvents,
     matches: getMatchesNested,
+    featuredMatches: getFeaturedMatchesNested
   }, cb);
 };
 
 //update
 var updateMatchById = function(id, updateOptions, cb){
-  matchModel.findByIdAndUpdate(id, updateOptions, function(err, res){
-    if (err) cb(err);
-    else cb(null, res);
-  });
+  matchModel.findByIdAndUpdate(id, updateOptions, cb);
 };
 
 //delete
@@ -125,6 +161,8 @@ module.exports = {
 
   updateMatchById: updateMatchById,
 
+  featureMatch: featureMatch,
+
   createPerson: createPerson, 
   createEvent: createEvent,
   createMatch: createMatch,
@@ -134,9 +172,12 @@ module.exports = {
   getEvent: getEvent,
   getMatch: getMatch,
   getMatchNested: getMatchNested,
+  getFeaturedMatch: getFeaturedMatch,
   
   getPeople: getPeople, 
   getEvents: getEvents,
   getMatches: getMatches,
+  getFeaturedMatches: getFeaturedMatches,
   getMatchesNested: getMatchesNested,
+  getFeaturedMatchesNested: getFeaturedMatchesNested
 };

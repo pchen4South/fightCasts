@@ -56,6 +56,8 @@ module.exports = function (app) {
       var payload = {
         proMatches: results.proMatches,
         communityMatches: results.communityMatches,
+        featuredPro: results.proMatches[0],
+        featuredCommunity: results.communityMatches[0],
         //featuredPro: querystring ? null : results.featuredPro,
         //featuredCommunity: querystring ? null : results.featuredCommunity,
         subheaders: createSubheaders(querystring),

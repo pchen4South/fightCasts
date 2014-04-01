@@ -29,17 +29,14 @@ module.exports = function (app) {
     res.json({message: "This route is not currently supported"});
   });
 
-  app.get("/api/v1/matches", function (req, res) {
-    var query = createQuery(req.query);
-    var querystring = req.query.search;
- 
-    api.getMatchesNested(query, function (err, matches) {
-      if (err) res.send(400, {err: err.message});
-      else res.json({
-        matches: matches,
-        query: querystring
-      }); 
-    }); 
+  //add match to featuredMatches list
+  app.post("/api/v1/matches/:id/feature", function (req, res) {
+    var matchId = req.params.id;
+
+    api.featureMatch(matchId, function (err, featuredMatch) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({featuredMatch: featuredMatch});
+    });
   });
 
   app.get("/api/v1/people", function (req, res) {
@@ -57,6 +54,26 @@ module.exports = function (app) {
       else res.json({
         events: events 
       });
+    });
+  });
+
+  app.get("/api/v1/matches", function (req, res) {
+    var query = createQuery(req.query);
+    var querystring = req.query.search;
+ 
+    api.getMatchesNested(query, function (err, matches) {
+      if (err) res.send(400, {err: err.message});
+      else res.json({
+        matches: matches,
+        query: querystring
+      }); 
+    }); 
+  });
+
+  app.get("/api/v1/featuredMatches", function (req, res) {
+    api.getFeaturedMatchesNested(function (err, featuredMatches) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({featuredMatches: featuredMatches});
     });
   });
 };
