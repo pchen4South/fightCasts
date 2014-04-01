@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-var eventSchema = require('./eventModel').schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var Fighters = new mongoose.Schema({

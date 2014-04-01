@@ -1,5 +1,4 @@
 var api = require('../api');
-var _ = require('lodash');
 var createQuery = require('./utils').createQuery;
 
 module.exports = function (app) {
