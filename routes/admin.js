@@ -1,7 +1,5 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var _ = require('lodash');
-var keys = _.keys;
 var api = require('../api');
 var gameData = require('../models/gameCharacterData');
 
@@ -49,11 +47,6 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/admin/casters",  ensureAuthenticated, 
-    function (req, res) {
-      res.redirect("/admin");
-  });
-
   app.get("/admin/events", function (req, res) {
     api.getAll(function (err, results) {
       if(results){
@@ -84,64 +77,11 @@ module.exports = function (app) {
     });
   });  
   
-  app.get("/admin/submittedmatches/:_id", ensureAuthenticated,
-    function (req, res) {
-      var id = req.params._id;
-      
-      api.getSubmittedMatch(id, function (err, results) {
-        if(results){
-          var id = results.id;
-          var resultObject = results.matchJson;
-          results = resultObject;
-          results.id = id;
-          results.layout = "adminLayout";
-          results.user = req.user.user;
-          
-          api.getAll(function(allErr, allRes){
-            if (allErr){res.redirect("admin/submittedmatches")}
-            else
-              results.all = allRes;
-              res.render("admin/submittedmatch", results);
-          });
-          
-        }
-        else (res.redirect("admin/submittedmatches"));
-
-      });
-  });
-  
-  app.get("/admin/submittedmatches", ensureAuthenticated,
-    function (req, res) {
-      api.getAll(function (err, results) {      
-        if(results){
-          results.layout = "adminLayout";
-          results.user = req.user.user;
-          
-          var submittedMatches = results.submittedMatches;
-          var matches = [];
-          
-          for (var i = 0; i < submittedMatches.length; i++){
-              matches[i] = submittedMatches[i].matchJson;
-              matches[i].id = submittedMatches[i].id;
-          }
-          results.submittedMatches = matches;       
-        }
-        res.render("admin/submittedmatches", results);
-      });
-  });
-
   //create
   app.post("/admin/people", ensureAuthenticated,
     function (req, res) {
       api.createPerson(req.body, function (err, result) {
         res.redirect("/admin/people");
-      });
-  });
-
-  app.post("/admin/games", ensureAuthenticated,
-    function (req, res) {
-      api.createGame(req.body, function (err, result) {
-        res.redirect("/admin/games");
       });
   });
 
@@ -177,32 +117,6 @@ module.exports = function (app) {
     });
   });  
   
-  app.post("/admin/convertmatches",  ensureAuthenticated,
-    function (req, res){
-      api.createMatch(req.body, function (err, result) {      
-        var convertedMatchId = req.body.convertedMatch
-        if(result){
-          api.deleteSubmittedMatch(convertedMatchId, function(err, result)
-          {
-            if(result){
-              console.log("deleted the submitted match and created match");
-            }
-            res.redirect("/admin/matches");
-          });
-        }
-      });
-  });
-
-  //update
-  app.post("/admin/matches/:_id/approve",  ensureAuthenticated, function(req,res) {
-    var id = req.body.id;
-    api.getMatch(id, function(err, result){
-      api.updateMatchById(id, { $set: { approved: true }}, function(err, result){
-        res.redirect("admin/matches");
-      })
-    })
-  });  
-  
   app.post("/admin/matches/:_id/feature", function(req,res){
     var id = req.body.id;
     api.getMatch(id, function(err, result){
@@ -213,26 +127,7 @@ module.exports = function (app) {
       })
     })
   });  
-  app.post("/admin/matches/:_id/unfeature",
-    function(req,res){
-      var id = req.body.id;
-      api.getMatch(id, function(err, result){
-        api.updateMatchById(id, { $set: { featured: false }}, function(err, result){
-          res.redirect("admin/matches");
-        })
-      })
-  });  
-  
-  app.post("/admin/matches/:_id/unapprove",  ensureAuthenticated,
-    function(req,res){
-      var id = req.body.id;
-      api.getMatch(id, function(err, result){
-        api.updateMatchById(id, { $set: { approved: false }}, function(err, result){
-          res.redirect("admin/matches");
-        })
-      })
-  });
-  
+
   //delete
   app.post("/admin/people/:_id/delete",  ensureAuthenticated,
     function(req, res){
@@ -260,13 +155,4 @@ module.exports = function (app) {
         res.redirect("admin/matches");
       });
   });  
-  
-  app.post("/admin/games/:_id/delete",  ensureAuthenticated,
-    function(req, res){
-      var id = req.body.id;
-      api.deleteGame(id, function(err, result){
-        console.log("deleted game", result.name);
-        res.redirect("admin/games");
-      });
-  }); 
 };

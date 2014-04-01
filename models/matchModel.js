@@ -25,5 +25,5 @@ Matches.plugin(timestamps);
 var Match = mongoose.model('Match', Matches);
 var Fighter = mongoose.model("Fighter", Fighters);
 
-module.exports.Match = Match;
-module.exports.Fighter = Fighter;
+module.exports.model = Match;
+module.exports.schema = Matches;

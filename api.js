@@ -10,8 +10,7 @@ var invoke = _.invoke;
 var find = _.find;
 var personModel = require('./models/personModel').model;
 var eventModel = require('./models/eventModel').model;
-var matchModel = require('./models/matchModel').Match;
-var fighterModel = require('./models/matchModel').Fighter;
+var matchModel = require('./models/matchModel').model;
 var gamesList = require('./models/gameCharacterData');
 
 var create = function (modelType, data, cb) {
@@ -24,11 +23,15 @@ var createEvent = partial(create, eventModel);
 var createMatch = partial(create, matchModel);
 
 var get = function (modelType, id, cb) {
-  model.Type.findById(id, cb);
+  modelType.findById(id)
+  .lean()
+  .exec(cb);
 };
 
 var getMultiple = function (modelType, cb) {
-  modelType.find({}, cb)
+  modelType.find({})
+  .lean()
+  .exec(cb);
 };
 
 var getPerson = partial(get, personModel);
@@ -64,14 +67,14 @@ var getMatchesNested = function (query, cb) {
   if (isFunction(query)) cb = query;
 
   matchModel.find(query)
+  .lean()
   .sort("createdAt")
   .populate("event casters fighters.person")
   .exec(function (err, matches) {
     if (err) return cb(err);
-    var matchObjects = invoke(matches, "toObject");
-    forEach(matchObjects, populateCharacters);
-    forEach(matchObjects, populateGame);
-    cb(null, matchObjects);
+    forEach(matches, populateCharacters);
+    forEach(matches, populateGame);
+    cb(null, matches);
   });
 };
 
@@ -80,13 +83,13 @@ var getMatchNested = function (id, cb) {
   if (!id) throw new Error("must provide an id!");
 
   matchModel.findById(id)
+  .lean()
   .populate("event casters fighters.person")
   .exec(function (err, match) {
     if (err) return cb(err);
-    var matchObject = match.toObject();
-    populateCharacters(matchObject);
-    populateGame(matchObject);
-    cb(null, matchObject);
+    populateCharacters(match);
+    populateGame(match);
+    cb(null, match);
   });
 };
 
