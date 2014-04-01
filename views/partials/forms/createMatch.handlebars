@@ -18,24 +18,6 @@
       {{/each}}
     </select>
         
-    <label for="fighterOne">Player One</label>
-    <select class="form-control" id="fighterOne" name="fighterOne">
-      {{#each fighters}}
-        <option value={{id}}>{{person.name}} as
-          {{characters}}
-        </option>
-      {{/each}}
-    </select>
-    
-    <label for="fighterTwo">Player Two</label>
-    <select class="form-control" id="fighterTwo" name="fighterTwo">
-      {{#each fighters}}
-        <option value={{id}}>{{person.name}} as
-          {{characters}}
-        </option>
-      {{/each}}
-    </select>
-
     <label for="event">Event</label>
     <select class="form-control" id="event" name="event">
       {{#each events}}
@@ -49,18 +31,7 @@
 
 
     <label for="videos">Videos</label>
-    <select multiple class="form-control" id="videos" name="videos">
-      {{#each videos}}
-        <option value={{id}}>{{name}}</option>
-      {{/each}}
-    </select>
-
-    <label for="channel">Channel</label>
-    <select class="form-control" id="channel" name="channel">
-      {{#each channels}}
-        <option value={{id}}>{{name}}</option>
-      {{/each}}
-    </select>
+    <input class="form-control" type="text" name="videos" id="videos" placeholder="comma separated ids">
 
     <label for="game">Game</label>
     <select class="form-control" id="game" name="game">
@@ -69,13 +40,6 @@
       {{/each}}
     </select>
 
-    <label for="teams">Teams</label>
-    <select class="form-control" id="teams" name="teams">
-      {{#each teams}}
-        <option value={{id}}>{{name}}</option>
-      {{/each}}
-    </select>
-    
     <label for="category">Category</label>
     <select class="form-control" id="category" name="category">
         <option value="pro">Pro</option>

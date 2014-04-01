@@ -1,26 +1,18 @@
+var mongoose = require('mongoose');
+var Model = mongoose.Model;
 var async = require('async');
 var _ = require('lodash');
+var isFunction = _.isFunction;
 var partial = _.partial;
 var map = _.map;
-var person = require('./models/personModel');
-var event = require('./models/eventModel');
-var match = require('./models/matchModel');
-var submittedMatch = require('./models/submittedMatchModel');
-var featuredMatch = require('./models/featuredMatchModel');
+var forEach = _.forEach;
+var invoke = _.invoke;
+var find = _.find;
+var personModel = require('./models/personModel').model;
+var eventModel = require('./models/eventModel').model;
+var matchModel = require('./models/matchModel').Match;
+var fighterModel = require('./models/matchModel').Fighter;
 var gamesList = require('./models/gameCharacterData');
-
-var formatDbResponse = function (result) {
-  var cleaned;
-
-  if (result) {
-   cleaned = result.toObject();
-   cleaned.id = result._id;
-   delete cleaned._id;
-   delete cleaned.__v;
-   return cleaned;
-  } else cleaned = null;
-  return cleaned;
-};
 
 var create = function (modelType, data, cb) {
   return modelType.create(data, function (err, res) {
@@ -29,128 +21,88 @@ var create = function (modelType, data, cb) {
 };
 
 //create
-var createPerson = partial(create, person.model);
-var createEvent = partial(create, event.model);
-var createSubmittedMatch = partial(create, submittedMatch.model);
-var createFeaturedMatch = partial(create, featuredMatch.model);
-
-var createMatch = function(data, cb){
-  var dateString = data.playedAt.split("/");
-  var jsDate = new Date(dateString[2], dateString[0] - 1, dateString[1]);
-
-  var formatted = {
-    approved: data.approved,
-    title: data.title,
-    category: data.category,
-    description: data.description,
-    playedAt: jsDate,
-    game: data.game,
-    _casters: data.casters,
-    _event: data.event,
-  };
-  return match.model.create(formatted, cb);
-};
-
-var createFeaturedMatch = function (data, cb) {
-  var formatted = {
-    _match: data.match,
-    game: data.game,
-    category: data.category
-  };
-  return featuredMatch.model.create(formatted, cb);
-};
+var createPerson = partial(create, personModel);
+var createEvent = partial(create, eventModel);
+var createMatch = partial(create, matchModel);
 
 var get = function (modelType, id, cb) {
-  return modelType.findById(id, function (err, res) {
-    return cb(err, formatDbResponse(res)); 
-  });
+  model.Type.findById(id, cb);
 };
 
 var getMultiple = function (modelType, cb) {
-  return modelType.find({}, function (err, res) {
-    if (err) cb(err);
-    else cb(err, map(res, formatDbResponse));
+  modelType.find({}, cb)
+};
+
+var getPerson = partial(get, personModel);
+var getEvent = partial(get, eventModel);
+var getMatch = partial(get, matchModel);
+
+var getPeople = partial(getMultiple, personModel);
+var getEvents = partial(getMultiple, eventModel);
+var getMatches = partial(getMultiple, matchModel);
+
+//mutative, populates characters for a match's fighters
+var populateCharacters = function (match) {
+  var game = gamesList[match.game];
+  if (!game) throw new Error("invalid game id", match.game);
+
+  forEach(match.fighters, function (fighter) {
+    var characters = map(fighter.characters, function (character) {
+      return find(game.characters, {id: character});
+    });
+    fighter.characters = characters;
   });
 };
 
-//Read
-var getFeaturedMatch = function (params, cb) {
-  featuredMatch.model.findOne(params, {}, {sort: {"createdAt": -1}}, function (err, featuredMatch) {
-    if (err) return cb(err); 
-    else if (!featuredMatch) return cb(null, {});
-    else getMatchNested(featuredMatch._match, cb);
-  });
-}
+//mutative, populates game for a match
+var populateGame = function (match) {
+  var game = gamesList[match.game];
+  if (!game) throw new Error("invalid game id", match.game);
 
-var getPerson = partial(get, person.model);
-var getEvent = partial(get, event.model);
-var getMatch = partial(get, match.model);
-var getSubmittedMatch = partial(get, submittedMatch.model);
-
-var getPeople = partial(getMultiple, person.model);
-var getEvents = partial(getMultiple, event.model);
-var getMatches = partial(getMultiple, match.model);
-var getSubmittedMatches = partial(getMultiple, submittedMatch.model);
-var getFeaturedMatches = partial(getMultiple, featuredMatch.model);
-
-var formatNestedMatch = function (monMatch) {
-  if (monMatch) {
-    return {
-      id: monMatch["_id"],
-      description: monMatch.description,
-      title: monMatch.title,
-      casters: map(monMatch["_casters"], formatDbResponse),
-      event: formatDbResponse(monMatch["_event"]),
-      game: monMatch.game,
-      channel: formatDbResponse(monMatch["_channel"]),
-      category: monMatch.category,
-      createdAt: monMatch.createdAt,
-      updatedAt: monMatch.updatedAt,
-      playedAt: monMatch.playedAt
-    };
-  } else return {};
-};
-
-var getMatchNested = function (id, cb) {
-  match.model.findById(id)
-  .populate("_event")
-  .populate("_casters")
-  .exec(function (err, res) {
-    if (err) cb(err);
-    else cb(null, formatNestedMatch(res));
-  });
+  match.game = game;
 };
 
 var getMatchesNested = function (query, cb) {
-  
-  if (typeof query === typeof(Function)){
-    cb = query;
-    query = {};
-  }
-  
-  match.model.find(query)
-  .populate("_event")
-  .populate("_casters")
-  .exec(function (err, res) {
-    if (err) cb(err); 
-    else cb(null, map(res, formatNestedMatch));
+  if (isFunction(query)) cb = query;
+
+  matchModel.find(query)
+  .populate("event casters fighters.person")
+  .exec(function (err, matches) {
+    if (err) return cb(err);
+    var matchObjects = invoke(matches, "toObject");
+    forEach(matchObjects, populateCharacters);
+    forEach(matchObjects, populateGame);
+    cb(null, matchObjects);
+  });
+};
+
+
+var getMatchNested = function (id, cb) {
+  if (!id) throw new Error("must provide an id!");
+
+  matchModel.findById(id)
+  .populate("event casters fighters.person")
+  .exec(function (err, match) {
+    if (err) return cb(err);
+    var matchObject = match.toObject();
+    populateCharacters(matchObject);
+    populateGame(matchObject);
+    cb(null, matchObject);
   });
 };
 
 var getAll = function (cb) {
   async.parallel({
-    submittedMatches: getSubmittedMatches,
     people: getPeople,
     events: getEvents,
     matches: getMatchesNested,
-    featuredMatches: getFeaturedMatches
   }, cb);
 };
 
 //update
 var updateMatchById = function(id, updateOptions, cb){
-  match.model.findByIdAndUpdate(id, updateOptions, function(err, res){
-    if (err) console.log(err);
+  matchModel.findByIdAndUpdate(id, updateOptions, function(err, res){
+    if (err) cb(err);
     else cb(null, res);
   });
 };
@@ -158,42 +110,34 @@ var updateMatchById = function(id, updateOptions, cb){
 //delete
 var deleteModelById = function (modelType, id, cb) {
   return modelType.findByIdAndRemove(id, function (err, res) {
-    if (err) console.log(err);
+    if (err) cb(err);
     else cb(err, formatDbResponse(res)); 
   });
 };
 
-var deletePerson = partial(deleteModelById, person.model);
-var deleteEvent = partial(deleteModelById, event.model);
-var deleteMatch = partial(deleteModelById, match.model);
-var deleteSubmittedMatch = partial(deleteModelById, submittedMatch.model);
+var deletePerson = partial(deleteModelById, personModel);
+var deleteEvent = partial(deleteModelById, eventModel);
+var deleteMatch = partial(deleteModelById, matchModel);
 
 module.exports = {
   deletePerson: deletePerson,
   deleteEvent: deleteEvent,
   deleteMatch: deleteMatch,
-  deleteSubmittedMatch: deleteSubmittedMatch,
 
   updateMatchById: updateMatchById,
 
   createPerson: createPerson, 
   createEvent: createEvent,
   createMatch: createMatch,
-  createSubmittedMatch: createSubmittedMatch,
-  createFeaturedMatch: createFeaturedMatch,
   
   getAll: getAll,
   getPerson: getPerson, 
   getEvent: getEvent,
   getMatch: getMatch,
   getMatchNested: getMatchNested,
-  getSubmittedMatch: getSubmittedMatch,
   
   getPeople: getPeople, 
   getEvents: getEvents,
   getMatches: getMatches,
-  getFeaturedMatches: getFeaturedMatches,
   getMatchesNested: getMatchesNested,
-
-  getFeaturedMatch: getFeaturedMatch
-}
+};

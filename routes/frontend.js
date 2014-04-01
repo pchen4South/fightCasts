@@ -5,7 +5,10 @@ var first = _.first;
 var filter = _.filter;
 var extend = _.extend;
 var clone = _.clone;
+var cloneDeep = _.cloneDeep;
 var sortBy = _.sortBy;
+var map = _.map;
+var forEach = _.forEach;
 var partial = _.partial;
 var isEmpty = _.isEmpty;
 var api = require('../api');
@@ -21,6 +24,13 @@ var subheaders = {
   }
 };
                   
+//mutative, add fields for templating
+var presentMatch = function (match) {
+  match.fighterOne = match.fighters[0];
+  match.fighterTwo = match.fighters[1];
+  return match;
+};
+
 module.exports = function (app) {
   var getMatches = function (rawQuery, cb) {
     var query = !isEmpty(rawQuery) ? parseQuery(rawQuery) : {};
@@ -32,8 +42,8 @@ module.exports = function (app) {
     async.parallel({
       proMatches: partial(api.getMatchesNested, proMatchesQuery),
       communityMatches: partial(api.getMatchesNested, communityMatchesQuery),
-      featuredPro: partial(api.getFeaturedMatch, proQuery),
-      featuredCommunity: partial(api.getFeaturedMatch, comQuery)
+      //featuredPro: partial(api.getFeaturedMatch, proQuery),
+      //featuredCommunity: partial(api.getFeaturedMatch, comQuery)
     }, cb);
   };
     
@@ -57,20 +67,25 @@ module.exports = function (app) {
     
     getMatches(req.query, function (err, results) {
       var focused = {};     
-      if(results.proMatches){focused = results.proMatches[0]}
-      else if(results.communityMatches){focused = results.communityMatches[0]}
-      else focused = results.featuredPro;
+      if (results.proMatches) focused = results.proMatches[0];
+      else if (results.communityMatches) focused = results.communityMatches[0];
+      //else focused = results.featuredPro;
+
+      //add fields for display
+      forEach(results.proMatches, presentMatch);
+      forEach(results.communityMatches, presentMatch);
     
       var payload = {
         proMatches: sortBy(results.proMatches, "createdAt"),
         communityMatches: sortBy(results.communityMatches, "createdAt"),
-        featuredPro: queryFlag ? null : results.featuredPro,
-        featuredCommunity: queryFlag ? null : results.featuredCommunity,
+        //featuredPro: queryFlag ? null : results.featuredPro,
+        //featuredCommunity: queryFlag ? null : results.featuredCommunity,
         subheaders: subheaderText,
         searched: searched,
         defaultFocused: focused
       };
   
+      console.log(JSON.stringify(payload, null, 4));
       res.render("index", payload); 
     }); 
   });
@@ -90,8 +105,8 @@ module.exports = function (app) {
       var payload = {
         proMatches: sortBy(results.matchData.proMatches, "createdAt"),
         communityMatches: sortBy(results.matchData.communityMatches, "createdAt"),
-        featuredPro: queryFlag ? null : results.matchData.featuredPro,
-        featuredCommunity: queryFlag ? null : results.matchData.featuredCommunity,
+        //featuredPro: queryFlag ? null : results.matchData.featuredPro,
+        //featuredCommunity: queryFlag ? null : results.matchData.featuredCommunity,
         focusedMatch: results.focusedMatch,
         searched: searched,
         subheaders: subheaderText

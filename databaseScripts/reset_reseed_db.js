@@ -1,51 +1,80 @@
+var querystring = require('querystring');
 var mongoose = require('mongoose');
 var _ = require('lodash');
 var keys = _.keys;
 var partial = _.partial;
 var forEach = _.forEach;
+var map = _.map;
 var prompt = require('prompt');
 var async = require('async');
 
 var people = require('./seeds/people');
 var events = require('./seeds/events');
+var matches = require('./seeds/matches');
 var games = require('../models/gameCharacterData');
 
-var personModel = require('../models/personModel');
-var eventModel = require('../models/eventModel');
-var matchModel = require('../models/matchModel');
+var personModel = require('../models/personModel').model;
+var eventModel = require('../models/eventModel').model;
+var matchModel = require('../models/matchModel').Match;
 var featuredMatchModel = require('../models/featuredMatchModel');
 
 var peopleCreation = function(done){
-  async.map(people, partial(create, personModel.model), done);
+  async.map(people, partial(create, personModel), done);
 };
 
 var eventsCreation = function(done){
-  async.map(events, partial(create, eventModel.model), done);
+  async.map(events, partial(create, eventModel), done);
 };
 
-var find = function(modelType, query, done){
-  modelType.model.find({name: query}, function(err, res){
-    if (err) { 
-      console.log(err);
-      done(err);
-    }
-    else{
-      done(null,res);
-    }
+var extractVideoId = function (videoUrl) {
+  var queries = videoUrl.split("?")[1];
+  return querystring.parse(queries)["v"];
+};
+
+var createMatch = function (matchData, cb) {
+  async.parallel({
+    casters: async.apply(async.map, matchData.casters, findPerson),
+    fighters: async.apply(async.map, matchData.fighters, findFighter),
+    event: async.apply(findEvent, matchData.event),
+  }, function (err, results) {
+    if (err) console.log(err);
+    var match = {
+      game: matchData.game,
+      title: matchData.title,
+      description: matchData.description,
+      category: matchData.category,
+      playedAt: Date.now(),
+      videos: map(matchData.videos, extractVideoId),
+      fighters: results.fighters,
+      casters: results.casters,
+      event: results.event,
+    };
+    create(matchModel, match, cb);
   });
 };
 
+var findData = function(done) {
+  async.map(matches, createMatch, done);
+};
+
+var find = function(modelType, query, cb){
+  modelType.findOne(query, cb);
+};
+
+var findPerson = partial(find, personModel);
+var findEvent = partial(find, eventModel);
+var findFighter = function (fighterData, cb) {
+  find(personModel, {name: fighterData.name}, function (err, person) {
+    var fighter = {
+      person: person,
+      characters: fighterData.characters 
+    };
+    cb(err, fighter);
+  }); 
+};
+
 var create = function(modelType, data, cb){
-  modelType.create(data, function(err, res){
-    if (err) { 
-      console.log(err);
-      cb(err);
-    }
-    else{
-      //console.log(modelType.modelName + "created: ", res.name);
-      cb(null,res);
-    }
-  });  
+  modelType.create(data, cb);
 }
 
 var resetDb = function (mongoose) {
@@ -55,17 +84,20 @@ var resetDb = function (mongoose) {
       async.series([
         peopleCreation,
         eventsCreation,
+        findData
+        //matchesCreation
       ], function(err, res){
         if (err) console.log (err);
-        else mongoose.disconnect();
+        mongoose.disconnect();
       });
     });
   });
 };
-
-prompt.start();
-
-prompt.get("password", function (err, result) {
-  if (result.password === "admin") resetDb(mongoose);
-  else console.log("Invalid password");
-});
+resetDb(mongoose);
+//
+//prompt.start();
+//
+//prompt.get("password", function (err, result) {
+//  if (result.password === "admin") resetDb(mongoose);
+//  else console.log("Invalid password");
+//});

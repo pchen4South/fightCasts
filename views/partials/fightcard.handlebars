@@ -6,9 +6,11 @@
        <div class="fighter-name">
          {{person.name}}
        </div> 
+       {{#each characters}}
        <div class="character-list">
-         <span class="character-name">{{characters}}</span>
+         <span class="character-name">{{name}}</span>
        </div>
+       {{/each}}
      </div> 
    {{/with}}
    
@@ -21,9 +23,11 @@
        <div class="fighter-name">
          {{person.name}}
        </div> 
+       {{#each characters}}
        <div class="character-list">
-         <span class="character-name">{{characters}}</span>
+         <span class="character-name">{{name}}</span>
        </div>
+       {{/each}}
      </div> 
    {{/with}}
    

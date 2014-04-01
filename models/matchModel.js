@@ -1,20 +1,29 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var eventSchema = require('./eventModel').schema;
+var ObjectId = mongoose.Schema.Types.ObjectId;
+
+var Fighters = new mongoose.Schema({
+  person: {type: ObjectId, ref: "Person"},
+  characters: Array
+});
 
 var Matches = new mongoose.Schema({
+  game: String,
   title: String,
   description: String,
+  category: String,
   playedAt: Date,
-  game: String,
-  _casters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Person" }],
-  _event: {type: mongoose.Schema.Types.ObjectId, ref: "Event"},
-  
-  //pro / scrub / community
-  category: String
+  videos: Array,
+  fighters: [Fighters],
+  casters: [{ type: ObjectId, ref: "Person" }],
+  event: {type: ObjectId, ref: "Event"},
 });
 
 Matches.plugin(timestamps);
-var Match = mongoose.model('Match', Matches);
 
-module.exports = {'model': Match, 'schema': Matches}
+var Match = mongoose.model('Match', Matches);
+var Fighter = mongoose.model("Fighter", Fighters);
+
+module.exports.Match = Match;
+module.exports.Fighter = Fighter;

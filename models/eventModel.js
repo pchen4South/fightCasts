@@ -4,9 +4,12 @@ var timestamps = require('mongoose-timestamp');
 var Events = new mongoose.Schema({
   name: String,
   country: String,
-  date: String
+  date: Date 
 });
+
 Events.plugin(timestamps);
 
 var Event = mongoose.model('Event', Events);
-module.exports = {'model': Event, 'schema': Events}
+
+module.exports.model = Event;
+module.exports.schema = Events;
