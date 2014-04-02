@@ -31,6 +31,7 @@ var createPerson = function (personData, cb) {
 };
 
 var createEvent = function (eventData, cb) {
+  console.log(eventData.name);
   var event = {
     name: eventData.name,
     country: eventData.country,
@@ -165,7 +166,7 @@ var getFeaturedCommunityMatch = function (cb) {
 };
 
 var getAll = function (cb) {
-  async.parallel({
+  async.series({
     people: getPeople,
     events: getEvents,
     matches: getMatchesNested,

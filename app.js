@@ -30,6 +30,7 @@ app.use(passport.session());
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(express.static(__dirname + '/assets'));
+app.use(express.static(__dirname));
 app.use(express.methodOverride());
 
 require('./routes/api')(app);
