@@ -2,6 +2,7 @@
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" type="text/css" href="/dist/index.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/stylesheets/introjs.css">
   <link href='http://fonts.googleapis.com/css?family=Tulpen+One|Exo:400,900italic|Dosis' rel='stylesheet' type='text/css'>
   <link rel="icon" type="image/png" href="/images/vs.png">
 </head>
@@ -11,7 +12,7 @@
     <div class="container">
       <div class="page-header">
         <a href="/" class="page-brand">fight casts</a> 
-        <div class="search-bar">
+        <div class="search-bar" id="searchBar">
           {{> searchBar}}      
         </div>
       </div>
@@ -21,7 +22,7 @@
   <div id="subheader">
     <div class="container">
       <div class="page-subheader">
-        <div class="tab-wrapper">
+        <div class="tab-wrapper" id="gameSelect">
           <div class="tab sf4 active">
           </div>
         </div>
@@ -34,4 +35,7 @@
       {{{body}}}
     </div>
   </div>
+
+  <script src="/vendor/javascripts/intro.js"></script>
+  <script src="/javascripts/intro.js"></script>
 </body>
