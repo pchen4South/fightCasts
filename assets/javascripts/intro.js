@@ -4,6 +4,7 @@ var tour = introJs();
 tour.setOptions({
   showStepNumbers: false,
   scrollToElement: false,
+  tooltipClass: "tool-tip",
   steps: [
     {
       element: "#featuredPro",
