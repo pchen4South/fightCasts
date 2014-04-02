@@ -12,7 +12,8 @@ var matchModel = require('./models/matchModel').model;
 var gamesList = require('./models/gameCharacterData');
 
 //helper to extract id from full youtube urls
-var extractVideoId = function (videoUrl) {
+var extractVideoId = function (video) {
+  var videoUrl = video.url;
   var queries = videoUrl.split("?")[1];
   return queries ? querystring.parse(queries)["v"] : videoUrl;
 };
@@ -43,17 +44,18 @@ var createEvent = function (eventData, cb) {
 };
 
 var createMatch = function (matchData, cb) {
+  console.log(matchData);
   var match = {
-    game: matchData.game,
+    game: "1",
     title: matchData.title,
     description: matchData.description,
     category: matchData.category,
     playedAt: matchData.playedAt,
     featuredAt: matchData.featuredAt,
     videos: map(matchData.videos, extractVideoId),
-    fighters: results.fighters,
-    casters: results.casters,
-    event: results.event,
+    fighters: matchData.fighters,
+    casters: matchData.casters,
+    event: matchData.event,
   };
   matchModel.create(match, cb);
 };
@@ -79,9 +81,11 @@ var getEvents = partial(getMultiple, eventModel);
 var getMatches = partial(getMultiple, matchModel);
 
 //mutative, populates characters for a match's fighters
+//hardcoded for now
+
 var populateCharacters = function (match) {
-  var game = gamesList[match.game];
-  if (!game) throw new Error("invalid game id", match.game);
+  var game = gamesList["1"];
+  //if (!game) throw new Error("invalid game id", match.game);
 
   forEach(match.fighters, function (fighter) {
     var characters = map(fighter.characters, function (character) {
@@ -93,7 +97,7 @@ var populateCharacters = function (match) {
 
 //mutative, populates game for a match
 var populateGame = function (match) {
-  var game = gamesList[match.game];
+  var game = gamesList["1"];
   if (!game) throw new Error("invalid game id", match.game);
 
   match.game = game;
