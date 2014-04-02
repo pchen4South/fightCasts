@@ -14,23 +14,52 @@
 @icon-font-name: "glyphicons-halflings-regular";
 @import "glyphicons.less";
 
-@tile-color-1: #2980b9;
-//@tile-color-2: darken(#826AE6, 10%);
-@tile-color-2: darken(#ff0000, 20%);
+//@tile-color-1: #2980b9;
+////@tile-color-2: darken(#826AE6, 10%);
+//@tile-color-2: darken(#ff0000, 20%);
+//@tile-color-3: lighten(#6a656c, 5%);
+//@tile-color-4: #f2f6f7;
+//@tile-color-5: darken(#333333, 10%);
+//@tile-color-6: lighten(@tile-color-2, 25%);
+//@tile-color-7: lighten(@tile-color-1, 25%);
+
+@tile-color-1: #ff0000;
+@tile-color-2: #ff9900;
 @tile-color-3: lighten(#6a656c, 5%);
 @tile-color-4: #f2f6f7;
-@tile-color-5: darken(#333333, 10%);
+@tile-color-5: lighten(#333333, 10%);
 @tile-color-6: lighten(@tile-color-2, 25%);
 @tile-color-7: lighten(@tile-color-1, 25%);
 
-@text-color: @tile-color-4;
-@secondary-text-color: @tile-color-3;
-@dark-text-color: @tile-color-5;
-@header-color: @tile-color-2;
+@gray-1: rgb(242, 242, 242);
+@gray-2: rgb(182, 177, 173);
+@gray-4: rgb(125, 125, 125);
+@gray-5: rgb(73, 73, 73);
+
+//@light-color: rgb(254, 252, 231);
+@light-color: rgb(234, 249, 255);
+
+@dark-color: rgb(32, 69, 102);
+
+//@text-color: rgb(73, 73, 73);
+@text-color: @gray-1;
+@secondary-text-color: @gray-2;
+@dark-text-color: @dark-color;
+
+@header-color: rgb(243, 116, 12);
+//@header-color: rgb(239, 186, 27);
+@header-font-color: @gray-1;
+//@header-font-color: @gray-1;
+//@subheader-color: rgb(226, 79, 29);
+@subheader-color: @gray-5;
+@subheader-font-color: @dark-text-color;
+//@subheader-color: rgb(243, 116, 12);
+@fightcard-color: rgb(228, 228, 228);
+
 @content-color: @tile-color-5;
 @background-dark: @tile-color-5;
 @background-light: @tile-color-4;
-@background-color: @tile-color-2;
+@background-color: @gray-1;
 @background-color-dark: darken(@tile-color-2, 10%);
 @hover-color: @tile-color-4;
 @border-color: @tile-color-4;
@@ -38,7 +67,7 @@
 @tab-active-color: @header-color;
 @tab-color: lighten(@tab-active-color, 10%);
 
-@default-tile-color: lighten(@tile-color-5, 10%);
+@default-tile-color: @gray-4;
 
 @font-largish: 64px;
 @font-large: 48px;
@@ -60,8 +89,16 @@
 @import "tiles/main.less";
 @import "tiles/main-details.less";
 
+*, *:before, *:after {
+  .box-sizing(border-box);
+  color: @text-color;
+  font-weight: 100;
+}
+
 .header-text {
   font-family: "Tulpen One", sans-serif;
+  color: @header-font-color;
+  font-size: @font-largish;
   text-decoration: none;
 }
 
@@ -72,33 +109,23 @@
 
 .content-secondary-text {
   font-family: "Dosis", sans-serif;
-}
-
-.site-header {
-  font-size: @font-largish;
-  color: @text-color;
+  color: @secondary-text-color;
 }
 
 .section-header {
-  .header-text();
+  font-family: "Tulpen One", sans-serif;
+  color: @subheader-font-color;
   font-size: @font-medium;
-  color: @secondary-text-color;
 }
 
 .header {
   .header-text();
 }
 
-*, *:before, *:after {
-  .box-sizing(border-box);
-  color: @text-color;
-  font-weight: 100;
-}
-
 body {
   .content-text();
   margin: 0px;
-  background-color: @content-color;
+  background-color: @background-color;
 }
 
 #header {
@@ -107,7 +134,7 @@ body {
 }
 
 #subheader {
-  background-color: @background-color-dark;
+  background-color: @subheader-color;
 }
 
 #divider {
@@ -121,7 +148,7 @@ body {
 
 #main-content {
   position: relative;
-  background-color: @content-color;
+  background-color: @background-color;
 }
 
 ul {
@@ -131,8 +158,7 @@ ul {
 
 //insanity comes from positioning the stupid, stupid icon
 .search-form {
-  //.hover-color(@text-color, @dark-text-color);
-  color: @secondary-text-color;
+  color: @dark-text-color;
   position: relative;
   .icon {
     .size(32px, 32px);
@@ -147,8 +173,8 @@ ul {
 
   .search-box {
     .size(100%, 32px);
-    .hover-color(@secondary-text-color, @dark-text-color);
-    background-color: @background-light;
+    color: inherit;
+    background-color: @gray-1;
     position: relative;
     outline: 0;
     padding-left: 32px;
@@ -160,7 +186,7 @@ ul {
 .tool-tip {
   div {
     .content-text();
-    color: @dark-text-color;
+    color: @text-color;
   }
 }
 
@@ -195,14 +221,26 @@ ul {
   .make-row(0px);
   height: @header-height;
   .page-brand {
-    .tile-region-6();
-    .header();
-    .site-header();
+    .tile-region-4();
+    .header-text();
   }
   .search-bar {
-    .tile-region-4();
-    .tile-offset-1();
+    .tile-region-3();
     top: 36px;
+  }
+  .header-links {
+    .tile-region-6();
+    .tile-column-push(11);
+    top: 20px;
+    li {
+      .make-xs-column(8, 0px);
+      text-align: center;
+      .header-link {
+        &:hover {
+          border-bottom: 1px dashed @text-color;
+        }
+      }
+    }
   }
 }
 
@@ -219,6 +257,9 @@ ul {
   font-size: @font-mediumish;
   margin: 0px;
   padding: 0px;
+  .subheader-secondary {
+    color: @secondary-text-color;
+  }
 }
 
 
@@ -243,11 +284,14 @@ ul {
         .make-row(0px);
         .text-overflow();
         .content-secondary-text();
+        color: @dark-text-color;
         vertical-align: bottom;
       }
       .character-list {
         margin-top: -8px;
         .character-name {
+          .content-secondary-text();
+          color: @dark-text-color;
           font-size: @font-small;
         }
       }
@@ -272,17 +316,15 @@ ul {
       .text-overflow();
       font-size: @font-small;
       .date {
-        .content-secondary-text();
+        color: @secondary-text-color;
         font-size: @font-small;
-        color: @tile-color-1;
       }
     }
     .caster-list {
       .make-row();
       .text-overflow();
-      .content-secondary-text();
-      color: @tile-color-1;
       font-size: @font-small;
+      color: @secondary-text-color;
       .caster-name {
         font-size: @font-small;
       }

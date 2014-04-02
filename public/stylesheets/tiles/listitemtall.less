@@ -3,17 +3,17 @@
   &:hover {
     text-decoration: none;
     .fight-card {
-      background-color: lighten(@background-color, 10%);
+      background-color: lighten(@fightcard-color, 10%);
     }
   }
   .fight-card-header {
-    .top-left();
-    .size(100%, 32px);
-  }
-  .fight-card {
     .bottom-left();
     .size(100%, 42px);
+  }
+  .fight-card {
+    .top-left();
+    .size(100%, 42px);
     .transition(all .2s);
-    background-color: @background-color;
+    background-color: @fightcard-color;
   }
 }

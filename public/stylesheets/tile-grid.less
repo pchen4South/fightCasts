@@ -29,12 +29,11 @@
 }
 
 .tile-offset-mixin (@count: 1) {
-  @media (min-width: @screen-md-min) {
-    margin-left: @count * 32px;
-  }
-  @media (min-width: @screen-lg-min) {
-    margin-left: @count * 48px;
-  }
+  .make-sm-column-offset(@count);
+}
+
+.tile-column-push (@count: 1) {
+  .make-sm-column-push(@count);
 }
 
 .pad-0 {
@@ -45,8 +44,20 @@
   .tile-region-mixin(1);
 }
 
+.tile-region-2 {
+  .tile-region-mixin(2);
+}
+
+.tile-region-3 {
+  .tile-region-mixin(3);
+}
+
 .tile-region-4 {
   .tile-region-mixin(4);
+}
+
+.tile-region-5 {
+  .tile-region-mixin(5);
 }
 
 .tile-region-6 {
@@ -55,6 +66,10 @@
 
 .tile-region-7 {
   .tile-region-mixin(7);
+}
+
+.tile-region-8 {
+  .tile-region-mixin(8);
 }
 
 .tile-region-10 {
@@ -203,4 +218,8 @@
 
 .tile-offset-1 {
   .tile-offset-mixin(1);
+}
+
+.tile-offset-2 {
+  .tile-offset-mixin(2);
 }
