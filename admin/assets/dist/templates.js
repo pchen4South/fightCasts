@@ -4,7 +4,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 
-  data.buffer.push("<div class = \"adminFormWrapper\">\r\n  <form role=\"form\">\r\n    <h3>Create Event</h3>\r\n    <div class=\"form-group\">\r\n      <label for=\"name\">Name</label>\r\n      ");
+  data.buffer.push("<div class = \"adminFormWrapper\">\r\n  <form role=\"form\">  \r\n    <div class=\"form-group\">\r\n      <label for=\"name\">Name</label>\r\n      ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("text"),
     'disabled': ("inFlight"),
@@ -81,6 +81,139 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 });
 
+Ember.TEMPLATES["_matchcreation"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1, helper, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n        <div class = \"tile-12x1\">\r\n          Player to Add: ");
+  stack1 = helpers._triageMustache.call(depth0, "person.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(" as \r\n          ");
+  stack1 = helpers.each.call(depth0, "characters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n        </div>\r\n      ");
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n            ");
+  stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n          ");
+  return buffer;
+  }
+
+  data.buffer.push("<form role=\"form\">\r\n  <div class=\"form-group\">\r\n    <label>Create a Match</label>\r\n    \r\n    <div class=\"form-group tile-12x1\">\r\n      <label>Title</label>\r\n      ");
+  data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'type': ("text"),
+    'disabled': ("inFlight"),
+    'value': ("data.title"),
+    'class': ("form-control")
+  },hashTypes:{'type': "STRING",'disabled': "ID",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'disabled': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  data.buffer.push("\r\n      <span class=\"help-block\">");
+  stack1 = helpers._triageMustache.call(depth0, "errors.title", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span>\r\n    </div>\r\n    \r\n    <div class=\"form-group tile-12x1\">\r\n      <label>Description</label> \r\n      ");
+  data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'type': ("text"),
+    'disabled': ("inFlight"),
+    'value': ("data.description"),
+    'class': ("form-control")
+  },hashTypes:{'type': "STRING",'disabled': "ID",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'disabled': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  data.buffer.push("\r\n    </div>\r\n    \r\n    <div class=\"form-group tile-4x1\">\r\n      <label>Game</label>\r\n      ");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'disabled': ("inFlight"),
+    'prompt': ("Select game"),
+    'content': ("games"),
+    'selection': ("data.game"),
+    'optionLabelPath': ("content"),
+    'class': ("form-control")
+  },hashTypes:{'disabled': "ID",'prompt': "STRING",'content': "ID",'selection': "STRING",'optionLabelPath': "STRING",'class': "STRING"},hashContexts:{'disabled': depth0,'prompt': depth0,'content': depth0,'selection': depth0,'optionLabelPath': depth0,'class': depth0},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push("\r\n      <span class=\"help-block\">");
+  stack1 = helpers._triageMustache.call(depth0, "errors.game", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span>\r\n    </div>\r\n    \r\n      <div class=\"form-group tile-12x3\"> \r\n        <label> Fighters </label>\r\n        ");
+  data.buffer.push(escapeExpression((helper = helpers['fc-createFighterForm'] || (depth0 && depth0['fc-createFighterForm']),options={hash:{
+    'inFlight': ("inFlight"),
+    'characters': ("characters"),
+    'fighter': ("data.fighters"),
+    'people': ("people")
+  },hashTypes:{'inFlight': "ID",'characters': "ID",'fighter': "ID",'people': "ID"},hashContexts:{'inFlight': depth0,'characters': depth0,'fighter': depth0,'people': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-createFighterForm", options))));
+  data.buffer.push("\r\n        <span class=\"help-block\">");
+  stack1 = helpers._triageMustache.call(depth0, "errors.fighterOne", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span>\r\n    </div> \r\n      ");
+  stack1 = helpers.each.call(depth0, "data.fighters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n\r\n    \r\n    <div class=\"form-group tile-4x1\">\r\n      <label for=\"category\">Category</label>\r\n      ");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'disabled': ("inFlight"),
+    'prompt': ("Select Category"),
+    'content': ("categories"),
+    'selection': ("data.category"),
+    'optionLabelPath': ("content"),
+    'class': ("form-control")
+  },hashTypes:{'disabled': "ID",'prompt': "STRING",'content': "ID",'selection': "STRING",'optionLabelPath': "STRING",'class': "STRING"},hashContexts:{'disabled': depth0,'prompt': depth0,'content': depth0,'selection': depth0,'optionLabelPath': depth0,'class': depth0},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push("\r\n      <span class=\"help-block\">");
+  stack1 = helpers._triageMustache.call(depth0, "errors.game", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span>\r\n    </div>\r\n    \r\n    <div class=\"form-group tile-5x3\">\r\n      <label for=\"casters\">Casters</label>\r\n      ");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'disabled': ("inFlight"),
+    'prompt': ("Select Casters"),
+    'multiple': (true),
+    'content': ("people"),
+    'selection': ("data.casters"),
+    'optionLabelPath': ("content.name"),
+    'class': ("form-control")
+  },hashTypes:{'disabled': "ID",'prompt': "STRING",'multiple': "BOOLEAN",'content': "ID",'selection': "STRING",'optionLabelPath': "STRING",'class': "STRING"},hashContexts:{'disabled': depth0,'prompt': depth0,'multiple': depth0,'content': depth0,'selection': depth0,'optionLabelPath': depth0,'class': depth0},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push("\r\n    </div>\r\n\r\n    \r\n    <div class=\"form-group tile-5x1\">\r\n      <label>Event Name</label> \r\n      ");
+  data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'type': ("text"),
+    'disabled': ("inFlight"),
+    'value': ("data.eventName"),
+    'class': ("form-control")
+  },hashTypes:{'type': "STRING",'disabled': "ID",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'disabled': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  data.buffer.push("\r\n    </div>\r\n    \r\n    \r\n    <div class=\"form-group tile-5x1\">\r\n      <label for=\"playedAt\">Date Played</label>\r\n       ");
+  data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'type': ("date"),
+    'disabled': ("inFlight"),
+    'value': ("data.date"),
+    'class': ("form-control")
+  },hashTypes:{'type': "STRING",'disabled': "ID",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'disabled': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  data.buffer.push("\r\n    </div>\r\n\r\n    <div class=\"form-group tile-12x1\">\r\n      <label for=\"videos\">Videos</label>\r\n      ");
+  data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'type': ("text"),
+    'disabled': ("inFlight"),
+    'value': ("data.videos"),
+    'class': ("form-control")
+  },hashTypes:{'type': "STRING",'disabled': "ID",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'disabled': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  data.buffer.push("\r\n    </div>\r\n    \r\n    <div class = \"form-group tile-12x1\">\r\n      <button class=\"btn btn-default\"\r\n        ");
+  data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
+    'disabled': ("inFlight")
+  },hashTypes:{'disabled': "ID"},hashContexts:{'disabled': depth0},contexts:[],types:[],data:data})));
+  data.buffer.push("\r\n        ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "onSubmit", "data", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(">\r\n        Submit\r\n      </button> \r\n    </div>\r\n    \r\n  </div>\r\n</form> \r\n");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["_matchdetails"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  
+
+
+  data.buffer.push("details yo");
+  
+});
+
 Ember.TEMPLATES["application"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
@@ -94,6 +227,35 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 });
 
+Ember.TEMPLATES["components/fc-admin-details"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var stack1, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', helper, options;
+  data.buffer.push("\r\n  ");
+  data.buffer.push(escapeExpression((helper = helpers.partial || (depth0 && depth0.partial),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "matchcreation", options) : helperMissing.call(depth0, "partial", "matchcreation", options))));
+  data.buffer.push("\r\n");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '', helper, options;
+  data.buffer.push("\r\n  ");
+  data.buffer.push(escapeExpression((helper = helpers.partial || (depth0 && depth0.partial),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "matchdetails", options) : helperMissing.call(depth0, "partial", "matchdetails", options))));
+  data.buffer.push("\r\n");
+  return buffer;
+  }
+
+  stack1 = helpers['if'].call(depth0, "createFlag", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  else { data.buffer.push(''); }
+  
+});
+
 Ember.TEMPLATES["components/fc-admin-matches"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
@@ -102,10 +264,10 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\r\n  ");
+  data.buffer.push("\r\n  <div class = \"tile-10x1\"> ");
   stack1 = helpers._triageMustache.call(depth0, "title", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("<br>\r\n");
+  data.buffer.push(" </div>\r\n");
   return buffer;
   }
 
@@ -122,11 +284,48 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 
-  data.buffer.push("<div id=\"subheader\">\r\n   <div class=\"container\">\r\n    <div class=\"page-subheader\">\r\n      <div class=\"tab-wrapper\">\r\n      \r\n      <div class = \"container inner\">\r\n      <ul class=\"nav navbar-nav navbar-left\">\r\n        <p class=\"navbar-text navbar-left\">Create: </p>\r\n        <li class=\"dropdown\">\r\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Person<b class=\"caret\"></b></a>\r\n          <ul class=\"dropdown-menu\">\r\n            ");
+  data.buffer.push("<div id=\"subheader\">      \r\n  <div class = \"container\">\r\n      <ul class=\"nav navbar-nav navbar-left\">\r\n        <p class=\"navbar-text navbar-left\">Create: </p>\r\n        <li class=\"dropdown\">\r\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Person<b class=\"caret\"></b></a>\r\n          <ul class=\"dropdown-menu\">\r\n            ");
   data.buffer.push(escapeExpression((helper = helpers.partial || (depth0 && depth0.partial),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "createPerson", options) : helperMissing.call(depth0, "partial", "createPerson", options))));
-  data.buffer.push("\r\n          </ul>\r\n        </li>             \r\n        \r\n        <li class=\"dropdown\">\r\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Event<b class=\"caret\"></b></a>\r\n          <ul class=\"dropdown-menu\">\r\n            ");
+  data.buffer.push("\r\n          </ul>\r\n        </li>                \r\n        <li class=\"dropdown\">\r\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Event<b class=\"caret\"></b></a>\r\n          <ul class=\"dropdown-menu\">\r\n            ");
   data.buffer.push(escapeExpression((helper = helpers.partial || (depth0 && depth0.partial),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "createEvent", options) : helperMissing.call(depth0, "partial", "createEvent", options))));
-  data.buffer.push("\r\n          </ul>\r\n        </li>         \r\n      \r\n      </ul>\r\n    </div>\r\n  \r\n      \r\n      </div>\r\n    </div>\r\n  </div> \r\n</div>");
+  data.buffer.push("\r\n          </ul>\r\n        </li>         \r\n      </ul> \r\n  </div>\r\n</div>");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["components/fc-createFighterForm"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', escapeExpression=this.escapeExpression;
+
+
+  data.buffer.push("  <div class = \"form-group tile-4x1\">\r\n   ");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'disabled': ("inFlight"),
+    'prompt': ("Select Person"),
+    'content': ("people"),
+    'selection': ("newFighter.person"),
+    'optionLabelPath': ("content.name"),
+    'class': ("form-control")
+  },hashTypes:{'disabled': "ID",'prompt': "STRING",'content': "ID",'selection': "ID",'optionLabelPath': "STRING",'class': "STRING"},hashContexts:{'disabled': depth0,'prompt': depth0,'content': depth0,'selection': depth0,'optionLabelPath': depth0,'class': depth0},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push("\r\n  </div>\r\n  <div class = \"form-group tile-4x1\">\r\n    ");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'disabled': ("inFlight"),
+    'multiple': ("true"),
+    'prompt': ("Select a character"),
+    'content': ("characters"),
+    'selection': ("newFighter.characters"),
+    'optionValuePath': ("content.name"),
+    'optionLabelPath': ("content.name"),
+    'class': ("form-control")
+  },hashTypes:{'disabled': "ID",'multiple': "STRING",'prompt': "STRING",'content': "ID",'selection': "ID",'optionValuePath': "STRING",'optionLabelPath': "STRING",'class': "STRING"},hashContexts:{'disabled': depth0,'multiple': depth0,'prompt': depth0,'content': depth0,'selection': depth0,'optionValuePath': depth0,'optionLabelPath': depth0,'class': depth0},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push(" \r\n  </div>\r\n<div class = \"form-group tile-1x1\">\r\n  <button class=\"btn btn-default\" \r\n    ");
+  data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
+    'disabled': ("inFlight")
+  },hashTypes:{'disabled': "ID"},hashContexts:{'disabled': depth0},contexts:[],types:[],data:data})));
+  data.buffer.push("\r\n    ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "createFighter", "newFighter", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(">\r\n    Add \r\n  </button>\r\n</div>");
   return buffer;
   
 });
@@ -138,16 +337,6 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
 
   return buffer;
-  
-});
-
-Ember.TEMPLATES["matchcreation"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  
-
-
-  data.buffer.push("MATCH CREATION");
   
 });
 
@@ -169,11 +358,13 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
   stack1 = helpers._triageMustache.call(depth0, "fc-admin-subheader", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n\r\n<div class = \"tile-8x2\">\r\n");
+  data.buffer.push("\r\n\r\n<div class = \"tile-8x2\">\r\n</div>\r\n<div class = \"tile-10x8\">\r\n  ");
   stack1 = helpers._triageMustache.call(depth0, "fc-admin-matches", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n</div>\r\n\r\n<div class = \"tile-8x2\">\r\n");
-  data.buffer.push(escapeExpression((helper = helpers.outlet || (depth0 && depth0.outlet),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "detail", options) : helperMissing.call(depth0, "outlet", "detail", options))));
+  data.buffer.push(" \r\n</div>\r\n\r\n<div class = \"tile-region-10\">\r\n");
+  data.buffer.push(escapeExpression((helper = helpers['fc-admin-details'] || (depth0 && depth0['fc-admin-details']),options={hash:{
+    'createFlag': ("createFlag")
+  },hashTypes:{'createFlag': "ID"},hashContexts:{'createFlag': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-admin-details", options))));
   data.buffer.push("\r\n</div>");
   return buffer;
   

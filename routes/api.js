@@ -59,7 +59,7 @@ module.exports = function (app) {
     
   app.get("/api/v1/games", function (req, res) {
     console.log(gamesList);
-    res.json({games: gamesList["1"]});
+    res.json({games: gamesList});
   });
   
   app.get("/api/v1/matches", function (req, res) {

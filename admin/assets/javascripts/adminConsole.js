@@ -28,15 +28,19 @@ App.MatchesRoute = Ember.Route.extend({
 
 App.MatchesIndexRoute = Ember.Route.extend({
   enter: function(){
-    console.log("matches index");
+    var matchCon = this.controllerFor('matches');
+    matchCon.set("createFlag", true);
   },
-  renderTemplate: function(){
-    this.render('matchcreation',{
-      into: 'matches',
-      outlet: 'detail'
-    });
-  }
 });
+
+App.MatchRoute = Ember.Route.extend({
+  enter: function(){
+    var matchCon = this.controllerFor('matches');
+    matchCon.set("createFlag", false);
+  }
+})
+
+
 
 var fetchMatches = function(){
   return Ember.$.get("/api/v1/matches");
@@ -46,9 +50,9 @@ var fetchPeople = function(){
   return Ember.$.get("/api/v1/people");
 };
 
-// var fetchGames = function(){
-  // return Ember.$.get("/api/v1/games");
-// };
+var fetchGames = function(){
+return Ember.$.get("/api/v1/games");
+};
 
 var submitData = function (data, type){
   switch(type){
@@ -61,17 +65,62 @@ var submitData = function (data, type){
   }
 };
 
+App.MatchesController = Ember.Controller.extend({
+  createFlag: false
+});
+
 App.FcAdminMatchesComponent = Ember.Component.extend({
   didInsertElement: function(){
-    window.matches = this.get("matches");
+    var matches = this.get("matches");
+    
     fetchMatches()
     .then(function(results){
       matches.pushObjects(results.matches);
     });
+  
   },
-  matches: []
-    
+  matches: [],
+
 });
+
+
+
+App.FcAdminDetailsComponent = Ember.Component.extend({
+  didInsertElement: function(){
+    window.people = this.get("people");
+    var self = this;
+    fetchPeople()
+    .then(function(results){
+      people.pushObjects(results.people);
+    }); 
+    
+    //seems slightly wrong for multiple game types
+    //doesn't seem to be an array
+    //works for now as the default 1 game Sf4
+    fetchGames()
+    .then(function(results){
+      window.res = results;
+      window.characters = self.get('characters');
+      characters.pushObjects(results.games["1"].characters);
+    });
+  },
+  
+  people: [],
+  data: {
+    title: "",
+    description: "",
+    casters: null,
+    game: "",
+    category: "",
+    fighters: []
+  },
+  games: ["SF4"],
+  characters: [],
+  categories: ["pro", "scrub", "community"],
+
+});
+
+
 
 App.FcAdminSubheaderComponent = Ember.Component.extend({
   didInsertElement: function(){
@@ -81,14 +130,6 @@ App.FcAdminSubheaderComponent = Ember.Component.extend({
       var people = self.get("people");
       people.pushObjects(results.people);
     });
-    
-    fetchGames()
-    .then(function(results){
-      var characters = self.get("characters");
-      window.res = results;
-      characters.pushObjects(results.games.characters);
-    });
-  
   },
   data: {
     country: "",
@@ -124,3 +165,22 @@ App.FcAdminSubheaderComponent = Ember.Component.extend({
     }
   }
 })
+
+App.FcCreateFighterFormComponent = Ember.Component.extend({
+  newFighter: {
+    person: "",
+    characters: []
+  },
+  
+  actions:{
+    createFighter: function (newFighter) {
+      window.newf = newFighter;
+      var newFighter = newFighter || this.get("newFighter");
+
+      get(this, "fighter").pushObject(copy(newFighter));
+      set(this, "newFighter.person", "");
+      set(this, "newFighter.characters", []);
+      console.log("createFighter", newFighter);
+    }
+  }
+});
