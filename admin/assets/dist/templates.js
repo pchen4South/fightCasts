@@ -209,9 +209,24 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["components/fc-admin-details"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, helper, options, self=this, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
+  
+  var buffer = '', helper, options;
+  data.buffer.push("\r\n        ");
+  data.buffer.push(escapeExpression((helper = helpers.prettyDate || (depth0 && depth0.prettyDate),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "match.featuredAt", options) : helperMissing.call(depth0, "prettyDate", "match.featuredAt", options))));
+  data.buffer.push("\r\n      ");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("\r\n        Not Featured\r\n      ");
+  }
+
+function program5(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push(" \r\n      <div class = \"adminListItem\"> ");
@@ -221,7 +236,7 @@ function program1(depth0,data) {
   return buffer;
   }
 
-function program3(depth0,data) {
+function program7(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push(" \r\n      <div class = \"adminListItem\">");
@@ -231,19 +246,19 @@ function program3(depth0,data) {
   return buffer;
   }
 
-function program5(depth0,data) {
+function program9(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push(" \r\n    <div class = \"adminListItem\"> \r\n    ");
   stack1 = helpers._triageMustache.call(depth0, "person.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" \r\n      ");
-  stack1 = helpers.each.call(depth0, "characters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers.each.call(depth0, "characters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(10, program10, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n    </div>\r\n    ");
   return buffer;
   }
-function program6(depth0,data) {
+function program10(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push("\r\n        <i>");
@@ -268,16 +283,17 @@ function program6(depth0,data) {
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</div>\r\n  </li>\r\n  <li>\r\n    <label> Date Played:</label> \r\n    <div class = \"adminListItem\"> ");
   data.buffer.push(escapeExpression((helper = helpers.prettyDate || (depth0 && depth0.prettyDate),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "match.playedAt", options) : helperMissing.call(depth0, "prettyDate", "match.playedAt", options))));
-  data.buffer.push(" </div>\r\n  </li>\r\n  <li>\r\n    <label> Featured At:</label>\r\n    <div class = \"adminListItem\">");
-  data.buffer.push(escapeExpression((helper = helpers.prettyDate || (depth0 && depth0.prettyDate),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "match.featuredAt", options) : helperMissing.call(depth0, "prettyDate", "match.featuredAt", options))));
+  data.buffer.push(" </div>\r\n  </li>\r\n  <li>\r\n    <label> Featured At:</label>\r\n    <div class = \"adminListItem\">\r\n      ");
+  stack1 = helpers['if'].call(depth0, "match.featuredAt", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</div>\r\n  </li>\r\n  <li>\r\n    <label> Videos:</label> \r\n    ");
-  stack1 = helpers.each.call(depth0, "match.videos", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers.each.call(depth0, "match.videos", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n  </li>\r\n  <li>\r\n    <label> Casters: </label>\r\n    ");
-  stack1 = helpers.each.call(depth0, "match.casters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers.each.call(depth0, "match.casters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n  </li>\r\n  <li>\r\n    <label> Fighters: </label>\r\n    ");
-  stack1 = helpers.each.call(depth0, "match.fighters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers.each.call(depth0, "match.fighters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n  </li>\r\n</ul>");
   return buffer;

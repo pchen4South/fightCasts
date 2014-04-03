@@ -51,7 +51,6 @@ var createMatch = function (matchData, cb) {
     description: matchData.description,
     category: matchData.category,
     playedAt: matchData.playedAt,
-    featuredAt: matchData.featuredAt,
     videos: map(matchData.videos, extractVideoId),
     fighters: matchData.fighters,
     casters: matchData.casters,

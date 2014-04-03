@@ -93,7 +93,7 @@ App.FcAdminMatchesComponent = Ember.Component.extend({
   matches: [],
 });
 
-App.FcAdminDetailsComponent = Ember.Component.extend({
+App.FcAdminCreateComponent = Ember.Component.extend({
   didInsertElement: function(){
     window.people = this.get("people");
     var self = this;
@@ -135,27 +135,8 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
   games: ["SF4"],
   characters: [],
   categories: ["pro", "scrub", "community"],
-  actions:{
-    makeFeatured: function(match){
-      console.log(get(match, "_id"));
-      makeMatchFeatured(match)
-      .then(function(results){
-        if(results.featuredMatch){
-          window.location.reload();
-        }
-      });
-    },
-    deleteMatch: function(match){
-      var self = this;
-      deleteMatch(match)
-      .then(function(results){
-        console.log(results);
-        if (results.deletedMatch){
-          self.sendAction();
-        }
-      })
-    },
-    onSubmit: function(data){
+  actions: {
+   onSubmit: function(data){
       var self = this;
       
       var data = {
@@ -182,6 +163,31 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
       set(self, "inFlight", false);
       console.log("boo", err);
     });
+    }
+  }
+})
+
+App.FcAdminDetailsComponent = Ember.Component.extend({
+  
+  actions:{
+    makeFeatured: function(match){
+      console.log(get(match, "_id"));
+      makeMatchFeatured(match)
+      .then(function(results){
+        if(results.featuredMatch){
+          window.location.reload();
+        }
+      });
+    },
+    deleteMatch: function(match){
+      var self = this;
+      deleteMatch(match)
+      .then(function(results){
+        console.log(results);
+        if (results.deletedMatch){
+          self.sendAction();
+        }
+      })
     }
   }  
 });

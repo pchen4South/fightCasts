@@ -16,7 +16,12 @@
   </li>
   <li>
     <label> Featured At:</label>
-    <div class = "adminListItem">{{prettyDate match.featuredAt}}</div>
+    <div class = "adminListItem">
+      {{#if match.featuredAt}}
+        {{prettyDate match.featuredAt}}
+      {{else}}
+        Not Featured
+      {{/if}}</div>
   </li>
   <li>
     <label> Videos:</label> 
