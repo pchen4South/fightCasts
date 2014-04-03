@@ -3,10 +3,11 @@ module.exports = function (grunt) {
     emberTemplates: {
       compile: {
         options: {
-          templateBasePath: /public\/templates\//
+           templateBasePath: /admin\/public\/templates\//
         },
         files: {
-          "assets/dist/templates.js": "public/templates/**/*.handlebars" 
+          "assets/dist/templates.js": "public/templates/**/*.handlebars",
+          "admin/assets/dist/templates.js": "admin/public/templates/**/*.handlebars"           
         } 
       } 
     },
@@ -37,7 +38,7 @@ module.exports = function (grunt) {
         }
       },
       templates: {
-        files: "public/templates/**/*.handlebars",
+        files: ["public/templates/**/*.handlebars","admin/public/templates/**/*.handlebars"],
         tasks: ["emberTemplates"],
         options: {
           livereload: true 

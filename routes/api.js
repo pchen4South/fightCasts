@@ -1,5 +1,6 @@
 var api = require('../api');
 var createQuery = require('./utils').createQuery;
+var gamesList = require('../models/gameCharacterData');
 
 module.exports = function (app) {
 
@@ -11,10 +12,11 @@ module.exports = function (app) {
     });
   });
 
+
   app.post("/api/v1/events", function (req, res) {
     api.createEvent(req.body, function (err, event) {
       if (err) res.send(400, {err: err.message}); 
-      else res.json({person: event});
+      else res.json({event: event});
     });
   });
 
@@ -53,7 +55,13 @@ module.exports = function (app) {
       });
     });
   });
-
+  
+    
+  app.get("/api/v1/games", function (req, res) {
+    console.log(gamesList);
+    res.json({games: gamesList["1"]});
+  });
+  
   app.get("/api/v1/matches", function (req, res) {
     var query = createQuery(req.query);
     var querystring = req.query.search;

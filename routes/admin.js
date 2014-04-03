@@ -28,13 +28,7 @@ var ensureAuthenticated = function (req, res, next) {
 module.exports = function (app) {
   //read
   app.get("/admin", function (req, res) {
-    api.getAll(function (err, results) {
-      if(results){
-        results.layout = "adminLayout";
-        results.games = gameData;
-      }
-      res.render("admin", results);
-    });
+      res.render("admin", {layout: "adminLayout"});
   });
 
   app.get("/admin/people", function (req, res) {

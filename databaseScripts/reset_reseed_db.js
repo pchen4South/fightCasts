@@ -74,6 +74,7 @@ var findFighter = function (fighterData, cb) {
 };
 
 var create = function(modelType, data, cb){
+  console.log(data);
   modelType.create(data, cb);
 };
 
