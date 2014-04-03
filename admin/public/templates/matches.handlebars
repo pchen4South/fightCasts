@@ -4,10 +4,15 @@
 <div class = "tile-8x2">
 </div>
 <div class = "tile-10x8">
-  {{fc-admin-matches}} 
+  {{fc-admin-matches matches = matches}} 
 </div>
 
-<div class = "tile-region-13 adminFormWrapper">
-{{fc-admin-details createFlag=createFlag}}
+<div class = "tile-region-11 adminFormWrapper">
+{{#if masterView}}
+  {{fc-admin-create}}
+  {{else}}
+  {{fc-admin-details match = controller.match action = "deleted" 
+    matchDeleted=matchDeleted}}
+{{/if}}
 </div>
 </div>

@@ -2,10 +2,16 @@ var get = Ember.get
   , set = Ember.set
   , copy = Ember.copy;
 
+//Ember App Creation
 var App = Ember.Application.create({
   rootElement: "#admin-content"
 });
 
+Ember.Handlebars.registerBoundHelper('prettyDate', function (date) {
+  return moment(date).format("MMMM Do YYYY");
+});
+
+//Routes
 App.Router.map(function(){
   this.resource("matches", function(){
     this.route("match", {path: ':match_id'});
@@ -15,6 +21,24 @@ App.Router.map(function(){
 App.IndexRoute = Ember.Route.extend({
   beforeModel: function(router){
     this.transitionTo('matches');
+  }
+});
+
+App.MatchesMatchRoute = Ember.Route.extend({
+  enter: function(){
+    var matchCon = this.controllerFor('matches');
+    matchCon.set("masterView", false);
+  },
+  model: function(params){
+    var self = this;
+    //sets route model and puts it on matches controller for the
+    //component to use
+    fetchMatches().then(function(results){
+      window.match = results.matches.findBy("_id", params.match_id);
+      var matchCon = self.controllerFor('matches');
+      matchCon.set("match", match);
+      return match;
+    })
   }
 });
 
@@ -28,50 +52,38 @@ App.MatchesRoute = Ember.Route.extend({
 
 App.MatchesIndexRoute = Ember.Route.extend({
   enter: function(){
+    var self = this;
     var matchCon = this.controllerFor('matches');
-    matchCon.set("createFlag", true);
-  },
-});
-
-App.MatchRoute = Ember.Route.extend({
-  enter: function(){
-    var matchCon = this.controllerFor('matches');
-    matchCon.set("createFlag", false);
-  }
-})
-
-
-App.MatchesController = Ember.Controller.extend({
-  createFlag: false
-});
-
-App.FcAdminMatchesComponent = Ember.Component.extend({
-  didInsertElement: function(){
-    var matches = this.get("matches");
+   
+    var matches = get(matchCon, 'matches');
+    matches.clear();
     
     fetchMatches()
     .then(function(results){
       matches.pushObjects(results.matches);
     });
+    
+    matchCon.set("masterView", true);
+  }
   
-  },
-  matches: [],
-
 });
 
 
+//Controllers
+App.MatchesController = Ember.Controller.extend({
+  masterView: true,
+  matches: [],
+  actions:{
+    deleted: function(){
+      this.transitionToRoute('matches');
+    }
+  }
+});
 
-
-var convertFighterFieldsToIds = function(fighterArray){
-  var convertedArray = [];
-  fighterArray.forEach(function(fighter){
-    var convertedFighter = {
-            "person": get(fighter, "person._id"), 
-            "characters": get(fighter, "characters").mapBy("id")};
-    convertedArray.push(convertedFighter);
-  });
-  return convertedArray;
-};
+//Components
+App.FcAdminMatchesComponent = Ember.Component.extend({
+  matches: [],
+});
 
 App.FcAdminDetailsComponent = Ember.Component.extend({
   didInsertElement: function(){
@@ -96,7 +108,7 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
     .then(function(results){
       window.res = results;
       window.characters = self.get('characters');
-      characters.pushObjects(results.games["1"].characters);
+      characters.pushObjects(results.games["1"].characters.sortBy("name"));
     });
   },
   events: [],
@@ -116,6 +128,19 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
   characters: [],
   categories: ["pro", "scrub", "community"],
   actions:{
+    makeFeatured: function(match){
+      console.log(get(match, "_id"));
+    },
+    deleteMatch: function(match){
+      var self = this;
+      deleteMatch(match)
+      .then(function(results){
+        console.log(results);
+        if (results.deletedMatch){
+          self.sendAction();
+        }
+      })
+    },
     onSubmit: function(data){
       var self = this;
       
@@ -131,28 +156,13 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
         category: get(data, "category"),
       }
     window.data = data;
-    
-    // // var titleError = validateTitle(data.title);
-    // // var gameError = validateGame(data.game);
-    // // var fighterOneError = validateFighterData(data.fighterOne);
-    // // var fighterTwoError = validateFighterData(data.fighterTwo);
-    // // var videoDataError = validateVideoData(data.videoData);
-
-    // // set(this, "errors.title", titleError);
-    // // set(this, "errors.game", gameError);
-    // // set(this, "errors.fighterOneError", fighterOneError);
-    // // set(this, "errors.fighterTwoError", fighterTwoError);
-    // // set(this, "errors.videoData", videoDataError);
-
-    // if (titleError || gameError || fighterOneError
-      // ||fighterTwoError|| videoDataError) return;
 
     set(self, "inFlight", true);
     submitMatch(data)
     .then(function (res) {
       console.log("yoyoyoyo", res);
       set(self, "inFlight", false);
-      //window.location.reload();
+      window.location.reload();
     })
     .fail(function (err) {
       set(self, "inFlight", false);
@@ -268,7 +278,7 @@ App.FcFighterSummaryComponent = Ember.Component.extend({
 
 //HELPERS
 
-
+//ajax
 var fetchMatches = function(){
   return Ember.$.get("/api/v1/matches");
 };
@@ -289,6 +299,12 @@ var submitMatch = function (data) {
   return Ember.$.post("/api/v1/matches", data);
 };
 
+var deleteMatch = function (data) {
+  var id = data._id;
+  var url = "/api/v1/matches/" + id + "/delete";
+  return Ember.$.post(url, data);
+};
+
 var submitData = function (data, type){
   switch(type){
     case "person":
@@ -299,3 +315,16 @@ var submitData = function (data, type){
       break;
   }
 };
+
+//data conversion
+var convertFighterFieldsToIds = function(fighterArray){
+  var convertedArray = [];
+  fighterArray.forEach(function(fighter){
+    var convertedFighter = {
+            "person": get(fighter, "person._id"), 
+            "characters": get(fighter, "characters").mapBy("id")};
+    convertedArray.push(convertedFighter);
+  });
+  return convertedArray;
+};
+

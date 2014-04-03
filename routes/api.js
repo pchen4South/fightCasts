@@ -36,7 +36,16 @@ module.exports = function (app) {
       else res.json({featuredMatch: featuredMatch});
     });
   });
-
+  
+  //delete
+  app.post("/api/v1/matches/:id/delete", function (req, res) {
+    var matchId = req.params.id;
+    api.deleteMatch(matchId, function (err, deletedMatch) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({deletedMatch: deletedMatch});
+    });
+  });
+  
   //READ
   app.get("/api/v1/people", function (req, res) {
     api.getPeople(function (err, people) {
