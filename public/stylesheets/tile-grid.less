@@ -1,12 +1,13 @@
 .tile-mixin (@padding: 0px) {
-  .hover-background(@default-tile-color, lighten(@default-tile-color, 10%));
-  background-color: @default-tile-color;
+  .hover-background(@default-tile-color, lighten(@default-tile-color, 6%));
+  .size(100%, 100%);
+  &:hover {
+    text-decoration: none;
+  }
   border-radius: 2px;
   position: relative;
   padding: @padding;
   display: block;
-  height: 100%;
-  width: 100%;
 }
 
 .tile-region-mixin (@x: 1) {
@@ -14,6 +15,24 @@
   width: (@x*32px);
   @media (min-width: @screen-lg-min) {
     width: (@x*48px);
+  }
+}
+
+.tile-height-mixin (@y: 1) {
+  .make-row();
+  height: (@y*32px);
+  width: 100%;
+  @media (min-width: @screen-lg-min) {
+    height: (@y*48px);
+  }
+}
+
+//when a tile is in the top of a tile it loses 4px to padding
+.tile-height-outer-mixin (@y: 1) {
+  height: (@y*32px) - 4px;
+  width: 100%;
+  @media (min-width: @screen-lg-min) {
+    height: (@y*48px) - 4px;
   }
 }
 
@@ -29,12 +48,11 @@
 }
 
 .tile-offset-mixin (@count: 1) {
-  @media (min-width: @screen-md-min) {
-    margin-left: @count * 32px;
-  }
-  @media (min-width: @screen-lg-min) {
-    margin-left: @count * 48px;
-  }
+  .make-sm-column-offset(@count);
+}
+
+.tile-column-push (@count: 1) {
+  .make-sm-column-push(@count);
 }
 
 .pad-0 {
@@ -45,8 +63,20 @@
   .tile-region-mixin(1);
 }
 
+.tile-region-2 {
+  .tile-region-mixin(2);
+}
+
+.tile-region-3 {
+  .tile-region-mixin(3);
+}
+
 .tile-region-4 {
   .tile-region-mixin(4);
+}
+
+.tile-region-5 {
+  .tile-region-mixin(5);
 }
 
 .tile-region-6 {
@@ -55,6 +85,10 @@
 
 .tile-region-7 {
   .tile-region-mixin(7);
+}
+
+.tile-region-8 {
+  .tile-region-mixin(8);
 }
 
 .tile-region-10 {
@@ -189,6 +223,10 @@
   .tile-grid-mixin(10, 8);
 }
 
+.tile-10x10 {
+  .tile-grid-mixin(10, 10);
+}
+
 .tile-12x1 {
   .tile-grid-mixin(12, 1);
 }
@@ -219,4 +257,8 @@
 
 .tile-offset-1 {
   .tile-offset-mixin(1);
+}
+
+.tile-offset-2 {
+  .tile-offset-mixin(2);
 }

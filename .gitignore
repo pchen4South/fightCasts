@@ -3,3 +3,4 @@ assets/dist/
 *.orig
 *.swp
 *.swo
+config.json
