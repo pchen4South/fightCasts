@@ -1,0 +1,44 @@
+<div class = "matchDetailHeader"> Match Details for <label> {{match.title}} </label></div>
+<button {{action makeFeatured match}} class = "btn btn-xs btn-default">Make Featured </button>
+<button {{action deleteMatch match}} class = "btn btn-xs btn-default">Delete</button>
+<ul>
+  <li>
+    <label> Description:</label>  
+    <div class = "adminListItem">{{match.description}}</div>
+  </li>
+  <li>
+    <label> Category:</label>
+    <div class = "adminListItem">{{match.category}}</div>
+  </li>
+  <li>
+    <label> Date Played:</label> 
+    <div class = "adminListItem"> {{prettyDate match.playedAt}} </div>
+  </li>
+  <li>
+    <label> Featured At:</label>
+    <div class = "adminListItem">{{prettyDate match.featuredAt}}</div>
+  </li>
+  <li>
+    <label> Videos:</label> 
+    {{#each match.videos}} 
+      <div class = "adminListItem"> {{this}} </div>
+    {{/each}}
+  </li>
+  <li>
+    <label> Casters: </label>
+    {{#each match.casters}} 
+      <div class = "adminListItem">{{this.name}} </div>
+    {{/each}}
+  </li>
+  <li>
+    <label> Fighters: </label>
+    {{#each match.fighters}} 
+    <div class = "adminListItem"> 
+    {{this.person.name}} 
+      {{#each this.characters}}
+        <i>{{this.name}} </i>
+      {{/each}}
+    </div>
+    {{/each}}
+  </li>
+</ul>
