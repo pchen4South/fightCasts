@@ -1,6 +1,7 @@
 var nodemailer = require("nodemailer");
 var mailconfig = require("./config.json").services.email;
-var subject = "kanesteven@gmail.com";
+var handlebars = require('handlebars');
+var template = handlebars.compile("Please tell us your name, {{name}}");
 
 var smtpTransport = nodemailer.createTransport("SMTP", {
   service: mailconfig.service,
@@ -10,14 +11,29 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
   }
 });
 
-var mailOptions = {
-  from: mailconfig.user,
-  to: subject,
-  subject: "Yo this is fantastic baby",
-  text: "Bang!!!!"
+/*
+ * scenario: we want to send a new user an email confirming their 
+ * signup.  
+ * obtain email transport
+ * obtain user's email, obtain key identifying this user for confirmation
+ * obtain newuser template function
+ * render html output for email w/ template function and data
+ * call email function w/ transport
+* */
+
+var trans = smtpTransport;
+var user = {
+  name: "Steve",
+  email: "kanesteven@gmail.com"
+};
+var html = template(user);
+var options = {
+  to: user.email,
+  subject: "Such wow, wow",
+  html: html
 };
 
-smtpTransport.sendMail(mailOptions, function (err, res) {
-  if (err) console.log(err);
-  else console.log("message sent: ", res.message)
+trans.sendMail(options, function (err, res) {
+  console.log(err);
+  console.log(res.message);
 });
