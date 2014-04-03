@@ -66,9 +66,38 @@ App.MatchesIndexRoute = Ember.Route.extend({
     var matches = get(matchCon, 'matches');
     matches.clear();
     
+    var people = get(matchCon, 'people');
+    people.clear();
+    
+    var events = get(matchCon, 'events');
+    events.clear();
+    
+    var characters = get(matchCon, 'characters');
+    characters.clear();
+    
     fetchMatches()
     .then(function(results){
       matches.pushObjects(results.matches);
+    });
+    
+    fetchPeople()
+    .then(function(results){
+      people.pushObjects(results.people.sortBy("name"));
+    });
+    
+    fetchEvents()
+    .then(function(results){
+      events.pushObjects(results.events.sortBy("name"));
+      window.evnts = results.events;
+    }); 
+    
+    //seems slightly wrong for multiple game types
+    //doesn't seem to be an array
+    //works for now as the default 1 game Sf4
+    fetchGames()
+    .then(function(results){
+      window.res = results;
+      characters.pushObjects(results.games["1"].characters.sortBy("name"));
     });
     
     matchCon.set("masterView", true);
@@ -81,9 +110,32 @@ App.MatchesIndexRoute = Ember.Route.extend({
 App.MatchesController = Ember.Controller.extend({
   masterView: true,
   matches: [],
+  events: [],
+  characters: [],
+  people: [],
   actions:{
     deleted: function(){
       this.transitionToRoute('matches');
+    },
+
+    updateInfo: function(){
+
+      var people = get(this, 'people');
+      people.clear();
+      
+      var events = get(this, 'events');
+      events.clear();
+      
+      fetchPeople()
+      .then(function(results){
+        people.pushObjects(results.people.sortBy("name"));
+      });
+    
+      fetchEvents()
+      .then(function(results){
+        events.pushObjects(results.events.sortBy("name"));
+        window.evnts = results.events;
+      }); 
     }
   }
 });
@@ -94,33 +146,7 @@ App.FcAdminMatchesComponent = Ember.Component.extend({
 });
 
 App.FcAdminCreateComponent = Ember.Component.extend({
-  didInsertElement: function(){
-    window.people = this.get("people");
-    var self = this;
-    fetchPeople()
-    .then(function(results){
-      people.pushObjects(results.people);
-    });
-    
-    fetchEvents()
-    .then(function(results){
-      var events = get(self, "events");
-      events.pushObjects(results.events);
-      window.evnts = results.events;
-    }); 
-    
-    //seems slightly wrong for multiple game types
-    //doesn't seem to be an array
-    //works for now as the default 1 game Sf4
-    fetchGames()
-    .then(function(results){
-      window.res = results;
-      window.characters = self.get('characters');
-      characters.pushObjects(results.games["1"].characters.sortBy("name"));
-    });
-  },
-  events: [],
-  people: [],
+
   data: {
     title: "",
     description: "",
@@ -195,21 +221,11 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
 
 
 App.FcAdminSubheaderComponent = Ember.Component.extend({
-  didInsertElement: function(){
-    var self = this;
-    fetchPeople()
-    .then(function(results){
-      var people = self.get("people");
-      people.pushObjects(results.people);
-    });
-  },
   data: {
     country: "",
     name: "",
     character: ""
   },
-  people: [],
-  characters: [],
   inFlight: false,
   resetFields:function(){
     var data = this.get("data");
@@ -217,21 +233,23 @@ App.FcAdminSubheaderComponent = Ember.Component.extend({
     set(this,"data.name", "");   
     set(this,"data.character", "");   
   },
+  updateInfo: function(){
+    this.sendAction();
+  },
   actions:{
     onSubmit: function(data, type){
-      console.log(type);
       var self = this;
       set(self, "inFlight", true);
       submitData(data, type)
       .then(function (res) {
-        console.log(type, " made", res);
-       // window.location.reload();
        self.resetFields();
+       self.updateInfo();
        set(self, "inFlight", false);
       })
       .fail(function(err){
         set(self, "inFlight", false);
         console.log("Error", err);
+        self.updateInfo();
         self.resetFields();
       });
     }

@@ -517,10 +517,14 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
-  var buffer = '', stack1;
+  var buffer = '', helper, options;
   data.buffer.push("\r\n  ");
-  stack1 = helpers._triageMustache.call(depth0, "fc-admin-create", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(escapeExpression((helper = helpers['fc-admin-create'] || (depth0 && depth0['fc-admin-create']),options={hash:{
+    'matches': ("matches"),
+    'people': ("people"),
+    'events': ("events"),
+    'characters': ("characters")
+  },hashTypes:{'matches': "ID",'people': "ID",'events': "ID",'characters': "ID"},hashContexts:{'matches': depth0,'people': depth0,'events': depth0,'characters': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-admin-create", options))));
   data.buffer.push("\r\n  ");
   return buffer;
   }
@@ -532,14 +536,16 @@ function program3(depth0,data) {
   data.buffer.push(escapeExpression((helper = helpers['fc-admin-details'] || (depth0 && depth0['fc-admin-details']),options={hash:{
     'match': ("controller.match"),
     'action': ("deleted"),
-    'matchDeleted': ("matchDeleted")
-  },hashTypes:{'match': "ID",'action': "STRING",'matchDeleted': "ID"},hashContexts:{'match': depth0,'action': depth0,'matchDeleted': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-admin-details", options))));
+    'matchDeleted': ("matchDeleted"),
+    'matches': ("matches")
+  },hashTypes:{'match': "ID",'action': "STRING",'matchDeleted': "ID",'matches': "ID"},hashContexts:{'match': depth0,'action': depth0,'matchDeleted': depth0,'matches': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-admin-details", options))));
   data.buffer.push("\r\n");
   return buffer;
   }
 
-  stack1 = helpers._triageMustache.call(depth0, "fc-admin-subheader", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(escapeExpression((helper = helpers['fc-admin-subheader'] || (depth0 && depth0['fc-admin-subheader']),options={hash:{
+    'action': ("updateInfo")
+  },hashTypes:{'action': "STRING"},hashContexts:{'action': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-admin-subheader", options))));
   data.buffer.push("\r\n\r\n<div class = \"adminWrapper\">\r\n<div class = \"tile-8x2\">\r\n</div>\r\n<div class = \"tile-10x8\">\r\n  ");
   data.buffer.push(escapeExpression((helper = helpers['fc-admin-matches'] || (depth0 && depth0['fc-admin-matches']),options={hash:{
     'matches': ("matches")

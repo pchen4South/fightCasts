@@ -1,4 +1,4 @@
-{{fc-admin-subheader}}
+{{fc-admin-subheader action = "updateInfo"}}
 
 <div class = "adminWrapper">
 <div class = "tile-8x2">
@@ -9,10 +9,17 @@
 
 <div class = "tile-region-11 adminFormWrapper">
 {{#if masterView}}
-  {{fc-admin-create}}
+  {{fc-admin-create
+    matches = matches
+    people = people
+    events = events
+    characters = characters}}
   {{else}}
-  {{fc-admin-details match = controller.match action = "deleted" 
-    matchDeleted=matchDeleted}}
+  {{fc-admin-details 
+    match = controller.match 
+    action = "deleted" 
+    matchDeleted=matchDeleted
+    matches = matches}}
 {{/if}}
 </div>
 </div>
