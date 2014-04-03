@@ -43,7 +43,8 @@
 
 //@text-color: rgb(73, 73, 73);
 @text-color: @gray-1;
-@secondary-text-color: @gray-2;
+@secondary-text-color: lighten(@gray-2, 10%);
+@colored-text-color: @dark-color;
 @dark-text-color: @dark-color;
 
 @header-color: rgb(243, 116, 12);
@@ -54,7 +55,7 @@
 @subheader-color: @gray-5;
 @subheader-font-color: @dark-text-color;
 //@subheader-color: rgb(243, 116, 12);
-@fightcard-color: rgb(228, 228, 228);
+@fightcard-color: lighten(@gray-2, 10%);
 
 @content-color: @tile-color-5;
 @background-dark: @tile-color-5;
@@ -87,7 +88,6 @@
 @import "tiles/featured.less";
 @import "tiles/listitemtall.less";
 @import "tiles/main.less";
-@import "tiles/main-details.less";
 
 *, *:before, *:after {
   .box-sizing(border-box);
@@ -137,15 +137,6 @@ body {
   background-color: @subheader-color;
 }
 
-#divider {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  width: 100%;
-  //height: 1px;
-  background-color: @border-color;
-}
-
 #main-content {
   position: relative;
   background-color: @background-color;
@@ -183,11 +174,17 @@ ul {
   }
 }
 
+//THESE ARE RELATED TO INTROJS
 .tool-tip {
   div {
     .content-text();
-    color: @text-color;
+    color: @dark-text-color;
   }
+}
+
+//THIS IS A HACK TO GET AROUND AN ERROR IN INTROJS
+.introjs-helperNumberLayer {
+  display: none;
 }
 
 .tab {
@@ -195,10 +192,12 @@ ul {
   text-align: center;
   font-size: @font-small;
   vertical-align: bottom;
+  cursor: pointer;
 }
 
 .tab.active {
   background-color: @tab-active-color;
+  cursor: auto;
 }
 
 .sf4 {
@@ -231,13 +230,14 @@ ul {
   .header-links {
     .tile-region-6();
     .tile-column-push(11);
-    top: 20px;
+    top: 22px;
     li {
       .make-xs-column(8, 0px);
-      text-align: center;
+      text-align: right;
       .header-link {
         &:hover {
           border-bottom: 1px dashed @text-color;
+          cursor: pointer;
         }
       }
     }
@@ -270,6 +270,8 @@ ul {
 .fight-card {
   display: block;
   padding: 4px;
+  background-color: @fightcard-color;
+ 
   .fighter-list {
     height: 100%;
     .make-row(0px);
@@ -312,7 +314,6 @@ ul {
   .match-details {
     text-align: center;
     .event-name {
-      .make-row(); 
       .text-overflow();
       font-size: @font-small;
       .date {
@@ -321,7 +322,6 @@ ul {
       }
     }
     .caster-list {
-      .make-row();
       .text-overflow();
       font-size: @font-small;
       color: @secondary-text-color;

@@ -45,10 +45,18 @@
         match details
       </h3> 
     </div>
-    {{> tiles/match-tile-main}}
+    <div class="tile-10x8">
+      {{> tiles/match-tile-main}}
+    </div>
     {{/with}}
   {{else}}
     <div class="tile-10x1">
+      <h3 class="subheader">
+        Welcome!
+      </h3> 
+    </div>
+    <div class="tile-10x8">
+     <div class="tile-match-main"></div>
     </div>
   {{/if}}
 </div>

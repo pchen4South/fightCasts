@@ -1,7 +1,16 @@
 .tile-match-main {
   .tile-mixin();
-  .embedded-video {
-    height: 100%;
-    width: 100%;
+  .video {
+    .tile-height-outer-mixin(6);
+    .embedded-video {
+      .size(100%, 100%);
+    }
+  }
+
+  .fight-card {
+    .tile-height-mixin(1);
+  }
+  .fight-card-header {
+    .tile-height-outer-mixin(1);
   }
 }

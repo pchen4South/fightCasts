@@ -1,12 +1,13 @@
 .tile-mixin (@padding: 0px) {
-  .hover-background(@default-tile-color, lighten(@default-tile-color, 10%));
-  background-color: @default-tile-color;
+  .hover-background(@default-tile-color, lighten(@default-tile-color, 6%));
+  .size(100%, 100%);
+  &:hover {
+    text-decoration: none;
+  }
   border-radius: 2px;
   position: relative;
   padding: @padding;
   display: block;
-  height: 100%;
-  width: 100%;
 }
 
 .tile-region-mixin (@x: 1) {
@@ -14,6 +15,24 @@
   width: (@x*32px);
   @media (min-width: @screen-lg-min) {
     width: (@x*48px);
+  }
+}
+
+.tile-height-mixin (@y: 1) {
+  .make-row();
+  height: (@y*32px);
+  width: 100%;
+  @media (min-width: @screen-lg-min) {
+    height: (@y*48px);
+  }
+}
+
+//when a tile is in the top of a tile it loses 4px to padding
+.tile-height-outer-mixin (@y: 1) {
+  height: (@y*32px) - 4px;
+  width: 100%;
+  @media (min-width: @screen-lg-min) {
+    height: (@y*48px) - 4px;
   }
 }
 
@@ -190,6 +209,10 @@
 
 .tile-10x8 {
   .tile-grid-mixin(10, 8);
+}
+
+.tile-10x10 {
+  .tile-grid-mixin(10, 10);
 }
 
 .tile-12x1 {

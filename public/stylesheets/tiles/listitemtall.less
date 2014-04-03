@@ -1,19 +1,9 @@
 .tile-match-listitemtall {
   .tile-mixin(); 
-  &:hover {
-    text-decoration: none;
-    .fight-card {
-      background-color: lighten(@fightcard-color, 10%);
-    }
+  .fight-card {
+    .tile-height-outer-mixin(1);
   }
   .fight-card-header {
-    .bottom-left();
-    .size(100%, 42px);
-  }
-  .fight-card {
-    .top-left();
-    .size(100%, 42px);
-    .transition(all .2s);
-    background-color: @fightcard-color;
+    .tile-height-outer-mixin(1);
   }
 }
