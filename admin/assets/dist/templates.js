@@ -155,12 +155,14 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
     'class': ("form-control")
   },hashTypes:{'disabled': "ID",'prompt': "STRING",'multiple': "BOOLEAN",'content': "ID",'selection': "ID",'optionLabelPath': "STRING",'class': "STRING"},hashContexts:{'disabled': depth0,'prompt': depth0,'multiple': depth0,'content': depth0,'selection': depth0,'optionLabelPath': depth0,'class': depth0},contexts:[depth0],types:["ID"],data:data})));
   data.buffer.push("\r\n    </div>\r\n\r\n    \r\n    <div class=\"form-group tile-5x1\">\r\n      <label>Event Name</label> \r\n      ");
-  data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
-    'type': ("text"),
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
     'disabled': ("inFlight"),
-    'value': ("data.eventName"),
+    'prompt': ("Select Event"),
+    'content': ("events"),
+    'selection': ("data.event"),
+    'optionLabelPath': ("content.name"),
     'class': ("form-control")
-  },hashTypes:{'type': "STRING",'disabled': "ID",'value': "ID",'class': "STRING"},hashContexts:{'type': depth0,'disabled': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  },hashTypes:{'disabled': "ID",'prompt': "STRING",'content': "ID",'selection': "ID",'optionLabelPath': "STRING",'class': "STRING"},hashContexts:{'disabled': depth0,'prompt': depth0,'content': depth0,'selection': depth0,'optionLabelPath': depth0,'class': depth0},contexts:[depth0],types:["ID"],data:data})));
   data.buffer.push("\r\n    </div>\r\n    \r\n    \r\n    <div class=\"form-group tile-5x1\">\r\n      <label for=\"playedAt\">Date Played</label>\r\n       ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("date"),
@@ -437,14 +439,14 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
   stack1 = helpers._triageMustache.call(depth0, "fc-admin-subheader", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n\r\n<div class = \"tile-8x2\">\r\n</div>\r\n<div class = \"tile-10x8\">\r\n  ");
+  data.buffer.push("\r\n\r\n<div class = \"adminWrapper\">\r\n<div class = \"tile-8x2\">\r\n</div>\r\n<div class = \"tile-10x8\">\r\n  ");
   stack1 = helpers._triageMustache.call(depth0, "fc-admin-matches", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push(" \r\n</div>\r\n\r\n<div class = \"tile-region-10\">\r\n");
+  data.buffer.push(" \r\n</div>\r\n\r\n<div class = \"tile-region-13 adminFormWrapper\">\r\n");
   data.buffer.push(escapeExpression((helper = helpers['fc-admin-details'] || (depth0 && depth0['fc-admin-details']),options={hash:{
     'createFlag': ("createFlag")
   },hashTypes:{'createFlag': "ID"},hashContexts:{'createFlag': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-admin-details", options))));
-  data.buffer.push("\r\n</div>");
+  data.buffer.push("\r\n</div>\r\n</div>");
   return buffer;
   
 });

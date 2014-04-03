@@ -41,34 +41,6 @@ App.MatchRoute = Ember.Route.extend({
 })
 
 
-
-var fetchMatches = function(){
-  return Ember.$.get("/api/v1/matches");
-};
-
-var fetchPeople = function(){
-  return Ember.$.get("/api/v1/people");
-};
-
-var fetchGames = function(){
-return Ember.$.get("/api/v1/games");
-};
-
-var submitMatch = function (data) {
-  return Ember.$.post("/api/v1/matches", data);
-};
-
-var submitData = function (data, type){
-  switch(type){
-    case "person":
-      return Ember.$.post("/api/v1/people", data);
-      break;
-    case "event":
-      return Ember.$.post("/api/v1/events", data);
-      break;
-  }
-};
-
 App.MatchesController = Ember.Controller.extend({
   createFlag: false
 });
@@ -89,6 +61,18 @@ App.FcAdminMatchesComponent = Ember.Component.extend({
 
 
 
+
+var convertFighterFieldsToIds = function(fighterArray){
+  var convertedArray = [];
+  fighterArray.forEach(function(fighter){
+    var convertedFighter = {
+            "person": get(fighter, "person._id"), 
+            "characters": get(fighter, "characters").mapBy("id")};
+    convertedArray.push(convertedFighter);
+  });
+  return convertedArray;
+};
+
 App.FcAdminDetailsComponent = Ember.Component.extend({
   didInsertElement: function(){
     window.people = this.get("people");
@@ -96,6 +80,13 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
     fetchPeople()
     .then(function(results){
       people.pushObjects(results.people);
+    });
+    
+    fetchEvents()
+    .then(function(results){
+      var events = get(self, "events");
+      events.pushObjects(results.events);
+      window.evnts = results.events;
     }); 
     
     //seems slightly wrong for multiple game types
@@ -108,7 +99,7 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
       characters.pushObjects(results.games["1"].characters);
     });
   },
-  
+  events: [],
   people: [],
   data: {
     title: "",
@@ -118,7 +109,7 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
     category: "",
     fighters: [],
     videoData: [],
-    event: "",
+    event: null,
     playedAt: null
   },
   games: ["SF4"],
@@ -127,13 +118,13 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
   actions:{
     onSubmit: function(data){
       var self = this;
-
+      
       var data = {
         title: get(data, "title"),
         game: get(data, "game"),
         description: get(data, "description"),
-        fighters: get(data,"fighters"),
-        //event: get(data, "event"),
+        fighters: convertFighterFieldsToIds(get(data, "fighters")),
+        event: get(data, "event._id"),
         casters: get(data, "casters").mapBy("_id"),
         videos: get(data, "videoData"), 
         playedAt: get(data, "playedAt"),
@@ -160,7 +151,8 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
     submitMatch(data)
     .then(function (res) {
       console.log("yoyoyoyo", res);
-      window.location.reload();
+      set(self, "inFlight", false);
+      //window.location.reload();
     })
     .fail(function (err) {
       set(self, "inFlight", false);
@@ -224,17 +216,10 @@ App.FcCreateFighterFormComponent = Ember.Component.extend({
   
   actions:{
     createFighter: function (newFighter) {
-      window.nef = newFighter;
-      var id = get(newFighter, 'person._id');
-      var cid = get(newFighter, 'characters').mapBy("id");
       var newFighter = newFighter || this.get("newFighter");
-      set(newFighter,"person",id);
-      set(newFighter,"characters",cid);
-      // get(this, "fighter").pushObject(copy(newFighter));
       get(this, "fighter").pushObject(copy(newFighter));
-      // set(this, "newFighter.person", "");
-      // set(this, "newFighter.characters", []);
-      console.log("createFighter", newFighter);
+      set(this, "newFighter.person", "");
+      set(this, "newFighter.characters", []);
     }
   }
 });
@@ -279,3 +264,38 @@ App.FcFighterSummaryComponent = Ember.Component.extend({
     }
   }
 });
+
+
+//HELPERS
+
+
+var fetchMatches = function(){
+  return Ember.$.get("/api/v1/matches");
+};
+
+var fetchPeople = function(){
+  return Ember.$.get("/api/v1/people");
+};
+
+var fetchEvents = function(){
+  return Ember.$.get("/api/v1/events");
+};
+
+var fetchGames = function(){
+return Ember.$.get("/api/v1/games");
+};
+
+var submitMatch = function (data) {
+  return Ember.$.post("/api/v1/matches", data);
+};
+
+var submitData = function (data, type){
+  switch(type){
+    case "person":
+      return Ember.$.post("/api/v1/people", data);
+      break;
+    case "event":
+      return Ember.$.post("/api/v1/events", data);
+      break;
+  }
+};
