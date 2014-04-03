@@ -30,7 +30,7 @@ module.exports = function (app) {
   //UPDATE
   app.post("/api/v1/matches/:id/feature", function (req, res) {
     var matchId = req.params.id;
-
+    console.log(req.params);
     api.featureMatch(matchId, function (err, featuredMatch) {
       if (err) res.send(400, {err: err.message}); 
       else res.json({featuredMatch: featuredMatch});

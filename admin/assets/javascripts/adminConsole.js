@@ -28,6 +28,14 @@ App.MatchesMatchRoute = Ember.Route.extend({
   enter: function(){
     var matchCon = this.controllerFor('matches');
     matchCon.set("masterView", false);
+   
+    var matches = get(matchCon, 'matches');
+    matches.clear();
+    
+    fetchMatches()
+    .then(function(results){
+      matches.pushObjects(results.matches);
+    });    
   },
   model: function(params){
     var self = this;
@@ -130,6 +138,12 @@ App.FcAdminDetailsComponent = Ember.Component.extend({
   actions:{
     makeFeatured: function(match){
       console.log(get(match, "_id"));
+      makeMatchFeatured(match)
+      .then(function(results){
+        if(results.featuredMatch){
+          window.location.reload();
+        }
+      });
     },
     deleteMatch: function(match){
       var self = this;
@@ -297,6 +311,12 @@ return Ember.$.get("/api/v1/games");
 
 var submitMatch = function (data) {
   return Ember.$.post("/api/v1/matches", data);
+};
+
+var makeMatchFeatured = function (data) {
+  var id = data._id;
+  var url = "/api/v1/matches/" + id + "/feature";
+  return Ember.$.post(url, data);
 };
 
 var deleteMatch = function (data) {
