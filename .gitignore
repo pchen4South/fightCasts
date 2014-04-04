@@ -4,3 +4,4 @@ assets/dist/
 *.swp
 *.swo
 config.json
+creds.json
