@@ -9,6 +9,7 @@ var find = _.find;
 var personModel = require('./models/personModel').model;
 var eventModel = require('./models/eventModel').model;
 var matchModel = require('./models/matchModel').model;
+var contactModel = require('./models/contactModel').model;
 var gamesList = require('./models/gameCharacterData');
 
 //helper to extract id from full youtube urls
@@ -23,6 +24,17 @@ var create = function (modelType, data, cb) {
 };
 
 //create
+var createContact = function (contactData, cb) {
+  if (!contactData.email) return cb(new Error("Must provide a valid email."));
+
+  var contact = {
+    email: contactData.email 
+  };
+
+  contactModel.create(contact, cb);
+};
+
+
 var createPerson = function (personData, cb) {
   var person = {
     name: personData.name 
@@ -75,6 +87,7 @@ var getPerson = partial(get, personModel);
 var getEvent = partial(get, eventModel);
 var getMatch = partial(get, matchModel);
 
+var getContacts = partial(getMultiple, contactModel);
 var getPeople = partial(getMultiple, personModel);
 var getEvents = partial(getMultiple, eventModel);
 var getMatches = partial(getMultiple, matchModel);
@@ -173,6 +186,7 @@ var getAll = function (cb) {
     people: getPeople,
     events: getEvents,
     matches: getMatchesNested,
+    contacts: getContacts
   }, cb);
 };
 
@@ -193,14 +207,17 @@ var deleteModelById = function (modelType, id, cb) {
 var deletePerson = partial(deleteModelById, personModel);
 var deleteEvent = partial(deleteModelById, eventModel);
 var deleteMatch = partial(deleteModelById, matchModel);
+var deleteContact = partial(deleteModelById, contactModel);
 
 module.exports.deletePerson = deletePerson;
 module.exports.deleteEvent = deleteEvent;
 module.exports.deleteMatch = deleteMatch;
+module.exports.deleteContact = deleteContact;
 
 module.exports.updateMatchById = updateMatchById;
 module.exports.featureMatch = featureMatch;
 
+module.exports.createContact = createContact;
 module.exports.createPerson = createPerson; 
 module.exports.createEvent = createEvent;
 module.exports.createMatch = createMatch;
@@ -213,6 +230,7 @@ module.exports.getFeaturedProMatch = getFeaturedProMatch;
 module.exports.getFeaturedCommunityMatch = getFeaturedCommunityMatch;
 
 module.exports.getPeople = getPeople; 
+module.exports.getContacts = getContacts;
 module.exports.getEvents = getEvents;
 module.exports.getMatches = getMatches;
 module.exports.getMatchesNested = getMatchesNested;

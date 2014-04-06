@@ -148,31 +148,44 @@ ul {
   padding-left: 0px;
 }
 
-//insanity comes from positioning the stupid, stupid icon
-.search-form {
-  color: @dark-text-color;
+.form-group {
   position: relative;
+  .input-text {
+    padding-left: 32px;
+  }
   .icon {
     .size(32px, 32px);
-    position: absolute;
     display: block;
     z-index: 99;
+    position: absolute;
     top: 6px;
     left: 12px;
     font-family: "Glyphicons Halflings";
-    color: inherit;
+    color: @dark-text-color;
   }
+}
 
-  .search-box {
-    .size(100%, 32px);
-    color: inherit;
-    background-color: @gray-1;
-    position: relative;
-    outline: 0;
-    padding-left: 32px;
-    border: none;
-    border-radius: 2px;
+#contactForm {
+  .message {
+    .make-xs-column(16, 0px);
+    text-align: right;
+    padding-right: 12px;
+    padding-top: 8px;
+    font-size: @font-small;
+    color: @secondary-text-color;
   }
+  .form-group {
+    .make-xs-column(8, 0px);
+  }
+}
+
+.input-text {
+  .size(100%, 32px);
+  color: @dark-text-color; 
+  background-color: @gray-1;
+  outline: 0;
+  border: none;
+  border-radius: 2px;
 }
 
 //THESE ARE RELATED TO INTROJS
@@ -250,6 +263,11 @@ ul {
   .tab-wrapper {
     .tile-2x1();
     padding: 0px 2px;
+  }
+  .contact-bar {
+    .tile-region-12();
+    .tile-offset-mixin(10);
+    top: 8px;
   }
 }
 

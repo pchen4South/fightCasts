@@ -5,6 +5,13 @@ var gamesList = require('../models/gameCharacterData');
 module.exports = function (app) {
 
   //CREATE
+  app.post("/api/v1/contacts", function (req, res) {
+    api.createContact(req.body, function (err, contact) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({contact: contact});
+    }); 
+  });
+
   app.post("/api/v1/people", function (req, res) {
     api.createPerson(req.body, function (err, person) {
       if (err) res.send(400, {err: err.message}); 
@@ -30,7 +37,6 @@ module.exports = function (app) {
   //UPDATE
   app.post("/api/v1/matches/:id/feature", function (req, res) {
     var matchId = req.params.id;
-    console.log(req.params);
     api.featureMatch(matchId, function (err, featuredMatch) {
       if (err) res.send(400, {err: err.message}); 
       else res.json({featuredMatch: featuredMatch});
@@ -45,7 +51,7 @@ module.exports = function (app) {
       else res.json({deletedMatch: deletedMatch});
     });
   });
-  
+
   //READ
   app.get("/api/v1/people", function (req, res) {
     api.getPeople(function (err, people) {

@@ -1,5 +1,7 @@
 (function (window, undefined) {
-  var introButton = document.getElementById("intro");
+  var introButton = $("#intro");
+  var contactForm = $("#contactForm");
+  var contactUri = "/api/v1/contacts/";
   var tour = introJs();
 
   tour.setOptions({
@@ -45,8 +47,29 @@
     ] 
   });
 
-  introButton.addEventListener("click", function (e) {
+  introButton.click(function (e) {
     e.preventDefault();
     tour.start();
   });
+
+  var submitContact = function (email) {
+    $.post(contactUri, {email: email})
+    .then(function (contact) {
+      console.log("thanks for signing up " + contact.email); 
+    })
+    .fail(function (err) {
+      console.log("There was an error"); 
+    })
+    .always(function () {
+      console.log("I always fire"); 
+    });
+  };
+
+  contactForm.submit(function (e) {
+    e.preventDefault(); 
+    e.stopPropagation();
+    var email = $(this).children("#emailInput").val();
+    submitContact(email)
+  });
+
 })(window);
