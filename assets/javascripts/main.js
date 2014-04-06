@@ -1,6 +1,8 @@
 (function (window, undefined) {
   var introButton = $("#intro");
   var contactForm = $("#contactForm");
+  var contactFormMessage = contactForm.children(".message").first();
+  var emailInput = $("#emailInput");
   var contactUri = "/api/v1/contacts/";
   var tour = introJs();
 
@@ -42,6 +44,11 @@
       {
         element: "#searchBar",
         intro: "Typing in search terms will filter the lists and remove featured tiles.",
+        position: "right"
+      },
+      {
+        element: "#emailInput",
+        intro: "Signup for our mailing list to keep up-to-date with announcements and new featured.",
         position: "bottom"
       },
     ] 
@@ -54,21 +61,24 @@
 
   var submitContact = function (email) {
     $.post(contactUri, {email: email})
-    .then(function (contact) {
-      console.log("thanks for signing up " + contact.email); 
+    .then(function (results) {
+      var successText = "Thanks for signing up, " + results.contact.email;
+
+      contactFormMessage.text(successText);
+      emailInput.val("");
     })
     .fail(function (err) {
-      console.log("There was an error"); 
+      var failureText = err.message ? err.message : "Something went wrong...";
+
+      contactFormMessage.text(failureText);
+      emailInput.val("");
     })
-    .always(function () {
-      console.log("I always fire"); 
-    });
   };
 
   contactForm.submit(function (e) {
     e.preventDefault(); 
     e.stopPropagation();
-    var email = $(this).children("#emailInput").val();
+    var email = emailInput.val();
     submitContact(email)
   });
 

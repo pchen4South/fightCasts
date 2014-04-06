@@ -44,7 +44,6 @@ var createPerson = function (personData, cb) {
 };
 
 var createEvent = function (eventData, cb) {
-  console.log(eventData.name);
   var event = {
     name: eventData.name,
     country: eventData.country,
@@ -56,7 +55,6 @@ var createEvent = function (eventData, cb) {
 };
 
 var createMatch = function (matchData, cb) {
-  console.log(matchData);
   var match = {
     game: "1",
     title: matchData.title,
@@ -125,7 +123,6 @@ var getMatchesNested = function (query, cb) {
   .exec(function (err, matches) {
     if (err) return cb(err);
     if (!matches) {
-      console.log("no matches");
       return cb(null, []);
     }
     forEach(matches, populateCharacters);
