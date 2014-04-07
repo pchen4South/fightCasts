@@ -3,6 +3,7 @@
 @import "grid.less";
 @import "utilities.less";
 @import "dropdowns.less";
+@import "buttons.less";
 @icon-font-path: "/vendor/fonts/";
 @icon-font-name: "glyphicons-halflings-regular";
 @import "glyphicons.less";
@@ -129,7 +130,7 @@ a {
   }
   .header-links {
     .tile-region-6();
-    .tile-column-push(11);
+    .tile-column-push(5);
     top: 12px;
     li {
       //.make-xs-column(8, 0px);
@@ -141,6 +142,12 @@ a {
         }
       }
     }
+  }
+  
+  .pastMatches{
+    .tile-region-5();
+    top: 26px;
+    padding-left: 5px;
   }
 }
 
