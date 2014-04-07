@@ -6,7 +6,6 @@ var forEach = _.forEach;
 var partial = _.partial;
 var api = require('../api');
 var createQuery = require('./utils').createQuery;
-var createHistoricalQuery = require('./utils').createHistoricalQuery;
 
 //returns subheaders which depend on querystring
 var createSubheaders = function (querystring) {
@@ -68,44 +67,6 @@ module.exports = function (app) {
       res.render("index", payload); 
     }); 
   });
-
-  app.get("/matches/historical/", function (req, res) {
-    var query = createHistoricalQuery(req.query);
-
-    var querystring = req.query.search;
-
-    var comQuery = {category: "community"};
-    var proQuery = {category: "pro"};
-    var communityMatchesQuery = extend(clone(query), comQuery);
-    var proMatchesQuery = extend(clone(query), proQuery);
-
-    async.parallel({
-      proMatches: partial(api.getMatchesNested, proMatchesQuery),
-      communityMatches: partial(api.getMatchesNested, communityMatchesQuery),
-      featuredPro: api.getFeaturedProMatch,
-      featuredCommunity: api.getFeaturedCommunityMatch
-    }, function (err, results) {
-      if (err) return res.redirect("error");
-      
-      //add fields for display
-      forEach(results.proMatches, presentMatch);
-      forEach(results.communityMatches, presentMatch);
-      presentMatch(results.featuredPro);
-      presentMatch(results.featuredCommunity);
-    
-      var payload = {
-        proMatches: results.proMatches,
-        communityMatches: results.communityMatches,
-        featuredPro: querystring ? null : results.featuredPro,
-        featuredCommunity: querystring ? null : results.featuredCommunity,
-        subheaders: createSubheaders(querystring),
-        searched: querystring,
-      };
-
-      res.render("index", payload); 
-    });
-  });
-  
   
   
   app.get('/matches/:id', function (req, res) {
