@@ -3,10 +3,22 @@ var passport = require('passport');
 var exphbs = require('express3-handlebars');
 var app = express();
 var mongoose = require('mongoose');
+var nodemailer = require('nodemailer');
+var handlebars = require('handlebars');
 var gameIcon = require('./views/helpers/gameIcon');
 var countryIcon = require('./views/helpers/countryIcon');
 var ytUrl = require('./views/helpers/ytUrl');
 var prettyDate = require('./views/helpers/prettyDate');
+var emailTemplates = require('./services/email/templates')(handlebars);
+var mailconfig = require("./config.json").services.email;
+var mailer = nodemailer.createTransport("SMTP", {
+  service: mailconfig.service,
+  auth: {
+    user: mailconfig.user,
+    pass: mailconfig.pass 
+  }
+});
+
 mongoose.connect('mongodb://localhost:27017/fightCasts');
 
 var hbs = exphbs.create({
@@ -21,6 +33,8 @@ var hbs = exphbs.create({
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
+app.set("mailer", mailer);
+app.set("emails", emailTemplates);
 app.engine("handlebars", hbs.engine);
 app.use(express.cookieParser());
 app.use(express.bodyParser());

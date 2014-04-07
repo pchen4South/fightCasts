@@ -5,10 +5,28 @@ var gamesList = require('../models/gameCharacterData');
 module.exports = function (app) {
 
   //CREATE
+  /*
+    We don't want to delay the response to wait for email
+    to send so we respond once the contact is created and then
+    carry on w/ sending the email
+  */
   app.post("/api/v1/contacts", function (req, res) {
+    if (!req.body.email) return res.send(400, "No valid email");
+    var mailer = app.get("mailer");
+    var signup = app.get("emails").contactSignup;
+    var options = {
+      to: req.body.email,
+      subject: "Thanks for signing up!",
+      html: signup({email: req.body.email})
+    };
+
     api.createContact(req.body, function (err, contact) {
-      if (err) res.send(400, {err: err.message}); 
+      if (err) return res.send(400, {err: err.message}); 
       else res.json({contact: contact});
+      mailer.sendMail(options, function (err, result) {
+        //handle email error?
+        return;
+      }); 
     }); 
   });
 

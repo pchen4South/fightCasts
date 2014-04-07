@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = function (grunt) {
   grunt.initConfig({
     emberTemplates: {
@@ -22,6 +24,20 @@ module.exports = function (grunt) {
         }
       } 
     },
+     
+    handlebars: {
+      emails: {
+        options: {
+          commonjs: true,
+          processName: function (filepath) {
+            return path.basename(filepath, ".handlebars"); 
+          } 
+        },
+        files: {
+          "services/email/templates.js": "services/email/templates/**/*.handlebars" 
+        }
+      }
+    },
 
     watch: {
       less: {
@@ -37,6 +53,11 @@ module.exports = function (grunt) {
           livereload: true 
         }
       },
+      emailTemplates: {
+        files: "services/email/templates/**/*.handlebars",
+        tasks: ["handlebars"]
+      },
+
       templates: {
         files: ["public/templates/**/*.handlebars","admin/public/templates/**/*.handlebars"],
         tasks: ["emberTemplates"],
@@ -50,5 +71,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-ember-templates");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-less");
-  grunt.registerTask("default", ["emberTemplates", "less", "watch"]);
+  grunt.loadNpmTasks("grunt-contrib-handlebars");
+  grunt.registerTask("default", [
+    "emberTemplates", 
+    "handlebars", 
+    "less", 
+    "watch"
+  ]);
 };
