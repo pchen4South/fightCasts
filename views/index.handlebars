@@ -14,7 +14,6 @@
   <div class="tile-region-1"></div>
 
   <div class="tile-region-6" id="proList">
-  {{#if proMatches}}
     <div class="tile-6x1">
       <h3 class="subheader">{{subheaders.botLeft}}
       {{#if searched}}
@@ -22,6 +21,7 @@
       {{/if}}
       </h3>
     </div>
+  {{#if proMatches}}
     {{#each proMatches}}
       <div class="tile-6x2">
         {{> tiles/match-tile-listitemtall}}
