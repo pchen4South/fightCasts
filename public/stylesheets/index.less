@@ -8,6 +8,13 @@
 @icon-font-name: "glyphicons-halflings-regular";
 @import "glyphicons.less";
 
+//needed for admin
+@import "forms.less";
+@import "navbar.less";
+@import "navs.less";
+@import "list-group.less";
+
+
 @import "custom/variables.less";
 @import "custom/grid.less";
 @import "custom/mixins.less";
@@ -17,6 +24,7 @@
 @import "tiles/listitemtall.less";
 @import "tiles/main.less";
 @import "custom/fightcards.less";
+@import "custom/admin.less";
 
 *, *:before, *:after {
   .box-sizing(border-box);
@@ -181,94 +189,4 @@ a {
 
 img.gameLogoSmall{
   .size(32px, 32px);
-}
-
-select *{
-  color: black !important;
-}
-
-select.ember-select{
-  color: black !important;
-}
-
-a.dropdown-toggle{
-  color: white;
-  height: 52px;
-  padding-top: 15px !important;
-}
-
-.adminlink *{
-  height: 52px !important;
-  padding-top: 15px !important;
-  font-family: "Tulpen One", sans-serif;
-  color: @header-font-color;
-  font-size: @font-medium;
-  text-decoration: none;
-}
-
-
-a.dropdown-toggle:hover{
-  background-color: #404040;
-}
-
-.nav > li > a:hover,
-.nav > li > a:focus {
-  text-decoration: none;
-  background-color: #a8a8a8;
-}
-
-.nav .open > a,
-.nav .open > a:hover,
-.nav .open > a:focus {
-  color: white;
-  background-color: #808080;
-  border-color: #428bca;
-}
-
-.adminMatchList{
-  border-radius: 5px;
-  background: @tile-color-2;
-  margin-bottom: 5px;
-}
-.adminMatchList:hover{
-  background: lighten(@tile-color-2,10%);
-}
-.adminMatchList.active{
-  background: #a8a8a8;
-}
-
-ul.dropdown-menu{
-  border-top: 0px;
-  border-left: 0px;
-  background-color: lighten(#494949,10%);
-}
-.adminSubmitForm{
-  padding: 20px 10px;
-  width: 300px;
-  background:  lighten(#494949,10%);
-}
-
-.adminFormWrapper{
-  margin-top: 4px;
-  border-radius: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  background: #a8a8a8;
-}
-
-.adminWrapper *{
-  font-family: "Dosis", sans-serif;
-  color: black;
-}
-
-.adminListItem{
-  padding: 2px 4px;
-  margin-right: 2px;
-  display: inline;
-  border-radius: 3px;
-  background-color: lighten(#a8a8a8, 10%);
-  border: 1px solid black;
-}
-.matchDetailHeader{
-  font-size: @font-medium;
 }

@@ -275,24 +275,24 @@ function program10(depth0,data) {
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "makeFeatured", "match", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["ID","ID"],data:data})));
   data.buffer.push(" class = \"btn btn-xs btn-default\">Make Featured </button>\r\n<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteMatch", "match", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["ID","ID"],data:data})));
-  data.buffer.push(" class = \"btn btn-xs btn-default\">Delete</button>\r\n<ul>\r\n  <li>\r\n    <label> Description:</label>  \r\n    <div class = \"adminListItem\">");
+  data.buffer.push(" class = \"btn btn-xs btn-default\">Delete</button>\r\n<ul>\r\n  <li class = \"adminListRow\">\r\n    <label> Description:</label>  \r\n    <div class = \"adminListItem\">");
   stack1 = helpers._triageMustache.call(depth0, "match.description", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</div>\r\n  </li>\r\n  <li>\r\n    <label> Category:</label>\r\n    <div class = \"adminListItem\">");
+  data.buffer.push("</div>\r\n  </li>\r\n  <li class = \"adminListRow\">\r\n    <label> Category:</label>\r\n    <div class = \"adminListItem\">");
   stack1 = helpers._triageMustache.call(depth0, "match.category", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</div>\r\n  </li>\r\n  <li>\r\n    <label> Date Played:</label> \r\n    <div class = \"adminListItem\"> ");
+  data.buffer.push("</div>\r\n  </li>\r\n  <li class = \"adminListRow\">\r\n    <label> Date Played:</label> \r\n    <div class = \"adminListItem\"> ");
   data.buffer.push(escapeExpression((helper = helpers.prettyDate || (depth0 && depth0.prettyDate),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "match.playedAt", options) : helperMissing.call(depth0, "prettyDate", "match.playedAt", options))));
-  data.buffer.push(" </div>\r\n  </li>\r\n  <li>\r\n    <label> Featured At:</label>\r\n    <div class = \"adminListItem\">\r\n      ");
+  data.buffer.push(" </div>\r\n  </li>\r\n  <li class = \"adminListRow\">\r\n    <label> Featured At:</label>\r\n    <div class = \"adminListItem\">\r\n      ");
   stack1 = helpers['if'].call(depth0, "match.featuredAt", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</div>\r\n  </li>\r\n  <li>\r\n    <label> Videos:</label> \r\n    ");
+  data.buffer.push("</div>\r\n  </li>\r\n  <li class = \"adminListRow\">\r\n    <label> Videos:</label> \r\n    ");
   stack1 = helpers.each.call(depth0, "match.videos", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n  </li>\r\n  <li>\r\n    <label> Casters: </label>\r\n    ");
+  data.buffer.push("\r\n  </li>\r\n  <li class = \"adminListRow\">\r\n    <label> Casters: </label>\r\n    ");
   stack1 = helpers.each.call(depth0, "match.casters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n  </li>\r\n  <li>\r\n    <label> Fighters: </label>\r\n    ");
+  data.buffer.push("\r\n  </li>\r\n  <li class = \"adminListRow\">\r\n    <label> Fighters: </label>\r\n    ");
   stack1 = helpers.each.call(depth0, "match.fighters", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n  </li>\r\n</ul>");
@@ -344,15 +344,82 @@ function program1(depth0,data) {
   data.buffer.push("Admin Home");
   }
 
-  data.buffer.push("<div id=\"subheader\">      \r\n  <div class = \"container\">\r\n      <ul class=\"nav navbar-nav navbar-left\">\r\n        <li class=\"navbar-left adminlink\">\r\n        ");
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("Matches Overview");
+  }
+
+  data.buffer.push("<div id=\"subheader\">      \r\n  <div class = \"container\">\r\n      <ul class=\"nav navbar-nav navbar-left\">\r\n        <li class=\"navbar-left adminlink\">\r\n          ");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "index", options) : helperMissing.call(depth0, "link-to", "index", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n        </li>\r\n        <p class=\"navbar-text navbar-left\">Create: </p>\r\n        <li class=\"dropdown\">\r\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Person<b class=\"caret\"></b></a>\r\n          <ul class=\"dropdown-menu\">\r\n            ");
+  data.buffer.push("\r\n        </li>\r\n        \r\n        <li class=\"navbar-left adminlink\">\r\n          ");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "matches", options) : helperMissing.call(depth0, "link-to", "matches", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n        </li>\r\n       \r\n        <p class=\"navbar-text navbar-left\">Create: </p>\r\n        <li class=\"dropdown\">\r\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Person<b class=\"caret\"></b></a>\r\n          <ul class=\"dropdown-menu\">\r\n            ");
   data.buffer.push(escapeExpression((helper = helpers.partial || (depth0 && depth0.partial),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "createPerson", options) : helperMissing.call(depth0, "partial", "createPerson", options))));
   data.buffer.push("\r\n          </ul>\r\n        </li>                \r\n        <li class=\"dropdown\">\r\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Event<b class=\"caret\"></b></a>\r\n          <ul class=\"dropdown-menu\">\r\n            ");
   data.buffer.push(escapeExpression((helper = helpers.partial || (depth0 && depth0.partial),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "createEvent", options) : helperMissing.call(depth0, "partial", "createEvent", options))));
   data.buffer.push("\r\n          </ul>\r\n        </li>         \r\n      </ul> \r\n  </div>\r\n</div>");
   return buffer;
+  
+});
+
+Ember.TEMPLATES["components/fc-adminSummaryItem"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var stack1, self=this, escapeExpression=this.escapeExpression;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n  <div class = \"summaryItem\">\r\n  ");
+  stack1 = helpers['if'].call(depth0, "summaryItem.name", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n  \r\n  ");
+  stack1 = helpers['if'].call(depth0, "summaryItem.email", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n  \r\n  ");
+  stack1 = helpers['if'].call(depth0, "summaryItem.title", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n\r\n  <button class = \"adminBtn btn btn-xs\"\r\n         ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteItem", "type", "summaryItem", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data})));
+  data.buffer.push("> \r\n          <span class = \"glyphicon glyphicon-trash\"></span>\r\n  </button>    \r\n  </div>  \r\n");
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n    Name : ");
+  stack1 = helpers._triageMustache.call(depth0, "summaryItem.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n  ");
+  return buffer;
+  }
+
+function program4(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n    Email : ");
+  stack1 = helpers._triageMustache.call(depth0, "summaryItem.email", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n  ");
+  return buffer;
+  }
+
+function program6(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n  \r\n    Title : ");
+  stack1 = helpers._triageMustache.call(depth0, "summaryItem.title", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n  \r\n  ");
+  return buffer;
+  }
+
+  stack1 = helpers.each.call(depth0, "summaryItem", "in", "items", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  else { data.buffer.push(''); }
   
 });
 
@@ -491,9 +558,33 @@ function program1(depth0,data) {
 Ember.TEMPLATES["index"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '';
+  var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 
+  data.buffer.push(escapeExpression((helper = helpers['fc-admin-subheader'] || (depth0 && depth0['fc-admin-subheader']),options={hash:{
+    'action': ("updateInfo")
+  },hashTypes:{'action': "STRING"},hashContexts:{'action': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-admin-subheader", options))));
+  data.buffer.push("\r\n\r\n<div class = \"adminWrapper\">\r\n  <div class = \"tile-region-8\"> </div>\r\n\r\n  <div class = \"tile-region-6 summaryColumn\">\r\n    <div class = \"adminSummaryHeader\"> Matches </div>\r\n    ");
+  data.buffer.push(escapeExpression((helper = helpers['fc-adminSummaryItem'] || (depth0 && depth0['fc-adminSummaryItem']),options={hash:{
+    'items': ("matches"),
+    'type': ("matches")
+  },hashTypes:{'items': "ID",'type': "STRING"},hashContexts:{'items': depth0,'type': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-adminSummaryItem", options))));
+  data.buffer.push(" \r\n  </div>\r\n\r\n  <div class = \"tile-region-6 summaryColumn\">\r\n    <div class = \"adminSummaryHeader\"> Contacts </div>\r\n    ");
+  data.buffer.push(escapeExpression((helper = helpers['fc-adminSummaryItem'] || (depth0 && depth0['fc-adminSummaryItem']),options={hash:{
+    'items': ("contacts"),
+    'type': ("contacts")
+  },hashTypes:{'items': "ID",'type': "STRING"},hashContexts:{'items': depth0,'type': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-adminSummaryItem", options))));
+  data.buffer.push(" \r\n  </div>\r\n  <div class = \"tile-region-6 summaryColumn\">\r\n    <div class = \"adminSummaryHeader\"> People </div>\r\n    ");
+  data.buffer.push(escapeExpression((helper = helpers['fc-adminSummaryItem'] || (depth0 && depth0['fc-adminSummaryItem']),options={hash:{
+    'items': ("people"),
+    'type': ("people")
+  },hashTypes:{'items': "ID",'type': "STRING"},hashContexts:{'items': depth0,'type': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-adminSummaryItem", options))));
+  data.buffer.push(" \r\n  </div>\r\n  <div class = \"tile-region-6 summaryColumn\">\r\n    <div class = \"adminSummaryHeader\"> Events </div>\r\n    ");
+  data.buffer.push(escapeExpression((helper = helpers['fc-adminSummaryItem'] || (depth0 && depth0['fc-adminSummaryItem']),options={hash:{
+    'items': ("events"),
+    'type': ("events")
+  },hashTypes:{'items': "ID",'type': "STRING"},hashContexts:{'items': depth0,'type': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "fc-adminSummaryItem", options))));
+  data.buffer.push(" \r\n  </div>\r\n</div>");
   return buffer;
   
 });

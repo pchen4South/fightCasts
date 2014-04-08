@@ -69,6 +69,29 @@ module.exports = function (app) {
       else res.json({deletedMatch: deletedMatch});
     });
   });
+  app.post("/api/v1/events/:id/delete", function (req, res) {
+    var matchId = req.params.id;
+    api.deleteEvent(matchId, function (err, deletedEvent) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({deletedEvent: deletedEvent});
+    });
+  });
+  
+  app.post("/api/v1/people/:id/delete", function (req, res) {
+    var matchId = req.params.id;
+    api.deletePerson(matchId, function (err, deletedPerson) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({deletedPerson: deletedPerson});
+    });
+  });  
+  
+  app.post("/api/v1/contacts/:id/delete", function (req, res) {
+    var matchId = req.params.id;
+    api.deleteContact(matchId, function (err, deletedContact) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({deletedContact: deletedContact});
+    });
+  });
 
   //READ
   app.get("/api/v1/people", function (req, res) {
@@ -85,6 +108,15 @@ module.exports = function (app) {
       if (err) res.send(400, {err: err.message}); 
       else res.json({
         events: events 
+      });
+    });
+  });
+  
+  app.get("/api/v1/contacts", function (req, res) {
+    api.getContacts(function (err, contacts) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({
+        contacts: contacts
       });
     });
   });

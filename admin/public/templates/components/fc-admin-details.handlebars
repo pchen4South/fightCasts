@@ -2,19 +2,19 @@
 <button {{action makeFeatured match}} class = "btn btn-xs btn-default">Make Featured </button>
 <button {{action deleteMatch match}} class = "btn btn-xs btn-default">Delete</button>
 <ul>
-  <li>
+  <li class = "adminListRow">
     <label> Description:</label>  
     <div class = "adminListItem">{{match.description}}</div>
   </li>
-  <li>
+  <li class = "adminListRow">
     <label> Category:</label>
     <div class = "adminListItem">{{match.category}}</div>
   </li>
-  <li>
+  <li class = "adminListRow">
     <label> Date Played:</label> 
     <div class = "adminListItem"> {{prettyDate match.playedAt}} </div>
   </li>
-  <li>
+  <li class = "adminListRow">
     <label> Featured At:</label>
     <div class = "adminListItem">
       {{#if match.featuredAt}}
@@ -23,19 +23,19 @@
         Not Featured
       {{/if}}</div>
   </li>
-  <li>
+  <li class = "adminListRow">
     <label> Videos:</label> 
     {{#each match.videos}} 
       <div class = "adminListItem"> {{this}} </div>
     {{/each}}
   </li>
-  <li>
+  <li class = "adminListRow">
     <label> Casters: </label>
     {{#each match.casters}} 
       <div class = "adminListItem">{{this.name}} </div>
     {{/each}}
   </li>
-  <li>
+  <li class = "adminListRow">
     <label> Fighters: </label>
     {{#each match.fighters}} 
     <div class = "adminListItem"> 
