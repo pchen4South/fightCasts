@@ -1,0 +1,22 @@
+{{#each summaryItem in items}}
+  <div class = "summaryItem">
+  {{#if summaryItem.name}}
+    Name : {{summaryItem.name}}
+  {{/if}}
+  
+  {{#if summaryItem.email}}
+    Email : {{summaryItem.email}}
+  {{/if}}
+  
+  {{#if summaryItem.title}}
+  
+    Title : {{summaryItem.title}}
+  
+  {{/if}}
+
+  <button class = "adminBtn btn btn-xs"
+         {{action deleteItem type summaryItem}}> 
+          <span class = "glyphicon glyphicon-trash"></span>
+  </button>    
+  </div>  
+{{/each}}
