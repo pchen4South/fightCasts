@@ -19,9 +19,50 @@ App.Router.map(function(){
 });
 
 App.IndexRoute = Ember.Route.extend({
-  beforeModel: function(router){
-    this.transitionTo('matches');
+enter: function(){
+    var self = this;
+    var indexCon = this.controllerFor('index');
+    
+    var matches = get(indexCon, 'matches');
+    matches.clear();
+    
+    var people = get(indexCon, 'people');
+    people.clear();
+    
+    var events = get(indexCon, 'events');
+    events.clear();
+    
+    var contacts = get(indexCon, 'contacts');
+    contacts.clear();
+    
+    fetchMatches()
+    .then(function(results){
+      matches.pushObjects(results.matches);
+    });
+    
+    fetchPeople()
+    .then(function(results){
+      people.pushObjects(results.people.sortBy("name"));
+    });
+    
+    fetchEvents()
+    .then(function(results){
+      events.pushObjects(results.events.sortBy("name"));
+      window.evnts = results.events;
+    }); 
+    fetchContacts()
+    .then(function(results){
+      contacts.pushObjects(results.contacts.sortBy("email"));
+    }); 
   }
+});
+
+App.IndexController = Ember.Controller.extend({
+  matches: [],
+  people: [],
+  events: [],
+  contacts: []
+
 });
 
 App.MatchesMatchRoute = Ember.Route.extend({
@@ -313,6 +354,25 @@ App.FcFighterSummaryComponent = Ember.Component.extend({
   }
 });
 
+App.FcAdminSummaryItemComponent = Ember.Component.extend({
+
+  actions:{
+    deleteItem: function (type, item) {
+      var id = item._id;
+      var url = "/api/v1/" + type + "/" + id + "/delete";
+      
+      
+      Ember.$.post(url, item)
+      .then(function(res){
+        window.location.reload();
+      })
+      .fail(function(err){
+        alert("item was not deleted");
+      })
+    }
+  }
+});
+
 
 //HELPERS
 
@@ -331,6 +391,10 @@ var fetchEvents = function(){
 
 var fetchGames = function(){
 return Ember.$.get("/api/v1/games");
+};
+
+var fetchContacts = function(){
+return Ember.$.get("/api/v1/contacts");
 };
 
 var submitMatch = function (data) {
