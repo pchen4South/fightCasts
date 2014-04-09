@@ -1,13 +1,15 @@
 .tile-mixin (@padding: 0px) {
-  .hover-background(@default-tile-color, lighten(@default-tile-color, 6%));
-  .size(100%, 100%);
-  &:hover {
-    text-decoration: none;
-  }
-  border-radius: 2px;
+  background-color: @grid-color;
   position: relative;
+  height: 100%;
+  width: 100%;
   padding: @padding;
   display: block;
+  border-radius: 2px;
+  &:hover {
+    text-decoration: none;
+    background-color: lighten(@grid-color, 6%);
+  }
 }
 
 .tile-region-mixin (@x: 1) {

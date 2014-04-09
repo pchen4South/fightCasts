@@ -12,7 +12,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (helper = helpers.email) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.email); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + ".  We promise not to\r\nspam you.  This email will only be used to send you news about new content,\r\nfeatures, and other exciting news related to fightcasts.  Enjoy!\r\n";
+    + ".  We promise not to\nspam you.  This email will only be used to send you news about new content,\nfeatures, and other exciting news related to fightcasts.  Enjoy!\n";
   return buffer;
   });
 
@@ -26,7 +26,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "<h1>\r\n";
+    + "<h1>\n";
   return buffer;
   });
 
