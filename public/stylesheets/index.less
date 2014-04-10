@@ -47,11 +47,18 @@
 }
 
 .link-text {
+  font-family: "Dosis", sans-serif;
   border-bottom: 1px dashed @text-color;
   cursor: pointer;
   &:hover {
     border-top: 1px dashed @text-color;
   }
+}
+
+.inset-text (@bg-color, @text-color) {
+  /* Shadows are visible under slightly transparent text color */
+  color: hsla(hue(@text-color), saturation(@text-color), lightness(@text-color), .8);
+  text-shadow: 1px 1px 1px @bg-color, 0 0 0 #000, 1px 1px 1px @bg-color;
 }
 
 .section-header {
@@ -77,6 +84,15 @@ body {
 #main-content {
   position: relative;
   background-color: @background-color;
+}
+
+#subfooter {
+  margin-top: 48px;
+  background-color: @subheader-color;
+}
+
+#footer {
+  background-color: @header-color;
 }
 
 ul {
@@ -137,13 +153,14 @@ a {
   .page-brand {
     .tile-region-4();
     .header-text();
+    //.inset-text(@header-color, @text-color);
   }
   .search-bar {
     .tile-region-3();
     top: 24px;
   }
   .filters {
-    .tile-region-6();
+    .tile-region-8();
     top: 20px;
     padding-left: 12px;
     font-size: @font-small;
@@ -161,7 +178,7 @@ a {
   }
   .header-links {
     .tile-region-6();
-    .tile-column-push(5);
+    .tile-column-push(3);
     top: 12px;
     li {
       text-align: right;
@@ -185,6 +202,17 @@ a {
   }
 }
 
+.page-footer {
+  .make-row(0px);
+  height: @footer-height;
+  padding-top: 12px;
+}
+
+.page-subfooter {
+  .make-row(0px);
+  height: @subfooter-height;
+}
+
 .subheader {
   .section-header();
   font-size: @font-mediumish;
@@ -198,7 +226,6 @@ a {
 .tile-subheader{
   .header-text();
 }
-
 
 img.gameLogoSmall{
   .size(32px, 32px);
