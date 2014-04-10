@@ -2,6 +2,7 @@
   var introButton = $("#intro");
   var contactForm = $("#contactForm");
   var contactFormMessage = contactForm.children(".message").first();
+  var filterLinks = $(".filter-link");
   var emailInput = $("#emailInput");
   var contactUri = "/api/v1/contacts/";
   var tour = introJs();
@@ -82,5 +83,12 @@
     submitContact(email)
   });
 
+  filterLinks.click(function (e) {
+    var target = $(this);
+    var filter = target.data().filter;
+    var current = window.location.pathname;
+    
+    window.location.href = current + "?search=" + filter;
+  });
  
 })(window);
