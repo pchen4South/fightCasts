@@ -1,3 +1,22 @@
+.adminBody{
+  background-color: #f0fffd;
+}
+
+#loginForm{
+  margin-top: 30px;
+  border: 1px solid black;
+  background: #a8a8a8;
+  color: black !important;
+}
+.adminLoginFormLabel{
+  color: black !important;
+}
+
+
+.loginHeader{
+  text-align: center;
+  color: black;
+}
 
 select *{
   color: black !important;
@@ -52,6 +71,8 @@ a.dropdown-toggle:hover{
 }
 .adminMatchList.active{
   background: #a8a8a8;
+  border: 1px dashed black;
+  font-weight: bold;
 }
 
 ul.dropdown-menu{
@@ -67,10 +88,10 @@ ul.dropdown-menu{
 
 .adminFormWrapper{
   margin-top: 4px;
-  border-radius: 5px;
+  border-radius: 2px;
   padding-left: 15px !important;
   padding-right: 10px !important;
-  background: #a8a8a8;
+  background: lighten(#a8a8a8, 10%);
 }
 
 .adminWrapper *{
@@ -86,7 +107,7 @@ ul.dropdown-menu{
   margin-right: 2px;
   display: inline;
   border-radius: 3px;
-  background-color: lighten(#a8a8a8, 10%);
+  background-color: lighten(#a8a8a8, 25%);
   border: 1px solid black;
 }
 .matchDetailHeader{
@@ -118,4 +139,14 @@ ul.dropdown-menu{
 
 .adminListRow{
   height: 32px;
+}
+
+.logged-in-name{
+  display: inline-block;
+  position: relative;
+  font-family: 'dosis', sans-serif;
+  width: 200px;
+  left: 300px;
+  top: 25px;
+  height: 25px;
 }
