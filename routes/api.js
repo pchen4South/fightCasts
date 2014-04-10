@@ -1,6 +1,9 @@
 var api = require('../api');
 var createQuery = require('./utils').createQuery;
 var gamesList = require('../models/gameCharacterData');
+var passport = require('passport');
+var ensureAuthenticated = require('./utils').ensureAuthenticated;
+
 
 module.exports = function (app) {
 
@@ -30,67 +33,75 @@ module.exports = function (app) {
     }); 
   });
 
-  app.post("/api/v1/people", function (req, res) {
-    api.createPerson(req.body, function (err, person) {
-      if (err) res.send(400, {err: err.message}); 
-      else res.json({person: person});
-    });
+  app.post("/api/v1/people", ensureAuthenticated,
+    function (req, res) {
+      api.createPerson(req.body, function (err, person) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({person: person});
+      });
   });
 
 
-  app.post("/api/v1/events", function (req, res) {
-    api.createEvent(req.body, function (err, event) {
-      if (err) res.send(400, {err: err.message}); 
-      else res.json({event: event});
-    });
+  app.post("/api/v1/events", ensureAuthenticated,
+    function (req, res) {
+      api.createEvent(req.body, function (err, event) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({event: event});
+      });
   });
 
-  app.post("/api/v1/matches", function (req, res) {
-    api.createMatch(req.body, function (err, match) {
-      if (err) res.send(400, {err: err.message}); 
-      else res.json({match: match});
-    });
+  app.post("/api/v1/matches", ensureAuthenticated,
+    function (req, res) {
+      api.createMatch(req.body, function (err, match) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({match: match});
+      });
   });
 
   //UPDATE
-  app.post("/api/v1/matches/:id/feature", function (req, res) {
-    var matchId = req.params.id;
-    api.featureMatch(matchId, function (err, featuredMatch) {
-      if (err) res.send(400, {err: err.message}); 
-      else res.json({featuredMatch: featuredMatch});
-    });
+  app.post("/api/v1/matches/:id/feature", ensureAuthenticated,
+    function (req, res) {
+      var matchId = req.params.id;
+      api.featureMatch(matchId, function (err, featuredMatch) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({featuredMatch: featuredMatch});
+      });
   });
   
   //delete
-  app.post("/api/v1/matches/:id/delete", function (req, res) {
-    var matchId = req.params.id;
-    api.deleteMatch(matchId, function (err, deletedMatch) {
-      if (err) res.send(400, {err: err.message}); 
-      else res.json({deletedMatch: deletedMatch});
-    });
+  app.post("/api/v1/matches/:id/delete", ensureAuthenticated,
+    function (req, res) {
+      var matchId = req.params.id;
+      api.deleteMatch(matchId, function (err, deletedMatch) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({deletedMatch: deletedMatch});
+      });
   });
-  app.post("/api/v1/events/:id/delete", function (req, res) {
-    var matchId = req.params.id;
-    api.deleteEvent(matchId, function (err, deletedEvent) {
-      if (err) res.send(400, {err: err.message}); 
-      else res.json({deletedEvent: deletedEvent});
-    });
+  app.post("/api/v1/events/:id/delete", ensureAuthenticated,
+    function (req, res) {
+      var matchId = req.params.id;
+      api.deleteEvent(matchId, function (err, deletedEvent) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({deletedEvent: deletedEvent});
+      });
   });
   
-  app.post("/api/v1/people/:id/delete", function (req, res) {
-    var matchId = req.params.id;
-    api.deletePerson(matchId, function (err, deletedPerson) {
-      if (err) res.send(400, {err: err.message}); 
-      else res.json({deletedPerson: deletedPerson});
-    });
+  app.post("/api/v1/people/:id/delete", ensureAuthenticated,
+    function (req, res) {
+      var matchId = req.params.id;
+      api.deletePerson(matchId, function (err, deletedPerson) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({deletedPerson: deletedPerson});
+      });
   });  
   
-  app.post("/api/v1/contacts/:id/delete", function (req, res) {
-    var matchId = req.params.id;
-    api.deleteContact(matchId, function (err, deletedContact) {
-      if (err) res.send(400, {err: err.message}); 
-      else res.json({deletedContact: deletedContact});
-    });
+  app.post("/api/v1/contacts/:id/delete", ensureAuthenticated,
+    function (req, res) {
+      var matchId = req.params.id;
+      api.deleteContact(matchId, function (err, deletedContact) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({deletedContact: deletedContact});
+      });
   });
 
   //READ
