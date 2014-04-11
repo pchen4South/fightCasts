@@ -54,10 +54,8 @@ var createQuery = function (params) {
       monQuery = {title: {"$regex": searchString}}
   }
   
-  
   return monQuery;  
 };
 
 module.exports.createQuery = createQuery;
 module.exports.ensureAuthenticated = ensureAuthenticated;
-
