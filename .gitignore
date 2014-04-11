@@ -1,6 +1,7 @@
 node_modules/
 assets/dist/
 admin/assets/dist/
+services/email/templates.js
 *.orig
 *.swp
 *.swo
