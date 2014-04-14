@@ -11,6 +11,7 @@ var ytUrl = require('./views/helpers/ytUrl');
 var prettyDate = require('./views/helpers/prettyDate');
 var emailTemplates = require('./services/email/templates')(handlebars);
 var mailconfig = require("./config.json").services.email;
+var mongoUri = require("./config.json").services.db.uri;
 var mailer = nodemailer.createTransport("SMTP", {
   service: mailconfig.service,
   auth: {
@@ -18,8 +19,6 @@ var mailer = nodemailer.createTransport("SMTP", {
     pass: mailconfig.pass 
   }
 });
-
-mongoose.connect('mongodb://localhost:27017/fightCasts');
 
 var hbs = exphbs.create({
   defaultLayout: "main",
@@ -51,4 +50,5 @@ require('./routes/api')(app);
 require('./routes/admin')(app);
 require('./routes/frontend')(app);
 
+mongoose.connect(mongoUri);
 app.listen(process.env.PORT || 3000);

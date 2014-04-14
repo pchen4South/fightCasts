@@ -4,7 +4,6 @@ var gamesList = require('../models/gameCharacterData');
 var passport = require('passport');
 var ensureAuthenticated = require('./utils').ensureAuthenticated;
 
-
 module.exports = function (app) {
 
   //CREATE
