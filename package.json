@@ -27,6 +27,9 @@
     "passport-local": "~1.0.0",
     "moment": "~2.5.1",
     "nodemailer": "~0.6.1",
-    "grunt-contrib-handlebars": "~0.7.0"
+    "grunt-contrib-handlebars": "~0.7.0",
+    "JSONStream": "^0.7.2",
+    "request": "^2.34.0",
+    "through": "^2.3.4"
   }
 }

@@ -92,7 +92,6 @@ var getMatches = partial(getMultiple, matchModel);
 
 //mutative, populates characters for a match's fighters
 //hardcoded for now
-
 var populateCharacters = function (match) {
   var game = gamesList["1"];
   //if (!game) throw new Error("invalid game id", match.game);
