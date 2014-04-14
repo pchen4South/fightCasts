@@ -42,7 +42,8 @@ var flattenMatch = function (match) {
   }
 };
 
-/* create flat representation of the match object
+/* 
+ * create flat representation of the match object
  * index the object by id into elastic search
  * call provided callback
 * */
@@ -55,9 +56,7 @@ var indexMatch = function (match, cb) {
   request.post(url, options, cb);
 };
 
-/*
- * extract ids from returned ES query
-* */
+//extract ids from returned ES query
 var extractIdsFrom = function (result) {
   var ids;
 
@@ -70,7 +69,7 @@ var extractIdsFrom = function (result) {
   }
 };
 
-//I want to pass in a search string and get back an array of ids
+//pass in a search string and get back an array of ids
 var getMatchIdsForQuery = function (query, cb) {
   var url = elasticSearchUri + "/matches/_search";
   var options = {
