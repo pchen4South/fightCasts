@@ -19,7 +19,6 @@ var mailer = nodemailer.createTransport("SMTP", {
     pass: mailconfig.pass 
   }
 });
-
 var hbs = exphbs.create({
   defaultLayout: "main",
   helpers: {
