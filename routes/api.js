@@ -77,6 +77,7 @@ module.exports = function (app) {
         else res.json({deletedMatch: deletedMatch});
       });
   });
+
   app.post("/api/v1/events/:id/delete", ensureAuthenticated,
     function (req, res) {
       var matchId = req.params.id;

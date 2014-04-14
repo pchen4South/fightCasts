@@ -1,5 +1,6 @@
 var querystring = require('querystring');
 var async = require('async');
+var through = require('through');
 var _ = require('lodash');
 var isFunction = _.isFunction;
 var partial = _.partial;
@@ -130,6 +131,23 @@ var getMatchesNested = function (query, cb) {
   });
 };
 
+//Returns stream of nested populated matches
+var getMatchesNestedStream = function (query) {
+  var populateStream = through(function (match) {
+    populateCharacters(match);
+    populateGame(match);
+    this.queue(match);
+  });
+
+  matchModel.find(query)
+  .lean()
+  .sort("createdAt")
+  .populate("event casters fighters.person")
+  .stream()
+  .pipe(populateStream);
+
+  return populateStream;
+};
 
 var getMatchNested = function (id, cb) {
   if (!id) return cb(null, null);
@@ -146,6 +164,7 @@ var getMatchNested = function (id, cb) {
     cb(null, match);
   });
 };
+
 
 var getFeaturedProMatch = function (cb) {
   matchModel.findOne({category: "pro", game: "1"})
@@ -230,4 +249,5 @@ module.exports.getContacts = getContacts;
 module.exports.getEvents = getEvents;
 module.exports.getMatches = getMatches;
 module.exports.getMatchesNested = getMatchesNested;
+module.exports.getMatchesNestedStream = getMatchesNestedStream;
 module.exports.getAll = getAll;
