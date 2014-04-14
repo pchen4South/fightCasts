@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
 var through = require("through");
-var searchApi = require("./services/search/search");
-var mongoUri = require('./config.json').services.db.uri;
-var api = require("./api");
+var searchApi = require("../services/search/search");
+var mongoUri = require('../config.json').services.db.uri;
+var api = require("../api");
 
 //TODO: error handling?
 var indexMatches = function (cb) {
