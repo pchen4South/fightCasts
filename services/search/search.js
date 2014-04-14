@@ -55,4 +55,38 @@ var indexMatch = function (match, cb) {
   request.post(url, options, cb);
 };
 
+/*
+ * extract ids from returned ES query
+* */
+var extractIdsFrom = function (result) {
+  var ids;
+
+  try {
+    ids = pluck(result.hits.hits, "_id");
+  } catch (e) {
+    ids = []; 
+  } finally {
+    return ids; 
+  }
+};
+
+//I want to pass in a search string and get back an array of ids
+var getMatchIdsForQuery = function (query, cb) {
+  var url = elasticSearchUri + "/matches/_search";
+  var options = {
+    json: {
+      query: {
+        flt: {
+          like_text: query 
+        } 
+      } 
+    }
+  };
+
+  request.post(url, options, function (err, req, body) {
+    return cb(err, extractIdsFrom(body));
+  });
+};
+
 module.exports.indexMatch = indexMatch;
+module.exports.getMatchIdsForQuery = getMatchIdsForQuery;
