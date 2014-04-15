@@ -2,6 +2,8 @@
   var introButton = $("#intro");
   var contactForm = $("#contactForm");
   var contactFormMessage = contactForm.children(".message").first();
+  var searchForm = $("#searchForm");
+  var searchInput = $("#searchInput");
   var filterLinks = $(".filter-link");
   var emailInput = $("#emailInput");
   var contactUri = "/api/v1/contacts/";
@@ -78,17 +80,25 @@
 
   contactForm.submit(function (e) {
     e.preventDefault(); 
-    e.stopPropagation();
     var email = emailInput.val();
     submitContact(email)
+  });
+
+  searchForm.submit(function (e) {
+    e.preventDefault(); 
+    var search = searchInput.val();
+    var url = "/matches/search/?search=" + search;
+
+    window.location.href = url;
   });
 
   filterLinks.click(function (e) {
     var target = $(this);
     var filter = target.data().filter;
     var current = window.location.pathname;
+    var url = current + "?search=" + filter;
     
-    window.location.href = current + "?search=" + filter;
+    window.location.href = url;
   });
  
 })(window);
