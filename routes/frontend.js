@@ -5,6 +5,7 @@ var clone = _.clone;
 var forEach = _.forEach;
 var partial = _.partial;
 var api = require('../api');
+var searchApi = require('../services/search/search');
 var createQuery = require('./utils').createQuery;
 
 //returns subheaders which depend on querystring
@@ -68,6 +69,31 @@ module.exports = function (app) {
     }); 
   });
   
+  app.get("/matches/search", function (req, res) {
+    var search = req.query.search; 
+    var comQuery = {category: "community"};
+    var proQuery = {category: "pro"};
+
+    async.parallel({
+      proMatches: partial(searchApi.getMatchesForSearch, search, proQuery),
+      communityMatches: partial(searchApi.getMatchesForSearch, search, comQuery),
+      //TODO: Perhaps should also support focused match?  who knows...
+    }, function (err, results) {
+      //TODO: REMOVE THIS LOGGING AND USE REDIRECTS AS ABOVE
+      console.log(err);
+
+      forEach(results.proMatches, presentMatch);
+      forEach(results.communityMatches, presentMatch);
+
+      var payload = {
+        proMatches: results.proMatches,
+        communityMatches: results.communityMatches,
+        subheaders: createSubheaders(search),
+        searched: search
+      }; 
+      res.render("index", payload);
+    });
+  });
   
   app.get('/matches/:id', function (req, res) {
     var querystring = req.query.search;
@@ -108,8 +134,7 @@ module.exports = function (app) {
       res.render("index", payload); 
     });
   });
-  
-  
+
   app.get("/error", function (req, res) {
     res.render("error"); 
   });

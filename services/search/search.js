@@ -5,7 +5,10 @@ var uniq = _.uniq;
 var map = _.map;
 var find = _.find;
 var pluck = _.pluck;
+var isFunction = _.isFunction;
+var cloneDeep = _.cloneDeep;
 var reduce = _.reduce;
+var api = require('../../api');
 var elasticSearchUri = require("../../config.json").services.search.uri;
 
 //helper to extract array of character names from fighters
@@ -87,5 +90,30 @@ var getMatchIdsForQuery = function (query, cb) {
   });
 };
 
+//combines the search api and mongoose to get actual matches
+//N.B. THIS MAY CHANGE IF ACTUAL MATCHES ARE INDEXED IN ES
+var getMatchesForSearch = function (search, query, cb) {
+  getMatchIdsForQuery(search, function (err, ids) {
+    var totalQuery;
+
+    //allow for optional query parameter
+    if (isFunction(query)) {
+      totalQuery = {};
+      cb(query);
+    } else {
+      totalQuery = cloneDeep(query);   
+    }
+
+    var searchQuery = {
+      $in: ids
+    };
+
+    totalQuery["_id"] = searchQuery;
+
+    api.getMatchesNested(totalQuery, cb);
+  });
+};
+
 module.exports.indexMatch = indexMatch;
 module.exports.getMatchIdsForQuery = getMatchIdsForQuery;
+module.exports.getMatchesForSearch = getMatchesForSearch;
