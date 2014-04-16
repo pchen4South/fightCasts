@@ -67,10 +67,14 @@
   font-size: @font-medium;
 }
 
+body, html {
+  height: 100%;
+  min-height: 100%;
+}
+
 body {
   .content-text();
-  margin: 0px;
-  background-color: @background-color;
+  margin: 0px; background-color: @background-color;
 }
 
 #header {
@@ -84,6 +88,7 @@ body {
 #main-content {
   position: relative;
   background-color: @background-color;
+  min-height: 80%;
 }
 
 #subfooter {
@@ -219,7 +224,7 @@ a {
   margin: 0px;
   padding: 0px;
   .subheader-secondary {
-    color: @secondary-text-color;
+    color: @text-color;
   }
 }
 
