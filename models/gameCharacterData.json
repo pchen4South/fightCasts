@@ -2,7 +2,8 @@
     "1": {
         "id": "1",
         "name": "Super Street Fighter 4 Arcade Edition",
-        "nickname": "SF4AE",
+        "nickname": "SSF4AE2012",
+        "slug": "ssf4-ae2012",
         "characters": [
             { "id": "1", "name": "Abel"},
             { "id": "2", "name": "Akuma"},

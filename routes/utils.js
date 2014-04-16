@@ -2,18 +2,17 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var creds = require('../creds.json');
 var analytics = require('analytics-node');
-  analytics.init({secret: creds['segmentKey']});
-
 var _ = require('lodash');  
 var forEach = _.forEach;
-var mapBy = _.mapBy;
 
-var extractGoogleAnalyticsCookie = function(gaCookie){
+analytics.init({secret: creds['segmentKey']});
+
+var extractGoogleAnalyticsCookie = function (gaCookie) {
   var cidSplit = gaCookie.split('.');
   return cidSplit[2] + cidSplit[3];
 };
 
-var trackCreatedContact = function(newContact, gaCookie){
+var trackCreatedContact = function (newContact, gaCookie) {
   var clientId = extractGoogleAnalyticsCookie(gaCookie);
   
   analytics.track({
@@ -31,7 +30,7 @@ var trackCreatedContact = function(newContact, gaCookie){
 };
 
 
-var trackViewedVideo = function (focusedMatch, gaCookie){
+var trackViewedVideo = function (focusedMatch, gaCookie) {
   
   var clientId = extractGoogleAnalyticsCookie(gaCookie);
   var players = [];
@@ -83,38 +82,37 @@ var ensureAuthenticated = function (req, res, next) {
     res.redirect('/admin/login');
 }
 
+//returns subheaders which depend on querystring
+var createSubheaders = function (querystring) {
+  var defaultHeaders = {
+    topLeft: 'top pro match',
+    topRight: 'top community match',
+    botLeft: 'new pro matches',
+    botRight: 'new community matches',
+  }; 
+  var queryHeaders = {
+    botLeft: "pro results: ",
+    botRight: "community results: "
+  };
 
-var createQuery = function (params) {
-  var gameQuery = "SF4";
-  var searchString = new RegExp(params.search, "i");
-  var timeFrame = params.search;
-  var monQuery = {};
-  var now = new Date();
-  
-  switch(params.search){
-    case "previous week": 
-      monQuery = {"playedAt": 
-        {"$gte": new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7), 
-        "$lt": now}};
-      break;    
-    case "previous month": 
-      monQuery = {"playedAt": 
-        {"$gte": new Date(now.getFullYear(), now.getMonth(), now.getDate() - 30), 
-        "$lt": now}};
-      break;    
-      
-    case "previous year": 
-      monQuery = {"playedAt": 
-        {"$gte": new Date(now.getFullYear(), now.getMonth(), now.getDate() - 365), 
-        "$lt": now}};
-      break;
-    default:
-      monQuery = {title: {"$regex": searchString}}
-  }
-  return monQuery;  
+  return querystring ? queryHeaders : defaultHeaders;
+};
+                  
+//FIXME: FIX THIS TO WORK W/ GAME SLUG!
+//atm it's hardcoded for game=1 aka ssf4
+var createQuery = function (gameSlug, category, minDate) {
+  return {
+    playedAt: {
+      "$gte": minDate,
+      "$lt": Date.now()
+    },
+    category: category,
+    "game": 1 
+  }; 
 };
 
 module.exports.trackViewedVideo = trackViewedVideo;
 module.exports.trackCreatedContact = trackCreatedContact;
 module.exports.createQuery = createQuery;
 module.exports.ensureAuthenticated = ensureAuthenticated;
+module.exports.createSubheaders = createSubheaders;

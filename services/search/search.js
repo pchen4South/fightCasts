@@ -92,7 +92,7 @@ var getMatchIdsForQuery = function (query, cb) {
 
 //combines the search api and mongoose to get actual matches
 //N.B. THIS MAY CHANGE IF ACTUAL MATCHES ARE INDEXED IN ES
-var getMatchesForSearch = function (search, query, cb) {
+var getMatchesForSearch = function (query, search, cb) {
   getMatchIdsForQuery(search, function (err, ids) {
     var totalQuery;
 
