@@ -10,7 +10,7 @@ var mapBy = _.mapBy;
 
 var extractGoogleAnalyticsCookie = function(gaCookie){
   var cidSplit = gaCookie.split('.');
-  return cidSplit[2] + cidSplit[3];
+  return cidSplit[2] + '.' + cidSplit[3];
 };
 
 var trackCreatedContact = function(newContact, gaCookie){
