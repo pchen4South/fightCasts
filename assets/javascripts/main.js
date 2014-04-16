@@ -4,7 +4,6 @@
   var contactFormMessage = contactForm.children(".message").first();
   var searchForm = $("#searchForm");
   var searchInput = $("#searchInput");
-  var filterLinks = $(".filter-link");
   var emailInput = $("#emailInput");
   var contactUri = "/api/v1/contacts/";
   var tour = introJs();
@@ -92,13 +91,4 @@
     window.location.href = url;
   });
 
-  filterLinks.click(function (e) {
-    var target = $(this);
-    var filter = target.data().filter;
-    var current = window.location.pathname;
-    var url = current + "?search=" + filter;
-    
-    window.location.href = url;
-  });
- 
 })(window);
