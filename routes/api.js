@@ -3,6 +3,7 @@ var createQuery = require('./utils').createQuery;
 var gamesList = require('../models/gameCharacterData');
 var passport = require('passport');
 var ensureAuthenticated = require('./utils').ensureAuthenticated;
+var trackCreatedContact = require('./utils').trackCreatedContact;
 
 module.exports = function (app) {
 
@@ -27,6 +28,7 @@ module.exports = function (app) {
       else res.json({contact: contact});
       mailer.sendMail(options, function (err, result) {
         //handle email error?
+        trackCreatedContact(contact, req.cookies._ga);
         return;
       }); 
     }); 

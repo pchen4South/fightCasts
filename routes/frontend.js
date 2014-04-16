@@ -7,6 +7,7 @@ var partial = _.partial;
 var api = require('../api');
 var searchApi = require('../services/search/search');
 var createQuery = require('./utils').createQuery;
+var trackViewedVideo = require('./utils').trackViewedVideo;
 
 //returns subheaders which depend on querystring
 var createSubheaders = function (querystring) {
@@ -104,6 +105,8 @@ module.exports = function (app) {
     var communityMatchesQuery = extend(clone(query), comQuery);
     var proMatchesQuery = extend(clone(query), proQuery);
 
+    var googleClientId = req.cookies._ga;
+    
     async.parallel({
       proMatches: partial(api.getMatchesNested, proMatchesQuery),
       communityMatches: partial(api.getMatchesNested, communityMatchesQuery),
@@ -130,7 +133,7 @@ module.exports = function (app) {
         subheaders: createSubheaders(querystring),
         searched: querystring,
       };
-
+      trackViewedVideo(results.focusedMatch, googleClientId);
       res.render("index", payload); 
     });
   });
