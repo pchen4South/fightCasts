@@ -21,6 +21,11 @@ var trackCreatedContact = function(newContact, gaCookie){
     event: 'New Contact Created', 
     properties: {
       email: newContact.email
+    },
+    context: {
+      "Google Analytics": {
+        clientId: clientId
+      }
     }
   });
 };
@@ -46,6 +51,11 @@ var trackViewedVideo = function (focusedMatch, gaCookie){
       name: focusedMatch.title,
       event: focusedMatch.event.name,
       players: players
+    },
+    context: {
+      "Google Analytics": {
+        clientId: clientId
+      }
     }
   });
 }
