@@ -7,6 +7,7 @@ var partial = _.partial;
 var map = _.map;
 var forEach = _.forEach;
 var find = _.find;
+var findKey = _.findKey;
 var personModel = require('./models/personModel').model;
 var eventModel = require('./models/eventModel').model;
 var matchModel = require('./models/matchModel').model;
@@ -34,7 +35,6 @@ var createContact = function (contactData, cb) {
 
   contactModel.create(contact, cb);
 };
-
 
 var createPerson = function (personData, cb) {
   var person = {
@@ -85,6 +85,50 @@ var getMultiple = function (modelType, cb) {
 var getPerson = partial(get, personModel);
 var getEvent = partial(get, eventModel);
 var getMatch = partial(get, matchModel);
+
+//we make this async intentionally such that it can be changed in future
+var getGame = function (id, cb) {
+  var game;
+  var err;
+
+  try {
+    game = gamesList[id]; 
+  } catch (e) {
+    err = e; 
+  }
+  process.nextTick(function () {
+    cb(err, game); 
+  });
+};
+
+//here we lookup a match for our slug then return the object
+var getGameBySlug = function (slug, cb) {
+  var game;
+  var err;
+
+  try {
+    game = gamesList[findKey(gamesList, {slug: slug})]; 
+  } catch (e) {
+    err = e; 
+  }
+  process.nextTick(function () {
+    cb(err, game); 
+  });
+};
+
+var getGameIdBySlug = function (slug, cb) {
+  var id;
+  var err;
+
+  try {
+    id = findKey(gamesList, {slug: slug}); 
+  } catch (e) {
+    err = e; 
+  }
+  process.nextTick(function () {
+    cb(err, id); 
+  });
+};
 
 var getContacts = partial(getMultiple, contactModel);
 var getPeople = partial(getMultiple, personModel);
@@ -165,7 +209,6 @@ var getMatchNested = function (id, cb) {
   });
 };
 
-
 var getFeaturedProMatch = function (cb) {
   matchModel.findOne({category: "pro", game: "1"})
   .lean()
@@ -243,6 +286,9 @@ module.exports.getMatch = getMatch;
 module.exports.getMatchNested = getMatchNested;
 module.exports.getFeaturedProMatch = getFeaturedProMatch;
 module.exports.getFeaturedCommunityMatch = getFeaturedCommunityMatch;
+module.exports.getGame = getGame;
+module.exports.getGameBySlug = getGameBySlug;
+module.exports.getGameIdBySlug = getGameIdBySlug;
 
 module.exports.getPeople = getPeople; 
 module.exports.getContacts = getContacts;

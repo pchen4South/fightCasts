@@ -32,6 +32,7 @@ var flattenMatch = function (match) {
     createdAt: match.createdAt,
     updatedAt: match.updatedAt,
     playedAt: match.playedAt,
+    game_id: match.game ? match.game.id : null,
     gameName: match.game ? match.game.name : "",
     gameNickname: match.game ? match.game.nickname : "",
     title: match.title,
@@ -92,23 +93,21 @@ var getMatchIdsForQuery = function (query, cb) {
 
 //combines the search api and mongoose to get actual matches
 //N.B. THIS MAY CHANGE IF ACTUAL MATCHES ARE INDEXED IN ES
-var getMatchesForSearch = function (query, search, cb) {
+var getMatchesForSearch = function (search, query, cb) {
   getMatchIdsForQuery(search, function (err, ids) {
     var totalQuery;
 
     //allow for optional query parameter
     if (isFunction(query)) {
       totalQuery = {};
-      cb(query);
+      cb = query;
     } else {
       totalQuery = cloneDeep(query);   
     }
 
-    var searchQuery = {
-      $in: ids
+    totalQuery["_id"] = {
+      "$in": ids 
     };
-
-    totalQuery["_id"] = searchQuery;
 
     api.getMatchesNested(totalQuery, cb);
   });

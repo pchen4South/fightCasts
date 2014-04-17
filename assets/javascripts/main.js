@@ -2,8 +2,6 @@
   var introButton = $("#intro");
   var contactForm = $("#contactForm");
   var contactFormMessage = contactForm.children(".message").first();
-  var searchForm = $("#searchForm");
-  var searchInput = $("#searchInput");
   var emailInput = $("#emailInput");
   var contactUri = "/api/v1/contacts/";
   var tour = introJs();
@@ -82,13 +80,4 @@
     var email = emailInput.val();
     submitContact(email)
   });
-
-  searchForm.submit(function (e) {
-    e.preventDefault(); 
-    var search = searchInput.val();
-    var url = "/matches/search/?search=" + search;
-
-    window.location.href = url;
-  });
-
 })(window);

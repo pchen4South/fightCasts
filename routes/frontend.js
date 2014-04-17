@@ -1,209 +1,220 @@
 var async = require('async');
 var moment = require('moment');
 var _ = require('lodash');
-var extend = _.extend;
-var clone = _.clone;
 var forEach = _.forEach;
 var partial = _.partial;
 var api = require('../api');
 var searchApi = require('../services/search/search');
 var utils = require('./utils');
-var createQuery = utils.createQuery;
 var trackViewedVideo = utils.trackViewedVideo;
 var createSubheaders = utils.createSubheaders;
 
 //mutative, add fields for templating
-var presentMatch = function (match) {
+var presentMatch = function (gameSlug, match) {
   if (!match) return match;
 
+  match.url = "/" + gameSlug + "/matches/" + match._id;
   match.fighterOne = match.fighters[0];
   match.fighterTwo = match.fighters[1];
+  
   return match;
 };
 
-module.exports = function (app) {
-  var proQuery = {category: "pro"};
-  var comQuery = {category: "community"};
-  var getProMatches = partial(api.getMatchesNested, proQuery);
-  var getCommunityMatches = partial(api.getMatchesNested, comQuery);
-  var getProSearchMatches = partial(searchApi.getMatchesForSearch, proQuery);
-  var getCommunitySearchMatches = partial(searchApi.getMatchesForSearch, comQuery);
+//lazy...plural form...so tired
+var presentMatches = function (gameSlug, matches) {
+  if (!matches) return matches;
 
-  app.get("/", function (req, res) {
-    async.parallel({
-      proMatches: getProMatches,
-      communityMatches: getCommunityMatches,
-      featuredPro: api.getFeaturedProMatch,
-      featuredCommunity: api.getFeaturedCommunityMatch
-    }, function (err, results) {
-      if (err) return res.redirect("error");
-      
-      forEach(results.proMatches, presentMatch);
-      forEach(results.communityMatches, presentMatch);
-      presentMatch(results.featuredPro);
-      presentMatch(results.featuredCommunity);
-    
-      var payload = {
-        proMatches: results.proMatches,
-        communityMatches: results.communityMatches,
-        featuredPro: results.featuredPro,
-        featuredCommunity: results.featuredCommunity,
-        subheaders: createSubheaders()
-      };
-
-      res.render("index", payload); 
-    }); 
-  });
-
-  app.get("/matches/search", function (req, res) {
-    var search = req.query.search; 
-
-    async.parallel({
-      proMatches: partial(getProSearchMatches, search),
-      communityMatches: partial(getCommunitySearchMatches, search),
-    }, function (err, results) {
-      if (err) return res.redirect("error");
-
-      forEach(results.proMatches, presentMatch);
-      forEach(results.communityMatches, presentMatch);
-
-      var payload = {
-        proMatches: results.proMatches,
-        communityMatches: results.communityMatches,
-        subheaders: createSubheaders(search),
-        searched: search
-      }; 
-      res.render("index", payload);
-    });
-  });
-
-  app.get("/matches/today", function (req, res) {
-    var minDate = moment().subtract("hours", 24).format();
-    var proQuery = createQuery("ssf4-ae2012", "pro", minDate);
-    var comQuery = createQuery("ssf4-ae2012", "community", minDate);
-
-    async.parallel({
-      proMatches: partial(api.getMatchesNested, proQuery),
-      communityMatches: partial(api.getMatchesNested, comQuery),
-    }, function (err, results) {
-      if (err) return res.redirect("error");
-
-      forEach(results.proMatches, presentMatch);
-      forEach(results.communityMatches, presentMatch);
-
-      var payload = {
-        proMatches: results.proMatches,
-        communityMatches: results.communityMatches,
-        subheaders: createSubheaders(),
-        searched: "today" 
-      }; 
-      res.render("index", payload);
-    });
-  });
-
-  app.get("/matches/this-week", function (req, res) {
-    var minDate = moment().subtract("weeks", 1).format();
-    var proQuery = createQuery("ssf4-ae2012", "pro", minDate);
-    var comQuery = createQuery("ssf4-ae2012", "community", minDate);
-
-    async.parallel({
-      proMatches: partial(api.getMatchesNested, proQuery),
-      communityMatches: partial(api.getMatchesNested, comQuery),
-    }, function (err, results) {
-      if (err) return res.redirect("error");
-
-      forEach(results.proMatches, presentMatch);
-      forEach(results.communityMatches, presentMatch);
-
-      var payload = {
-        proMatches: results.proMatches,
-        communityMatches: results.communityMatches,
-        subheaders: createSubheaders(),
-        searched: "this week"
-      }; 
-      res.render("index", payload);
-    });
-  });
-
-  app.get("/matches/this-month", function (req, res) {
-    var minDate = moment().subtract("months", 1).format();
-    var proQuery = createQuery("ssf4-ae2012", "pro", minDate);
-    var comQuery = createQuery("ssf4-ae2012", "community", minDate);
-
-    async.parallel({
-      proMatches: partial(api.getMatchesNested, proQuery),
-      communityMatches: partial(api.getMatchesNested, comQuery),
-    }, function (err, results) {
-      if (err) return res.redirect("error");
-
-      forEach(results.proMatches, presentMatch);
-      forEach(results.communityMatches, presentMatch);
-
-      var payload = {
-        proMatches: results.proMatches,
-        communityMatches: results.communityMatches,
-        subheaders: createSubheaders(),
-        searched: "this month"
-      }; 
-      res.render("index", payload);
-    });
-  });
-
-  app.get("/matches/this-year", function (req, res) {
-    var minDate = moment().subtract("years", 1).format();
-    var proQuery = createQuery("ssf4-ae2012", "pro", minDate);
-    var comQuery = createQuery("ssf4-ae2012", "community", minDate);
-
-    async.parallel({
-      proMatches: partial(api.getMatchesNested, proQuery),
-      communityMatches: partial(api.getMatchesNested, comQuery),
-    }, function (err, results) {
-      if (err) return res.redirect("error");
-
-      forEach(results.proMatches, presentMatch);
-      forEach(results.communityMatches, presentMatch);
-
-      var payload = {
-        proMatches: results.proMatches,
-        communityMatches: results.communityMatches,
-        subheaders: createSubheaders(),
-        searched: "this year"
-      }; 
-      res.render("index", payload);
-    });
+  forEach(matches, function (match) {
+    match.url = "/" + gameSlug + "/matches/" + match._id;
+    match.fighterOne = match.fighters[0];
+    match.fighterTwo = match.fighters[1];
   });
   
-  app.get('/matches/:id', function (req, res) {
-    var id = req.params.id;
-    var googleClientId = req.cookies._ga;
-    
-    async.parallel({
-      proMatches: getProMatches,
-      communityMatches: getCommunityMatches,
-      featuredPro: api.getFeaturedProMatch,
-      featuredCommunity: api.getFeaturedCommunityMatch,
-      focusedMatch: partial(api.getMatchNested, id)
-    }, function (err, results) {
+  return matches;
+};
+
+//default value is last 10 years....because ya....h4x
+var calculateMinDate = function (range) {
+  var minDate;
+
+  switch (range) {
+    case "today":
+      minDate = moment().subtract("days" , 1).format();
+      break;
+    case "this-week":
+      minDate = moment().subtract("weeks" , 1).format();
+      break;
+    case "this-month":
+      minDate = moment().subtract("months" , 1).format();
+      break;
+    case "this-year":
+      minDate = moment().subtract("years" , 1).format();
+      break;
+    default:
+      minDate = moment().subtract("years", 10).format();
+  }
+
+  return minDate;
+};
+
+module.exports = function (app) {
+
+  app.get("/", function (req, res) {
+    res.redirect("/ssf4-ae2012/matches");
+  });
+
+  app.get("/:gameSlug/matches", function (req, res) {
+    var gameSlug = req.params.gameSlug;
+
+    api.getGameIdBySlug(gameSlug, function (err, id) {
       if (err) return res.redirect("error");
-      if (!results.focusedMatch) return res.redirect("notfound");
+      if (!id) return res.redirect("notFound");
 
-      forEach(results.proMatches, presentMatch);
-      forEach(results.communityMatches, presentMatch);
-      presentMatch(results.featuredPro);
-      presentMatch(results.featuredCommunity);
-      presentMatch(results.focusedMatch);
-
-      var payload = {
-        proMatches: results.proMatches,
-        communityMatches: results.communityMatches,
-        featuredPro: results.featuredPro,
-        featuredCommunity: results.featuredCommunity,
-        focusedMatch: results.focusedMatch,
-        subheaders: createSubheaders(),
+      var proQuery = {
+        category: "pro",
+        game: id
       };
+      var comQuery = {
+        category: "community",
+        game: id
+      };
+      var getProMatches = partial(api.getMatchesNested, proQuery);
+      var getCommunityMatches = partial(api.getMatchesNested, comQuery);
 
-      trackViewedVideo(results.focusedMatch, googleClientId);
-      res.render("index", payload); 
+      async.parallel({
+        proMatches: getProMatches,
+        communityMatches: getCommunityMatches,
+        featuredPro: api.getFeaturedProMatch,
+        featuredCommunity: api.getFeaturedCommunityMatch
+      }, function (err, results) {
+        if (err) return res.redirect("error");
+        
+        presentMatches(gameSlug, results.proMatches);
+        presentMatches(gameSlug, results.communityMatches);
+        presentMatch(gameSlug, results.featuredPro);
+        presentMatch(gameSlug, results.featuredCommunity);
+      
+        var payload = {
+          proMatches: results.proMatches,
+          communityMatches: results.communityMatches,
+          featuredPro: results.featuredPro,
+          featuredCommunity: results.featuredCommunity,
+          subheaders: createSubheaders(),
+          gameSlug: gameSlug
+        };
+
+        res.render("index", payload); 
+      }); 
+    });
+  });
+
+  app.get("/:gameSlug/matches/search", function (req, res) {
+    var gameSlug = req.params.gameSlug;
+
+    api.getGameIdBySlug(gameSlug, function (err, id) {
+      if (err) return res.redirect("error");
+      if (!id) return res.redirect("notFound");
+
+      var search = req.query.search;
+      var range = req.query.range;
+      var now = Date.now();
+      var minDate = calculateMinDate(range);
+      var proQuery = {
+        category: "pro",
+        game: id,
+        playedAt: {
+          "$gte": minDate,
+          "$lt": now 
+        }
+      };
+      var comQuery = {
+        category: "community",
+        game: id,
+        playedAt: {
+          "$gte": minDate,
+          "$lt": now 
+        }
+      };
+      var getProMatches = search
+        ? partial(searchApi.getMatchesForSearch, search, proQuery)
+        : partial(api.getMatchesNested, proQuery);
+      var getCommunityMatches = search
+        ? partial(searchApi.getMatchesForSearch, search, comQuery)
+        : partial(api.getMatchesNested, comQuery);
+
+      async.parallel({
+        proMatches: getProMatches,
+        communityMatches: getCommunityMatches,
+      }, function (err, results) {
+        if (err) return res.redirect("error");
+        
+        presentMatches(gameSlug, results.proMatches);
+        presentMatches(gameSlug, results.communityMatches);
+      
+        var payload = {
+          proMatches: results.proMatches,
+          communityMatches: results.communityMatches,
+          subheaders: createSubheaders(),
+          searched: (search || "") + " " + (range || ""),
+          gameSlug: gameSlug
+        };
+
+        res.render("index", payload); 
+      }); 
+    });
+  });
+
+
+  //FIXME: must use gameslug
+  app.get('/:gameSlug/matches/:id', function (req, res) {
+    var gameSlug = req.params.gameSlug;
+
+    api.getGameIdBySlug(gameSlug, function (err, id) {
+      if (err) return res.redirect("error");
+      if (!id) return res.redirect("notFound");
+
+      var matchId = req.params.id;
+      var googleClientId = req.cookies._ga;
+      var proQuery = {
+        category: "pro",
+        game: id
+      };
+      var comQuery = {
+        category: "community",
+        game: id
+      };
+      var getProMatches = partial(api.getMatchesNested, proQuery);
+      var getCommunityMatches = partial(api.getMatchesNested, comQuery);
+      
+      async.parallel({
+        proMatches: getProMatches,
+        communityMatches: getCommunityMatches,
+        featuredPro: api.getFeaturedProMatch,
+        featuredCommunity: api.getFeaturedCommunityMatch,
+        focusedMatch: partial(api.getMatchNested, matchId)
+      }, function (err, results) {
+        if (err) return res.redirect("error");
+        if (!results.focusedMatch) return res.redirect("notfound");
+
+        presentMatches(gameSlug, results.proMatches);
+        presentMatches(gameSlug, results.communityMatches);
+        presentMatch(gameSlug, results.featuredPro);
+        presentMatch(gameSlug, results.featuredCommunity);
+        presentMatch(gameSlug, results.focusedMatch);
+      
+        var payload = {
+          proMatches: results.proMatches,
+          communityMatches: results.communityMatches,
+          featuredPro: results.featuredPro,
+          featuredCommunity: results.featuredCommunity,
+          focusedMatch: results.focusedMatch,
+          subheaders: createSubheaders(),
+          gameSlug: gameSlug
+        };
+
+        trackViewedVideo(results.focusedMatch, googleClientId);
+        res.render("index", payload); 
+      });
     });
   });
 

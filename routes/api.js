@@ -43,30 +43,27 @@ module.exports = function (app) {
   });
 
 
-  app.post("/api/v1/events", ensureAuthenticated,
-    function (req, res) {
-      api.createEvent(req.body, function (err, event) {
-        if (err) res.send(400, {err: err.message}); 
-        else res.json({event: event});
-      });
+  app.post("/api/v1/events", ensureAuthenticated, function (req, res) {
+    api.createEvent(req.body, function (err, event) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({event: event});
+    });
   });
 
-  app.post("/api/v1/matches", ensureAuthenticated,
-    function (req, res) {
-      api.createMatch(req.body, function (err, match) {
-        if (err) res.send(400, {err: err.message}); 
-        else res.json({match: match});
-      });
+  app.post("/api/v1/matches", ensureAuthenticated, function (req, res) {
+    api.createMatch(req.body, function (err, match) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({match: match});
+    });
   });
 
   //UPDATE
-  app.post("/api/v1/matches/:id/feature", ensureAuthenticated,
-    function (req, res) {
-      var matchId = req.params.id;
-      api.featureMatch(matchId, function (err, featuredMatch) {
-        if (err) res.send(400, {err: err.message}); 
-        else res.json({featuredMatch: featuredMatch});
-      });
+  app.post("/api/v1/matches/:id/feature", ensureAuthenticated, function (req, res) {
+    var matchId = req.params.id;
+    api.featureMatch(matchId, function (err, featuredMatch) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({featuredMatch: featuredMatch});
+    });
   });
   
   //delete
@@ -140,7 +137,6 @@ module.exports = function (app) {
   });
   
   app.get("/api/v1/matches", function (req, res) {
-    var query = createQuery(req.query);
     var querystring = req.query.search;
  
     api.getMatchesNested(query, function (err, matches) {

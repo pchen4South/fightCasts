@@ -1,9 +1,9 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var creds = require('../creds.json');
 var analytics = require('analytics-node');
 var _ = require('lodash');  
 var forEach = _.forEach;
+var creds = require('../creds.json');
 
 analytics.init({secret: creds['segmentKey']});
 
@@ -28,7 +28,6 @@ var trackCreatedContact = function (newContact, gaCookie) {
     }
   });
 };
-
 
 var trackViewedVideo = function (focusedMatch, gaCookie) {
   
@@ -76,10 +75,8 @@ passport.deserializeUser(function(user, done) {
 });
 
 var ensureAuthenticated = function (req, res, next) {
-  if (req.isAuthenticated())
-    return next();
-  else
-    res.redirect('/admin/login');
+  if (req.isAuthenticated()) return next();
+  else res.redirect('/admin/login');
 }
 
 //returns subheaders which depend on querystring
@@ -98,21 +95,7 @@ var createSubheaders = function (querystring) {
   return querystring ? queryHeaders : defaultHeaders;
 };
                   
-//FIXME: FIX THIS TO WORK W/ GAME SLUG!
-//atm it's hardcoded for game=1 aka ssf4
-var createQuery = function (gameSlug, category, minDate) {
-  return {
-    playedAt: {
-      "$gte": minDate,
-      "$lt": Date.now()
-    },
-    category: category,
-    "game": 1 
-  }; 
-};
-
 module.exports.trackViewedVideo = trackViewedVideo;
 module.exports.trackCreatedContact = trackCreatedContact;
-module.exports.createQuery = createQuery;
 module.exports.ensureAuthenticated = ensureAuthenticated;
 module.exports.createSubheaders = createSubheaders;
