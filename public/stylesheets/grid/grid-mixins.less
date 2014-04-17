@@ -1,0 +1,293 @@
+.tile-mixin (@padding: 0px) {
+  background-color: @grid-color;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: @padding;
+  display: block;
+  border-radius: 2px;
+  &:hover {
+    text-decoration: none;
+    background-color: lighten(@grid-color, 6%);
+  }
+}
+
+.tile-region-mixin (@x: 1) {
+  .make-xs-column(@x, 0px);
+  width: (@x*32px);
+  @media (min-width: @screen-lg-min) {
+    width: (@x*48px);
+  }
+}
+
+.tile-height-mixin (@y: 1) {
+  .make-row();
+  height: (@y*32px);
+  width: 100%;
+  @media (min-width: @screen-lg-min) {
+    height: (@y*48px);
+  }
+}
+
+//when a tile is in the top of a tile it loses 4px to padding
+.tile-height-outer-mixin (@y: 1) {
+  height: (@y*32px) - 4px;
+  width: 100%;
+  @media (min-width: @screen-lg-min) {
+    height: (@y*48px) - 4px;
+  }
+}
+
+.tile-grid-mixin (@x: 1, @y: 1) {
+  .make-xs-column(@x, 0px);
+  padding: 4px;
+  height: (@y*32px);
+  width: (@x*32px);
+  @media (min-width: @screen-lg-min) {
+    height: (@y*48px);
+    width: (@x*48px);
+  }
+}
+
+.tile-offset-mixin (@count: 1) {
+  .make-sm-column-offset(@count);
+}
+
+.tile-column-push (@count: 1) {
+  .make-sm-column-push(@count);
+}
+
+.pad-0 {
+  padding: 0px !important;
+}
+
+.tile-region-1 {
+  .tile-region-mixin(1);
+}
+
+.tile-region-2 {
+  .tile-region-mixin(2);
+}
+
+.tile-region-3 {
+  .tile-region-mixin(3);
+}
+
+.tile-region-4 {
+  .tile-region-mixin(4);
+}
+
+.tile-region-5 {
+  .tile-region-mixin(5);
+}
+
+.tile-region-6 {
+  .tile-region-mixin(6);
+}
+
+.tile-region-7 {
+  .tile-region-mixin(7);
+}
+
+.tile-region-8 {
+  .tile-region-mixin(8);
+}
+
+.tile-region-10 {
+  .tile-region-mixin(10);
+}
+
+.tile-region-11 {
+  .tile-region-mixin(11);
+}
+
+.tile-region-12 {
+  .tile-region-mixin(12);
+}
+
+.tile-region-13 {
+  .tile-region-mixin(13);
+}
+
+.tile-1x1 {
+  .tile-grid-mixin(1, 1);
+}
+
+.tile-1x2 {
+  .tile-grid-mixin(1, 2);
+}
+
+.tile-1x4 {
+  .tile-grid-mixin(1, 4);
+}
+
+.tile-1x6 {
+  .tile-grid-mixin(1, 6);
+}
+
+.tile-1x8 {
+  .tile-grid-mixin(1, 8);
+}
+
+.tile-2x1 {
+  .tile-grid-mixin(2, 1);
+}
+
+.tile-3x1 {
+  .tile-grid-mixin(3, 1);
+}
+
+.tile-3x2 {
+  .tile-grid-mixin(3, 2);
+}
+
+.tile-3x3 {
+  .tile-grid-mixin(3, 3);
+}
+
+.tile-4x1 {
+  .tile-grid-mixin(4, 1);
+}
+
+.tile-4x2 {
+  .tile-grid-mixin(4, 2);
+}
+
+.tile-4x4 {
+  .tile-grid-mixin(4, 4);
+}
+
+.tile-4x8 {
+  .tile-grid-mixin(4, 8);
+}
+
+.tile-5x1 {
+  .tile-grid-mixin(5, 1);
+}
+
+.tile-5x3 {
+  .tile-grid-mixin(5, 3);
+}
+
+.tile-6x1 {
+  .tile-grid-mixin(6, 1);
+}
+
+.tile-6x2 {
+  .tile-grid-mixin(6, 2);
+}
+
+.tile-6x3 {
+  .tile-grid-mixin(6, 3);
+}
+
+.tile-6x4 {
+  .tile-grid-mixin(6, 4);
+}
+
+.tile-6x6 {
+  .tile-grid-mixin(6, 6);
+}
+
+.tile-6x8 {
+  .tile-grid-mixin(6, 8);
+}
+
+.tile-6x10{
+  .tile-grid-mixin(6, 10);
+}
+
+.tile-6x12 {
+  .tile-grid-mixin(6, 12);
+}
+
+.tile-8x1 {
+  .tile-grid-mixin(8, 1);
+}
+
+.tile-8x2 {
+  .tile-grid-mixin(8, 2);
+}
+
+.tile-8x4 {
+  .tile-grid-mixin(8, 4);
+}
+
+.tile-8x6 {
+  .tile-grid-mixin(8, 6);
+}
+
+.tile-8x8 {
+  .tile-grid-mixin(8, 8);
+}
+
+.tile-9x1 {
+  .tile-grid-mixin(9, 1);
+}
+
+.tile-10x1 {
+  .tile-grid-mixin(10, 1);
+}
+
+.tile-10x2 {
+  .tile-grid-mixin(10, 2);
+}
+
+.tile-10x3 {
+  .tile-grid-mixin(10, 3);
+}
+
+.tile-10x4 {
+  .tile-grid-mixin(10, 4);
+}
+
+.tile-10x6 {
+  .tile-grid-mixin(10, 6);
+}
+
+.tile-10x8 {
+  .tile-grid-mixin(10, 8);
+}
+
+.tile-10x10 {
+  .tile-grid-mixin(10, 10);
+}
+
+.tile-12x1 {
+  .tile-grid-mixin(12, 1);
+}
+
+.tile-12x2 {
+  .tile-grid-mixin(12, 2);
+}
+
+.tile-12x3 {
+  .tile-grid-mixin(12, 3);
+}
+
+.tile-12x4 {
+  .tile-grid-mixin(12, 4);
+}
+
+.tile-12x6 {
+  .tile-grid-mixin(12, 6);
+}
+
+.tile-12x8 {
+  .tile-grid-mixin(12, 8);
+}
+
+.tile-12x9 {
+  .tile-grid-mixin(12, 9);
+}
+.tile-24x1 {
+  .tile-grid-mixin(24, 1);
+}
+
+.tile-offset-1 {
+  .tile-offset-mixin(1);
+}
+
+.tile-offset-2 {
+  .tile-offset-mixin(2);
+}

@@ -1,0 +1,40 @@
+.form-group {
+  position: relative;
+  .input-text {
+    padding-left: 32px;
+  }
+  .icon {
+    .size(32px, 32px);
+    display: block;
+    z-index: 99;
+    position: absolute;
+    top: 7px;
+    left: 8px;
+    font-family: "Glyphicons Halflings";
+    color: @dark-text-color;
+  }
+}
+
+#contactForm {
+  .message {
+    .make-xs-column(12, 0px);
+    text-align: right;
+    padding-right: 12px;
+    padding-top: 8px;
+    font-size: @font-small;
+    color: @secondary-text-color;
+  }
+  .form-group {
+    .make-xs-column(12, 0px);
+  }
+}
+
+.input-text {
+  .size(100%, 32px);
+  color: @dark-text-color; 
+  background-color: @gray-1;
+  outline: 0;
+  border: none;
+  border-radius: 2px;
+}
+

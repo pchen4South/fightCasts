@@ -1,12 +1,17 @@
 module.exports = [
-  {name: "Pete", country: "US"},
-  {name: "Steve", country: "US"},
-  {name: "Sid", country: "US"},
-  {name: "Rohan", country: "US"},
+  {name: "Pete Chen", country: "US"},
+  {name: "Steve Kane", country: "US"},
+  {name: "Sid Zalani", country: "US"},
+  {name: "Rohan Zalani", country: "US"},
   {name: "Infiltration", country: "KR"},
   {name: "Daigo Umehara", country: "JP"},
+  {name: "Ryan Hart", country: "GB"},
+  {name: "Smug", country: "US"},
+  {name: "Solid", country: "US"},
+  {name: "Alioune", country: "FR"},
+  {name: "Xian", country: "SG"},
   {name: "Gootecks", country: "US"},
   {name: "Mike Ross", country: "US"},
-  {name: "Ryan Hart", country: "GB"},
-  {name: "multiple", country: ""}
+  {name: "Ultra David", country: "US"},
+  {name: "James Chen", country: "US"},
 ]

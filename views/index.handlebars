@@ -1,91 +1,102 @@
 <div class="tile-region-7">
-  {{#if featuredPro.id}}
-    <div class="tile-6x1">
-      <h3 class="subheader">{{subheaders.topLeft}}</h3> 
-    </div>
-    {{#with featuredPro}} 
-    <div class="tile-1x1"></div>
-    <div class="tile-6x6">
-      {{> tiles/match-tile-featured}}
-    </div>
-    {{/with}}
-    <div class="tile-1x1"></div>
-  {{/if}}
-
-  <div class="tile-6x1">
-    <h3 class="subheader">{{subheaders.botLeft}}</h3> 
+  <div class="tile-region-6" id="featuredPro">
+    {{#if featuredPro}}
+      <div class="tile-6x1">
+        <h3 class="subheader">{{subheaders.topLeft}}</h3> 
+      </div>
+      {{#with featuredPro}} 
+      <div class="tile-6x6">
+        {{> tiles/match-tile-featured}}
+      </div>
+      {{/with}}
+    {{/if}}
   </div>
-  <div class="tile-1x1"></div>
+  <div class="tile-region-1"></div>
+
+  <div class="tile-region-6" id="proList">
+    <div class="tile-6x1">
+      <h3 class="subheader">{{subheaders.botLeft}}
+      {{#if searched}}
+        <span class="subheader-secondary">{{searched}}</span>
+      {{/if}}
+      </h3>
+    </div>
   {{#if proMatches}}
     {{#each proMatches}}
       <div class="tile-6x2">
         {{> tiles/match-tile-listitemtall}}
-      </div>
-      <div class="tile-1x2">
       </div>
     {{/each}}
   {{else}}
     <div class="tile-6x2">
       <h3> No Results found </h3>
     </div>
-    <div class="tile-1x2">
-    </div>
   {{/if}}
+  </div>
+  <div class="tile-region-1">
+  </div>
 </div>
 
-<div class="col-xs-10">
-  {{#if focusedMatch.id}}
+<div class="tile-region-10" id="focusedContent">
+  {{#if focusedMatch}}
     {{#with focusedMatch}}
     <div class="tile-10x1">
       <h3 class="subheader">
         match details
       </h3> 
     </div>
-    {{> tiles/match-tile-main}}
+    <div class="tile-10x8">
+      {{> tiles/match-tile-main}}
+    </div>
     {{/with}}
   {{else}}
-  {{#with defaultFocused}}
     <div class="tile-10x1">
       <h3 class="subheader">
-        match details /
-        <span class="subheader-secondary">{{title}}</span>
+        Welcome!
       </h3> 
     </div>
-    {{> tiles/match-tile-main}}
-    {{/with}}
+    <div class="tile-10x8">
+     <div class="tile-match-main"></div>
+    </div>
   {{/if}}
 </div>
 
 <div class="tile-region-7">
-  <div class="tile-1x1"></div>
-  {{#if featuredCommunity.id}}
-  <div class="tile-6x1">
-    <h3 class="subheader">{{subheaders.topRight}}</h3> 
-  </div>
-  <div class="tile-1x1"></div>
-  {{#with featuredCommunity}}
-  <div class="tile-6x6">
-    {{> tiles/match-tile-featured}}
-  </div>
-  {{/with}}
-  <div class="tile-1x1"></div>
-  {{/if}}
 
-  <div class="tile-6x1">
-    <h3 class="subheader">{{subheaders.botRight}}</h3> 
+  <div class="tile-region-1"></div>
+  <div class="tile-region-6" id="featuredCommunity">
+    {{#if featuredCommunity}}
+      <div class="tile-6x1">
+        <h3 class="subheader">{{subheaders.topRight}}</h3> 
+      </div>
+      {{#with featuredCommunity}}
+      <div class="tile-6x6">
+        {{> tiles/match-tile-featured}}
+      </div>
+      {{/with}}
+    {{/if}}
   </div>
-  {{#if communityMatches}}
-    {{#each communityMatches}}
-      <div class="tile-1x2">
-      </div>
-      <div class="tile-6x2">
-        {{> tiles/match-tile-listitemtall}}
-      </div>
-    {{/each}}
-  {{else}}
-    <div class="tile-1x2"></div>
-    <div class="tile-6x2">
-      <h3> No Results Found </h3>
+
+  <div class="tile-region-1"></div>
+  <div class="tile-region-6" id="communityList">
+    <div class="tile-6x1">
+      <h3 class="subheader">
+        {{subheaders.botRight}}
+        {{#if searched}}
+          <span class="subheader-secondary">{{searched}}</span>
+        {{/if}}
+      </h3>
     </div>
-  {{/if}}
+    {{#if communityMatches}}
+      {{#each communityMatches}}
+        <div class="tile-6x2">
+          {{> tiles/match-tile-listitemtall}}
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="tile-6x2">
+        <h3> No Results Found </h3>
+      </div>
+    {{/if}}
+  </div>
 </div>

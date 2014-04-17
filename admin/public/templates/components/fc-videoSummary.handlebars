@@ -1,0 +1,12 @@
+{{#each video in videos}}
+  <span>
+    {{video.name}}
+    {{video.url}}
+  </span>
+  <button class="btn btn-danger btn-xs"
+  {{bind-attr disabled=inFlight}}
+  {{action "removeVideo" video}}>
+    Remove
+  </button>
+{{/each}}
+

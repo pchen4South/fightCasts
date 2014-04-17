@@ -5,6 +5,9 @@
     {{#with event}} 
       {{name}}
     {{/with}}
+    {{#if playedAt}}
+      <span class="date">{{prettyDate playedAt}}</span>
+    {{/if}}
     {{else}}
       Online Ladder
     {{/if}}

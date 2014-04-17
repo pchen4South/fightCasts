@@ -1,4 +1,4 @@
-<a class="tile-match-featured" href="/matches/{{id}}">
+<a class="tile-match-featured" href={{url}}>
   <div class="video">
     <iframe class="embedded-video"
       autohide=1
@@ -10,8 +10,6 @@
       rel=0>
     </iframe>
   </div>
-  <div class="content">
-    {{> fightcard-header}}
-    {{> fightcard}}
-  </div>
+  {{> fightcard}}
+  {{> fightcard-header}}
 </a>

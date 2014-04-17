@@ -2,36 +2,78 @@
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" type="text/css" href="/dist/index.css">
-  <link href='http://fonts.googleapis.com/css?family=Tulpen+One|Exo:400,900italic|Dosis' rel='stylesheet' type='text/css'>
-  <link rel="icon" type="image/png" href="/images/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="/vendor/stylesheets/introjs.css">
+  <link href='http://fonts.googleapis.com/css?family=Tulpen+One|Dosis' rel='stylesheet' type='text/css'>
+  <link rel="icon" type="image/png" href="/images/vs.png">
+  <!-- Segment.io/analytics -->
+  <script type="text/javascript">
+    window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+    window.analytics.load("m4dhavb3xy");
+    window.analytics.page();
+  </script>
+  <title>FightCasts.tv: Fighting Game Videos, Matches, Casts. Search for Hype VODs</title>
 </head>
 
 <body>
-  <div id="header">
+  <header id="header">
     <div class="container">
       <div class="page-header">
         <a href="/" class="page-brand">fight casts</a> 
-        <div class="search-bar">
+        <div class="search-bar" id="searchBar">
           {{> searchBar}}      
+        </div>    
+        
+        <div class="filters">
+          {{> pastMatches}}      
         </div>
+              
+        <ul class="header-links">
+          <li class="header-link tour-link" id="intro">
+            <span>
+              take the tour                
+            </span>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
+  </header>
 
-  <div id="subheader">
+  <header id="subheader">
     <div class="container">
       <div class="page-subheader">
-        <div class="tab-wrapper">
+        <div class="tab-wrapper" id="gameSelect">
           <div class="tab sf4 active">
           </div>
         </div>
+        <div class="contact-bar" id="contactBar">
+          {{> contactForm}}      
+        </div>
       </div>
     </div>
-  </div>
+  </header>
 
   <div id="main-content">
     <div class="container">
       {{{body}}}
     </div>
   </div>
+
+  <footer id="subfooter">
+    <div class="container">
+      <div class="page-subfooter">
+      </div>
+    </div>
+  </footer>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="page-footer">
+      
+      </div> 
+    </div> 
+  </footer>
+
+  <script src="/vendor/javascripts/intro.js"></script>
+  <script src="/vendor/javascripts/jquery.js"></script>
+  <script src="/javascripts/main.js"></script>
 </body>

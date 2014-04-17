@@ -1,0 +1,14 @@
+<div class = "adminSubmitForm">
+  <form role="form">  
+    <div class="form-group">
+      <label for="name">Name</label>
+      {{input type="text" 
+        disabled=inFlight 
+        class = "form-control"
+        value=data.name placeholder = "Event Name"}}
+    </div> 
+    <button class="btn btn-info" {{action "onSubmit" data "event"}}>
+      create!
+    </button> 
+  </form> 
+</div>

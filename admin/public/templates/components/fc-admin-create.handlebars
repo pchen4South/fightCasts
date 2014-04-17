@@ -1,0 +1,114 @@
+<form role="form">
+  <div class="form-group">
+    <label>Create a Match</label>
+    
+    <div class="form-group tile-10x1">
+      {{input type="text"
+        disabled=inFlight 
+        value=data.title
+        class = "form-control"
+        placeholder = "Match Title"}}
+      <span class="help-block">{{errors.title}}</span>
+    </div>
+    
+    <div class="form-group tile-10x1">
+      {{input type="text"
+        disabled=inFlight
+        value=data.description
+        class = "form-control"
+        placeholder = "Description"}}
+    </div>
+    
+    <div class="form-group tile-4x1">
+      {{view Ember.Select 
+        disabled=inFlight
+        prompt="Select game"
+        content=games
+        selection=data.game
+        optionLabelPath="content"
+        class = "form-control"}}
+      <span class="help-block">{{errors.game}}</span>
+    </div>
+    
+      <div class="form-group tile-12x3"> 
+        <label> Fighters </label>
+        {{fc-createFighterForm 
+          inFlight=inFlight
+          characters=characters
+          fighter=data.fighters
+          people = people}}
+        <span class="help-block">{{errors.fighterOne}}</span>
+    </div> 
+    
+    <div class="form-group tile-12x2"> 
+      <label> Players to Add: </label>
+      {{fc-fighterSummary 
+        inFlight=inFlight
+        fighters=data.fighters}}
+    </div>
+    <div class="form-group tile-4x1">
+      {{view Ember.Select 
+        disabled=inFlight
+        prompt="Select Category"
+        content=categories
+        selection=data.category
+        optionLabelPath="content"
+        optionValuePath="content"
+        class = "form-control"}}
+      <span class="help-block">{{errors.game}}</span>
+    </div>
+    
+    <div class="form-group tile-5x3">
+      <label for="casters">Casters</label>
+      {{view Ember.Select 
+        disabled=inFlight
+        prompt="Select Casters"
+        multiple=true
+        content=people
+        selection=data.casters
+        optionLabelPath="content.name"
+        class = "form-control"}}
+    </div>
+
+    
+    <div class="form-group tile-5x1">
+      <label>Event Name</label> 
+      {{view Ember.Select 
+        disabled=inFlight
+        prompt="Select Event"
+        content=events
+        selection=data.event
+        optionLabelPath="content.name"
+        class = "form-control"}}
+    </div>
+    
+    
+    <div class="form-group tile-5x1">
+      <label for="playedAt">Date Played</label>
+       {{input type="date" disabled=inFlight value=data.playedAt
+        class = "form-control"}}
+    </div>
+
+    <div class="form-group tile-12x1">
+       {{fc-createVideoForm inFlight=inFlight videos=data.videoData}}
+    </div>   
+
+
+    <div class="form-group tile-12x1">
+    <label> Videos to Add </label>
+       {{fc-videoSummary
+      inFlight=inFlight
+      videos=data.videoData}}
+    </div>
+
+    <div class = "form-group tile-12x1">
+      <button class="btn btn-default"
+        {{bind-attr disabled=inFlight}}
+        {{action "onSubmit" data}}>
+        Submit
+      </button> 
+    </div>
+    
+  </div>
+</form> 
+

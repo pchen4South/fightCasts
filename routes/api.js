@@ -1,126 +1,164 @@
 var api = require('../api');
-var _ = require('lodash');
-var find = _.find;
-var first = _.first;
-var partial = _.partial;
-var filter = _.filter;
+var createQuery = require('./utils').createQuery;
+var gamesList = require('../models/gameCharacterData');
+var passport = require('passport');
+var ensureAuthenticated = require('./utils').ensureAuthenticated;
+var trackCreatedContact = require('./utils').trackCreatedContact;
 
 module.exports = function (app) {
 
-  //PLAYER
-  app.post("/api/v1/people", api.createPerson);
+  //CREATE
+  /*
+    We don't want to delay the response to wait for email
+    to send so we respond once the contact is created and then
+    carry on w/ sending the email
+  */
+  app.post("/api/v1/contacts", function (req, res) {
+    if (!req.body.email) return res.send(400, "No valid email");
+    var mailer = app.get("mailer");
+    var signup = app.get("emails").contactSignup;
+    var options = {
+      to: req.body.email,
+      subject: "Thanks for signing up!",
+      html: signup({email: req.body.email})
+    };
 
-  //VIDEO
-  app.post("/api/v1/videos", api.createVideo);
-
-  //EVENT
-  app.post("/api/v1/events", api.createEvent);
-
-  //CHANNEL
-  app.post("/api/v1/channels", api.createChannel);
-
-  //TEAM
-  app.post("/api/v1/teams", api.createTeam);
-
-  //FIGHTER
-  
-  //MATCH
-  app.get("/api/v1/matches/", function (req, res, next) {
-    var query = req.query.search;
-    var querystring = query;
-    query = {"title": {"$regex": new RegExp(query, "i")}};
- 
-    api.getMatchesNested(query,function (err, results) {
-      if (err) res.send(400, {err: err.message});
-      else {
-        res.render("results",{matches: results, query: querystring}); 
-      }
+    api.createContact(req.body, function (err, contact) {
+      if (err) return res.send(400, {err: err.message}); 
+      else res.json({contact: contact});
+      mailer.sendMail(options, function (err, result) {
+        //handle email error?
+        trackCreatedContact(contact, req.cookies._ga);
+        return;
+      }); 
     }); 
   });
-  
-  app.get("/api/v1/matches/all", allMatches);
-  app.get("/api/v1/matches/pro", partial(getMatchByCategory, "pro"));
-  app.get("/api/v1/matches/community", partial(getMatchByCategory, "community"));
-  app.get("/api/v1/matches/scrub", partial(getMatchByCategory, "scrub"));
-  
-  app.post("/api/v1/submittedMatches", function (req, res) {
-    api.createSubmittedMatch({matchJson: req.body}, function (err, result) {
+
+  app.post("/api/v1/people", ensureAuthenticated,
+    function (req, res) {
+      api.createPerson(req.body, function (err, person) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({person: person});
+      });
+  });
+
+
+  app.post("/api/v1/events", ensureAuthenticated, function (req, res) {
+    api.createEvent(req.body, function (err, event) {
       if (err) res.send(400, {err: err.message}); 
-      else res.json(result);
+      else res.json({event: event});
     });
   });
-};
 
-
-
-//HELPERS
-var createPayload = function (matches) {
-
-  var matchesByCategory = sortByCategory(matches);
-  
-  matchesByCategory.pro.sort(sortByDateMostRecent);
-  matchesByCategory.scrub.sort(sortByDateMostRecent);
-  matchesByCategory.community.sort(sortByDateMostRecent);
-
-  return {
-    matches: matchesByCategory,
-    featuredMatches: {
-      pro: getFeaturedMatches(matchesByCategory.pro)[0] || {}, 
-      community: getFeaturedMatches(matchesByCategory.community)[0] || {}, 
-      scrub: getFeaturedMatches(matchesByCategory.scrub)[0] || {}, 
-      //default: matchesByCategory.pro[0], 
-    },
-    communityMatches: first(matchesByCategory.community, 3)
-  };
-};
-
-var sortByCategory = function (matchArray){
-  var community = [];
-  var pro = [];
-  var scrub = [];
-  
-  for(var i = 0; i < matchArray.length; ++i){
-    switch(matchArray[i].category){
-      case "pro":
-        pro.push(matchArray[i]);
-        break;
-      case "scrub":
-        scrub.push(matchArray[i]);
-        break;
-      case "community":
-        community.push(matchArray[i]);
-        break;
-    }
-  }
-  
-  return {pro: pro, community: community, scrub:scrub};  
-  
-};
-
-var sortByDateMostRecent = function(date1,date2){
-  return date1 - date2;
-};
-
-var allMatches = function (req, res) {
-  api.getMatchesNested(function (err, matches) {
-    var payload = createPayload(matches);
-    //console.log(JSON.stringify(payload, null, 6));
-    res.send(payload);
-   });
-};
-
-var getMatchByCategory = function (type, req, res) {
-  api.getMatchesNested(function (err, matches) {
-    var payload = filter(matches, function(element){
-      return element.category == type;
+  app.post("/api/v1/matches", ensureAuthenticated, function (req, res) {
+    api.createMatch(req.body, function (err, match) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({match: match});
     });
-    res.send(payload);
-   });
-};
-
-var getFeaturedMatches = function(matchArray){
-  var featured = filter(matchArray, function(element){
-    return element.featured == true;
   });
-  return featured;
+
+  //UPDATE
+  app.post("/api/v1/matches/:id/feature", ensureAuthenticated, function (req, res) {
+    var matchId = req.params.id;
+    api.featureMatch(matchId, function (err, featuredMatch) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({featuredMatch: featuredMatch});
+    });
+  });
+  
+  //delete
+  app.post("/api/v1/matches/:id/delete", ensureAuthenticated,
+    function (req, res) {
+      var matchId = req.params.id;
+      api.deleteMatch(matchId, function (err, deletedMatch) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({deletedMatch: deletedMatch});
+      });
+  });
+
+  app.post("/api/v1/events/:id/delete", ensureAuthenticated,
+    function (req, res) {
+      var matchId = req.params.id;
+      api.deleteEvent(matchId, function (err, deletedEvent) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({deletedEvent: deletedEvent});
+      });
+  });
+  
+  app.post("/api/v1/people/:id/delete", ensureAuthenticated,
+    function (req, res) {
+      var matchId = req.params.id;
+      api.deletePerson(matchId, function (err, deletedPerson) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({deletedPerson: deletedPerson});
+      });
+  });  
+  
+  app.post("/api/v1/contacts/:id/delete", ensureAuthenticated,
+    function (req, res) {
+      var matchId = req.params.id;
+      api.deleteContact(matchId, function (err, deletedContact) {
+        if (err) res.send(400, {err: err.message}); 
+        else res.json({deletedContact: deletedContact});
+      });
+  });
+
+  //READ
+  app.get("/api/v1/people", function (req, res) {
+    api.getPeople(function (err, people) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({
+        people: people 
+      });
+    });
+  });
+
+  app.get("/api/v1/events", function (req, res) {
+    api.getEvents(function (err, events) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({
+        events: events 
+      });
+    });
+  });
+  
+  app.get("/api/v1/contacts", function (req, res) {
+    api.getContacts(function (err, contacts) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({
+        contacts: contacts
+      });
+    });
+  });
+  
+    
+  app.get("/api/v1/games", function (req, res) {
+    res.json({games: gamesList});
+  });
+  
+  app.get("/api/v1/matches", function (req, res) {
+    var querystring = req.query.search;
+ 
+    api.getMatchesNested(query, function (err, matches) {
+      if (err) res.send(400, {err: err.message});
+      else res.json({
+        matches: matches,
+        query: querystring
+      }); 
+    }); 
+  });
+
+  app.get("/api/v1/matches/featured/pro", function (req, res) {
+    api.getFeaturedProMatch(function (err, featuredMatch) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({featuredMatch: featuredMatch});
+    });
+  });
+
+  app.get("/api/v1/matches/featured/community", function (req, res) {
+    api.getFeaturedCommunityMatch(function (err, featuredMatch) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({featuredMatch: featuredMatch});
+    });
+  });
 };

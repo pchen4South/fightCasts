@@ -1,0 +1,29 @@
+<div class = "adminFormWrapper">
+  <form role="form">
+    <div class="form-group">
+      <label for="person">Player</label>
+      {{view Ember.Select 
+      disabled=inFlight
+      prompt="Select a person"
+      content=people
+      selection=data.name
+      optionValuePath="content.name"
+      optionLabelPath="content.name"
+      class = "form-control"}} 
+
+      <label for="characters">Character</label>
+      {{view Ember.Select 
+        disabled=inFlight
+        prompt="Select a character"
+        content=characters
+        selection=data.character
+        optionValuePath="content.name"
+        optionLabelPath="content.name"
+        class = "form-control"}} 
+      
+    </div> 
+     <button class="btn btn-info" {{action "onSubmit" data "fighter"}}>
+      create!
+    </button> 
+  </form> 
+</div>

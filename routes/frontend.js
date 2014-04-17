@@ -1,103 +1,228 @@
-var _ = require('lodash');
 var async = require('async');
-var find = _.find;
-var first = _.first;
-var filter = _.filter;
-var extend = _.extend;
-var clone = _.clone;
-var sortBy = _.sortBy;
+var moment = require('moment');
+var _ = require('lodash');
+var forEach = _.forEach;
 var partial = _.partial;
-var isEmpty = _.isEmpty;
 var api = require('../api');
-var gameFilter = {default: 'SF4'};
-var subheaders = {
-  default: {
-    topLeft: 'top pro match',
-    topRight: 'top community match',
-    botLeft: 'new pro matches',
-    botRight: 'new community matches'},
-    searchPage: {botLeft: 'results: pro',
-    botRight: 'results: community'
-  }
-};
-                  
-module.exports = function (app) {
-  var getMatches = function (rawQuery, cb) {
-    var query = !isEmpty(rawQuery) ? parseQuery(rawQuery) : {};
-    var comQuery = {category: "community"};
-    var proQuery = {category: "pro"};
-    var communityMatchesQuery = extend(clone(query), comQuery);
-    var proMatchesQuery = extend(clone(query), proQuery);
+var searchApi = require('../services/search/search');
+var utils = require('./utils');
+var trackViewedVideo = utils.trackViewedVideo;
+var createSubheaders = utils.createSubheaders;
+
+//mutative, add fields for templating
+var presentMatch = function (gameSlug, match) {
+  if (!match) return match;
+
+  match.url = "/" + gameSlug + "/matches/" + match._id;
+  match.fighterOne = match.fighters[0];
+  match.fighterTwo = match.fighters[1];
   
-    async.parallel({
-      proMatches: partial(api.getMatchesNested, proMatchesQuery),
-      communityMatches: partial(api.getMatchesNested, communityMatchesQuery),
-      featuredPro: partial(api.getFeaturedMatch, proQuery),
-      featuredCommunity: partial(api.getFeaturedMatch, comQuery)
-    }, cb);
-  };
-    
-  var parseQuery = function(query){
-    var searchString = query.search;
-    var gameString = query.game;
-    
-    if(!gameString){gameString = "SF4"}
-    return {title: {"$regex": new RegExp(searchString, "i")}};
-  };
+  return match;
+};
+
+//lazy...plural form...so tired
+var presentMatches = function (gameSlug, matches) {
+  if (!matches) return matches;
+
+  forEach(matches, function (match) {
+    match.url = "/" + gameSlug + "/matches/" + match._id;
+    match.fighterOne = match.fighters[0];
+    match.fighterTwo = match.fighters[1];
+  });
+  
+  return matches;
+};
+
+//default value is last 10 years....because ya....h4x
+var calculateMinDate = function (range) {
+  var minDate;
+
+  switch (range) {
+    case "today":
+      minDate = moment().subtract("days" , 1).format();
+      break;
+    case "this-week":
+      minDate = moment().subtract("weeks" , 1).format();
+      break;
+    case "this-month":
+      minDate = moment().subtract("months" , 1).format();
+      break;
+    case "this-year":
+      minDate = moment().subtract("years" , 1).format();
+      break;
+    default:
+      minDate = moment().subtract("years", 10).format();
+  }
+
+  return minDate;
+};
+
+module.exports = function (app) {
 
   app.get("/", function (req, res) {
-    var searched = req.query.search;
-    //queryFlag is true when there is a search query
-    var queryFlag = !isEmpty(req.query);
-    if(queryFlag){
-      var searched = req.query.search;
-      var subheaderText = subheaders.searchPage;
-    }else var subheaderText = subheaders.default;
-
-    
-    getMatches(req.query, function (err, results) {
-      var focused = {};     
-      if(results.proMatches){focused = results.proMatches[0]}
-      else if(results.communityMatches){focused = results.communityMatches[0]}
-      else focused = results.featuredPro;
-    
-      var payload = {
-        proMatches: sortBy(results.proMatches, "createdAt"),
-        communityMatches: sortBy(results.communityMatches, "createdAt"),
-        featuredPro: queryFlag ? null : results.featuredPro,
-        featuredCommunity: queryFlag ? null : results.featuredCommunity,
-        subheaders: subheaderText,
-        searched: searched,
-        defaultFocused: focused
-      };
-  
-      res.render("index", payload); 
-    }); 
+    res.redirect("/ssf4-ae2012/matches");
   });
-  app.get('/matches/:id', function (req, res) {
-    var id = req.params.id;
-    //queryFlag is true when there is a search query
-    var queryFlag = !isEmpty(req.query);
-    if(queryFlag){
-      var searched = req.query.search;
-      var subheaderText = subheaders.searchPage;
-    }else var subheaderText = subheaders.default;
-    
-    async.parallel({
-      matchData: partial(getMatches, req.query),
-      focusedMatch: partial(api.getMatchNested, id)
-    }, function (err, results) {
-      var payload = {
-        proMatches: sortBy(results.matchData.proMatches, "createdAt"),
-        communityMatches: sortBy(results.matchData.communityMatches, "createdAt"),
-        featuredPro: queryFlag ? null : results.matchData.featuredPro,
-        featuredCommunity: queryFlag ? null : results.matchData.featuredCommunity,
-        focusedMatch: results.focusedMatch,
-        searched: searched,
-        subheaders: subheaderText
-      };
 
-      res.render("index", payload); 
+  app.get("/:gameSlug/matches", function (req, res) {
+    var gameSlug = req.params.gameSlug;
+
+    api.getGameIdBySlug(gameSlug, function (err, id) {
+      if (err) return res.redirect("error");
+      if (!id) return res.redirect("notFound");
+
+      var proQuery = {
+        category: "pro",
+        game: id
+      };
+      var comQuery = {
+        category: "community",
+        game: id
+      };
+      var getProMatches = partial(api.getMatchesNested, proQuery);
+      var getCommunityMatches = partial(api.getMatchesNested, comQuery);
+
+      async.parallel({
+        proMatches: getProMatches,
+        communityMatches: getCommunityMatches,
+        featuredPro: api.getFeaturedProMatch,
+        featuredCommunity: api.getFeaturedCommunityMatch
+      }, function (err, results) {
+        if (err) return res.redirect("error");
+        
+        presentMatches(gameSlug, results.proMatches);
+        presentMatches(gameSlug, results.communityMatches);
+        presentMatch(gameSlug, results.featuredPro);
+        presentMatch(gameSlug, results.featuredCommunity);
+      
+        var payload = {
+          proMatches: results.proMatches,
+          communityMatches: results.communityMatches,
+          featuredPro: results.featuredPro,
+          featuredCommunity: results.featuredCommunity,
+          subheaders: createSubheaders(),
+          gameSlug: gameSlug
+        };
+
+        res.render("index", payload); 
+      }); 
     });
+  });
+
+  app.get("/:gameSlug/matches/search", function (req, res) {
+    var gameSlug = req.params.gameSlug;
+
+    api.getGameIdBySlug(gameSlug, function (err, id) {
+      if (err) return res.redirect("error");
+      if (!id) return res.redirect("notFound");
+
+      var search = req.query.search;
+      var range = req.query.range;
+      var now = Date.now();
+      var minDate = calculateMinDate(range);
+      var proQuery = {
+        category: "pro",
+        game: id,
+        playedAt: {
+          "$gte": minDate,
+          "$lt": now 
+        }
+      };
+      var comQuery = {
+        category: "community",
+        game: id,
+        playedAt: {
+          "$gte": minDate,
+          "$lt": now 
+        }
+      };
+      var getProMatches = search
+        ? partial(searchApi.getMatchesForSearch, search, proQuery)
+        : partial(api.getMatchesNested, proQuery);
+      var getCommunityMatches = search
+        ? partial(searchApi.getMatchesForSearch, search, comQuery)
+        : partial(api.getMatchesNested, comQuery);
+
+      async.parallel({
+        proMatches: getProMatches,
+        communityMatches: getCommunityMatches,
+      }, function (err, results) {
+        if (err) return res.redirect("error");
+        
+        presentMatches(gameSlug, results.proMatches);
+        presentMatches(gameSlug, results.communityMatches);
+      
+        var payload = {
+          proMatches: results.proMatches,
+          communityMatches: results.communityMatches,
+          subheaders: createSubheaders(),
+          searched: (search || "") + " " + (range || ""),
+          gameSlug: gameSlug
+        };
+
+        res.render("index", payload); 
+      }); 
+    });
+  });
+
+
+  //FIXME: must use gameslug
+  app.get('/:gameSlug/matches/:id', function (req, res) {
+    var gameSlug = req.params.gameSlug;
+
+    api.getGameIdBySlug(gameSlug, function (err, id) {
+      if (err) return res.redirect("error");
+      if (!id) return res.redirect("notFound");
+
+      var matchId = req.params.id;
+      var googleClientId = req.cookies._ga;
+      var proQuery = {
+        category: "pro",
+        game: id
+      };
+      var comQuery = {
+        category: "community",
+        game: id
+      };
+      var getProMatches = partial(api.getMatchesNested, proQuery);
+      var getCommunityMatches = partial(api.getMatchesNested, comQuery);
+      
+      async.parallel({
+        proMatches: getProMatches,
+        communityMatches: getCommunityMatches,
+        featuredPro: api.getFeaturedProMatch,
+        featuredCommunity: api.getFeaturedCommunityMatch,
+        focusedMatch: partial(api.getMatchNested, matchId)
+      }, function (err, results) {
+        if (err) return res.redirect("error");
+        if (!results.focusedMatch) return res.redirect("notfound");
+
+        presentMatches(gameSlug, results.proMatches);
+        presentMatches(gameSlug, results.communityMatches);
+        presentMatch(gameSlug, results.featuredPro);
+        presentMatch(gameSlug, results.featuredCommunity);
+        presentMatch(gameSlug, results.focusedMatch);
+      
+        var payload = {
+          proMatches: results.proMatches,
+          communityMatches: results.communityMatches,
+          featuredPro: results.featuredPro,
+          featuredCommunity: results.featuredCommunity,
+          focusedMatch: results.focusedMatch,
+          subheaders: createSubheaders(),
+          gameSlug: gameSlug
+        };
+
+        trackViewedVideo(results.focusedMatch, googleClientId);
+        res.render("index", payload); 
+      });
+    });
+  });
+
+  app.get("/error", function (req, res) {
+    res.render("error"); 
+  });
+
+  app.get("/*", function (req, res) {
+    res.render("notfound"); 
   });
 };

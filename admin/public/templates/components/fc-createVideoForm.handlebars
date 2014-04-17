@@ -1,0 +1,13 @@
+<div class="form-group tile-5x1">
+    {{input type="text" disabled=inFlight value=newVideo.url
+      class="form-control"
+      placeholder = "Video URL"}}
+</div>
+
+<div class="form-group tile-5x1">
+  <button class="btn btn-default" 
+    {{bind-attr disabled=inFlight}}
+    {{action "addVideo" newVideo}}>
+    Add 
+  </button>
+</div>

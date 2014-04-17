@@ -1,0 +1,49 @@
+<div class = "matchDetailHeader"> Match Details for <label> {{match.title}} </label></div>
+<button {{action makeFeatured match}} class = "btn btn-xs btn-default">Make Featured </button>
+<button {{action deleteMatch match}} class = "btn btn-xs btn-default">Delete</button>
+<ul>
+  <li class = "adminListRow">
+    <label> Description:</label>  
+    <div class = "adminListItem">{{match.description}}</div>
+  </li>
+  <li class = "adminListRow">
+    <label> Category:</label>
+    <div class = "adminListItem">{{match.category}}</div>
+  </li>
+  <li class = "adminListRow">
+    <label> Date Played:</label> 
+    <div class = "adminListItem"> {{prettyDate match.playedAt}} </div>
+  </li>
+  <li class = "adminListRow">
+    <label> Featured At:</label>
+    <div class = "adminListItem">
+      {{#if match.featuredAt}}
+        {{prettyDate match.featuredAt}}
+      {{else}}
+        Not Featured
+      {{/if}}</div>
+  </li>
+  <li class = "adminListRow">
+    <label> Videos:</label> 
+    {{#each match.videos}} 
+      <div class = "adminListItem"> {{this}} </div>
+    {{/each}}
+  </li>
+  <li class = "adminListRow">
+    <label> Casters: </label>
+    {{#each match.casters}} 
+      <div class = "adminListItem">{{this.name}} </div>
+    {{/each}}
+  </li>
+  <li class = "adminListRow">
+    <label> Fighters: </label>
+    {{#each match.fighters}} 
+    <div class = "adminListItem"> 
+    {{this.person.name}} 
+      {{#each this.characters}}
+        <i>{{this.name}} </i>
+      {{/each}}
+    </div>
+    {{/each}}
+  </li>
+</ul>
