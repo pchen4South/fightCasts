@@ -137,8 +137,9 @@ module.exports = function (app) {
   });
   
   app.get("/api/v1/matches", function (req, res) {
-    var querystring = req.query.search;
- 
+    var querystring = req.query.search || {};
+    var query = {};
+    
     api.getMatchesNested(query, function (err, matches) {
       if (err) res.send(400, {err: err.message});
       else res.json({
