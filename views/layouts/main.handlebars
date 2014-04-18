@@ -19,21 +19,18 @@
     <div class="container">
       <div class="page-header">
         <a href="/" class="page-brand">fight casts</a> 
-        <div class="search-bar" id="searchBar">
-          {{> searchBar}}      
-        </div>    
-        
-        <div class="filters">
-          {{> pastMatches}}      
+        <div class="tab active">
+          <div class="inner-tab sf4">
+          </div>
         </div>
-              
-        <ul class="header-links">
-          <li class="header-link tour-link" id="intro">
-            <span>
-              take the tour                
-            </span>
-          </li>
-        </ul>
+        <div class="tab">
+          <div class="inner-tab mvc3">
+          </div>
+        </div>
+        <div class="tab">
+          <div class="inner-tab sfxt">
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -41,9 +38,11 @@
   <header id="subheader">
     <div class="container">
       <div class="page-subheader">
-        <div class="tab-wrapper" id="gameSelect">
-          <div class="tab sf4 active">
-          </div>
+        <div class="search-bar" id="searchBar">
+          {{> searchBar}}      
+        </div>    
+        <div class="filters">
+          {{> pastMatches}}      
         </div>
         <div class="contact-bar" id="contactBar">
           {{> contactForm}}      
