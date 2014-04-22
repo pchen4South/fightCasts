@@ -32,6 +32,7 @@
     "request": "^2.34.0",
     "through": "^2.3.4",
     "youtube-api": "^0.2.2",
-    "analytics-node": "^0.6.0"
+    "analytics-node": "^0.6.0",
+    "bcrypt": "^0.7.7"
   }
 }

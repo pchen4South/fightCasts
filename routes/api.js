@@ -8,13 +8,7 @@ var trackCreatedContact = require('./utils').trackCreatedContact;
 module.exports = function (app) {
 
   //CREATE
-  /*
-    We don't want to delay the response to wait for email
-    to send so we respond once the contact is created and then
-    carry on w/ sending the email
-  */
-  app.post("/api/v1/contacts", function (req, res) {
-    if (!req.body.email) return res.send(400, "No valid email");
+  var signup = function (req, res) {
     var mailer = app.get("mailer");
     var signup = app.get("emails").contactSignup;
     var options = {
@@ -23,23 +17,49 @@ module.exports = function (app) {
       html: signup({email: req.body.email})
     };
 
-    api.createContact(req.body, function (err, contact) {
+    api.createUser(req.body, function (err, user) {
       if (err) return res.send(400, {err: err.message}); 
-      else res.json({contact: contact});
-      mailer.sendMail(options, function (err, result) {
-        //handle email error?
-        trackCreatedContact(contact, req.cookies._ga);
-        return;
-      }); 
+      else res.json({user: user});
+      //FIXME: this was throwing errors for some reason
+      //trackCreatedContact(user, req.cookies._ga);
+      mailer.sendMail(options);
     }); 
-  });
+  };
 
-  app.post("/api/v1/people", ensureAuthenticated,
-    function (req, res) {
-      api.createPerson(req.body, function (err, person) {
-        if (err) res.send(400, {err: err.message}); 
-        else res.json({person: person});
+  var changePassword = function (req, res) {
+    var userData = {
+      email: req.body.email,
+      password: req.body.password 
+    }; 
+    var newPassword = req.body.newPassword;
+
+    api.changeUserPassword(userData, newPassword, function (err, user) {
+      if (err) return res.send(400, {err: err.message}); 
+      else res.json({
+        user: user 
       });
+    });
+  };
+
+  var resetPassword = function (req, res) {
+    api.resetUserPassword(req.body.email, function (err, tempPw) {
+      if (err) return res.send(400, {err: err.message}); 
+      else res.json({
+        tempPw: tempPw 
+      });
+    });
+  };
+
+  app.post("/api/v1/users", signup);
+  app.post("/api/v1/signup", signup);
+  app.post("/api/v1/changePassword", changePassword);
+  app.post("/api/v1/resetPassword", resetPassword);
+
+  app.post("/api/v1/people", ensureAuthenticated, function (req, res) {
+    api.createPerson(req.body, function (err, person) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({person: person});
+    });
   });
 
 
@@ -67,43 +87,59 @@ module.exports = function (app) {
   });
   
   //delete
-  app.post("/api/v1/matches/:id/delete", ensureAuthenticated,
-    function (req, res) {
-      var matchId = req.params.id;
-      api.deleteMatch(matchId, function (err, deletedMatch) {
-        if (err) res.send(400, {err: err.message}); 
-        else res.json({deletedMatch: deletedMatch});
-      });
+  app.post("/api/v1/matches/:id/delete", ensureAuthenticated, function (req, res) {
+    var matchId = req.params.id;
+    api.deleteMatch(matchId, function (err, deletedMatch) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({deletedMatch: deletedMatch});
+    });
   });
 
-  app.post("/api/v1/events/:id/delete", ensureAuthenticated,
-    function (req, res) {
-      var matchId = req.params.id;
-      api.deleteEvent(matchId, function (err, deletedEvent) {
-        if (err) res.send(400, {err: err.message}); 
-        else res.json({deletedEvent: deletedEvent});
-      });
+  app.post("/api/v1/events/:id/delete", ensureAuthenticated, function (req, res) {
+    var matchId = req.params.id;
+    api.deleteEvent(matchId, function (err, deletedEvent) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({deletedEvent: deletedEvent});
+    });
   });
   
-  app.post("/api/v1/people/:id/delete", ensureAuthenticated,
-    function (req, res) {
-      var matchId = req.params.id;
-      api.deletePerson(matchId, function (err, deletedPerson) {
-        if (err) res.send(400, {err: err.message}); 
-        else res.json({deletedPerson: deletedPerson});
-      });
+  app.post("/api/v1/people/:id/delete", ensureAuthenticated, function (req, res) {
+    var matchId = req.params.id;
+    api.deletePerson(matchId, function (err, deletedPerson) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({deletedPerson: deletedPerson});
+    });
   });  
   
-  app.post("/api/v1/contacts/:id/delete", ensureAuthenticated,
-    function (req, res) {
-      var matchId = req.params.id;
-      api.deleteContact(matchId, function (err, deletedContact) {
-        if (err) res.send(400, {err: err.message}); 
-        else res.json({deletedContact: deletedContact});
-      });
+  app.post("/api/v1/contacts/:id/delete", ensureAuthenticated, function (req, res) {
+    var matchId = req.params.id;
+    api.deleteContact(matchId, function (err, deletedContact) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({deletedContact: deletedContact});
+    });
   });
 
   //READ
+
+  //get a user by their email
+  app.post("/api/v1/users", function (req, res) {
+    api.getUsers(function (err, users) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({
+        users: users 
+      });
+    }); 
+  });
+
+  app.get("/api/v1/users", function (req, res) {
+    api.getUsers(function (err, users) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({
+        users: users 
+      });
+    }); 
+  });
+
   app.get("/api/v1/people", function (req, res) {
     api.getPeople(function (err, people) {
       if (err) res.send(400, {err: err.message}); 
@@ -147,6 +183,15 @@ module.exports = function (app) {
         query: querystring
       }); 
     }); 
+  });
+
+  app.get("/api/v1/users/:id", function (req, res) {
+    api.getUser(req.params.id, function (err, user) {
+      if (err) res.send(400, {err: err.message}); 
+      else res.json({
+        user: user
+      });
+    });
   });
 
   app.get("/api/v1/matches/featured/pro", function (req, res) {

@@ -164,8 +164,6 @@ module.exports = function (app) {
     });
   });
 
-
-  //FIXME: must use gameslug
   app.get('/:gameSlug/matches/:id', function (req, res) {
     var gameSlug = req.params.gameSlug;
 
