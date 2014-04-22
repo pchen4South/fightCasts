@@ -31,6 +31,23 @@
           <div class="inner-tab sfxt">
           </div>
         </div>
+        <ul class="button-group">
+          <li>
+            <span class="link-text" id="signup">signup</span>
+          </li>
+          <li>
+            <span class="link-text" id="login">login</span>
+          </li>
+          <li>
+            <span class="link-text" id="forgotPassword">forgot password</span>
+          </li>
+        </ul>
+        <div class="header-form">
+          <form id="userForm" class="stacked-form">
+            <input class="input-text" name="email" placeholder="email"/> 
+            <input type="password" class="input-text" placeholder="password"/> 
+          </form>
+        </div>
       </div>
     </div>
   </header>
@@ -43,9 +60,6 @@
         </div>    
         <div class="filters">
           {{> pastMatches}}      
-        </div>
-        <div class="contact-bar" id="contactBar">
-          {{> contactForm}}      
         </div>
       </div>
     </div>

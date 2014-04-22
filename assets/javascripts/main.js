@@ -1,9 +1,8 @@
 (function (window, undefined) {
   var introButton = $("#intro");
-  var contactForm = $("#contactForm");
-  var contactFormMessage = contactForm.children(".message").first();
   var emailInput = $("#emailInput");
-  var contactUri = "/api/v1/contacts/";
+  var signupUri = "/api/v1/signup/";
+  var resetPwUri = "/api/v1/resetPassword/";
   var tour = introJs();
 
   tour.setOptions({
@@ -59,25 +58,4 @@
     tour.start();
   });
 
-  var submitContact = function (email) {
-    $.post(contactUri, {email: email})
-    .then(function (results) {
-      var successText = "Thanks for signing up, " + results.contact.email;
-
-      contactFormMessage.text(successText);
-      emailInput.val("");
-    })
-    .fail(function (err) {
-      var failureText = err.message ? err.message : "Something went wrong...";
-
-      contactFormMessage.text(failureText);
-      emailInput.val("");
-    })
-  };
-
-  contactForm.submit(function (e) {
-    e.preventDefault(); 
-    var email = emailInput.val();
-    submitContact(email)
-  });
 })(window);

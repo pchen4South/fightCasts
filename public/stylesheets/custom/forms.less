@@ -1,3 +1,13 @@
+.input-text {
+  .size(100%, 32px);
+  color: @dark-text-color; 
+  background-color: @gray-1;
+  outline: 0;
+  border: none;
+  border-radius: 2px;
+  padding: 0px 6px;
+}
+
 .form-group {
   position: relative;
   .input-text {
@@ -15,25 +25,22 @@
   }
 }
 
-#contactForm {
-  .message {
-    .make-xs-column(12, 0px);
-    text-align: right;
-    padding-right: 12px;
-    padding-top: 8px;
-    font-size: @font-small;
-  }
-  .form-group {
-    .make-xs-column(12, 0px);
+.stacked-form {
+  input {
+    margin-top: 4px;
+    margin-bottom: 4px;
   }
 }
 
-.input-text {
-  .size(100%, 32px);
-  color: @dark-text-color; 
-  background-color: @gray-1;
-  outline: 0;
-  border: none;
-  border-radius: 2px;
+.inline-form {
+  .inline-group {
+    .make-row(0px);
+    label {
+      .make-xs-column(8, 0px);
+    }
+    input {
+      .make-xs-column(16, 0px);
+      .input-text();
+    }
+  } 
 }
-
