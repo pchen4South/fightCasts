@@ -44,12 +44,7 @@
         element: "#searchBar",
         intro: "Typing in search terms will filter the lists and remove featured tiles.",
         position: "right"
-      },
-      {
-        element: "#emailInput",
-        intro: "Signup for our mailing list to keep up-to-date with announcements and new featured.",
-        position: "bottom"
-      },
+      }
     ] 
   });
 
