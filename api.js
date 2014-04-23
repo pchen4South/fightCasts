@@ -26,6 +26,12 @@ var hash = function (data, SALT_WORK_FACTOR, cb) {
   });
 };
 
+//helper to wrap bcrypt.compare to account for nulls or empty strings
+var compare = function (data, encrypted, cb) {
+  if (!encrypted) return process.nextTick(function () {cb(null, false)});
+  bcrypt.compare(data, encrypted, cb);
+};
+
 //helper to extract id from full youtube urls
 var extractVideoId = function (video) {
   var videoUrl = video.url;
@@ -62,7 +68,6 @@ var createUser = function (userData, cb) {
     if (existingUser) return cb(new Error("That email is already registered")); 
 
     hash(userData.password, SALT_WORK_FACTOR, function (err, hashedPw) {
-      console.log(err);
       if (err) return cb(err);
 
       var user = {
@@ -98,8 +103,8 @@ var changeUserPassword = function (userData, newPass, cb) {
     if (!user) return cb(new Error("No user found for that email"));
 
     async.parallel({
-      passwordMatch: partial(bcrypt.compare, userData.password, user.password),
-      tempMatch: partial(bcrypt.compare, userData.password, user.tempPw)
+      passwordMatch: partial(compare, userData.password, user.password),
+      tempMatch: partial(compare, userData.password, user.tempPw)
     }, function (err, results) {
       if (err) return cb(err);
 
@@ -169,8 +174,8 @@ var verifyUser = function (userData, cb) {
     if (!user) return cb(new Error("No user found for that email"));
 
     async.parallel({
-      passwordMatch: partial(bcrypt.compare, userData.password, user.password),
-      tempMatch: partial(bcrypt.compare, userData.password, user.tempPw)
+      passwordMatch: partial(compare, userData.password, user.password),
+      tempMatch: partial(compare, userData.password, user.tempPw)
     }, function (err, results) {
       if (err) return cb(err);
       if (results.passwordMatch === false && results.tempMatch === false) {

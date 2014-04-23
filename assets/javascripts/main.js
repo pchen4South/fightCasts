@@ -47,7 +47,7 @@
       resetForm(form);
     })
     .fail(function (err) {
-      displayMessage(err.message || err); 
+      displayMessage(err.responseText); 
     });
   };
 
@@ -61,11 +61,10 @@
     $.post(loginUri, newUserData)
     .then(function (res) {
       displayMessage("Thanks for logging in!");
-      console.log(res);
       resetForm(form);
     })
     .fail(function (err) {
-      displayMessage(err.message || err); 
+      displayMessage(err.responseText); 
     });
   };
 
@@ -125,7 +124,7 @@
 
   loginBtn.click(function (e) {
     e.preventDefault(); 
-    console.log(formToJson(userForm));
+    login(userForm);
   });
 
   signupBtn.click(function (e) {
