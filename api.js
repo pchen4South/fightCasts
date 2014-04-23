@@ -18,6 +18,14 @@ var generateTempPw = function () {
   return Math.random().toString(36).slice(-8);
 };
 
+//helper to wrap genSalt and hash which bcrypt-nodejs doesnt have
+var hash = function (data, SALT_WORK_FACTOR, cb) {
+  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+    if (err) return cb(err); 
+    bcrypt.hash(data, salt, null, cb);
+  });
+};
+
 //helper to extract id from full youtube urls
 var extractVideoId = function (video) {
   var videoUrl = video.url;
@@ -53,7 +61,8 @@ var createUser = function (userData, cb) {
     if (err) return cb(err); 
     if (existingUser) return cb(new Error("That email is already registered")); 
 
-    bcrypt.hash(userData.password, SALT_WORK_FACTOR, function (err, hashedPw) {
+    hash(userData.password, SALT_WORK_FACTOR, function (err, hashedPw) {
+      console.log(err);
       if (err) return cb(err);
 
       var user = {
@@ -78,8 +87,11 @@ var changeUserPassword = function (userData, newPass, cb) {
   if (!userData.password) return cb(new Error("Must provide password"));
 
   var SALT_WORK_FACTOR = 10;
+  var query = {
+    email: userData.email 
+  };
 
-  userModel.findOne({email: userData.email})
+  userModel.findOne(query)
   .lean()
   .exec(function (err, user) {
     if (err) return cb(err); 
@@ -98,15 +110,15 @@ var changeUserPassword = function (userData, newPass, cb) {
         return cb(new Error("Provided password does not match"));
       }
 
-      bcrypt.hash(newPass, SALT_WORK_FACTOR, function (err, hashedPw) {
+      hash(newPass, SALT_WORK_FACTOR, function (err, hashedPw) {
         if (err) return cb(err); 
 
-        var updatedUser = {
+        var updates = {
           password: hashedPw,
           tempPw: ""
         };
 
-        userModel.findOneAndUpdate({email: userData.email}, updatedUser, function (err, user) {
+        userModel.findOneAndUpdate(query, updates, function (err, user) {
           if (err) return cb(err); 
           if (!user) return cb(new Error("Something went wrong in the update"));
 
@@ -135,7 +147,7 @@ var resetUserPassword = function (email, cb) {
       tempPw: hashedPw 
     };
 
-    bcrypt.hash(tempPw, SALT_WORK_FACTOR, function (err, hashedPw) {
+    hash(tempPw, SALT_WORK_FACTOR, function (err, hashedPw) {
       userModel.findOneAndUpdate(query, changes, function (err, updatedUser) {
         cb(err, tempPw); 
       })
