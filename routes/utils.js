@@ -58,21 +58,21 @@ var trackViewedVideo = function (focusedMatch, gaCookie) {
   });
 }
 
-passport.use(new LocalStrategy(function(user, password, done){
-  if (user && password) {
-    if (user == creds["admin"].username && password == creds["admin"].password) {
-      return done(null, {id:1, user:user});
-    } else return done(null, false);
-  } else return done(null, false);
-}));
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
+//passport.use(new LocalStrategy(function(user, password, done){
+//  if (user && password) {
+//    if (user == creds["admin"].username && password == creds["admin"].password) {
+//      return done(null, {id:1, user:user});
+//    } else return done(null, false);
+//  } else return done(null, false);
+//}));
+//
+//passport.serializeUser(function(user, done) {
+//  done(null, user);
+//});
+//
+//passport.deserializeUser(function(user, done) {
+//  done(null, user);
+//});
 
 var ensureAuthenticated = function (req, res, next) {
   if (req.isAuthenticated()) return next();

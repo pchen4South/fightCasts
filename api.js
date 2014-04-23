@@ -62,8 +62,11 @@ var createUser = function (userData, cb) {
   if (!userData.password) return (cb(new Error("Must provide valid password.")));
 
   var SALT_WORK_FACTOR = 10;
+  var query = {
+    email: userData.email 
+  };
 
-  userModel.findOne({email: userData.email}, function (err, existingUser) {
+  userModel.findOne(query, function (err, existingUser) {
     if (err) return cb(err); 
     if (existingUser) return cb(new Error("That email is already registered")); 
 

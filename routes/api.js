@@ -18,21 +18,34 @@ module.exports = function (app) {
     };
 
     api.createUser(req.body, function (err, user) {
-      if (err) return res.send(400, err.message); 
-      else res.json({user: user});
-      //FIXME: this was throwing errors for some reason
-      //trackCreatedContact(user, req.cookies._ga);
-      mailer.sendMail(options);
+      if (err) {
+        return res.send(400, err.message); 
+      } else {
+        req.session.user = user;
+        //FIXME: this was throwing errors for some reason
+        //trackCreatedContact(user, req.cookies._ga);
+        mailer.sendMail(options);
+        res.json({user: user});
+      }
     }); 
   };
 
   var login = function (req, res) {
     api.verifyUser(req.body, function (err, user) {
-      if (err) return res.send(400, err.message); 
-      else res.json({
-        user: user 
-      });
+      if (err) {
+        return res.send(400, err.message); 
+      } else {
+        req.session.user = user;
+        res.json({
+          user: user 
+        });
+      }
     });
+  };
+
+  var logout = function (req, res) {
+    req.session.user = null; 
+    res.json(200, "Logged out");
   };
 
   var changePassword = function (req, res) {
@@ -51,7 +64,9 @@ module.exports = function (app) {
   };
 
   var resetPassword = function (req, res) {
-    api.resetUserPassword(req.body.email, function (err, tempPw) {
+    var email = req.body.email;
+
+    api.resetUserPassword(email, function (err, tempPw) {
       if (err) return res.send(400, err.message); 
       else res.json({
         tempPw: tempPw 
@@ -62,6 +77,7 @@ module.exports = function (app) {
   app.post("/api/v1/users", signup);
   app.post("/api/v1/signup", signup);
   app.post("/api/v1/login", login);
+  app.post("/api/v1/logout", logout);
   app.post("/api/v1/changePassword", changePassword);
   app.post("/api/v1/resetPassword", resetPassword);
 
