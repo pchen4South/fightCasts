@@ -34,20 +34,28 @@
           </div>
         </div>
         <ul class="links">
-          <li>
-            <span class="link-text" id="signup">signup</span>
-          </li>
-          <li>
-            <span class="link-text" id="login">login</span>
-          </li>
+          {{#if user}}
           <li>
             <span class="link-text" id="account">account</span>
           </li>
           <li>
             <span class="link-text" id="forgotPassword">forgot password</span>
           </li>
+          <li>
+            <span class="link-text" id="logout">logout</span>
+          </li>
+          {{else}}
+          <li>
+            <span class="link-text" id="signup">signup</span>
+          </li>
+          <li>
+            <span class="link-text" id="login">login</span>
+          </li>
+          {{/if}}
         </ul>
         <div class="header-form">
+          {{#if user}}
+          {{else}}
           <form id="userForm" class="stacked-form">
             <input class="input-text" 
               name="email" 
@@ -56,7 +64,9 @@
               class="input-text" 
               name="password" 
               placeholder="password"/> 
+            <button type="submit" style="display:none">Submit</button>
           </form>
+          {{/if}}
         </div>
       </div>
     </div>

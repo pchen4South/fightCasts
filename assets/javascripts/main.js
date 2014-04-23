@@ -3,11 +3,13 @@
   var emailInput = $("#emailInput");
   var signupUri = "/api/v1/signup/";
   var loginUri = "/api/v1/login";
+  var logoutUri = "/api/v1/logout";
   var resetPwUri = "/api/v1/resetPassword/";
   var tour = introJs();
   var userForm = $("#userForm");
   var signupBtn = $("#signup");
   var loginBtn = $("#login");
+  var logoutBtn = $("#logout");
   var forgotPwBtn = $("#forgotPassword");
 
   //helper that resets input field values for a form
@@ -43,8 +45,9 @@
 
     $.post(signupUri, newUserData)
     .then(function (res) {
-      displayMessage("Thanks for signing up!");
-      resetForm(form);
+      location.reload();
+      //displayMessage("Thanks for signing up!");
+      //resetForm(form);
     })
     .fail(function (err) {
       displayMessage(err.responseText); 
@@ -60,8 +63,19 @@
 
     $.post(loginUri, newUserData)
     .then(function (res) {
-      displayMessage("Thanks for logging in!");
-      resetForm(form);
+      location.reload();
+      //displayMessage("Thanks for logging in!");
+      //resetForm(form);
+    })
+    .fail(function (err) {
+      displayMessage(err.responseText); 
+    });
+  };
+
+  var logout = function (form) {
+    $.post(logoutUri)
+    .then(function (res) {
+      location.reload(); 
     })
     .fail(function (err) {
       displayMessage(err.responseText); 
@@ -125,6 +139,11 @@
   loginBtn.click(function (e) {
     e.preventDefault(); 
     login(userForm);
+  });
+
+  logoutBtn.click(function (e) {
+    e.preventDefault(); 
+    logout(userForm);
   });
 
   signupBtn.click(function (e) {
