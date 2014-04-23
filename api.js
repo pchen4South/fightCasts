@@ -119,8 +119,11 @@ var changeUserPassword = function (userData, newPass, cb) {
 
 var resetUserPassword = function (email, cb) {
   if (!email) return cb(new Error("Must provide email"));
+  var query = {
+    email: email 
+  };
 
-  userModel.findOne({email: email})
+  userModel.findOne(query)
   .lean()
   .exec(function (err, user) {
     if (err) return cb(err);  
@@ -128,9 +131,12 @@ var resetUserPassword = function (email, cb) {
 
     var tempPw = generateTempPw();
     var SALT_WORK_FACTOR = 10;
+    var changes = {
+      tempPw: hashedPw 
+    };
 
     bcrypt.hash(tempPw, SALT_WORK_FACTOR, function (err, hashedPw) {
-      userModel.findOneAndUpdate({email: email}, {tempPw: hashedPw}, function (err, updatedUser) {
+      userModel.findOneAndUpdate(query, changes, function (err, updatedUser) {
         cb(err, tempPw); 
       })
     });

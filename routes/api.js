@@ -26,6 +26,15 @@ module.exports = function (app) {
     }); 
   };
 
+  var login = function (req, res) {
+    api.verifyUser(req.body, function (err, user) {
+      if (err) return res.send(400, {err: err.message}); 
+      else res.json({
+        user: user 
+      });
+    });
+  };
+
   var changePassword = function (req, res) {
     var userData = {
       email: req.body.email,
@@ -52,6 +61,7 @@ module.exports = function (app) {
 
   app.post("/api/v1/users", signup);
   app.post("/api/v1/signup", signup);
+  app.post("/api/v1/login", login);
   app.post("/api/v1/changePassword", changePassword);
   app.post("/api/v1/resetPassword", resetPassword);
 
