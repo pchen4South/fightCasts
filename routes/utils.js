@@ -46,9 +46,10 @@ var trackViewedVideo = function (focusedMatch, gaCookie) {
     userId: clientId,
     event: 'Match Viewed', 
     properties: {
-      name: focusedMatch.title,
-      event: focusedMatch.event.name,
-      players: players
+      category: 'Match Viewed',
+      event: focusedMatch.title,
+      label: focusedMatch.event.name,
+      //players: players
     },
     context: {
       "Google Analytics": {
