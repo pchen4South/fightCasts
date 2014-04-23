@@ -18,6 +18,20 @@ var generateTempPw = function () {
   return Math.random().toString(36).slice(-8);
 };
 
+//helper to wrap genSalt and hash which bcrypt-nodejs doesnt have
+var hash = function (data, SALT_WORK_FACTOR, cb) {
+  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+    if (err) return cb(err); 
+    bcrypt.hash(data, salt, null, cb);
+  });
+};
+
+//helper to wrap bcrypt.compare to account for nulls or empty strings
+var compare = function (data, encrypted, cb) {
+  if (!encrypted) return process.nextTick(function () {cb(null, false)});
+  bcrypt.compare(data, encrypted, cb);
+};
+
 //helper to extract id from full youtube urls
 var extractVideoId = function (video) {
   var videoUrl = video.url;
@@ -48,12 +62,15 @@ var createUser = function (userData, cb) {
   if (!userData.password) return (cb(new Error("Must provide valid password.")));
 
   var SALT_WORK_FACTOR = 10;
+  var query = {
+    email: userData.email 
+  };
 
-  userModel.findOne({email: userData.email}, function (err, existingUser) {
+  userModel.findOne(query, function (err, existingUser) {
     if (err) return cb(err); 
     if (existingUser) return cb(new Error("That email is already registered")); 
 
-    bcrypt.hash(userData.password, SALT_WORK_FACTOR, function (err, hashedPw) {
+    hash(userData.password, SALT_WORK_FACTOR, function (err, hashedPw) {
       if (err) return cb(err);
 
       var user = {
@@ -78,16 +95,19 @@ var changeUserPassword = function (userData, newPass, cb) {
   if (!userData.password) return cb(new Error("Must provide password"));
 
   var SALT_WORK_FACTOR = 10;
+  var query = {
+    email: userData.email 
+  };
 
-  userModel.findOne({email: userData.email})
+  userModel.findOne(query)
   .lean()
   .exec(function (err, user) {
     if (err) return cb(err); 
     if (!user) return cb(new Error("No user found for that email"));
 
     async.parallel({
-      passwordMatch: partial(bcrypt.compare, userData.password, user.password),
-      tempMatch: partial(bcrypt.compare, userData.password, user.tempPw)
+      passwordMatch: partial(compare, userData.password, user.password),
+      tempMatch: partial(compare, userData.password, user.tempPw)
     }, function (err, results) {
       if (err) return cb(err);
 
@@ -98,15 +118,15 @@ var changeUserPassword = function (userData, newPass, cb) {
         return cb(new Error("Provided password does not match"));
       }
 
-      bcrypt.hash(newPass, SALT_WORK_FACTOR, function (err, hashedPw) {
+      hash(newPass, SALT_WORK_FACTOR, function (err, hashedPw) {
         if (err) return cb(err); 
 
-        var updatedUser = {
+        var updates = {
           password: hashedPw,
           tempPw: ""
         };
 
-        userModel.findOneAndUpdate({email: userData.email}, updatedUser, function (err, user) {
+        userModel.findOneAndUpdate(query, updates, function (err, user) {
           if (err) return cb(err); 
           if (!user) return cb(new Error("Something went wrong in the update"));
 
@@ -119,8 +139,11 @@ var changeUserPassword = function (userData, newPass, cb) {
 
 var resetUserPassword = function (email, cb) {
   if (!email) return cb(new Error("Must provide email"));
+  var query = {
+    email: email 
+  };
 
-  userModel.findOne({email: email})
+  userModel.findOne(query)
   .lean()
   .exec(function (err, user) {
     if (err) return cb(err);  
@@ -128,9 +151,12 @@ var resetUserPassword = function (email, cb) {
 
     var tempPw = generateTempPw();
     var SALT_WORK_FACTOR = 10;
+    var changes = {
+      tempPw: hashedPw 
+    };
 
-    bcrypt.hash(tempPw, SALT_WORK_FACTOR, function (err, hashedPw) {
-      userModel.findOneAndUpdate({email: email}, {tempPw: hashedPw}, function (err, updatedUser) {
+    hash(tempPw, SALT_WORK_FACTOR, function (err, hashedPw) {
+      userModel.findOneAndUpdate(query, changes, function (err, updatedUser) {
         cb(err, tempPw); 
       })
     });
@@ -151,8 +177,8 @@ var verifyUser = function (userData, cb) {
     if (!user) return cb(new Error("No user found for that email"));
 
     async.parallel({
-      passwordMatch: partial(bcrypt.compare, userData.password, user.password),
-      tempMatch: partial(bcrypt.compare, userData.password, user.tempPw)
+      passwordMatch: partial(compare, userData.password, user.password),
+      tempMatch: partial(compare, userData.password, user.tempPw)
     }, function (err, results) {
       if (err) return cb(err);
       if (results.passwordMatch === false && results.tempMatch === false) {

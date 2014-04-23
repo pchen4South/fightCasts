@@ -100,7 +100,8 @@ module.exports = function (app) {
           featuredPro: results.featuredPro,
           featuredCommunity: results.featuredCommunity,
           subheaders: createSubheaders(),
-          gameSlug: gameSlug
+          gameSlug: gameSlug,
+          user: req.session.user
         };
 
         res.render("index", payload); 
@@ -156,7 +157,8 @@ module.exports = function (app) {
           communityMatches: results.communityMatches,
           subheaders: createSubheaders(),
           searched: (search || "") + " " + (range || ""),
-          gameSlug: gameSlug
+          gameSlug: gameSlug,
+          user: req.session.user
         };
 
         res.render("index", payload); 
@@ -207,7 +209,8 @@ module.exports = function (app) {
           featuredCommunity: results.featuredCommunity,
           focusedMatch: results.focusedMatch,
           subheaders: createSubheaders(),
-          gameSlug: gameSlug
+          gameSlug: gameSlug,
+          user: req.session.user
         };
 
         trackViewedVideo(results.focusedMatch, googleClientId);
