@@ -180,7 +180,6 @@ module.exports = function (app) {
       if (!game) return res.redirect("notFound");
 
       var matchId = req.params.id;
-      //var googleClientId = req.cookies._ga;
       var proQuery = {
         category: "pro",
         game: game.id
@@ -217,7 +216,8 @@ module.exports = function (app) {
           subheaders: createSubheaders(),
           gameSlug: gameSlug,
           user: req.session.user,
-          title: results.focusedMatch.title
+          title: results.focusedMatch.title,
+          description: results.focusedMatch.description
         };
 
         trackViewedVideo(results.focusedMatch, session_user);
