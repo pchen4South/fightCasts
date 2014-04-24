@@ -65,7 +65,11 @@ module.exports = function (app) {
       user: user 
     };
 
-    res.render("account", payload); 
+    if (!user) {
+      return res.redirect("back"); 
+    } else {
+      res.render("account", payload); 
+    }
   });
 
   app.get("/", function (req, res) {
