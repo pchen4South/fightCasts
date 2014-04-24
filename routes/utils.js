@@ -57,7 +57,7 @@ var trackViewedVideo = function (focusedMatch, gaCookie) {
       }
     }
   });
-}
+};
 
 //passport.use(new LocalStrategy(function(user, password, done){
 //  if (user && password) {
