@@ -66,17 +66,17 @@ module.exports = function (app) {
   app.get("/:gameSlug/matches", function (req, res) {
     var gameSlug = req.params.gameSlug;
 
-    api.getGameIdBySlug(gameSlug, function (err, id) {
+    api.getGameBySlug(gameSlug, function (err, game) {
       if (err) return res.redirect("error");
-      if (!id) return res.redirect("notFound");
+      if (!game) return res.redirect("notFound");
 
       var proQuery = {
         category: "pro",
-        game: id
+        game: game.id
       };
       var comQuery = {
         category: "community",
-        game: id
+        game: game.id
       };
       var getProMatches = partial(api.getMatchesNested, proQuery);
       var getCommunityMatches = partial(api.getMatchesNested, comQuery);
@@ -101,7 +101,9 @@ module.exports = function (app) {
           featuredCommunity: results.featuredCommunity,
           subheaders: createSubheaders(),
           gameSlug: gameSlug,
-          user: req.session.user
+          user: req.session.user,
+          title: "Matches for: ",
+          secondaryTitle: game.nickname
         };
 
         res.render("index", payload); 
@@ -112,17 +114,18 @@ module.exports = function (app) {
   app.get("/:gameSlug/matches/search", function (req, res) {
     var gameSlug = req.params.gameSlug;
 
-    api.getGameIdBySlug(gameSlug, function (err, id) {
+    api.getGameBySlug(gameSlug, function (err, game) {
       if (err) return res.redirect("error");
-      if (!id) return res.redirect("notFound");
+      if (!game) return res.redirect("notFound");
 
       var search = req.query.search;
       var range = req.query.range;
+      var searched = (search || "") + " " + (range || "");
       var now = Date.now();
       var minDate = calculateMinDate(range);
       var proQuery = {
         category: "pro",
-        game: id,
+        game: game.id,
         playedAt: {
           "$gte": minDate,
           "$lt": now 
@@ -130,7 +133,7 @@ module.exports = function (app) {
       };
       var comQuery = {
         category: "community",
-        game: id,
+        game: game.id,
         playedAt: {
           "$gte": minDate,
           "$lt": now 
@@ -156,9 +159,11 @@ module.exports = function (app) {
           proMatches: results.proMatches,
           communityMatches: results.communityMatches,
           subheaders: createSubheaders(),
-          searched: (search || "") + " " + (range || ""),
+          searched: searched,
           gameSlug: gameSlug,
-          user: req.session.user
+          user: req.session.user,
+          title: "Results for: ",
+          secondaryTitle: searched
         };
 
         res.render("index", payload); 
@@ -169,19 +174,19 @@ module.exports = function (app) {
   app.get('/:gameSlug/matches/:id', function (req, res) {
     var gameSlug = req.params.gameSlug;
 
-    api.getGameIdBySlug(gameSlug, function (err, id) {
+    api.getGameBySlug(gameSlug, function (err, game) {
       if (err) return res.redirect("error");
-      if (!id) return res.redirect("notFound");
+      if (!game) return res.redirect("notFound");
 
       var matchId = req.params.id;
       var googleClientId = req.cookies._ga;
       var proQuery = {
         category: "pro",
-        game: id
+        game: game.id
       };
       var comQuery = {
         category: "community",
-        game: id
+        game: game.id
       };
       var getProMatches = partial(api.getMatchesNested, proQuery);
       var getCommunityMatches = partial(api.getMatchesNested, comQuery);
@@ -210,7 +215,8 @@ module.exports = function (app) {
           focusedMatch: results.focusedMatch,
           subheaders: createSubheaders(),
           gameSlug: gameSlug,
-          user: req.session.user
+          user: req.session.user,
+          title: results.focusedMatch.title
         };
 
         trackViewedVideo(results.focusedMatch, googleClientId);

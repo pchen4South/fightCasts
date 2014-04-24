@@ -1,3 +1,14 @@
+<div class="page-header">
+  {{#if title}}
+  <h1>
+    {{title}}
+    <span class="secondary-title">
+      {{secondaryTitle}}
+    </span>
+  </h1>
+  {{/if}}
+</div>
+
 <div class="tile-region-7">
   <div class="tile-region-6" id="featuredPro">
     {{#if featuredPro}}
@@ -41,9 +52,6 @@
   {{#if focusedMatch}}
     {{#with focusedMatch}}
     <div class="tile-10x1">
-      <h3 class="subheader">
-        match details
-      </h3> 
     </div>
     <div class="tile-10x8">
       {{> tiles/match-tile-main}}

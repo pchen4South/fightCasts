@@ -15,24 +15,33 @@
 
 @dark-color: rgb(32, 69, 102);
 
-@text-color: @gray-1;
-@secondary-text-color: @gray-2;
-@colored-text-color: @dark-color;
-@dark-text-color: @dark-color;
-
 //RED
 //@header-color: rgb(212, 14, 32);
 //@header-color: rgb(172, 21, 34);
-@header-color: rgb(243, 116, 12);
+//orange
+//@header-color: rgb(243, 116, 12);
+//flat orange
+//@header-color: rgb(243, 116, 12);
+//@header-color: #f39c12;
+//flat red
+@header-color: #e74c3c;
+//flat blue
+//@header-color: #3498db;
 @header-font-color: @gray-1;
 @subheader-color: @gray-5;
 @subheader-font-color: @dark-text-color;
-@fightcard-color: @gray-1;
+@fightcard-color: lighten(@gray-2, 15%);
+
+@text-color: @gray-1;
+@secondary-text-color: @gray-2;
+@colored-text-color: @header-color;
+@dark-text-color: @dark-color;
+
 
 @content-color: @tile-color-5;
 @background-dark: @tile-color-5;
 @background-light: @tile-color-4;
-@background-color: @gray-2;
+@background-color: @gray-1;
 @background-color-dark: darken(@tile-color-2, 10%);
 @hover-color: @tile-color-4;
 @border-color: @tile-color-4;
@@ -55,3 +64,5 @@
 @subheader-height: 48px;
 @footer-height: 144px;
 @subfooter-height: 32px;
+
+@header-font: OpanSansLight, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;

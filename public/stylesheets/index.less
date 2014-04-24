@@ -229,9 +229,9 @@ a {
 
 .subheader {
   .section-header();
-  font-size: @font-medium;
+  font-size: @font-mediumish;
   margin: 0px;
-  padding: 12px 0px 0px 0px;
+  padding: 4px 0px 0px 0px;
   .subheader-secondary {
     color: @text-color;
   }
@@ -239,6 +239,21 @@ a {
 
 .tile-subheader{
   .header-text();
+}
+
+.page-header {
+  .make-row(0px);
+  margin: 24px 0px;
+  h1 {
+    margin: 0px;
+    font-family: @header-font;
+    color: @dark-text-color;
+    font-size: @font-mediumish;
+    font-weight: 100;
+    .secondary-title {
+      color: @colored-text-color;
+    }
+  }
 }
 
 img.gameLogoSmall{
