@@ -3,7 +3,7 @@ var createQuery = require('./utils').createQuery;
 var gamesList = require('../models/gameCharacterData');
 var passport = require('passport');
 var ensureAuthenticated = require('./utils').ensureAuthenticated;
-var trackCreatedContact = require('./utils').trackCreatedContact;
+var trackCreatedContact = require('../services/analytics/analytics').trackCreatedContact;
 
 module.exports = function (app) {
 
