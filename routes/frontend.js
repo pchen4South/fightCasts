@@ -6,7 +6,7 @@ var partial = _.partial;
 var api = require('../api');
 var searchApi = require('../services/search/search');
 var utils = require('./utils');
-var trackViewedVideo = utils.trackViewedVideo;
+var trackViewedVideo = require('../services/analytics/analytics').trackViewedVideo;
 var createSubheaders = utils.createSubheaders;
 
 //mutative, add fields for templating
@@ -173,13 +173,14 @@ module.exports = function (app) {
 
   app.get('/:gameSlug/matches/:id', function (req, res) {
     var gameSlug = req.params.gameSlug;
+    var session_user = req.session.user;
 
     api.getGameBySlug(gameSlug, function (err, game) {
       if (err) return res.redirect("error");
       if (!game) return res.redirect("notFound");
 
       var matchId = req.params.id;
-      var googleClientId = req.cookies._ga;
+      //var googleClientId = req.cookies._ga;
       var proQuery = {
         category: "pro",
         game: game.id
@@ -219,7 +220,7 @@ module.exports = function (app) {
           title: results.focusedMatch.title
         };
 
-        trackViewedVideo(results.focusedMatch, googleClientId);
+        trackViewedVideo(results.focusedMatch, session_user);
         res.render("index", payload); 
       });
     });
