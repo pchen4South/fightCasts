@@ -1,75 +1,57 @@
 var analytics = require('analytics-node');
 var _ = require('lodash');  
 var forEach = _.forEach;
-
-var creds = require('../../creds.json');
-
+var creds = require('../../config.json').services.analytics;
 
 analytics.init({secret: creds['segmentKey']});
 
-var extractGoogleAnalyticsCookie = function (gaCookie) {
-  var cidSplit = gaCookie.split('.');
-  return cidSplit[2] + '.' + cidSplit[3];
-};
 
-var trackCreatedContact = function (newContact, gaCookie) {
-  var clientId = extractGoogleAnalyticsCookie(gaCookie);
-  
-  analytics.track({
-    userId: clientId,
-    event: 'New Contact Created', 
-    properties: {
-      email: newContact.email
-    },
-    context: {
-      "Google Analytics": {
-        clientId: clientId
-      }
-    }
+var trackCreatedContact = function (newContact) {
+
+  analytics.identify(newContact.id, {
+    email: newContact.email
   });
+
 };
 
 var trackViewedVideo = function (focusedMatch, user) {
-  
-  //var clientId = extractGoogleAnalyticsCookie(gaCookie);
-   console.log(user);
+  if (!user){
+    user = {"email": "anonymous"};
+  }
   forEach(focusedMatch.fighters, function(player){
-
-    //playerObj.characters = player.characters;
-    //players.push(playerObj);
-    
+    //player info for each fighter
     analytics.track({
-      userId: "1",
+      userId: user.email,
       event: "Match View Player",
       properties: {
-        //packageId: clientId,
-       // user_id: user,
         category: 'Match Viewed',
         player: player.person.name,
       }
     });
     
-    analytics.track({
-      userId: "1",
-      event: "Match View Character",
-      properties: {
-        category: 'Match Viewed',
-        character: player.characters[0].name,
-      }
+    //character info for the match
+    forEach(player.characters, function(character){
+      analytics.track({
+        userId: user.email,
+        event: "Match View Character",
+        properties: {
+          category: 'Match Viewed',
+          character: character.name
+        }
+      });
     });
-    
   });
   
-  
-    analytics.track({
-      userId: "1",
-      event: "Match View",
-      properties: {
-        category: 'Match Viewed',
-        title: focusedMatch.title,
-        event_name: focusedMatch.event.name,
-      }
-    });
+  //Overall match info
+  analytics.track({
+    userId: user.email,
+    event: "Match View",
+    properties: {
+      category: 'Match Viewed',
+      title: focusedMatch.title,
+      event_name: focusedMatch.event.name,
+    }
+  });
 
 }
 
