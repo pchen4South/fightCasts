@@ -14,6 +14,8 @@ var eventModel = require('./models/eventModel').model;
 var matchModel = require('./models/matchModel').model;
 var userModel = require('./models/userModel').model;
 var gamesList = require('./models/gameCharacterData');
+
+//helper to generate a temp pw
 var generateTempPw = function () {
   return Math.random().toString(36).slice(-8);
 };

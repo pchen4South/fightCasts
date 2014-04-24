@@ -1,11 +1,11 @@
 (function (window, undefined) {
-  var introButton = $("#intro");
   var signupUri = "/api/v1/signup";
   var loginUri = "/api/v1/login";
   var logoutUri = "/api/v1/logout";
   var resetPwUri = "/api/v1/resetPassword";
   var changePwUri = "/api/v1/changePassword"
   var tour = introJs();
+  var introButton = $("#intro");
   var userForm = $("#userForm");
   var changePwForm = $("#changePasswordForm");
   var signupBtn = $("#signup");
