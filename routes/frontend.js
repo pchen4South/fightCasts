@@ -59,6 +59,15 @@ var calculateMinDate = function (range) {
 
 module.exports = function (app) {
 
+  app.get("/account", function (req, res) {
+    var user = req.session.user;
+    var payload = {
+      user: user 
+    };
+
+    res.render("account", payload); 
+  });
+
   app.get("/", function (req, res) {
     res.redirect("/ssf4-ae2012/matches");
   });
