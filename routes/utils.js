@@ -1,6 +1,5 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
 var creds = require('../creds.json');
 
 //passport.use(new LocalStrategy(function(user, password, done){
