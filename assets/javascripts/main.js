@@ -1,12 +1,14 @@
 (function (window, undefined) {
   var introButton = $("#intro");
   var emailInput = $("#emailInput");
-  var signupUri = "/api/v1/signup/";
+  var signupUri = "/api/v1/signup";
   var loginUri = "/api/v1/login";
   var logoutUri = "/api/v1/logout";
-  var resetPwUri = "/api/v1/resetPassword/";
+  var resetPwUri = "/api/v1/resetPassword";
+  var changePwUri = "/api/v1/changePassword"
   var tour = introJs();
   var userForm = $("#userForm");
+  var changePwForm = $("#changePasswordForm");
   var signupBtn = $("#signup");
   var loginBtn = $("#login");
   var logoutBtn = $("#logout");
@@ -46,8 +48,6 @@
     $.post(signupUri, newUserData)
     .then(function (res) {
       location.reload();
-      //displayMessage("Thanks for signing up!");
-      //resetForm(form);
     })
     .fail(function (err) {
       displayMessage(err.responseText); 
@@ -64,8 +64,6 @@
     $.post(loginUri, newUserData)
     .then(function (res) {
       location.reload();
-      //displayMessage("Thanks for logging in!");
-      //resetForm(form);
     })
     .fail(function (err) {
       displayMessage(err.responseText); 
@@ -76,6 +74,23 @@
     $.post(logoutUri)
     .then(function (res) {
       location.reload(); 
+    })
+    .fail(function (err) {
+      displayMessage(err.responseText); 
+    });
+  };
+
+  var changePassword = function (form) {
+    var userData = formToJson(form);
+
+    if (!userData.email) return displayMessage("You must provide an email"); 
+    if (!userData.password) return displayMessage("You must provide a password"); 
+    if (!userData.newPassword) return displayMessage("You must provide a new password"); 
+
+    $.post(changePwUri, userData)
+    .then(function (res) {
+      displayMessage("You changed your password!");
+      resetForm(form);
     })
     .fail(function (err) {
       displayMessage(err.responseText); 
@@ -134,6 +149,11 @@
   userForm.submit(function (e) {
     e.preventDefault(); 
     console.log("blocked");
+  });
+
+  changePwForm.submit(function (e) {
+    e.preventDefault(); 
+    changePassword(changePwForm);
   });
 
   loginBtn.click(function (e) {

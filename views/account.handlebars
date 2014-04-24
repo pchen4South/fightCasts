@@ -1,0 +1,32 @@
+<div class="page-header">
+  <h1>Your account</h1>
+  <p>{{user.email}}</p>
+</div>
+
+<div class="tile-region-6">
+  <div class="tile-6x1">
+    <h3 class="subheader">Change your password</h3>
+  </div>
+  <div class="tile-6x4">
+    <div class="form-container">
+      <form class="stacked-form" id="changePasswordForm">
+        <input type="text" 
+          class="input-text"
+          value="{{user.email}}"
+          name="email"
+          placeholder="email"/>
+        <input type="password" 
+          class="input-text"
+          name="password"
+          placeholder="old password"/>
+        <input type="password" 
+          class="input-text"
+          name="newPassword"
+          placeholder="new password"/>
+        <button class="btn btn-danger submit-button" type="submit">
+          Change password
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
