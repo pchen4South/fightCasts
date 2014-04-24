@@ -151,11 +151,12 @@ var resetUserPassword = function (email, cb) {
 
     var tempPw = generateTempPw();
     var SALT_WORK_FACTOR = 10;
-    var changes = {
-      tempPw: hashedPw 
-    };
 
     hash(tempPw, SALT_WORK_FACTOR, function (err, hashedPw) {
+      var changes = {
+        tempPw: hashedPw 
+      };
+
       userModel.findOneAndUpdate(query, changes, function (err, updatedUser) {
         cb(err, tempPw); 
       })

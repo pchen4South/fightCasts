@@ -1,6 +1,5 @@
 (function (window, undefined) {
   var introButton = $("#intro");
-  var emailInput = $("#emailInput");
   var signupUri = "/api/v1/signup";
   var loginUri = "/api/v1/login";
   var logoutUri = "/api/v1/logout";
@@ -97,6 +96,21 @@
     });
   };
 
+  var forgotPassword = function (form) {
+    var userData = formToJson(form);
+
+    if (!userData.email) return displayMessage("You must provide an email"); 
+
+    $.post(resetPwUri, userData)
+    .then(function (res) {
+      displayMessage("A temporary password has been emailed to you!");
+      resetForm(form);
+    })
+    .fail(function (err) {
+      displayMessage(err.responseText); 
+    });
+  };
+
   tour.setOptions({
     //showStepNumbers: false,
     scrollToElement: false,
@@ -173,7 +187,7 @@
 
   forgotPwBtn.click(function (e) {
     e.preventDefault(); 
-    console.log("forgotPw");
+    forgotPassword(userForm);
   });
 
 })(window);

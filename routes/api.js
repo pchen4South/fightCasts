@@ -65,12 +65,27 @@ module.exports = function (app) {
 
   var resetPassword = function (req, res) {
     var email = req.body.email;
+    var mailer = app.get("mailer");
+    var forgotPw = app.get("emails").forgotPw;
 
     api.resetUserPassword(email, function (err, tempPw) {
-      if (err) return res.send(400, err.message); 
-      else res.json({
-        tempPw: tempPw 
-      });
+      var options = {
+        to: email,
+        subject: "Here is a temporary password!",
+        html: forgotPw({
+          email: email,
+          tempPw: tempPw
+        })
+      };
+
+      if (err) {
+        return res.send(400, err.message); 
+      } else {
+        mailer.sendMail(options);
+        res.json({
+          tempPw: tempPw 
+        });
+      }
     });
   };
 
