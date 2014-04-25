@@ -170,9 +170,45 @@ a {
     .header-text();
     margin-top: 8px;
   }
+  .search-bar {
+    margin-top: 32px;
+    .tile-region-8();
+    .component-wrapper {
+      form {
+        .tile-region-4();
+        input {
+          border-radius: 2px 0px 0px 2px !important;
+        }
+      }
+      .inline-tabs {
+        .tile-region-4();
+        height: 32px;
+        margin: 0px;
+        li {
+          .tile-region-1();
+          height: inherit;
+          background-color: @background-color;
+          color: @secondary-text-color;
+          padding-top: 6px;
+          text-align: center;
+          &:last-child {
+            border-radius: 0px 2px 2px 0px !important;
+          }
+          &:hover {
+            background-color: @header-color;
+            color: @text-color;
+          }
+        }
+        li.active {
+          background-color: @header-color;
+          color: @text-color;
+        }
+      }
+    }
+  }
   .links {
     .tile-region-3();
-    .tile-offset-mixin(7);
+    .tile-offset-mixin(5);
     text-align: right;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -193,10 +229,6 @@ a {
 .site-subheader {
   .make-row(0px);
   height: @subheader-height;
-  .search-bar {
-    .tile-region-8();
-    top: 8px;
-  }
   .filters {
     .tile-region-8();
     padding-left: 12px;
@@ -263,25 +295,4 @@ a {
 
 img.gameLogoSmall{
   .size(32px, 32px);
-}
-
-#searchInput{
-  display: inline-block;
-  width: 68%;
-}
-
-#searchInputTextBox{
-  border-bottom-right-radius: 0px !important;
-  border-top-right-radius: 0px !important;
-}
-
-#searchSelect{
-  display: inline-block;
-  width: 30%;
-}
-
-#searchSelectBox{
-  margin-left: -5px;
-  border-bottom-left-radius: 0px !important;
-  border-top-left-radius: 0px !important;
 }

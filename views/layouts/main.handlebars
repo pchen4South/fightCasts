@@ -24,22 +24,10 @@
           <a href="/">fight casts</a> 
         </div>
         
-<!--         Hid these tabs so that the login info is in the right place
-        TODO: unghettofy this -->
-        
-        <div class="tab active" style="visibility:hidden;">
-          <div class="inner-tab sf4">
-          </div>
-        </div>
-        <div class="tab" style="visibility:hidden;">
-          <div class="inner-tab mvc3">
-          </div>
-        </div>
-        <div class="tab" style="visibility:hidden;">
-          <div class="inner-tab sfxt">
-          </div>
-        </div>
-        
+        <div class="search-bar" id="searchBar">
+          {{> searchBar}}      
+        </div>    
+
         <ul class="links">
           {{#if user}}
           <li>
@@ -82,9 +70,6 @@
   <header id="subheader">
     <div class="container">
       <div class="site-subheader">
-        <div class="search-bar" id="searchBar">
-          {{> searchBar}}      
-        </div>    
         <div class="filters">
           {{> pastMatches}}      
         </div>

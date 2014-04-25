@@ -1,19 +1,14 @@
 <!-- <form id="searchForm" action="/{{gameSlug}}/matches/search"> -->
-<form id="searchForm">
-  <div class="form-group" id="searchInput">
-    <div class="icon">&#57347</div>
-    <input class="input-text" name="search" id="searchInputTextBox" placeholder = "Search for Matches..."/>
-  </div> 
-  <div class="form-group"  id = "searchSelect">
-    <select size="1" 
-      id = "searchSelectBox"
-      class = "form-control"
-      onChange="this.form.action= '/' + this.options[this.selectedIndex].value + '/matches/search';" 
-      style = "color:black !important;">
-      <option value = "ssf4-ae2012" selected = "selected">SSF4 AE</option>
-      <option value="ssbm">SSBM</option>
-      <option value="umvc3">MvC3</option>
-    </select>
-  </div>
-  
-</form>
+<div class="component-wrapper">
+  <form id="searchForm">
+    <div class="form-group" id="searchInput">
+      <div class="icon">&#57347</div>
+      <input class="input-text" name="search" id="searchInputTextBox" placeholder = "Search for Matches..."/>
+    </div> 
+  </form>
+  <ul class="inline-tabs">
+    <li class="active">SSF4</li>
+    <li>MVC3</li>
+    <li>SSBM</li>
+  </ul>
+</div>
