@@ -32,8 +32,8 @@ enter: function(){
     var events = get(indexCon, 'events');
     events.clear();
     
-    var contacts = get(indexCon, 'contacts');
-    contacts.clear();
+    var users = get(indexCon, 'users');
+    users.clear();
     
     fetchMatches()
     .then(function(results){
@@ -50,9 +50,10 @@ enter: function(){
       events.pushObjects(results.events.sortBy("name"));
       window.evnts = results.events;
     }); 
-    fetchContacts()
+    fetchUsers()
     .then(function(results){
-      contacts.pushObjects(results.contacts.sortBy("email"));
+      console.log(results);
+      users.pushObjects(results.users.sortBy("email"));
     }); 
   }
 });
@@ -61,22 +62,16 @@ App.IndexController = Ember.Controller.extend({
   matches: [],
   people: [],
   events: [],
-  contacts: []
+  users: []
 
 });
 
 App.MatchesMatchRoute = Ember.Route.extend({
+  isEditingMatch: false,
   enter: function(){
     var matchCon = this.controllerFor('matches');
     matchCon.set("masterView", false);
-   
-    var matches = get(matchCon, 'matches');
-    matches.clear();
-    
-    fetchMatches()
-    .then(function(results){
-      matches.pushObjects(results.matches);
-    });    
+    this.send("populateItems");  
   },
   model: function(params){
     var self = this;
@@ -88,6 +83,22 @@ App.MatchesMatchRoute = Ember.Route.extend({
       matchCon.set("match", match);
       return match;
     })
+  },
+  actions:{
+    editMatch: function(){
+      this.controllerFor('matches').set('isEditingMatch', true);
+    },
+    doneEditingMatch: function(){
+      this.controllerFor('matches').set('isEditingMatch', false)
+    }
+  }
+});
+
+App.MatchesIndexRoute = Ember.Route.extend({
+  enter: function(){  
+    var matchCon = this.controllerFor('matches');  
+    matchCon.set("masterView", true);
+    this.send("populateItems");
   }
 });
 
@@ -96,11 +107,8 @@ App.MatchesRoute = Ember.Route.extend({
     this.render('matches',{
       into: 'application'
     });
-  }
-});
-
-App.MatchesIndexRoute = Ember.Route.extend({
-  enter: function(){
+  },
+  populateItems: function(){
     var self = this;
     var matchCon = this.controllerFor('matches');
    
@@ -140,10 +148,13 @@ App.MatchesIndexRoute = Ember.Route.extend({
       window.res = results;
       characters.pushObjects(results.games["1"].characters.sortBy("name"));
     });
-    
-    matchCon.set("masterView", true);
+  }, 
+  actions:{
+    populateItems: function(){
+      console.log("populating");
+      this.populateItems();
+    }
   }
-  
 });
 
 
@@ -183,7 +194,7 @@ App.MatchesController = Ember.Controller.extend({
 
 //Components
 App.FcAdminMatchesComponent = Ember.Component.extend({
-  matches: [],
+  matches: []
 });
 
 App.FcAdminCreateComponent = Ember.Component.extend({
@@ -234,9 +245,64 @@ App.FcAdminCreateComponent = Ember.Component.extend({
   }
 })
 
+App.FcAdminEditDetailsComponent = Ember.Component.extend({
+  didInsertElement:function(){
+    window.fcadmin = this;
+    this.initializeData();
+  },
+  categories: ["pro", "scrub", "community"],
+  games:["SF4"],
+  
+  // game hardcoded still for now
+  initializeData: function(){
+    var match = this.get('match');
+    window.m = match;
+    window.dd = this;
+    var data = this.get('data');
+    vidList = [];
+    
+    if(match){
+      get(match,'videos').forEach(function(vid){
+       vidList.push({"url": vid});
+      });
+      
+      set(data, 'title', get(match,'title'));
+      set(data,'description', get(match,'description'));
+      // set(data,'casters', get(match,'casters'));
+      // set(data,'game', get(match,'game'));
+      set(data,'category', get(match,'category'));
+      set(data,'event', get(match,'event'));
+      set(data,'playedAt', get(match,'playedAt').slice(0,10));
+      set(data,'fighters', get(match,'fighters') || []);
+      set(data,'videoData', vidList);
+    }
+  },
+  data: {
+    title: "",
+    description: "",
+    casters: null,
+    game: "SF4",
+    category: "",
+    fighters: [],
+    videoData: [],
+    event: null,
+    playedAt: null
+  }, 
+  actions:{
+    doneEditing: function(){
+      console.log("sending action");
+      this.sendAction();
+    }
+  }
+});
+
+
 App.FcAdminDetailsComponent = Ember.Component.extend({
   
   actions:{
+    editMatch: function(){
+      this.sendAction("editMatch");
+    },
     makeFeatured: function(match){
       console.log(get(match, "_id"));
       makeMatchFeatured(match)
@@ -393,8 +459,8 @@ var fetchGames = function(){
 return Ember.$.get("/api/v1/games");
 };
 
-var fetchContacts = function(){
-return Ember.$.get("/api/v1/contacts");
+var fetchUsers = function(){
+return Ember.$.get("/api/v1/users");
 };
 
 var submitMatch = function (data) {

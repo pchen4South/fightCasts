@@ -1,6 +1,10 @@
 <div class = "matchDetailHeader"> Match Details for <label> {{match.title}} </label></div>
 <button {{action makeFeatured match}} class = "btn btn-xs btn-default">Make Featured </button>
 <button {{action deleteMatch match}} class = "btn btn-xs btn-default">Delete</button>
+<button class = "btn btn-xs btn-warning" {{action "editMatch" match}} title="Edit">
+  <i class="fa fa-pencil-square-o"></i>
+</button>
+  
 <ul>
   <li class = "adminListRow">
     <label> Description:</label>  

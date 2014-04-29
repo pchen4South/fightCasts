@@ -1,12 +1,13 @@
 {{#each video in videos}}
-  <span>
+  <div class = "admin-video-select">
     {{video.name}}
     {{video.url}}
-  </span>
-  <button class="btn btn-danger btn-xs"
-  {{bind-attr disabled=inFlight}}
-  {{action "removeVideo" video}}>
-    Remove
-  </button>
+
+    <button class="btn btn-danger btn-xs admin-icon-btn"
+    {{bind-attr disabled=inFlight}}
+    {{action "removeVideo" video}}>
+    <i class="fa fa-trash-o"></i>
+    </button> 
+  </div>
 {{/each}}
 

@@ -1,23 +1,24 @@
 {{fc-admin-subheader action = "updateInfo"}}
+<div class = "container">
+  <div class = "adminWrapper">
+  <div class = "tile-region-24">
+    <div class = "tile-region-7">
+      <div class = "adminSummaryHeader"> Matches </div>
+      {{fc-adminSummaryItem items = matches type = "matches"}} 
+    </div>
 
-<div class = "adminWrapper">
-  <div class = "tile-region-8"> </div>
-
-  <div class = "tile-region-6 summaryColumn">
-    <div class = "adminSummaryHeader"> Matches </div>
-    {{fc-adminSummaryItem items = matches type = "matches"}} 
+    <div class = "tile-region-6">
+      <div class = "adminSummaryHeader"> Users </div>
+      {{fc-adminSummaryItem items = users type = "users"}} 
+    </div>
+    <div class = "tile-region-5">
+      <div class = "adminSummaryHeader"> People </div>
+      {{fc-adminSummaryItem items = people type = "people"}} 
+    </div>
+    <div class = "tile-region-6">
+      <div class = "adminSummaryHeader"> Events </div>
+      {{fc-adminSummaryItem items = events type = "events"}} 
+    </div>
   </div>
-
-  <div class = "tile-region-6 summaryColumn">
-    <div class = "adminSummaryHeader"> Contacts </div>
-    {{fc-adminSummaryItem items = contacts type = "contacts"}} 
-  </div>
-  <div class = "tile-region-6 summaryColumn">
-    <div class = "adminSummaryHeader"> People </div>
-    {{fc-adminSummaryItem items = people type = "people"}} 
-  </div>
-  <div class = "tile-region-6 summaryColumn">
-    <div class = "adminSummaryHeader"> Events </div>
-    {{fc-adminSummaryItem items = events type = "events"}} 
   </div>
 </div>

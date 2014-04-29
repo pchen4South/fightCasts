@@ -4,27 +4,11 @@ var passport = require('passport');
 var ensureAuthenticated = require('./utils').ensureAuthenticated;
 
 module.exports = function (app) {
-   app.post('/admin/login', 
-    passport.authenticate('local', { failureRedirect: "/admin/login",
-                                   successRedirect: "/admin"})
-  );
-  
-  app.get("/admin/login", function(req,res){
-    res.render('login', {layout: "adminLayout"});
-  });
-  //read
-  app.post('/admin/login', 
-    passport.authenticate('local', { failureRedirect: "/admin/login",
-                                   successRedirect: "/admin"})
-  );
-  
-  app.get("/admin/login", function(req,res){
-    res.render('login', {layout: "adminLayout"});
-  });
+ 
   //read
   app.get("/admin", ensureAuthenticated, function (req, res) {
-    console.log(req.user);
-     res.render("admin", {layout: "adminLayout", user: req.user.user});
+    console.log("admin", req.session);
+     res.render("admin", {layout: "adminLayout", user: "admin"});
   });
 
   app.get("/admin/people", ensureAuthenticated,

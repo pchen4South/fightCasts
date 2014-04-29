@@ -1,28 +1,35 @@
 <form role="form">
   <div class="form-group">
-    <label>Create a Match</label>
-    
-    <div class="form-group tile-10x1">
+
+    <div class="form-group admin-form-text-input-half">
+        <label>Create A Match</label>
       {{input type="text"
         disabled=inFlight 
         value=data.title
         class = "form-control"
-        placeholder = "Match Title"}}
+        placeholder = "match title"}}
       <span class="help-block">{{errors.title}}</span>
     </div>
     
-    <div class="form-group tile-10x1">
+      
+    <div class="form-group admin-form-select-half">
+      <label for="playedAt">Date Played</label>
+       {{input type="date" disabled=inFlight value=data.playedAt
+        class = "form-control"}}
+    </div>
+    
+    <div class="form-group admin-form-text-input">
       {{input type="text"
         disabled=inFlight
         value=data.description
         class = "form-control"
-        placeholder = "Description"}}
+        placeholder = "description"}}
     </div>
     
-    <div class="form-group tile-4x1">
-      {{view Ember.Select 
+    <div class="form-group admin-form-select-half">
+      {{view Ember.Select
         disabled=inFlight
-        prompt="Select game"
+        prompt="select game"
         content=games
         selection=data.game
         optionLabelPath="content"
@@ -30,26 +37,10 @@
       <span class="help-block">{{errors.game}}</span>
     </div>
     
-      <div class="form-group tile-12x3"> 
-        <label> Fighters </label>
-        {{fc-createFighterForm 
-          inFlight=inFlight
-          characters=characters
-          fighter=data.fighters
-          people = people}}
-        <span class="help-block">{{errors.fighterOne}}</span>
-    </div> 
-    
-    <div class="form-group tile-12x2"> 
-      <label> Players to Add: </label>
-      {{fc-fighterSummary 
-        inFlight=inFlight
-        fighters=data.fighters}}
-    </div>
-    <div class="form-group tile-4x1">
-      {{view Ember.Select 
+    <div class="form-group admin-form-select-half">
+      {{view Ember.Select
         disabled=inFlight
-        prompt="Select Category"
+        prompt="select category"
         content=categories
         selection=data.category
         optionLabelPath="content"
@@ -58,9 +49,23 @@
       <span class="help-block">{{errors.game}}</span>
     </div>
     
-    <div class="form-group tile-5x3">
+        {{fc-createFighterForm
+          inFlight=inFlight
+          characters=characters
+          fighter=data.fighters
+          people = people
+          class = "form-group"}}
+    
+    <div class="form-group"> 
+      <label> players to add: </label>
+      {{fc-fighterSummary 
+        inFlight=inFlight
+        fighters=data.fighters}}
+    </div>
+        
+    <div class="form-group admin-form-select-half">
       <label for="casters">Casters</label>
-      {{view Ember.Select 
+      {{view Ember.Select
         disabled=inFlight
         prompt="Select Casters"
         multiple=true
@@ -71,41 +76,36 @@
     </div>
 
     
-    <div class="form-group tile-5x1">
-      <label>Event Name</label> 
-      {{view Ember.Select 
+    <div class="form-group admin-form-select-half">
+      <label>event name</label> 
+      {{view Ember.Select
         disabled=inFlight
-        prompt="Select Event"
+        prompt="select event"
         content=events
         selection=data.event
         optionLabelPath="content.name"
         class = "form-control"}}
     </div>
     
-    
-    <div class="form-group tile-5x1">
-      <label for="playedAt">Date Played</label>
-       {{input type="date" disabled=inFlight value=data.playedAt
-        class = "form-control"}}
-    </div>
+  
 
-    <div class="form-group tile-12x1">
+    <div class="form-group">
        {{fc-createVideoForm inFlight=inFlight videos=data.videoData}}
     </div>   
 
 
-    <div class="form-group tile-12x1">
-    <label> Videos to Add </label>
+    <div class="form-group">
+    <label> videos to add </label>
        {{fc-videoSummary
       inFlight=inFlight
       videos=data.videoData}}
     </div>
 
-    <div class = "form-group tile-12x1">
+    <div class = "form-group">
       <button class="btn btn-default"
         {{bind-attr disabled=inFlight}}
-        {{action "onSubmit" data}}>
-        Submit
+        {{action "onsubmit" data}}>
+        submit
       </button> 
     </div>
     

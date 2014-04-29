@@ -1,13 +1,12 @@
-  <div class = "form-group tile-4x1">
+
    {{view Ember.Select 
         disabled=inFlight
         prompt="Select Person"
         content=people
         selection=newFighter.person
         optionLabelPath="content.name"
-        class = "form-control"}}
-  </div>
-  <div class = "form-group tile-4x1">
+        class = "form-control admin-form-select-half"}}
+
     {{view Ember.Select 
       disabled=inFlight
       multiple="true"
@@ -15,9 +14,9 @@
       content=characters
       selection=newFighter.characters
       optionLabelPath="content.name"
-      class = "form-control"}} 
-  </div>
-<div class = "form-group tile-1x1">
+      class = "form-control admin-form-select-half"}} 
+
+<div class = "form-group admin-form-select-half">
   <button class="btn btn-default" 
     {{bind-attr disabled=inFlight}}
     {{action "createFighter" newFighter}}>

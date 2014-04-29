@@ -2,10 +2,18 @@
 <head>
   <meta charset="utf-8" />
    <link rel="stylesheet" type="text/css" href="/dist/index.css">
+   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
    <link href='http://fonts.googleapis.com/css?family=Tulpen+One|Exo:400,900italic|Dosis' rel='stylesheet' type='text/css'>
 </head>
 
 <body class = "adminBody">
+  
+  <script src="/vendor/javascripts/jquery.js"></script>
+  <script src="/vendor/javascripts/handlebars.js"></script>
+  <script src="/vendor/javascripts/ember.js"></script>
+  <script src="/vendor/javascripts/bootstrap.min.js"></script>
+  <script src="/vendor/javascripts/moment.min.js"></script>
+
   <div id="header">
     <div class="container">
       <div class="page-header">
@@ -16,17 +24,9 @@
       </div>
     </div>
   </div>
-
-  <script src="/vendor/javascripts/jquery.js"></script>
-  <script src="/vendor/javascripts/handlebars.js"></script>
-  <script src="/vendor/javascripts/ember.js"></script>
-  <script src="/vendor/javascripts/bootstrap.min.js"></script>
-  <script src="/vendor/javascripts/moment.min.js"></script>
-  
+ 
   <section id="admin-content">
-    <div class="container">
-       {{{body}}}
-    </div>
+    {{{body}}}
   </section>
-
+  
 </body>

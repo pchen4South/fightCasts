@@ -1,16 +1,16 @@
 {{#each fighter in fighters}}
-  <li class = "tile-5x1">
+  <li class = "admin-fighter-select">
     <span>
-    {{fighter.person.name}}
+    <b>{{fighter.person.name}} :</b>
     {{#each character in fighter.characters}}
       {{character.name}}
     {{/each}}
     </span>
 
-    <button class="btn btn-danger btn-xs" 
+    <button class="btn btn-danger btn-xs admin-icon-btn" 
     {{bind-attr disabled=inFlight}}
     {{action "deleteFighter" fighter}}>
-    Remove
+    <i class="fa fa-trash-o"></i>
     </button>
   </li>
 {{/each}}

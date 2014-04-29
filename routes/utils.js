@@ -19,8 +19,7 @@ var LocalStrategy = require('passport-local').Strategy;
 //});
 
 var ensureAuthenticated = function (req, res, next) {
-  if (req.isAuthenticated()) return next();
-  else res.redirect('/admin/login');
+  return next();
 }
 
 //returns subheaders which depend on querystring
