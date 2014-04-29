@@ -108,6 +108,9 @@ App.MatchesRoute = Ember.Route.extend({
       into: 'application'
     });
   },
+  sendMatchToServer: function(match){
+  
+  },
   populateItems: function(){
     var self = this;
     var matchCon = this.controllerFor('matches');
@@ -151,7 +154,6 @@ App.MatchesRoute = Ember.Route.extend({
   }, 
   actions:{
     populateItems: function(){
-      console.log("populating");
       this.populateItems();
     }
   }
@@ -213,10 +215,16 @@ App.FcAdminCreateComponent = Ember.Component.extend({
   games: ["SF4"],
   characters: [],
   categories: ["pro", "scrub", "community"],
+  errors: {
+    title: "",
+    game: "",
+    eventName: "",
+    fighters: "",
+    casters: "",
+    videoData: ""
+  },
   actions: {
-   onSubmit: function(data){
-      var self = this;
-      
+    onSubmit: function(data){
       var data = {
         title: get(data, "title"),
         game: get(data, "game"),
@@ -228,19 +236,34 @@ App.FcAdminCreateComponent = Ember.Component.extend({
         playedAt: get(data, "playedAt"),
         category: get(data, "category"),
       }
-    window.data = data;
+          
+      var self = this;
+      var titleError = validateTitle(data.title);
+      var gameError = validateGame(data.game);
+      var fighterError = validateFighterData(data.fighters);
+      var videoDataError = validateVideoData(data.videos);
+      var categoryError = validateCategory(data.category);
 
-    set(self, "inFlight", true);
-    submitMatch(data)
-    .then(function (res) {
-      console.log("yoyoyoyo", res);
-      set(self, "inFlight", false);
-      window.location.reload();
-    })
-    .fail(function (err) {
-      set(self, "inFlight", false);
-      console.log("boo", err);
-    });
+      set(this, "errors.title", titleError);
+      set(this, "errors.game", gameError);
+      set(this, "errors.fighters", fighterError);
+      set(this, "errors.videoData", videoDataError);
+      set(this, "errors.category", categoryError);
+      
+      if (titleError || gameError || fighterError
+        ||categoryError|| videoDataError) return;;
+      
+      set(self, "inFlight", true);
+      submitMatch(data)
+      .then(function (res) {
+        console.log("yoyoyoyo", res);
+        set(self, "inFlight", false);
+        //window.location.reload();
+      })
+      .fail(function (err) {
+        set(self, "inFlight", false);
+        console.log("boo", err);
+      });
     }
   }
 })
@@ -248,6 +271,7 @@ App.FcAdminCreateComponent = Ember.Component.extend({
 App.FcAdminEditDetailsComponent = Ember.Component.extend({
   didInsertElement:function(){
     window.fcadmin = this;
+    console.log(this.get('elementId'));
     this.initializeData();
   },
   categories: ["pro", "scrub", "community"],
@@ -261,6 +285,7 @@ App.FcAdminEditDetailsComponent = Ember.Component.extend({
     var data = this.get('data');
     vidList = [];
     
+    console.log("INITIALIZING DATAS", get(match,'casters'));
     if(match){
       get(match,'videos').forEach(function(vid){
        vidList.push({"url": vid});
@@ -268,8 +293,9 @@ App.FcAdminEditDetailsComponent = Ember.Component.extend({
       
       set(data, 'title', get(match,'title'));
       set(data,'description', get(match,'description'));
-      // set(data,'casters', get(match,'casters'));
-      // set(data,'game', get(match,'game'));
+      set(data,'casters', get(match,'casters'));
+      set(data,'game', get(match,'game'));
+      set(data,'event', get(match,'event'));
       set(data,'category', get(match,'category'));
       set(data,'event', get(match,'event'));
       set(data,'playedAt', get(match,'playedAt').slice(0,10));
@@ -288,11 +314,62 @@ App.FcAdminEditDetailsComponent = Ember.Component.extend({
     event: null,
     playedAt: null
   }, 
+  errors: {
+    title: "",
+    game: "",
+    eventName: "",
+    fighters: "",
+    casters: "",
+    videoData: ""
+  },
   actions:{
     doneEditing: function(){
-      console.log("sending action");
-      this.sendAction();
-    }
+      var self = this;
+      var data = this.get("data");
+      
+      window.thisdata = data;
+      
+      var dataToSend = {
+        title: get(data, "title"),
+        game: get(data, "game"),
+        description: get(data, "description"),
+        fighters: convertFighterFieldsToIds(get(data, "fighters")),
+        event: get(data, "event._id"),
+        casters: get(data, "casters").mapBy("_id"),
+        videos: get(data, "videoData").mapBy('url'), 
+        playedAt: get(data, "playedAt"),
+        category: get(data, "category"),
+      };
+      
+      var titleError = validateTitle(dataToSend.title);
+      var gameError = validateGame(dataToSend.game);
+      var fighterError = validateFighterData(dataToSend.fighters);
+      var videoDataError = validateVideoData(dataToSend.videos);
+      var categoryError = validateCategory(dataToSend.category);
+
+      set(this, "errors.title", titleError);
+      set(this, "errors.game", gameError);
+      set(this, "errors.fighters", fighterError);
+      set(this, "errors.videoData", videoDataError);
+      set(this, "errors.category", categoryError);
+      
+      
+      if (titleError || gameError || fighterError
+        ||categoryError|| videoDataError) return;
+      
+      set(self, "inFlight", true);
+      submitMatchUpdate(dataToSend, get(this, 'match'))
+      .then(function (res) {
+        console.log("yoyoyoyo", res);
+        set(self, "inFlight", false);
+        //self.sendAction();
+        window.location.reload();
+      })
+      .fail(function (err) {
+        set(self, "inFlight", false);
+        console.log("boo", err);
+      })
+    }  
   }
 });
 
@@ -467,6 +544,16 @@ var submitMatch = function (data) {
   return Ember.$.post("/api/v1/matches", data);
 };
 
+var submitMatchUpdate = function(data, match){
+  window.data2send = data;
+  if(match._id){
+    var url = "/api/v1/matches/" + match._id;
+    return Ember.$.post(url, data);
+  }
+  else
+    alert("problems with update");
+};
+
 var makeMatchFeatured = function (data) {
   var id = data._id;
   var url = "/api/v1/matches/" + id + "/feature";
@@ -502,3 +589,23 @@ var convertFighterFieldsToIds = function(fighterArray){
   return convertedArray;
 };
 
+
+var validateTitle = function (title) {
+  return title ? "" : "Must provide a value for title";
+};
+
+var validateGame = function (game) {
+  return game ? "" : "Must select a game";
+};
+
+var validateFighterData = function (fighterData) {
+  return fighterData.length > 0 ? "" : "Must include at least one fighter";
+};
+
+var validateVideoData = function (videoData) {
+  return videoData.length > 0 ? "" : "Must include at least one video";
+};
+
+var validateCategory = function (category) {
+  return category ? "" : "Must select category";
+};

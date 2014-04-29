@@ -429,6 +429,7 @@ var getAll = function (cb) {
 
 //update
 var updateMatchById = function(id, updateOptions, cb){
+  if (!updateOptions || !cb) return;
   matchModel.findByIdAndUpdate(id, updateOptions, cb);
 };
 

@@ -116,9 +116,16 @@ module.exports = function (app) {
       if (err) res.send(400, err.message); 
       else res.json({match: match});
     });
+  }); 
+  
+  //UPDATE
+  app.post("/api/v1/matches/:id", ensureAuthenticated, function (req, res) {
+    api.updateMatchById(req.params.id, req.body, function (err, match) {
+      if (err) res.send(400, err.message); 
+      else res.json({match: match});
+    });
   });
 
-  //UPDATE
   app.post("/api/v1/matches/:id/feature", ensureAuthenticated, function (req, res) {
     var matchId = req.params.id;
     api.featureMatch(matchId, function (err, featuredMatch) {

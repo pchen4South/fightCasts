@@ -1,3 +1,10 @@
+<div class = "matchDetailHeader"> Editing Match Details for <label> {{match.title}} </label></div>
+<button {{action makeFeatured match}} class = "btn btn-xs btn-default">Make Featured </button>
+<button {{action deleteMatch match}} class = "btn btn-xs btn-default">Delete</button>
+<button class = "btn btn-xs btn-primary" {{action "doneEditing"}} title="Edit">
+  Save
+</button>
+ 
 <form role="form">
   <div class="form-group">
 
@@ -46,7 +53,7 @@
         optionLabelPath="content"
         optionValuePath="content"
         class = "form-control"}}
-      <span class="help-block">{{errors.category}}</span>
+      <span class="help-block">{{errors.game}}</span>
     </div>
     
         {{fc-createFighterForm
@@ -61,7 +68,6 @@
       {{fc-fighterSummary 
         inFlight=inFlight
         fighters=data.fighters}}
-        <span class="help-block">{{errors.fighters}}</span>
     </div>
         
     <div class="form-group admin-form-select-half">
@@ -92,7 +98,6 @@
 
     <div class="form-group">
        {{fc-createVideoForm inFlight=inFlight videos=data.videoData}}
-       <span class="help-block">{{errors.videoData}}</span>
     </div>   
 
 
@@ -103,14 +108,8 @@
       videos=data.videoData}}
     </div>
 
-    <div class = "form-group">
-      <button class="btn btn-default"
-        {{bind-attr disabled=inFlight}}
-        {{action "onSubmit" data}}>
-        submit
-      </button> 
-    </div>
-    
   </div>
 </form> 
+
+
 
