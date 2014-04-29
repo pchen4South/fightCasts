@@ -232,6 +232,12 @@ var get = function (modelType, id, cb) {
   .exec(cb);
 };
 
+var updateById = function (modelType, id, data, cb) {
+  modelType.findByIdAndUpdate(id, data)
+  .lean()
+  .exec(cb);
+};
+
 var getMultiple = function (modelType, cb) {
   modelType.find({})
   .lean()
@@ -447,12 +453,20 @@ var deleteEvent = partial(deleteModelById, eventModel);
 var deleteMatch = partial(deleteModelById, matchModel);
 var deleteUser = partial(deleteModelById, userModel);
 
+var updateUserById = partial(updateById, userModel);
+var updateEventById = partial(updateById, eventModel);
+var updatePersonById = partial(updateById, personModel);
+
 module.exports.deletePerson = deletePerson;
 module.exports.deleteEvent = deleteEvent;
 module.exports.deleteMatch = deleteMatch;
 module.exports.deleteUser = deleteUser;
 
 module.exports.updateMatchById = updateMatchById;
+module.exports.updateEventById = updateEventById;
+module.exports.updateUserById = updateUserById;
+module.exports.updatePersonById = updatePersonById;
+
 module.exports.featureMatch = featureMatch;
 module.exports.changeUserPassword = changeUserPassword;
 module.exports.resetUserPassword = resetUserPassword;

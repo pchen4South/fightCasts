@@ -1,22 +1,37 @@
-{{#each summaryItem in items}}
-  <div class = "summaryItem">
-  {{#if summaryItem.name}}
-    Name : {{summaryItem.name}}
-  {{/if}}
+<div class = "summaryItem">
+ 
+  {{categoryLabel}}
   
-  {{#if summaryItem.email}}
-    Email : {{summaryItem.email}}
-  {{/if}}
+  {{#unless isEditing}} 
   
-  {{#if summaryItem.title}}
-  
-    Title : {{summaryItem.title}}
-  
-  {{/if}}
+    {{#if item.name}}
+      {{item.name}}
+    {{/if}}
 
-  <button class = "adminBtn btn btn-xs"
-         {{action deleteItem type summaryItem}}> 
-          <span class = "glyphicon glyphicon-trash"></span>
-  </button>    
+    {{#if item.email}}
+      {{item.email}}
+    {{/if}}
+
+    {{#if item.title}}
+      {{item.title}}
+    {{/if}}
+
+    <button class = "adminBtn btn btn-xs"
+           {{action deleteItem type item}}> 
+            <span class = "glyphicon glyphicon-trash"></span>
+    </button> 
+
+    <button class = "adminBtn btn btn-xs"
+           {{action modifyItem type item}}> 
+            <i class="fa fa-pencil-square-o"></i>
+    </button>
+  {{else}}
+    
+    {{input class="summaryInput" type="text" value = item.attrValue}}
+    
+    <button class = "adminBtn btn btn-xs"
+      {{action saveChanges type item}}> 
+      <span class = "glyphicon glyphicon-floppy-disk"></span>
+    </button>  
+  {{/unless}} 
   </div>  
-{{/each}}

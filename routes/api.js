@@ -134,6 +134,27 @@ module.exports = function (app) {
     });
   });
   
+  app.post("/api/v1/users/:id", ensureAuthenticated, function (req, res) {
+    api.updateUserById(req.params.id, req.body, function (err, match) {
+      if (err) res.send(400, err.message); 
+      else res.json({match: match});
+    });
+  });  
+  
+  app.post("/api/v1/people/:id", ensureAuthenticated, function (req, res) {
+    api.updatePersonById(req.params.id, req.body, function (err, match) {
+      if (err) res.send(400, err.message); 
+      else res.json({match: match});
+    });
+  });  
+  
+  app.post("/api/v1/events/:id", ensureAuthenticated, function (req, res) {
+    api.updateEventById(req.params.id, req.body, function (err, match) {
+      if (err) res.send(400, err.message); 
+      else res.json({match: match});
+    });
+  });
+  
   //delete
   app.post("/api/v1/matches/:id/delete", ensureAuthenticated, function (req, res) {
     var matchId = req.params.id;

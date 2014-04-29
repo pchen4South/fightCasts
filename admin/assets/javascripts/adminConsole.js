@@ -52,7 +52,6 @@ enter: function(){
     }); 
     fetchUsers()
     .then(function(results){
-      console.log(results);
       users.pushObjects(results.users.sortBy("email"));
     }); 
   }
@@ -358,7 +357,7 @@ App.FcAdminEditDetailsComponent = Ember.Component.extend({
         ||categoryError|| videoDataError) return;
       
       set(self, "inFlight", true);
-      submitMatchUpdate(dataToSend, get(this, 'match'))
+      updateMatch(dataToSend, get(this, 'match'))
       .then(function (res) {
         console.log("yoyoyoyo", res);
         set(self, "inFlight", false);
@@ -497,13 +496,48 @@ App.FcFighterSummaryComponent = Ember.Component.extend({
   }
 });
 
-App.FcAdminSummaryItemComponent = Ember.Component.extend({
+App.FcAdminSummaryComponent = Ember.Component.extend({});
 
+App.FcAdminSummaryItemComponent = Ember.Component.extend({
+  isEditing: false,
+  categoryAttribute: "",
+  // singluar form of type
+  typeSingular: function(){
+    var type = get(this, 'type');
+    if (type){
+      if (type == "matches")
+        return "match";
+      else if (type == "people"){
+        return "person";
+      } else {
+      return type.slice(0, type.length - 1);
+      }
+    }
+  }.property('type'),
+  // Helper to set value of input element
+  initializeValues: function(){
+    var item = get(this, "item");
+    var attr = get(this, "categoryAttribute");
+    item["attrValue"] = get(item, attr);
+  },
+  // Label outside of the input field
+  categoryLabel: function(){
+    type = this.get('type');
+    if (type == "matches"){
+      set(this, "categoryAttribute", "title");
+      return "Title: ";
+    } else if (type == "users"){
+      set(this, "categoryAttribute", "email");
+      return "Email: ";
+    } else {
+      set(this, "categoryAttribute", "name");
+      return "Name: ";  
+    }
+  }.property('type'),
   actions:{
     deleteItem: function (type, item) {
       var id = item._id;
       var url = "/api/v1/" + type + "/" + id + "/delete";
-      
       
       Ember.$.post(url, item)
       .then(function(res){
@@ -512,9 +546,33 @@ App.FcAdminSummaryItemComponent = Ember.Component.extend({
       .fail(function(err){
         alert("item was not deleted");
       })
+    },
+    modifyItem: function(type, item){
+      this.initializeValues();
+      set(this, 'isEditing', true); 
+    },
+    saveChanges: function(type, item){
+      var field = get(this, "categoryAttribute");     
+      var type = get(this, "typeSingular");
+      var data = {};
+      data[field] = get(item, 'attrValue');
+      
+      // build the function call string
+      var fnType = window["update" + type.charAt(0).toUpperCase() + type.slice(1)];
+      
+      
+      fnType(data, item)
+      .then(function(res){
+        window.location.reload();
+      })
+      .fail(function(err){
+        console.log("failed");
+        set(this, 'isEditing', false);
+      });
     }
   }
 });
+
 
 
 //HELPERS
@@ -544,10 +602,36 @@ var submitMatch = function (data) {
   return Ember.$.post("/api/v1/matches", data);
 };
 
-var submitMatchUpdate = function(data, match){
-  window.data2send = data;
+var updateMatch = function(data, match){
   if(match._id){
     var url = "/api/v1/matches/" + match._id;
+    return Ember.$.post(url, data);
+  }
+  else
+    alert("problems with update");
+};
+
+var updateUser = function(data, user){
+  if(user._id){
+    var url = "/api/v1/users/" + user._id;
+    return Ember.$.post(url, data);
+  }
+  else
+    alert("problems with update");
+};
+
+var updatePerson = function(data, person){
+  if(person._id){
+    var url = "/api/v1/people/" + person._id;
+    return Ember.$.post(url, data);
+  }
+  else
+    alert("problems with update");
+};
+
+var updateEvent = function(data, event){
+  if(event._id){
+    var url = "/api/v1/events/" + event._id;
     return Ember.$.post(url, data);
   }
   else
