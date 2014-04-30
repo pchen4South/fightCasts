@@ -78,7 +78,9 @@ module.exports = function (app) {
 
   app.get("/:gameSlug/matches", function (req, res) {
     var gameSlug = req.params.gameSlug;
-
+    
+    console.log(gameSlug);
+    
     api.getGameBySlug(gameSlug, function (err, game) {
       if (err) return res.redirect("error");
       if (!game) return res.redirect("notFound");
@@ -91,6 +93,7 @@ module.exports = function (app) {
         category: "community",
         game: game.id
       };
+           
       var getProMatches = partial(api.getMatchesNested, proQuery);
       var getCommunityMatches = partial(api.getMatchesNested, comQuery);
 
@@ -116,7 +119,8 @@ module.exports = function (app) {
           gameSlug: gameSlug,
           user: req.session.user,
           title: "Matches for: ",
-          secondaryTitle: game.nickname
+          secondaryTitle: game.nickname,
+          gameinfo: results
         };
 
         res.render("index", payload); 

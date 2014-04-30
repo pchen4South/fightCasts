@@ -120,6 +120,9 @@ module.exports = function (app) {
   
   //UPDATE
   app.post("/api/v1/matches/:id", ensureAuthenticated, function (req, res) {
+  
+    console.log("ID: ", req.params.id);
+    
     api.updateMatchById(req.params.id, req.body, function (err, match) {
       if (err) res.send(400, err.message); 
       else res.json({match: match});

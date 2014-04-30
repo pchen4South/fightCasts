@@ -269,36 +269,36 @@ App.FcAdminCreateComponent = Ember.Component.extend({
 
 App.FcAdminEditDetailsComponent = Ember.Component.extend({
   didInsertElement:function(){
-    window.fcadmin = this;
-    console.log(this.get('elementId'));
+    console.log(this.get('people'));
     this.initializeData();
   },
   categories: ["pro", "scrub", "community"],
   games:["SF4"],
-  
+
   // game hardcoded still for now
   initializeData: function(){
     var match = this.get('match');
-    window.m = match;
-    window.dd = this;
     var data = this.get('data');
     vidList = [];
     
-    console.log("INITIALIZING DATAS", get(match,'casters'));
     if(match){
       get(match,'videos').forEach(function(vid){
        vidList.push({"url": vid});
       });
       
-      set(data, 'title', get(match,'title'));
-      set(data,'description', get(match,'description'));
-      set(data,'casters', get(match,'casters'));
+      if (get(match,'title'))
+        set(data, 'title', get(match,'title'));
+      if (get(match,'description'))
+        set(data,'description', get(match,'description'));
+      if (get(match,'casters'))  
+        set(data,'casters', get(match,'casters'));
       set(data,'game', get(match,'game'));
-      set(data,'event', get(match,'event'));
+      if (get(match,'event'))
+        set(data,'event', get(match,'event'));
       set(data,'category', get(match,'category'));
-      set(data,'event', get(match,'event'));
-      set(data,'playedAt', get(match,'playedAt').slice(0,10));
-      set(data,'fighters', get(match,'fighters') || []);
+      if (get(match,'playedAt'))
+        set(data,'playedAt', get(match,'playedAt').slice(0,10));
+      set(data,'fighters', get(match,'fighters'));
       set(data,'videoData', vidList);
     }
   },
@@ -306,7 +306,7 @@ App.FcAdminEditDetailsComponent = Ember.Component.extend({
     title: "",
     description: "",
     casters: null,
-    game: "SF4",
+    game: "1",
     category: "",
     fighters: [],
     videoData: [],
@@ -335,10 +335,12 @@ App.FcAdminEditDetailsComponent = Ember.Component.extend({
         fighters: convertFighterFieldsToIds(get(data, "fighters")),
         event: get(data, "event._id"),
         casters: get(data, "casters").mapBy("_id"),
-        videos: get(data, "videoData").mapBy('url'), 
+        videos: get(data, "videoData"), 
         playedAt: get(data, "playedAt"),
         category: get(data, "category"),
       };
+      
+      window.data2 = dataToSend;
       
       var titleError = validateTitle(dataToSend.title);
       var gameError = validateGame(dataToSend.game);
@@ -362,7 +364,8 @@ App.FcAdminEditDetailsComponent = Ember.Component.extend({
         console.log("yoyoyoyo", res);
         set(self, "inFlight", false);
         //self.sendAction();
-        window.location.reload();
+        //window.location.reload();
+        window.respo = res;
       })
       .fail(function (err) {
         set(self, "inFlight", false);
@@ -603,6 +606,7 @@ var submitMatch = function (data) {
 };
 
 var updateMatch = function(data, match){
+  console.log("match: ", match);
   if(match._id){
     var url = "/api/v1/matches/" + match._id;
     return Ember.$.post(url, data);

@@ -436,7 +436,21 @@ var getAll = function (cb) {
 //update
 var updateMatchById = function(id, updateOptions, cb){
   if (!updateOptions || !cb) return;
-  matchModel.findByIdAndUpdate(id, updateOptions, cb);
+  
+  var match = {
+    game: "1",
+    title: updateOptions.title,
+    description: updateOptions.description,
+    category: updateOptions.category,
+    playedAt: updateOptions.playedAt,
+    videos: map(updateOptions.videos, extractVideoId),
+    fighters: updateOptions.fighters,
+    casters: updateOptions.casters,
+    event: updateOptions.event,
+  };
+      console.log(match, "ID: ", id);
+
+  matchModel.findByIdAndUpdate(id, match, cb);
 };
 
 var featureMatch = function (id, cb) {
