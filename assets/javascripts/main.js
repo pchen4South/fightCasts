@@ -4,13 +4,12 @@
   var logoutUri = "/api/v1/logout";
   var resetPwUri = "/api/v1/resetPassword";
   var changePwUri = "/api/v1/changePassword"
-  var tour = introJs();
-  var introButton = $("#intro");
   var signupForm = $("#signupForm");
   var loginForm = $("#loginForm");
   var forgotPasswordForm = $("#forgotPasswordForm");
   var changePwForm = $("#changePasswordForm");
   var logoutBtn = $("#logout");
+  var backBtns = $(".back-button");
 
   //helper that resets input field values for a form
   var resetForm = function (form) {
@@ -110,54 +109,6 @@
     });
   };
 
-  tour.setOptions({
-    //showStepNumbers: false,
-    scrollToElement: false,
-    tooltipClass: "tool-tip",
-    steps: [
-      {
-        element: "#featuredPro",
-        intro: "Top pro matches are featured here.  You can even view them directly in the tile.",
-        position: "right"
-      },
-      {
-        element: "#featuredCommunity",
-        intro: "Top community matches are featured here.  Again, the match may be viewed in the tile itself.",
-        position: "left"
-      },
-      {
-        element: "#proList",
-        intro: "The latest pro matches are always available in this list.",
-        position: "right"
-      },
-      {
-        element: "#communityList",
-        intro: "The latest community matches are always available in this list.",
-        position: "left"
-      },
-      {
-        element: "#focusedContent",
-        intro: "The currently focused match is found here.  Match details, comments, etc are available below.",
-        position: "bottom"
-      },
-      {
-        element: "#gameSelect",
-        intro: "Select your game of interest here.",
-        position: "right"
-      },
-      {
-        element: "#searchBar",
-        intro: "Typing in search terms will filter the lists and remove featured tiles.",
-        position: "right"
-      }
-    ] 
-  });
-
-  introButton.click(function (e) {
-    e.preventDefault();
-    tour.start();
-  });
-
   //we don't want standard form submission for this
   signupForm.submit(function (e) {
     e.preventDefault(); 
@@ -184,6 +135,11 @@
   logoutBtn.click(function (e) {
     e.preventDefault(); 
     logout();
+  });
+
+  backBtns.click(function (e) {
+    e.preventDefault(); 
+    window.history.go(-1);
   });
 
 })(window);

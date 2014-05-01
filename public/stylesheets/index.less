@@ -46,10 +46,23 @@
   border-bottom: 1px solid @text-color;
 }
 
-.inset-text (@bg-color, @text-color) {
-  /* Shadows are visible under slightly transparent text color */
-  color: hsla(hue(@text-color), saturation(@text-color), lightness(@text-color), .8);
-  text-shadow: 1px 1px 1px @bg-color, 0 0 0 #000, 1px 1px 1px @bg-color;
+.logo-text {
+  font-family: @fancy-font;
+  color: @header-font-color;
+  font-size: @font-largish;
+  text-decoration: none;
+}
+
+.dark {
+  color: @dark-text-color;
+}
+
+.centered {
+  text-align: center;
+}
+
+.back-button {
+  margin: 0px;
 }
 
 body, html {
@@ -79,6 +92,10 @@ body {
   position: relative;
   background-color: @background-color;
   min-height: 80%;
+}
+
+#form-region {
+  margin-top: 5%;
 }
 
 #focused-content {
@@ -116,11 +133,9 @@ a {
   padding: 12px 12px 0px 12px;
   
   .site-brand {
+    .logo-text();
     margin-right: 12px;
-    font-family: @fancy-font;
-    color: @header-font-color;
     font-size: @font-mediumish;
-    text-decoration: none;
   }
 
   .search-bar {

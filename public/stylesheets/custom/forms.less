@@ -27,14 +27,14 @@
 }
 
 .form-header {
-  font-size: @font-mediumish;  
   text-align: center;
   color: @dark-text-color;
-  margin: 6px 0px;
+  margin: 12px 0px;
 }
 
 .stacked-form {
   input {
+    text-align: center;
     margin-top: 4px;
     margin-bottom: 4px;
   }
@@ -43,19 +43,6 @@
     margin-bottom: 4px;
     width: 100%;
   }
-}
-
-.inline-form {
-  .inline-group {
-    .make-row(0px);
-    label {
-      .make-xs-column(8, 0px);
-    }
-    input {
-      .make-xs-column(16, 0px);
-      .input-text();
-    }
-  } 
 }
 
 .form-container {

@@ -75,6 +75,7 @@ module.exports = function (app) {
   app.get("/login", function (req, res) {
     var user = req.session.user;
     var payload = {
+      layout: "forms",
       user: user 
     };
 
@@ -84,6 +85,7 @@ module.exports = function (app) {
   app.get("/signup", function (req, res) {
     var user = req.session.user;
     var payload = {
+      layout: "forms",
       user: user 
     };
 
@@ -93,6 +95,7 @@ module.exports = function (app) {
   app.get("/forgot-password", function (req, res) {
     var user = req.session.user;
     var payload = {
+      layout: "forms",
       user: user 
     };
 

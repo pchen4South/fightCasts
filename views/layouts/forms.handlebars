@@ -2,7 +2,6 @@
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" type="text/css" href="/dist/index.css">
-  <link rel="stylesheet" type="text/css" href="/vendor/stylesheets/introjs.css">
   <link href='http://fonts.googleapis.com/css?family=Tulpen+One|Dosis' rel='stylesheet' type='text/css'>
   <link rel="icon" type="image/png" href="/images/vs.png">
   <!-- Segment.io/analytics -->
@@ -17,7 +16,15 @@
 </head>
 
 <body>
-  {{{body}}}
+  <div id="form-region">
+    <div class="centered">
+      {{> backButton}}
+      <h1>
+        <a href="/" class="logo-text dark">fight casts</a>
+      </h1>
+    </div>
+    {{{body}}}
+  </div>
   <script src="/vendor/javascripts/jquery.js"></script>
   <script src="/javascripts/main.js"></script>
 </body>
