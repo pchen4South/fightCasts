@@ -113,11 +113,9 @@ a {
 }
 
 .site-header {
-  text-align: center;
   padding: 12px 12px 0px 12px;
   
   .site-brand {
-    float: left;
     margin-right: 12px;
     font-family: @fancy-font;
     color: @header-font-color;
@@ -126,14 +124,17 @@ a {
   }
 
   .search-bar {
-    float: left;
     display: inline-block;
+    vertical-align: super;
     min-width: 300px;
-    margin-top: 4px;
     &:after {
       clear: both;
     }
     form {
+      .form-group {
+        margin-bottom: 0 !important;
+        width: 100%;
+      }
       input {
         width: 100%;
       }
