@@ -1,0 +1,31 @@
+<ul class="ms-tags">
+  {{#each widget.selections}}
+  <li class="ms-tag">
+    {{value}}
+    <i class="glyphicon glyphicon-remove" {{action "removeSelection" this}}></i>
+  </li>
+  {{else}}
+  <li class="ms-no-tag">no selections</li>
+  {{/each}}
+</ul>
+
+{{input 
+  classNames="ms-input"
+  type="text"
+  value=search
+  placeholder=placeholder
+  enter="addActiveSelection"
+  escape-press="removeLastSelection"
+  update="updateSearch"}}
+
+  <ul class="ms-dropdown">
+  {{#if widget.focused}}
+    {{#each matches}}
+    <li {{bind-attr class=":ms-match active"}} {{action "addSelection" match on="mouseDown"}}>
+      {{match.value}}
+    </li>
+    {{else}}
+    <li class="ms-no-matches">no matches</li>
+    {{/each}}
+  {{/if}}
+  </ul>

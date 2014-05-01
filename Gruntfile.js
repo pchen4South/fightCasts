@@ -2,6 +2,16 @@ var path = require('path');
 
 module.exports = function (grunt) {
   grunt.initConfig({
+    minispade: {
+      options: {
+        renameRequire: true,
+        prefixToRemove: "admin/assets/javascripts/",      
+      },
+      files: {
+        src: ['admin/assets/javascripts/*.js'],
+        dest: 'admin/assets/dist/adminjs.js',
+      },
+    },    
     emberTemplates: {
       compile: {
         options: {
@@ -40,6 +50,10 @@ module.exports = function (grunt) {
     },
 
     watch: {
+      minispade:{
+        files: "admin/assets/javascripts/*.js",
+        tasks: ["minispade"]
+      },
       less: {
         files: "public/stylesheets/**/*.less",
         tasks: ["less"],
@@ -67,7 +81,7 @@ module.exports = function (grunt) {
       } 
     }
   });
-
+  grunt.loadNpmTasks('grunt-minispade');
   grunt.loadNpmTasks("grunt-ember-templates");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-less");
@@ -76,6 +90,7 @@ module.exports = function (grunt) {
     "emberTemplates", 
     "handlebars", 
     "less", 
+    "minispade",
     "watch"
   ]);
 };

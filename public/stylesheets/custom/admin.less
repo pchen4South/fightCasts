@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .adminBody{
   background-color: #f0fffd;
 }
@@ -212,4 +216,80 @@ ul.dropdown-menu{
   padding: 0 0 0 0 !important;
   margin: 0 0 0 0 !important;
   width: 70%;
+}
+
+
+
+@light-gray: lighten(gray, 30%);
+
+
+ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+li {
+  margin: 0px;
+}
+
+.ms-wrapper {
+  width: 90%;
+  input.ms-input {
+    .size(100%, 32px);
+    color: black !important;
+  }
+  .ms-dropdown {
+    width: 100%;
+    max-height: 256px;
+    overflow-y: scroll;
+    .ms-match {
+      .size(100%, 32px);
+      .text-overflow();
+      border-bottom: 1px solid @gray;
+      border-left: 1px solid @gray;
+      border-right: 1px solid @gray;
+      padding-top: .2em;
+      font-size: 1.2em;
+      padding-left: 12px;
+      color: gray;
+      background: @light-gray;
+      &:hover {
+        color: white;
+        background: gray;
+      }
+    }
+    .ms-match.active {
+      color: white;
+      background: gray; 
+    }
+  }
+  .ms-tags {
+    min-height: 32px;
+    background-color: @light-gray;  
+    padding: 3px;
+    .ms-tag {
+      .text-overflow();
+      position: relative;
+      display: inline-block;
+      height: 26px;
+      width: 100%;
+      line-height: 24px;
+      padding-left: 4px;
+      padding-right: 24px;
+      color: white;
+      background: gray;
+      i {
+        position: absolute;
+        top: 6px;
+        right: 8px;
+      }
+    }
+    .ms-no-tag {
+      height: 24px;
+      line-height: 24px;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+  }
 }

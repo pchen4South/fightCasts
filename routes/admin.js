@@ -3,6 +3,10 @@ var gameData = require('../models/gameCharacterData');
 var passport = require('passport');
 var ensureAuthenticated = require('./utils').ensureAuthenticated;
 
+
+
+
+
 module.exports = function (app) {
  
   //read
@@ -10,7 +14,7 @@ module.exports = function (app) {
     console.log("admin", req.session);
      res.render("admin", {layout: "adminLayout", user: "admin"});
   });
-
+ 
   app.get("/admin/people", ensureAuthenticated,
     function (req, res) {
       api.getAll(function (err, results) {

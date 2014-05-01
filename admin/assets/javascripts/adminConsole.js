@@ -2,21 +2,77 @@ var get = Ember.get
   , set = Ember.set
   , copy = Ember.copy;
 
+
+
+  
 //Ember App Creation
-var App = Ember.Application.create({
-  rootElement: "#admin-content"
+window.App = Ember.Application.create({
+  rootElement: "#admin-content",
 });
+App.deferReadiness();
+require('ember-component.js');
+
+App.advanceReadiness();
+
+
+  
+
+
+var candidates = [
+    {
+      "id": "1",
+      "value": "Street Fighter IV"
+    },
+    {
+      "id": "2",
+      "value": "Ultimate Marvel vs Capcom III"
+    },
+    {
+      "id": "3",
+      "value": "Super Smash Brothers Melee"
+    }
+  ];
+
+
+var emberWidget = Widget({
+  name: "ember-ms",
+  candidates: candidates,
+  search: ""
+});  
 
 Ember.Handlebars.registerBoundHelper('prettyDate', function (date) {
   return moment(date).format("MMMM Do YYYY");
 });
+
 
 //Routes
 App.Router.map(function(){
   this.resource("matches", function(){
     this.route("match", {path: ':match_id'});
   });
+  this.resource("test");
 });
+
+
+
+
+
+App.TestRoute = Ember.Route.extend({
+  enter: function(){
+    console.log("enter");
+  },
+  setupController: function(controller, model){
+    controller.set('widget', emberWidget);
+    controller.set('games', ["SF4", "SSBM", "Melee"]);
+  },
+  renderTemplate: function(){
+    this.render('test',{
+      into: 'application'
+    });
+  }
+  
+});
+
 
 App.IndexRoute = Ember.Route.extend({
 enter: function(){
