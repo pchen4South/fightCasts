@@ -12,55 +12,12 @@
     window.analytics.page();
   </script>
   <title>
-    FightCasts.tv: Fighting Game Videos, Matches, Casts. Search for Hype VODs
+    FightCasts.tv form
   </title>
 </head>
 
 <body>
-  <header id="header">
-    <div class="container">
-      <div class="site-header clearfix">
-        <a class="site-brand" href="/">fight casts</a> 
-        
-        <div class="search-bar" id="searchBar">
-          {{> searchBar}}      
-        </div>    
-
-        <ul class="links">
-          {{#if user}}
-          <li>
-            <a href="/account" class="link-text">account</a>
-          </li>
-          <li>
-            <span class="link-text" id="logout">logout</span>
-          </li>
-          {{else}}
-          <li>
-            <a href="/signup" class="link-text">signup</a>
-          </li>
-          <li>
-            <a href="/login" class="link-text">login</a>
-          </li>
-          <li>
-            <a href="/forgot-password" class="link-text">forgot password</a>
-          </li>
-          {{/if}}
-        </ul>
-      </div>
-    </div>
-  </header>
-
   {{{body}}}
-
-  <footer id="footer">
-    <div class="container">
-      <div class="site-footer">
-      
-      </div> 
-    </div> 
-  </footer>
-
-  <script src="/vendor/javascripts/intro.js"></script>
   <script src="/vendor/javascripts/jquery.js"></script>
   <script src="/javascripts/main.js"></script>
 </body>

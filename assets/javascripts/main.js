@@ -6,12 +6,11 @@
   var changePwUri = "/api/v1/changePassword"
   var tour = introJs();
   var introButton = $("#intro");
-  var userForm = $("#userForm");
+  var signupForm = $("#signupForm");
+  var loginForm = $("#loginForm");
+  var forgotPasswordForm = $("#forgotPasswordForm");
   var changePwForm = $("#changePasswordForm");
-  var signupBtn = $("#signup");
-  var loginBtn = $("#login");
   var logoutBtn = $("#logout");
-  var forgotPwBtn = $("#forgotPassword");
 
   //helper that resets input field values for a form
   var resetForm = function (form) {
@@ -46,7 +45,7 @@
 
     $.post(signupUri, newUserData)
     .then(function (res) {
-      location.reload();
+      window.location.pathname = "/";
     })
     .fail(function (err) {
       displayMessage(err.responseText); 
@@ -62,14 +61,14 @@
 
     $.post(loginUri, newUserData)
     .then(function (res) {
-      location.reload();
+      window.location.pathname = "/";
     })
     .fail(function (err) {
       displayMessage(err.responseText); 
     });
   };
 
-  var logout = function (form) {
+  var logout = function () {
     $.post(logoutUri)
     .then(function (res) {
       location.reload(); 
@@ -160,9 +159,16 @@
   });
 
   //we don't want standard form submission for this
-  userForm.submit(function (e) {
+  signupForm.submit(function (e) {
     e.preventDefault(); 
-    console.log("blocked");
+    signup(signupForm);
+    console.log("signup attempted");
+  });
+
+  loginForm.submit(function (e) {
+    e.preventDefault(); 
+    login(loginForm);
+    console.log("login attempted");
   });
 
   changePwForm.submit(function (e) {
@@ -170,24 +176,14 @@
     changePassword(changePwForm);
   });
 
-  loginBtn.click(function (e) {
+  forgotPasswordForm.submit(function (e) {
     e.preventDefault(); 
-    login(userForm);
+    forgotPassword(forgotPasswordForm);
   });
 
   logoutBtn.click(function (e) {
     e.preventDefault(); 
-    logout(userForm);
-  });
-
-  signupBtn.click(function (e) {
-    e.preventDefault(); 
-    signup(userForm);
-  });
-
-  forgotPwBtn.click(function (e) {
-    e.preventDefault(); 
-    forgotPassword(userForm);
+    logout();
   });
 
 })(window);

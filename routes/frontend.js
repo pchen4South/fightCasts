@@ -66,18 +66,37 @@ module.exports = function (app) {
     };
 
     if (!user) {
-      return res.redirect("back"); 
+      return res.redirect("/"); 
     } else {
       res.render("account", payload); 
     }
   });
 
   app.get("/login", function (req, res) {
-    res.render("login");
+    var user = req.session.user;
+    var payload = {
+      user: user 
+    };
+
+    res.render("login", payload);
   });
 
   app.get("/signup", function (req, res) {
-    res.render("signup");
+    var user = req.session.user;
+    var payload = {
+      user: user 
+    };
+
+    res.render("signup", payload);
+  });
+
+  app.get("/forgot-password", function (req, res) {
+    var user = req.session.user;
+    var payload = {
+      user: user 
+    };
+
+    res.render("forgot-password", payload);
   });
 
   app.get("/", function (req, res) {
