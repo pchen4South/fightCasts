@@ -18,11 +18,9 @@
 
 <body>
   <header id="header">
-    <div class="container">
+    <div class="custom-container">
       <div class="site-header">
-        <div class="site-brand">
-          <a href="/">fight casts</a> 
-        </div>
+        <a class="site-brand" href="/">fight casts</a> 
         
         <div class="search-bar" id="searchBar">
           {{> searchBar}}      
@@ -48,47 +46,11 @@
           </li>
           {{/if}}
         </ul>
-        <div class="header-form">
-          {{#if user}}
-          {{else}}
-          <form id="userForm" class="stacked-form">
-            <input class="input-text" 
-              name="email" 
-              placeholder="email"/> 
-            <input type="password" 
-              class="input-text" 
-              name="password" 
-              placeholder="password"/> 
-            <button type="submit" style="display:none">Submit</button>
-          </form>
-          {{/if}}
-        </div>
       </div>
     </div>
   </header>
 
-  <header id="subheader">
-    <div class="container">
-      <div class="site-subheader">
-        <div class="filters">
-          {{> pastMatches}}      
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div id="main-content">
-    <div class="container">
-      {{{body}}}
-    </div>
-  </div>
-
-  <footer id="subfooter">
-    <div class="container">
-      <div class="site-subfooter">
-      </div>
-    </div>
-  </footer>
+  {{{body}}}
 
   <footer id="footer">
     <div class="container">

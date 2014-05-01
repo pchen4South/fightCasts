@@ -1,67 +1,25 @@
-
-{{#with focusedMatch}}
-<div class="col-xs-24">
-  <div class="tile-12x1">
-    <img class = "gameLogoSmall" src = {{gameIcon game.nickname}}> </img>
-    <span style = "font-size:22px"> {{title}}</span>
+<div id="page-header">
+  <div class="custom-container">
+    {{#with focusedMatch}}
+    <div class="page-header">
+      <h1>{{title}}</h1>
+      <span>{{description}}</span>
+      <span class="date">({{prettyDate playedAt}})</span>
+    </div>
+    {{/with}}
   </div>
 </div>
 
-<div class="col-xs-24">
-  <div class="tile-8x1"> 
-    {{#with fighterOne}}
-          <img src = "{{countryIcon person.country}}"/>
-          {{person.name}}
-        {{#each characters}}
-          <span class="character-name"><i>{{name}}</i></span> 
-        {{/each}}
-    {{/with}}
-    <br>
-    {{#with fighterTwo}}
-          <img src = "{{countryIcon person.country}}"/>
-          {{person.name}} 
-        {{#each characters}}
-          <span class="character-name"><i>{{name}}</i></span> 
-        {{/each}}
-    {{/with}}
-  </div>
+<div id="focused-content">
+  <div class="container">
+    <div class="tile-region-24" id="focusedContent">
 
-  {{#if event}}
-  <div class="tile-6x1">
-      <div class="event">
-        <span class="event-name"><b>{{event.name}}</b></span>
+      {{#with focusedMatch}}
+      <div class="tile-24x12">
+        {{> tiles/match-tile-main}}
       </div>
-  </div>
-  {{/if}}
-  
-  <div class="tile-8x1">
-  {{#if casters}}
-    <div class="caster-list">
-      Cast by:
-    {{#each casters}}
-      <span class="caster-name">
-        <img src = "{{countryIcon country}}"/>
-       {{name}}
-      </span>
-    {{/each}}
-    </div>
-  {{/if}}
-  </div>
-  <section class="col-xs-24">
-  <hr>
-  <div class = "col-xs-6"></div>
-    <div class = "tile-12x8">
-      <iframe class="embedded-video"
-            iv_load_policy=3
-            src={{ytUrl videos}}&color=white
-            frameborder="0" 
-            rel=0
-            width = 100%
-            height = 100%
-            modestbranding
-            allowfullscreen>
-      </iframe>
-    </div>
-</div>
-{{/with}}
+      {{/with}}
 
+    </div>
+  </div>
+</div>

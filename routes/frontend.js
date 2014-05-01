@@ -234,7 +234,7 @@ module.exports = function (app) {
         };
 
         trackViewedVideo(results.focusedMatch, session_user);
-        res.render("index", payload); 
+        res.render("match", payload); 
       });
     });
   });

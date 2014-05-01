@@ -29,11 +29,21 @@
   font-weight: 100;
 }
 
-.header-text {
-  font-family: "Tulpen One", sans-serif;
-  color: @header-font-color;
-  font-size: @font-largish;
-  text-decoration: none;
+.custom-container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left:  (@grid-gutter-width / 2);
+  padding-right: (@grid-gutter-width / 2);
+
+  @media (min-width: @screen-sm-min) {
+    width: @container-sm;
+  }
+  @media (min-width: @screen-md-min) {
+    width: @container-md;
+  }
+  @media (min-width: @screen-lg-min) {
+    width: @container-lg;
+  }
 }
 
 .content-text {
@@ -48,24 +58,15 @@
 
 .link-text {
   font-size: @font-small;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  border-bottom: 1px dashed @text-color;
+  font-family: @link-font;
   cursor: pointer;
-  &:hover {
-    border-top: 1px dashed @text-color;
-  }
+  border-bottom: 1px solid @text-color;
 }
 
 .inset-text (@bg-color, @text-color) {
   /* Shadows are visible under slightly transparent text color */
   color: hsla(hue(@text-color), saturation(@text-color), lightness(@text-color), .8);
   text-shadow: 1px 1px 1px @bg-color, 0 0 0 #000, 1px 1px 1px @bg-color;
-}
-
-.section-header {
-  font-family: "Tulpen One", sans-serif;
-  color: @subheader-font-color;
-  font-size: @font-medium;
 }
 
 body, html {
@@ -80,26 +81,29 @@ body {
 
 #header {
   background-color: @header-color;
-  height: @header-height;
+  .custom-container {
+    height: @header-height;
+  }
 }
 
-#subheader {
-  background-color: @subheader-color;
-  height: @subheader-height;
+#page-header {
+  .custom-container {
+    height: @page-header-height;
+  }
 }
 
-#main-content {
+#secondary-content {
   position: relative;
   background-color: @background-color;
   min-height: 80%;
 }
 
-#subfooter {
-  margin-top: 48px;
-  background-color: @subheader-color;
+#focused-content {
+  background-color: @focused-bg-color;
 }
 
 #footer {
+  margin-top: 128px;
   background-color: @header-color;
 }
 
@@ -125,125 +129,41 @@ a {
   display: none;
 }
 
-.tab {
-  .size(100%, 100%);
-  .tile-region-2();
-  height: inherit;
-  padding: 8px;
-  text-align: center;
-  font-size: @font-small;
-  vertical-align: bottom;
-  cursor: pointer;
-  .inner-tab {
-    .size(100%, 100%);
-  }
-  .sf4 {
-    .center-bg("/images/SSFIVAE-gray.png");
-  }
-  .mvc3 {
-    .center-bg("/images/UMVC3-gray.png");
-  }
-  .sfxt {
-    .center-bg("/images/SFxT-gray.png");
-  }
-}
-
-.tab.active {
-  background-color: @tab-active-color;
-  cursor: auto;
-  .sf4 {
-    .center-bg("/images/SSFIVAE.png");
-  }
-  .mvc3 {
-    .center-bg("/images/UMVC3.png");
-  }
-  .sfxt {
-    .center-bg("/images/SFxT.png");
-  }
-}
-
 .site-header {
-  .make-row(0px);
-  height: @header-height;
+  text-align: center;
+  padding: 12px 12px;
+  
   .site-brand {
-    .tile-region-4();
-    .header-text();
-    margin-top: 8px;
+    float: left;
+    margin-right: 12px;
+    font-family: @fancy-font;
+    color: @header-font-color;
+    font-size: @font-mediumish;
+    text-decoration: none;
   }
-  .search-bar {
-    margin-top: 32px;
-    .tile-region-8();
-    .component-wrapper {
-      form {
-        .tile-region-4();
-        input {
-          border-radius: 2px 0px 0px 2px !important;
-        }
-      }
-      .inline-tabs {
-        .tile-region-4();
-        height: 32px;
-        margin: 0px;
-        li {
-          .tile-region-1();
-          height: inherit;
-          background-color: @background-color;
-          color: @secondary-text-color;
-          padding-top: 6px;
-          text-align: center;
-          &:last-child {
-            border-radius: 0px 2px 2px 0px !important;
-          }
-          &:hover {
-            background-color: @header-color;
-            color: @text-color;
-          }
-        }
-        li.active {
-          background-color: @header-color;
-          color: @text-color;
-        }
-      }
-    }
-  }
-  .links {
-    .tile-region-3();
-    .tile-offset-mixin(5);
-    text-align: right;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding-right: 24px;
-    padding-top: 4px;
-    li {
-      margin-top: 2px;
-      margin-top: 2px;
-    }
-  }
-  .header-form {
-    .tile-region-4();
-    height: inherit;
-    padding-top: 8px;
-  }
-}
 
-.site-subheader {
-  .make-row(0px);
-  height: @subheader-height;
-  .filters {
-    .tile-region-8();
-    padding-left: 12px;
-    font-size: @font-small;
-    .filter-links {
-      display: inline-block;
-      padding-left: 12px;
-      padding-top: 4px;
-      .filter-link {
-        display: inline-block;
-        padding-left: 12px;
-        a {
-          .link-text();
-        }
+  .search-bar {
+    float: left;
+    display: inline-block;
+    min-width: 300px;
+    margin-top: 4px;
+    &:after {
+      clear: both;
+    }
+    form {
+      input {
+        width: 100%;
       }
+    }
+  }
+
+  .links {
+    float: right;
+    text-align: center;
+    margin-top: 6px;
+    li {
+      margin-left: 12px;
+      display: inline;
     }
   }
 }
@@ -254,14 +174,10 @@ a {
   padding-top: 12px;
 }
 
-.site-subfooter {
-  .make-row(0px);
-  height: @subfooter-height;
-}
-
-.subheader {
-  .section-header();
-  font-size: @font-mediumish;
+.section-header {
+  font-family: "Tulpen One", sans-serif;
+  color: @section-header-color;
+  font-size: @font-medium;
   margin: 0px;
   padding: 4px 0px 0px 0px;
   .subheader-secondary {
@@ -269,27 +185,30 @@ a {
   }
 }
 
-.tile-subheader{
-  .header-text();
-}
-
 .page-header {
-  .make-row(0px);
-  margin: 24px 12px;
+  clear: both;
+  height: @page-header-height;
+  line-height: @page-header-height;
+  padding: 0px 12px;
   h1 {
-    margin: 0px;
+    display: inline;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: @font-smallish;
     font-family: @header-font;
     color: @dark-text-color;
-    font-size: @font-mediumish;
     font-weight: 100;
     .secondary-title {
       color: @colored-text-color;
     }
   }
-  p {
-    font-family: @smalltext-font;
+  span {
+    vertical-align: center;
+    font-size: @font-small;
     color: @colored-text-color;
-    margin: 0px;
+  }
+  span.date {
+    color: @secondary-text-color; 
   }
 }
 
