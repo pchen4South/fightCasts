@@ -152,6 +152,18 @@ a {
   }
 }
 
+.video-player {
+  padding: 0px !important;
+  iframe {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.video-player.full {
+  .tile-grid-mixin(24, 12);
+}
+
 .site-footer {
   .make-row(0px);
   height: @footer-height;
@@ -170,7 +182,6 @@ a {
 }
 
 .page-header {
-  clear: both;
   height: @page-header-height;
   line-height: @page-header-height;
   padding: 0px 12px;

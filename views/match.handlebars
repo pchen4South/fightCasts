@@ -12,12 +12,18 @@
 
 <div id="focused-content">
   <div class="container">
-    <div id="focusedContent">
+    <div class="video-player full">
 
       {{#with focusedMatch}}
-      <div class="tile-24x12">
-        {{> tiles/match-tile-main}}
-      </div>
+        <iframe class="embedded-video"
+          autohide=1
+          iv_load_policy=3
+          modestbranding=1
+          allowfullscreen=1
+          src={{ytUrl videos}}&color=white&showinfo=0&rel=0
+          frameborder=0
+          rel=0>
+        </iframe>
       {{/with}}
 
     </div>
