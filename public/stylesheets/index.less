@@ -29,23 +29,6 @@
   font-weight: 100;
 }
 
-.custom-container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left:  (@grid-gutter-width / 2);
-  padding-right: (@grid-gutter-width / 2);
-
-  @media (min-width: @screen-sm-min) {
-    width: @container-sm;
-  }
-  @media (min-width: @screen-md-min) {
-    width: @container-md;
-  }
-  @media (min-width: @screen-lg-min) {
-    width: @container-lg;
-  }
-}
-
 .content-text {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: @font-smallish;
@@ -81,13 +64,13 @@ body {
 
 #header {
   background-color: @header-color;
-  .custom-container {
+  .container {
     height: @header-height;
   }
 }
 
 #page-header {
-  .custom-container {
+  .container {
     height: @page-header-height;
   }
 }
@@ -131,7 +114,7 @@ a {
 
 .site-header {
   text-align: center;
-  padding: 12px 12px;
+  padding: 12px 12px 0px 12px;
   
   .site-brand {
     float: left;
