@@ -62,6 +62,7 @@ module.exports = function (app) {
   app.get("/account", function (req, res) {
     var user = req.session.user;
     var payload = {
+      layout: "forms",
       user: user 
     };
 
