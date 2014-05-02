@@ -42,8 +42,11 @@
 .link-text {
   font-size: @font-small;
   font-family: @link-font;
+  color: @dark-text-color;
   cursor: pointer;
-  border-bottom: 1px solid @text-color;
+  &:hover {
+    border-bottom: 1px dotted @dark-text-color;
+  }
 }
 
 .logo-text {
@@ -63,6 +66,8 @@
 
 .back-button {
   margin: 0px;
+  background-color: @dark-color;
+  border-color: darken(@dark-color, 5%);
 }
 
 body, html {
@@ -72,7 +77,8 @@ body, html {
 
 body {
   .content-text();
-  margin: 0px; background-color: @background-color;
+  margin: 0px;
+  background-color: @background-color;
 }
 
 #header {
@@ -88,18 +94,46 @@ body {
   }
 }
 
+#searchBar {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  min-width: 300px;
+  &:after {
+    clear: both;
+  }
+  form {
+    .form-group {
+      margin-bottom: 0 !important;
+      width: 100%;
+    }
+    input {
+      width: 100%;
+      border: 1px solid @dark-color;
+      background-color: @gray-1;
+    }
+  }
+}
+
+#site-links {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+
+  .links {
+    text-align: center;
+    margin-top: 6px;
+    li {
+      margin-left: 12px;
+      display: inline;
+    }
+  }
+}
+
 #secondary-content {
   position: relative;
   background-color: @background-color;
   min-height: 80%;
-}
-
-#form-region {
-  margin-top: 5%;
-}
-
-#focused-content {
-  background-color: @focused-bg-color;
 }
 
 #footer {
@@ -122,6 +156,11 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
 //THESE ARE RELATED TO INTROJS
 .tool-tip {
   div {
@@ -135,42 +174,13 @@ a {
   display: none;
 }
 
-.site-header {
-  padding: 12px 12px 0px 12px;
-  
+#header-column {
+  text-align: center;
   .site-brand {
     .logo-text();
-    margin-right: 12px;
     font-size: @font-mediumish;
   }
 
-  .search-bar {
-    display: inline-block;
-    vertical-align: super;
-    min-width: 300px;
-    &:after {
-      clear: both;
-    }
-    form {
-      .form-group {
-        margin-bottom: 0 !important;
-        width: 100%;
-      }
-      input {
-        width: 100%;
-      }
-    }
-  }
-
-  .links {
-    float: right;
-    text-align: center;
-    margin-top: 6px;
-    li {
-      margin-left: 12px;
-      display: inline;
-    }
-  }
 }
 
 .video-player {

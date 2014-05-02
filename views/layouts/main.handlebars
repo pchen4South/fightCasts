@@ -17,38 +17,40 @@
 </head>
 
 <body>
-  <header id="header">
-    <div class="container">
-      <div class="site-header clearfix">
-        <a class="site-brand" href="/">fight casts</a> 
-        
-        <div class="search-bar" id="searchBar">
-          {{> searchBar}}      
-        </div>    
+  <div class="search-bar" id="searchBar">
+    {{> searchBar}}      
+  </div>    
+  <div id="site-links">
+    <ul class="links">
+      {{#if user}}
+      <li>
+        <a href="/account" class="link-text">ACCOUNT</a>
+      </li>
+      <li>
+        <span class="link-text" id="logout">LOGOUT</span>
+      </li>
+      {{else}}
+      <li>
+        <a href="/signup" class="link-text">SIGNUP</a>
+      </li>
+      <li>
+        <a href="/login" class="link-text">LOGIN</a>
+      </li>
+      <li>
+        <a href="/forgot-password" class="link-text">FORGOT PASSWORD</a>
+      </li>
+      {{/if}}
+    </ul>
+  </div>
 
-        <ul class="links">
-          {{#if user}}
-          <li>
-            <a href="/account" class="link-text">account</a>
-          </li>
-          <li>
-            <span class="link-text" id="logout">logout</span>
-          </li>
-          {{else}}
-          <li>
-            <a href="/signup" class="link-text">signup</a>
-          </li>
-          <li>
-            <a href="/login" class="link-text">login</a>
-          </li>
-          <li>
-            <a href="/forgot-password" class="link-text">forgot password</a>
-          </li>
-          {{/if}}
-        </ul>
-      </div>
+  <div id="header-column">
+    <div class="centered">
+      <h1>
+        <a href="/" class="logo-text dark">
+          fight casts
+        </a>
+      </h1>
     </div>
-  </header>
 
   {{{body}}}
 
