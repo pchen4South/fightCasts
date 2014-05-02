@@ -9,7 +9,6 @@
   var forgotPasswordForm = $("#forgotPasswordForm");
   var changePwForm = $("#changePasswordForm");
   var logoutBtn = $("#logout");
-  var backBtns = $(".back-button");
 
   //helper that resets input field values for a form
   var resetForm = function (form) {
@@ -135,11 +134,6 @@
   logoutBtn.click(function (e) {
     e.preventDefault(); 
     logout();
-  });
-
-  backBtns.click(function (e) {
-    e.preventDefault(); 
-    window.history.go(-1);
   });
 
 })(window);

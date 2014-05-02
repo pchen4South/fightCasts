@@ -1,4 +1,5 @@
 @import "variables.less";
+@import "responsive-utilities";
 @import "mixins.less";
 @import "grid.less";
 @import "utilities.less";
@@ -184,16 +185,9 @@ h1 {
 }
 
 .video-player {
-  padding: 0px !important;
-  iframe {
-    height: 100%;;
-    width: 100%;
-  }
-}
-
-.video-player.full {
-  .tile-grid-mixin(20, 10);
-  .tile-offset-mixin(2);
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 }
 
 .site-footer {
