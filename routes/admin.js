@@ -10,7 +10,7 @@ module.exports = function (app) {
   );
   
   app.get("/admin/login", function(req,res){
-    res.render('login', {layout: "adminLayout"});
+    res.render('admin/login', {layout: "adminLayout"});
   });
   //read
   app.post('/admin/login', 

@@ -1,0 +1,28 @@
+<li class="match-list-item">
+  {{#with fighterOne}}
+    <span class=fighter-name">
+      {{person.name}}
+    </span>
+    as
+    {{#each characters}}
+      <span class="character-name">
+        {{name}}
+      </span>
+    {{/each}}
+    </span>
+  {{/with}}
+  vs
+  {{#with fighterTwo}}
+    <span class=fighter-name">
+      {{person.name}}
+    </span>
+    as
+    {{#each characters}}
+      <span class="character-name">
+        {{name}}
+      </span>
+    {{/each}}
+    </span>
+  {{/with}}
+  vs
+</li>
